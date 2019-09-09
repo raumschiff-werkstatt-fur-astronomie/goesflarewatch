@@ -26,6 +26,8 @@ https://randomnerdtutorials.com/getting-started-thonny-micropython-python-ide-es
 ## Upload code
 Open `main.py` in Thonny, change the WiFi credentials to your network, check if the LED pins are correct, the pinnames on ESPs are a bit weird from time to time.
 
-## Testing
+## Wiring
+On my board the pins are labled with **IOxx** so it was pretty straight forward. The pins deliver 3.3V and some sources say max 12mA, I took 330 Ohm, for 10mA.
 
-In line 8
+## Testing
+In line 11 set RUN to False, the program loop wont run and you can test the functions. For example if the LEDs light up correctly.

@@ -12,8 +12,6 @@ RUN = True  # set False for testing, True for running
 SSID = 'NETWORK'
 PASSWORD = 'PASSWORD'
 
-###################################
-
 """
 Status LED
 uses the internal LED:
@@ -21,7 +19,6 @@ uses the internal LED:
 - on while getting data from the internet
 """
 STATUS_LED = 2
-status_led = machine.Pin(STATUS_LED, machine.Pin.OUT)
 
 """
 LEDS
@@ -29,6 +26,9 @@ uses GPIO, in order
 level 1 lights up LEDS[0]
 """
 LEDS = [16, 17, 21, 22, 25]
+###################################
+
+status_led = machine.Pin(STATUS_LED, machine.Pin.OUT)
 leds = []
 for led in LEDS:
     leds.append(machine.Pin(led, machine.Pin.OUT))
