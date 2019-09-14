@@ -1,13 +1,5 @@
-# goesflarewatch
-# goesflarewatch
-0
-	filemode = false
-	bare = false
-	logallrefupdates = true
-	symlinks = false
-	precomposeunicode = false
-[submodule]
-	active = .
-[remote "origin"]
-	url = ACsillaghy@github.com:raumschiff-werkstatt-fur-astronomie/goesflarewatch.git
-# goesflarewatch
+# GOES Flare Watch
+
+This is an application to display with multiple front ends the state of activitz of the Sun. 
+It reads the last value delivered by the GOES spacecraft and sends it to an arduino or an esp32 processor.
+
