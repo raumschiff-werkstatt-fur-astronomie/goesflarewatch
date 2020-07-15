@@ -1,18 +1,21 @@
 /*
 
+This is just a test to see how to drive the white LED strip,
+using a MOSFET to bring in the 12 V
 */
 
 #define RED_LED 6
 #define BLUE_LED 5
 #define GREEN_LED 9
 
-int brightness = 1000;
+int brightMax = 255;
 
 int gBright = 0;
 int rBright = 0;
 int bBright = 0;
 
 int fadeSpeed = 10;
+int waitTime = 1000;
 
 void setup() {
    pinMode(GREEN_LED, OUTPUT);
@@ -25,49 +28,48 @@ void setup() {
 
 void loop() { 
 
-  /*analogWrite(RED_LED,255);*/
-  digitalWrite(LED_BUILTIN, HIGH);
+//  analogWrite(RED_LED,1);
+  digitalWrite(LED_BUILTIN, LOW);
+
+// with this circuit, increasing rBright actually diminishes the
+// brightness...
 
   rBright=0;
-   for (int i = 0; i < 1024; i++) {
+   for (int i = 0; i < brightMax; i++) {
        analogWrite(RED_LED, rBright);
        rBright +=1;
        delay(fadeSpeed);
    }
  
-   for (int i = 0; i < 256; i++) {
-       analogWrite(BLUE_LED, bBright);
-       bBright += 1;
-       delay(fadeSpeed);
-   } 
-
-   for (int i = 0; i < 256; i++) {
-       analogWrite(GREEN_LED, gBright);
-       gBright +=1;
-       delay(fadeSpeed);
-   } 
+//   for (int i = 0; i < 256; i++) {
+//       analogWrite(BLUE_LED, bBright);
+//       bBright += 1;
+//       delay(fadeSpeed);
+//   } 
+//
+//   for (int i = 0; i < 256; i++) {
+//       analogWrite(GREEN_LED, gBright);
+//       gBright +=1;
+//       delay(fadeSpeed);
+//   } 
  
 
-  delay(1000);
+  delay(waitTime);
   
-  /*analogWrite(RED_LED,0);*/
-  digitalWrite(LED_BUILTIN, LOW);
+//  analogWrite(RED_LED,1);
+  digitalWrite(LED_BUILTIN, HIGH);
 
- 
 
-   brightness =1024;
-   for (int i = 0; i < 1024; i++) {
-       analogWrite(GREEN_LED, brightness);
-       analogWrite(RED_LED, brightness);
-       analogWrite(BLUE_LED, brightness);
+   for (int i = 0; i < brightMax; i++) {
+//       analogWrite(GREEN_LED, brightness);
+       analogWrite(RED_LED, rBright);
+//       analogWrite(BLUE_LED, brightness);
  
-       brightness -= 1;
+       rBright -= 1;
        delay(fadeSpeed);
    }
 
      delay(1000);
-
-  
 
 
 }
