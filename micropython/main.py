@@ -1,16 +1,21 @@
+# Original version from :
+# Modified by A.Csillaghy for the new json format provided by NOAA
+
 import machine  # needed for Hardware stuff
 import urequests
 import time
 from math import log, ceil
 import network
+import ujson
+import gc
 
 ###################################
 # Settings
 
-DEBUG = False  # more verbose output on the serial port
+DEBUG = True  # more verbose output on the serial port
 RUN = True  # set False for testing, True for running
-SSID = 'NETWORK'
-PASSWORD = 'PASSWORD'
+SSID = 'Raumschiff'
+PASSWORD = '70524761197483070928'
 
 """
 Status LED
@@ -18,7 +23,7 @@ uses the internal LED:
 - fast blinking while connecting to WiFi
 - on while getting data from the internet
 """
-STATUS_LED = 2
+STATUS_LED = 5
 
 """
 LEDS
@@ -50,6 +55,7 @@ def do_connect():
             time.sleep(0.05)
             status_led.off()
             time.sleep(0.05)
+            
     print('network config:', sta_if.ifconfig())
 
 
@@ -63,10 +69,30 @@ def get_val():
     """
 
     # Get request to get the most recent table
-    response = urequests.get(
-        "https://services.swpc.noaa.gov/text/goes-xray-flux-primary.txt")
-    return response.text.split(" ")[-1].strip()
+    response = urequests.get('https://services.swpc.noaa.gov/json/goes/primary/xrays-6-hour.json')
+    #    "https://services.swpc.noaa.gov/text/goes-xray-flux-primary.txt")
+    #response = response.text.split("{")[-1].strip()
+    
+    #response = response.text[-150:].split('}')
+    response = response.text[-150:]
 
+    print('response:', response )
+    
+    data = response.split('}')
+    data = data[-2]
+    data = data[1:]+'}'
+ 
+    data = ujson.loads(data)
+    #data = ujson.loads("""{"name":"John"}""")
+#   data = [t['flux'] for t in data if t['energy']=='0.1-0.8nm']
+    print('flux:', data['flux'])
+
+  
+    
+#    return data[-1], min(data), max(data)
+    return data['flux']
+
+#----------
 
 def val_str2int(val, numLEDs=4):
     """
@@ -81,7 +107,12 @@ def val_str2int(val, numLEDs=4):
 
     """
     try:
-        return min(max(ceil(log(float(val), 10)+7), 0), numLEDs)
+        print('val = ', val)
+        
+        val = min(max(ceil(log(float(val), 10)+7), 0), numLEDs)
+        if DEBUG : print( 'val = ', val )
+        return val
+    
     except ValueError:
         return -1
 
@@ -125,20 +156,23 @@ def print_led_vals():
     lp = []
     for led in leds:
         lp.append(led.value())
-    print(lp)
+    print('LED vals: ', lp)
 
 
 do_connect()
 boot_up()
 
 while(RUN):
+    
     if DEBUG:
         print_led_vals()
 
     status_led.on()
+    
     val = get_val()
     led_no = val_str2int(val, len(leds))
     set_leds(led_no)
+    
     status_led.off()
 
     if DEBUG:
@@ -146,4 +180,7 @@ while(RUN):
         print(led_no)
 
     print_led_vals()
+    
+    gc.collect()
+    gc.mem_free()
     time.sleep(60)
