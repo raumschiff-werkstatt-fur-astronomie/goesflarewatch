@@ -3,19 +3,24 @@
 
 import machine  # needed for Hardware stuff
 import urequests
+import usocket
 import time
 from math import log, ceil
 import network
 import ujson
 import gc
+#import urllib.urequest
+
 
 ###################################
 # Settings
 
 DEBUG = True  # more verbose output on the serial port
 RUN = True  # set False for testing, True for running
-SSID = 'Raumschiff'
-PASSWORD = '70524761197483070928'
+#SSID = 'Raumschiff'
+#PASSWORD = '70524761197483070928'
+SSID = 'csillag'
+PASSWORD = '50768316143033105816'
 
 """
 Status LED
@@ -23,14 +28,14 @@ uses the internal LED:
 - fast blinking while connecting to WiFi
 - on while getting data from the internet
 """
-STATUS_LED = 5
+STATUS_LED = 2
 
 """
 LEDS
 uses GPIO, in order
 level 1 lights up LEDS[0]
 """
-LEDS = [16, 17, 21, 22, 25]
+LEDS = [13, 12, 14, 27]
 ###################################
 
 status_led = machine.Pin(STATUS_LED, machine.Pin.OUT)
@@ -59,7 +64,7 @@ def do_connect():
     print('network config:', sta_if.ifconfig())
 
 
-def get_val():
+def get_current_goes_val():
     """
     Getting raw data from the internet
 
@@ -69,32 +74,23 @@ def get_val():
     """
 
     # Get request to get the most recent table
-    response = urequests.get('https://services.swpc.noaa.gov/json/goes/primary/xrays-6-hour.json')
+    #response = urequests.get('https://services.swpc.noaa.gov/json/goes/primary/xrays-6-hour.json')
     #    "https://services.swpc.noaa.gov/text/goes-xray-flux-primary.txt")
     #response = response.text.split("{")[-1].strip()
-    
-    #response = response.text[-150:].split('}')
-    response = response.text[-150:]
 
-    print('response:', response )
+    myHeaders = {'Range':'bytes=78000-79000'}
+    response = urequests.get("https://services.swpc.noaa.gov/json/goes/primary/xrays-6-hour.json", 
+                            headers=myHeaders).text
     
-    data = response.split('}')
-    data = data[-2]
-    data = data[1:]+'}'
- 
-    data = ujson.loads(data)
-    #data = ujson.loads("""{"name":"John"}""")
-#   data = [t['flux'] for t in data if t['energy']=='0.1-0.8nm']
-    print('flux:', data['flux'])
+    response_json = ujson.loads("{"+ response.strip(']').rsplit('{',1)[-1])
 
-  
+    print('response json:', response_json )
     
-#    return data[-1], min(data), max(data)
-    return data['flux']
+    return response_json["flux"]
 
 #----------
 
-def val_str2int(val, numLEDs=4):
+def goes_to_int(val, nb_LED=4, debug=True, input_range=[1e-8, 1e-7]):
     """
     Calculates the integer value to show based on the number of LEDs
 
@@ -106,10 +102,13 @@ def val_str2int(val, numLEDs=4):
     int: Number of Leds to light up, -1 if error
 
     """
+    return int(round( np.interp( val, input_range, [0,nb_LED-1])))
     try:
         print('val = ', val)
         
-        val = min(max(ceil(log(float(val), 10)+7), 0), numLEDs)
+        #val = min(max(ceil(log(float(val), 10)+7), 0), numLEDs)
+        val = int(round( np.interp( val, input_range, [0,nb_LED-1])))
+        
         if DEBUG : print( 'val = ', val )
         return val
     
@@ -162,6 +161,10 @@ def print_led_vals():
 do_connect()
 boot_up()
 
+n_diff=100
+diff = [0.0]*n_diff
+
+
 while(RUN):
     
     if DEBUG:
@@ -169,7 +172,15 @@ while(RUN):
 
     status_led.on()
     
-    val = get_val()
+    current_goes_val = get_current_goes_val()
+    diff[0:-1] = diff[1:]      # shift array to make space to the new value
+    diff[-1] = current_goes_val
+    if verbose: print( "Diff array is: ", diff )
+            level = GOES2LEDValue( current_goes_val,
+                                   input_range = [min(diff), max(diff)])
+
+    
+    
     led_no = val_str2int(val, len(leds))
     set_leds(led_no)
     
