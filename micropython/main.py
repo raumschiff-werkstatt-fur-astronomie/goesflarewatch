@@ -3,6 +3,7 @@
 
 import machine  # needed for Hardware stuff
 import urequests
+import usocket
 import time
 from math import log, ceil
 import network
@@ -14,8 +15,10 @@ import gc
 
 DEBUG = True  # more verbose output on the serial port
 RUN = True  # set False for testing, True for running
-SSID = 'Raumschiff'
-PASSWORD = '70524761197483070928'
+# SSID = 'Raumschiff'
+# PASSWORD = '70524761197483070928'
+SSID='WLAN-Gast'
+PASSWORD='gast8783fasol'
 
 """
 Status LED
@@ -23,14 +26,15 @@ uses the internal LED:
 - fast blinking while connecting to WiFi
 - on while getting data from the internet
 """
-STATUS_LED = 5
+STATUS_LED = 2
 
 """
 LEDS
 uses GPIO, in order
 level 1 lights up LEDS[0]
 """
-LEDS = [16, 17, 21, 22, 25]
+#LEDS = [16, 17, 21, 22, 25]
+LEDS = [13, 12, 14, 27]
 ###################################
 
 status_led = machine.Pin(STATUS_LED, machine.Pin.OUT)
@@ -69,32 +73,40 @@ def get_val():
     """
 
     # Get request to get the most recent table
-    response = urequests.get('https://services.swpc.noaa.gov/json/goes/primary/xrays-6-hour.json')
-    #    "https://services.swpc.noaa.gov/text/goes-xray-flux-primary.txt")
-    #response = response.text.split("{")[-1].strip()
-    
-    #response = response.text[-150:].split('}')
-    response = response.text[-150:]
+    gc.collect()
+    gc.mem_free()
 
-    print('response:', response )
-    
-    data = response.split('}')
-    data = data[-2]
-    data = data[1:]+'}'
- 
-    data = ujson.loads(data)
-    #data = ujson.loads("""{"name":"John"}""")
-#   data = [t['flux'] for t in data if t['energy']=='0.1-0.8nm']
-    print('flux:', data['flux'])
+    try: 
+        response = urequests.get(
+                'https://services.swpc.noaa.gov/json/goes/primary/xrays-6-hour.json'
+                ).text[-150:]
+        
+        response = '{'+response.split("{")[-1].strip(']')
+         
+        if DEBUG:
+             print('response :', response )
+     
+        data = ujson.loads(response)
+            
+        if DEBUG:
+            print('-------------------------------------------------------------')
+            print('flux:', data['flux'])
+            
+        return data['flux']
+        
+    except:
+        print('could not get json this time')
+        
+        print('++++++++++++++++++++++++++++++++++')
+        return 0.0
 
   
     
 #    return data[-1], min(data), max(data)
-    return data['flux']
 
 #----------
 
-def val_str2int(val, numLEDs=4):
+def val_str2int(val, numLEDs=4, relative=False):
     """
     Calculates the integer value to show based on the number of LEDs
 
@@ -107,13 +119,15 @@ def val_str2int(val, numLEDs=4):
 
     """
     try:
-        print('val = ', val)
+        if DEBUG: print('value entered = ', val)
         
         val = min(max(ceil(log(float(val), 10)+7), 0), numLEDs)
-        if DEBUG : print( 'val = ', val )
+        if DEBUG : print( 'LED value returned = ', val )
+        
         return val
     
     except ValueError:
+        
         return -1
 
 
@@ -169,9 +183,16 @@ while(RUN):
 
     status_led.on()
     
+    
     val = get_val()
+    
+
+    
     led_no = val_str2int(val, len(leds))
     set_leds(led_no)
+
+
+        
     
     status_led.off()
 
@@ -183,4 +204,5 @@ while(RUN):
     
     gc.collect()
     gc.mem_free()
+
     time.sleep(60)
