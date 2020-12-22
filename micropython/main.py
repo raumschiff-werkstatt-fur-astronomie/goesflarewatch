@@ -9,16 +9,25 @@ from math import log, ceil
 import network
 import ujson
 import gc
+#import urllib.urequest
+
 
 ###################################
 # Settings
 
 DEBUG = True  # more verbose output on the serial port
 RUN = True  # set False for testing, True for running
+
 # SSID = 'Raumschiff'
 # PASSWORD = '70524761197483070928'
-SSID='WLAN-Gast'
-PASSWORD='gast8783fasol'
+SSID='Topinambour'
+PASSWORD='57z0kmnvze8e8'
+
+#SSID = 'Raumschiff'
+#PASSWORD = '70524761197483070928'
+# SSID = 'csillag'
+# PASSWORD = '50768316143033105816'
+
 
 """
 Status LED
@@ -32,10 +41,12 @@ STATUS_LED = 2
 LEDS
 uses GPIO, in order
 level 1 lights up LEDS[0]
+
 """
+
 #LEDS = [16, 17, 21, 22, 25]
+
 LEDS = [13, 12, 14, 27]
-###################################
 
 status_led = machine.Pin(STATUS_LED, machine.Pin.OUT)
 leds = []
@@ -63,7 +74,7 @@ def do_connect():
     print('network config:', sta_if.ifconfig())
 
 
-def get_val():
+def get_current_goes_val():
     """
     Getting raw data from the internet
 
@@ -73,40 +84,25 @@ def get_val():
     """
 
     # Get request to get the most recent table
-    gc.collect()
-    gc.mem_free()
 
-    try: 
-        response = urequests.get(
-                'https://services.swpc.noaa.gov/json/goes/primary/xrays-6-hour.json'
-                ).text[-150:]
-        
-        response = '{'+response.split("{")[-1].strip(']')
-         
-        if DEBUG:
-             print('response :', response )
-     
-        data = ujson.loads(response)
-            
-        if DEBUG:
-            print('-------------------------------------------------------------')
-            print('flux:', data['flux'])
-            
-        return data['flux']
-        
-    except:
-        print('could not get json this time')
-        
-        print('++++++++++++++++++++++++++++++++++')
-        return 0.0
+    #response = urequests.get('https://services.swpc.noaa.gov/json/goes/primary/xrays-6-hour.json')
+    #    "https://services.swpc.noaa.gov/text/goes-xray-flux-primary.txt")
+    #response = response.text.split("{")[-1].strip()
 
-  
+    myHeaders = {'Range':'bytes=78000-79000'}
+    response = urequests.get("https://services.swpc.noaa.gov/json/goes/primary/xrays-6-hour.json", 
+                            headers=myHeaders).text
     
-#    return data[-1], min(data), max(data)
+    response_json = ujson.loads("{"+ response.strip(']').rsplit('{',1)[-1])
+
+    print('response json:', response_json )
+    
+    return response_json["flux"]
 
 #----------
 
-def val_str2int(val, numLEDs=4, relative=False):
+def goes_to_int(val, nb_LED=4, debug=True, input_range=[1e-8, 1e-7]):
+
     """
     Calculates the integer value to show based on the number of LEDs
 
@@ -118,12 +114,15 @@ def val_str2int(val, numLEDs=4, relative=False):
     int: Number of Leds to light up, -1 if error
 
     """
+
     try:
         if DEBUG: print('value entered = ', val)
         
-        val = min(max(ceil(log(float(val), 10)+7), 0), numLEDs)
-        if DEBUG : print( 'LED value returned = ', val )
+        #val = min(max(ceil(log(float(val), 10)+7), 0), numLEDs)
+        val = int(round( np.interp( val, input_range, [0,nb_LED-1])))
         
+        if DEBUG : print( 'val = ', val )
+
         return val
     
     except ValueError:
@@ -176,6 +175,10 @@ def print_led_vals():
 do_connect()
 boot_up()
 
+n_diff=100
+diff = [0.0]*n_diff
+
+
 while(RUN):
     
     if DEBUG:
@@ -183,17 +186,20 @@ while(RUN):
 
     status_led.on()
     
+
+    current_goes_val = get_current_goes_val()
+    diff[0:-1] = diff[1:]      # shift array to make space to the new value
+    diff[-1] = current_goes_val
+    if verbose: print( "Diff array is: ", diff )
     
-    val = get_val()
-    
+    level = GOES2LEDValue( current_goes_val,
+                           input_range = [min(diff), max(diff)])
 
     
     led_no = val_str2int(val, len(leds))
     set_leds(led_no)
 
 
-        
-    
     status_led.off()
 
     if DEBUG:
