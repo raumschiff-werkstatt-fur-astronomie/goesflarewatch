@@ -20,11 +20,11 @@ RUN = True  # set False for testing, True for running
 
 # SSID = 'Raumschiff'
 # PASSWORD = '70524761197483070928'
-SSID='Topinambour'
-PASSWORD='57z0kmnvze8e8'
+#SSID='Topinambour'
+#PASSWORD='57z0kmnvze8e8'
 
-#SSID = 'Raumschiff'
-#PASSWORD = '70524761197483070928'
+SSID = 'Raumschiff'
+PASSWORD = '70524761197483070928'
 # SSID = 'csillag'
 # PASSWORD = '50768316143033105816'
 
@@ -43,16 +43,26 @@ uses GPIO, in order
 level 1 lights up LEDS[0]
 
 """
-
+#This is the version with 4 LEDS
 #LEDS = [16, 17, 21, 22, 25]
+#LEDS = [13, 12, 14, 27]
 
-LEDS = [13, 12, 14, 27]
+#This is the version with one single LED, usually done for the FLARE MODE. 
+LEDS = [27]
 
 status_led = machine.Pin(STATUS_LED, machine.Pin.OUT)
 leds = []
 for led in LEDS:
     leds.append(machine.Pin(led, machine.Pin.OUT))
+    
+"""
+FLARE mode vs activity confinguration: if you want the LED to light up only when there
+is a flare (i.e. larger than GOES M), then you need to set up the FLARE mode. Otherwise
+the system will display the flare activity on the specified number of LEDS.
 
+"""
+FLARE_MODE = True
+M_FLARE=1e-07
 
 def do_connect():
     """
@@ -74,7 +84,8 @@ def do_connect():
     print('network config:', sta_if.ifconfig())
 
 
-def get_current_goes_val():
+def get_current_goes_val( log_scale=True ):
+
     """
     Getting raw data from the internet
 
@@ -93,11 +104,21 @@ def get_current_goes_val():
     response = urequests.get("https://services.swpc.noaa.gov/json/goes/primary/xrays-6-hour.json", 
                             headers=myHeaders).text
     
-    response_json = ujson.loads("{"+ response.strip(']').rsplit('{',1)[-1])
+    print('reponse: ', response)
+    
+    response_processed = "{" + response.split(", {")[-2]
+    
+    print('reponse processed: ', response_processed)
+
+    response_json = ujson.loads( response_processed )
 
     print('response json:', response_json )
     
-    return response_json["flux"]
+    if log_scale:
+        return abs(log(response_json["flux"]))
+    else:
+        return response_json["flux"]
+    
 
 #----------
 
@@ -118,10 +139,19 @@ def goes_to_int(val, nb_LED=4, debug=True, input_range=[1e-8, 1e-7]):
     try:
         if DEBUG: print('value entered = ', val)
         
-        #val = min(max(ceil(log(float(val), 10)+7), 0), numLEDs)
-        val = int(round( np.interp( val, input_range, [0,nb_LED-1])))
+        range = abs( input_range[1]-input_range[0] )
         
-        if DEBUG : print( 'val = ', val )
+        if range > 0:
+            slope = float(nb_LED)/(range)
+        else:
+            slope=0
+        
+        #val = min(max(ceil(log(float(val), 10)+7), 0), numLEDs)
+        #val = int(round( np.interp( val, input_range, [0,nb_LED-1])))
+        val = int(round( slope/val + 1 ))
+        
+        if DEBUG :
+            print( 'range, solpe, val = ', range, slope, val )
 
         return val
     
@@ -186,25 +216,35 @@ while(RUN):
 
     status_led.on()
     
-
-    current_goes_val = get_current_goes_val()
-    diff[0:-1] = diff[1:]      # shift array to make space to the new value
-    diff[-1] = current_goes_val
-    if verbose: print( "Diff array is: ", diff )
+    current_goes_val = get_current_goes_val( log_scale=not FLARE_MODE )
     
-    level = GOES2LEDValue( current_goes_val,
-                           input_range = [min(diff), max(diff)])
+    if FLARE_MODE:
+
+        if current_goes_val > M_FLARE :
+            level=1
+        else:
+            level=0
+        
+    else:
+        
+        diff[0:-1] = diff[1:]      # shift array to make space to the new value
+        diff[-1] = current_goes_val
+        if DEBUG: print( "Diff array is: ", diff )
+    
+    
+        level = goes_to_int( current_goes_val,
+                         input_range = [min([i for i in diff if i > 0]), max(diff)])
 
     
-    led_no = val_str2int(val, len(leds))
-    set_leds(led_no)
-
+    print('level: ', level)
+    #led_no = val_str2int(val, len(leds))
+    
+    set_leds(level)
 
     status_led.off()
 
     if DEBUG:
-        print(val)
-        print(led_no)
+        print(current_goes_val)
 
     print_led_vals()
     
