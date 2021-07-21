@@ -1,6 +1,8 @@
 # Original version from :
 # Modified by A.Csillaghy for the new json format provided by NOAA
 
+# This software 
+
 import machine  # needed for Hardware stuff
 import urequests
 import usocket
@@ -62,7 +64,9 @@ the system will display the flare activity on the specified number of LEDS.
 
 """
 FLARE_MODE = True
-M_FLARE=1e-07
+M_FLARE=1e-05
+C_FLARE=1e-06
+B_FLARE=1e-07
 
 def do_connect():
     """
@@ -105,12 +109,25 @@ def get_current_goes_val( log_scale=True ):
                             headers=myHeaders).text
     
     print('reponse: ', response)
-    
-    response_processed = "{" + response.split(", {")[-2]
-    
-    print('reponse processed: ', response_processed)
 
-    response_json = ujson.loads( response_processed )
+# unfortunately, it is not deterministic when the high channel is at the correct position in the json.
+# therefore, we need to scan through the records in the response to find the correct channel (i.e. 01-0.8nm)
+
+    i=-2
+    while True:
+
+        response_processed = "{" + response.split(", {")[i]
+    
+        print('reponse processed: ', response_processed)
+
+        response_json = ujson.loads( response_processed )
+    
+        if response_json["energy"] == "0.1-0.8nm" : break
+            
+        print( "wrong goes channel, re-reading")
+        
+        i = i-1
+
 
     print('response json:', response_json )
     
@@ -211,8 +228,7 @@ diff = [0.0]*n_diff
 
 while(RUN):
     
-    if DEBUG:
-        print_led_vals()
+    if DEBUG: print_led_vals()
 
     status_led.on()
     
@@ -220,7 +236,7 @@ while(RUN):
     
     if FLARE_MODE:
 
-        if current_goes_val > M_FLARE :
+        if current_goes_val > B_FLARE :
             level=1
         else:
             level=0
@@ -236,15 +252,14 @@ while(RUN):
                          input_range = [min([i for i in diff if i > 0]), max(diff)])
 
     
-    print('level: ', level)
+    if DEBUG : print('level: ', level)
     #led_no = val_str2int(val, len(leds))
     
     set_leds(level)
 
     status_led.off()
 
-    if DEBUG:
-        print(current_goes_val)
+    if DEBUG: print(current_goes_val)
 
     print_led_vals()
     
