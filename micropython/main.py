@@ -27,6 +27,7 @@ RUN = True  # set False for testing, True for running
 
 SSID = 'Raumschiff'
 PASSWORD = '70524761197483070928'
+
 # SSID = 'csillag'
 # PASSWORD = '50768316143033105816'
 
@@ -47,10 +48,10 @@ level 1 lights up LEDS[0]
 """
 #This is the version with 4 LEDS
 #LEDS = [16, 17, 21, 22, 25]
-#LEDS = [13, 12, 14, 27]
+LEDS = [13, 12, 14, 27]
 
 #This is the version with one single LED, usually done for the FLARE MODE. 
-LEDS = [27]
+#LEDS = [27]
 
 status_led = machine.Pin(STATUS_LED, machine.Pin.OUT)
 leds = []
@@ -64,6 +65,7 @@ the system will display the flare activity on the specified number of LEDS.
 
 """
 FLARE_MODE = True
+
 M_FLARE=1e-05
 C_FLARE=1e-06
 B_FLARE=1e-07
@@ -81,9 +83,9 @@ def do_connect():
         while not sta_if.isconnected():
             # blink LED while connecting
             status_led.on()
-            time.sleep(0.05)
+            time.sleep(0.5)
             status_led.off()
-            time.sleep(0.05)
+            time.sleep(0.5)
             
     print('network config:', sta_if.ifconfig())
 
@@ -256,6 +258,7 @@ while(RUN):
     #led_no = val_str2int(val, len(leds))
     
     set_leds(level)
+#     set_leds(0)
 
     status_led.off()
 
