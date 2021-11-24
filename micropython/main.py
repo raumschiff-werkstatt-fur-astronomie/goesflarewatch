@@ -11,6 +11,9 @@ from math import log, ceil
 import network
 import ujson
 import gc
+
+import wifimgr
+
 #import urllib.urequest
 
 
@@ -26,7 +29,7 @@ RUN = True  # set False for testing, True for running
 #PASSWORD='57z0kmnvze8e8'
 
 SSID = 'Raumschiff'
-PASSWORD = '70524761197483070928'
+# PASSWORD = '70524761197483070928'
 
 # SSID = 'csillag'
 # PASSWORD = '50768316143033105816'
@@ -69,25 +72,40 @@ FLARE_MODE = True
 M_FLARE=1e-05
 C_FLARE=1e-06
 B_FLARE=1e-07
+A_FLARE=1e-08
+
+
 
 def do_connect():
     """
     Connect to the network from the MicroPython manual:
     http://docs.micropython.org/en/v1.9.3/esp8266/esp8266/tutorial/network_basics.html
     """
-    sta_if = network.WLAN(network.STA_IF)
-    if not sta_if.isconnected():
-        print('connecting to network...')
-        sta_if.active(True)
-        sta_if.connect(SSID, PASSWORD)
-        while not sta_if.isconnected():
-            # blink LED while connecting
-            status_led.on()
-            time.sleep(0.5)
-            status_led.off()
-            time.sleep(0.5)
-            
-    print('network config:', sta_if.ifconfig())
+#     sta_if = network.WLAN(network.STA_IF)
+#     if sta_if.isconnected() :
+#         sta_if.connect(SSID, 'gaga')
+     
+#         print('connecting to network...')
+#         sta_if.active(True)
+#         sta_if.connect(SSID, PASSWORD)
+#         while not sta_if.isconnected():
+#             # blink LED while connecting
+#             status_led.on()
+#             time.sleep(0.5)
+#             status_led.off()
+#             time.sleep(0.5)
+                            
+    wlan = wifimgr.get_connection()
+    if wlan is None:
+        print("Could not initialize the network connection.")
+        while True:
+            pass  # you shall not pass :D
+
+
+# Main Code goes here, wlan is a working network.WLAN(STA_IF) instance.
+    print("ESP OK")
+
+    print('network config:', wlan.ifconfig())
 
 
 def get_current_goes_val( log_scale=True ):
@@ -238,7 +256,7 @@ while(RUN):
     
     if FLARE_MODE:
 
-        if current_goes_val > B_FLARE :
+        if current_goes_val > A_FLARE :
             level=1
         else:
             level=0
