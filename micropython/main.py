@@ -16,6 +16,7 @@ import wifimgr
 
 #import urllib.urequest
 
+print("I am alive!")
 
 ###################################
 # Settings
@@ -28,7 +29,7 @@ RUN = True  # set False for testing, True for running
 #SSID='Topinambour'
 #PASSWORD='57z0kmnvze8e8'
 
-SSID = 'Raumschiff'
+#SSID = 'Raumschiff'
 # PASSWORD = '70524761197483070928'
 
 # SSID = 'csillag'
@@ -51,10 +52,10 @@ level 1 lights up LEDS[0]
 """
 #This is the version with 4 LEDS
 #LEDS = [16, 17, 21, 22, 25]
-LEDS = [13, 12, 14, 27]
+#LEDS = [13, 12, 14, 27]
 
 #This is the version with one single LED, usually done for the FLARE MODE. 
-#LEDS = [27]
+LEDS = [27]
 
 status_led = machine.Pin(STATUS_LED, machine.Pin.OUT)
 leds = []
@@ -73,8 +74,6 @@ M_FLARE=1e-05
 C_FLARE=1e-06
 B_FLARE=1e-07
 A_FLARE=1e-08
-
-
 
 def do_connect():
     """
@@ -256,7 +255,7 @@ while(RUN):
     
     if FLARE_MODE:
 
-        if current_goes_val > A_FLARE :
+        if current_goes_val > C_FLARE :
             level=1
         else:
             level=0
@@ -280,9 +279,9 @@ while(RUN):
 
     status_led.off()
 
-    if DEBUG: print(current_goes_val)
-
-    print_led_vals()
+    if DEBUG:
+        print(current_goes_val)
+        print_led_vals()
     
     gc.collect()
     gc.mem_free()
