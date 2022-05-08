@@ -13,6 +13,7 @@ import ujson
 import gc
 
 import wifimgr
+import micropython
 
 #import urllib.urequest
 
@@ -58,6 +59,7 @@ level 1 lights up LEDS[0]
 LEDS = [27]
 
 status_led = machine.Pin(STATUS_LED, machine.Pin.OUT)
+
 leds = []
 for led in LEDS:
     leds.append(machine.Pin(led, machine.Pin.OUT))
@@ -123,20 +125,29 @@ def get_current_goes_val( log_scale=True ):
     #    "https://services.swpc.noaa.gov/text/goes-xray-flux-primary.txt")
     #response = response.text.split("{")[-1].strip()
 
-    myHeaders = {'Range':'bytes=78000-79000'}
-    response = urequests.get("https://services.swpc.noaa.gov/json/goes/primary/xrays-6-hour.json", 
-                            headers=myHeaders).text
+    myHeaders = {'Range':'bytes=162000-164000'}
     
+    try:
+        response = urequests.get("https://services.swpc.noaa.gov/json/goes/primary/xrays-6-hour.json", 
+                            headers=myHeaders).text[:-1]
+    except:
+        gc.collect()
+        gc.threshold(gc.mem_free() // 4 + gc.mem_alloc())
+        print('*** MEMORY ERROR ***')
+        micropython.mem_info()
+        return 1e-09
+        
+        
     print('reponse: ', response)
 
 # unfortunately, it is not deterministic when the high channel is at the correct position in the json.
 # therefore, we need to scan through the records in the response to find the correct channel (i.e. 01-0.8nm)
 
-    i=-2
+    i=-1
     while True:
 
         response_processed = "{" + response.split(", {")[i]
-    
+        
         print('reponse processed: ', response_processed)
 
         response_json = ujson.loads( response_processed )
@@ -148,7 +159,16 @@ def get_current_goes_val( log_scale=True ):
         i = i-1
 
 
-    print('response json:', response_json )
+    #print('response json:', response_json )
+        
+    gc.collect()
+    gc.threshold(gc.mem_free() // 4 + gc.mem_alloc())
+    micropython.mem_info()
+    
+    print('-----------------------------')
+    print('free: {} allocated: {}'.format(gc.mem_free(), gc.mem_alloc()))
+    print('-----------------------------')    
+
     
     if log_scale:
         return abs(log(response_json["flux"]))
@@ -215,6 +235,19 @@ def set_leds(val):
         leds[-1].on()
 
 
+def blink_led(val):
+    
+    match val:
+        case 0: delay = 0.1
+        case 1: delay = 1
+        case 2: dela = 2
+        case 3: time = 100
+        
+    led.off()
+    time.sleep(time)
+        
+    
+    
 def boot_up():
     """
     Boot up animation, lights up every LED
@@ -223,6 +256,9 @@ def boot_up():
     for led in leds:
         led.on()
         time.sleep(0.4)
+        
+    time.sleep(10)
+    
     for led in leds:
         led.off()
     print("bootup done")
@@ -237,6 +273,10 @@ def print_led_vals():
         lp.append(led.value())
     print('LED vals: ', lp)
 
+
+#--------
+''' HERE STARTS THE MAIN PROGRAM
+'''
 
 do_connect()
 boot_up()
@@ -283,7 +323,4 @@ while(RUN):
         print(current_goes_val)
         print_led_vals()
     
-    gc.collect()
-    gc.mem_free()
-
     time.sleep(60)
