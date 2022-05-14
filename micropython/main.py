@@ -62,7 +62,10 @@ status_led = machine.Pin(STATUS_LED, machine.Pin.OUT)
 
 leds = []
 for led in LEDS:
-    leds.append(machine.Pin(led, machine.Pin.OUT))
+    this_led = machine.PWM( machine.Pin(27), freq=1, duty=512)
+#     leds.append(machine.Pin(led, machine.Pin.OUT))
+    leds.append(this_led)
+    print("PWM freq, duty:", this_led.freq(), this_led.duty())
     
 """
 FLARE mode vs activity confinguration: if you want the LED to light up only when there
@@ -72,10 +75,11 @@ the system will display the flare activity on the specified number of LEDS.
 """
 FLARE_MODE = True
 
-M_FLARE=1e-05
-C_FLARE=1e-06
-B_FLARE=1e-07
-A_FLARE=1e-08
+GOES_X=1e-04
+GOES_M=1e-05
+GOES_C=1e-06
+GOES_B=1e-07
+
 
 def do_connect():
     """
@@ -99,8 +103,8 @@ def do_connect():
     wlan = wifimgr.get_connection()
     if wlan is None:
         print("Could not initialize the network connection.")
-        while True:
-            pass  # you shall not pass :D
+#         while True:
+#             pass  # you shall not pass :D
 
 
 # Main Code goes here, wlan is a working network.WLAN(STA_IF) instance.
@@ -129,7 +133,9 @@ def get_current_goes_val( log_scale=True ):
     
     try:
         response = urequests.get("https://services.swpc.noaa.gov/json/goes/primary/xrays-6-hour.json", 
-                            headers=myHeaders).text[:-1]
+                            headers=myHeaders)
+        text=response.text[:-1]
+        response.close()
     except:
         gc.collect()
         gc.threshold(gc.mem_free() // 4 + gc.mem_alloc())
@@ -138,7 +144,7 @@ def get_current_goes_val( log_scale=True ):
         return 1e-09
         
         
-    print('reponse: ', response)
+    print('reponse: ', text)
 
 # unfortunately, it is not deterministic when the high channel is at the correct position in the json.
 # therefore, we need to scan through the records in the response to find the correct channel (i.e. 01-0.8nm)
@@ -146,15 +152,13 @@ def get_current_goes_val( log_scale=True ):
     i=-1
     while True:
 
-        response_processed = "{" + response.split(", {")[i]
-        
-        print('reponse processed: ', response_processed)
-
-        response_json = ujson.loads( response_processed )
-    
-        if response_json["energy"] == "0.1-0.8nm" : break
+        try:
+            response_processed = "{" + text.split(", {")[i]
+            print('reponse processed: ', response_processed)
+            response_json = ujson.loads( response_processed )
+            if response_json["energy"] == "0.1-0.8nm" : break
             
-        print( "wrong goes channel, re-reading")
+        except: print( "wrong goes channel, re-reading")
         
         i = i-1
 
@@ -176,6 +180,34 @@ def get_current_goes_val( log_scale=True ):
         return response_json["flux"]
     
 
+#----------
+    
+def goes_to_freq_duty( val ):
+    
+    if val < GOES_C:
+        
+        freq=500
+        duty=200
+        
+    if val > GOES_C and val < GOES_M :
+        
+        duty= int(round( val/1e-6*10 )) + 200
+        freq=500
+        
+    elif val > GOES_M and val > GOES_X:
+        
+        duty = 1023
+        freq=1
+        
+    else:
+    
+        duty=1023
+        freq = 3
+        
+    if DEBUG : print( "freq, duty =", freq, duty )
+    
+    return freq, duty
+        
 #----------
 
 def goes_to_int(val, nb_LED=4, debug=True, input_range=[1e-8, 1e-7]):
@@ -216,7 +248,7 @@ def goes_to_int(val, nb_LED=4, debug=True, input_range=[1e-8, 1e-7]):
         return -1
 
 
-def set_leds(val):
+def set_leds(val=None, duty=512, freq=500):
     """
     Sets the LEDs based on an integer value
     if the value is < 0 (error from val_str2int)
@@ -225,6 +257,11 @@ def set_leds(val):
     Parameters:
     val (int): number of LEDs to light up
     """
+    
+    if val == None:
+        leds[0].freq(freq)
+        leds[0].duty(duty)
+        return
 
     for led in leds:
         led.off()
@@ -237,12 +274,12 @@ def set_leds(val):
 
 def blink_led(val):
     
-    match val:
-        case 0: delay = 0.1
-        case 1: delay = 1
-        case 2: dela = 2
-        case 3: time = 100
-        
+#     if val==0: delay
+#         case 0: delay = 0.1
+#         case 1: delay = 1
+#         case 2: dela = 2
+#         case 3: time = 100
+#         
     led.off()
     time.sleep(time)
         
@@ -254,13 +291,13 @@ def boot_up():
     """
 
     for led in leds:
-        led.on()
+#         led.on()
         time.sleep(0.4)
         
     time.sleep(10)
     
-    for led in leds:
-        led.off()
+#     for led in leds:
+#         led.off()
     print("bootup done")
 
 
@@ -287,7 +324,7 @@ diff = [0.0]*n_diff
 
 while(RUN):
     
-    if DEBUG: print_led_vals()
+#     if DEBUG: print_led_vals()
 
     status_led.on()
     
@@ -295,10 +332,9 @@ while(RUN):
     
     if FLARE_MODE:
 
-        if current_goes_val > C_FLARE :
-            level=1
-        else:
-            level=0
+        freq, duty = goes_to_freq_duty( current_goes_val )
+        set_leds( freq=freq, duty=duty )
+        
         
     else:
         
@@ -311,16 +347,16 @@ while(RUN):
                          input_range = [min([i for i in diff if i > 0]), max(diff)])
 
     
-    if DEBUG : print('level: ', level)
+        if DEBUG : print('level: ', level)
     #led_no = val_str2int(val, len(leds))
     
-    set_leds(level)
+        set_leds(level)
 #     set_leds(0)
 
     status_led.off()
 
     if DEBUG:
         print(current_goes_val)
-        print_led_vals()
+#         print_led_vals()
     
     time.sleep(60)
