@@ -191,7 +191,7 @@ def goes_to_freq_duty( val ):
         
     if val > GOES_C and val < GOES_M :
         
-        duty= int(round( val/1e-6*10 )) + 200
+        duty= int(round( val/1e-6*80 )) + 200
         freq=500
         
     elif val > GOES_M and val > GOES_X:
