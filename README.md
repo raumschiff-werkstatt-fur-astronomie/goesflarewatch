@@ -1,4 +1,4 @@
-# GOES Flare Watch
+# Solar Flare Alert
 
 This is an application to display with multiple front ends the state of activity of the Sun. 
 It reads the last value delivered by the GOES spacecraft and sends it to an arduino or an esp32 processor,
