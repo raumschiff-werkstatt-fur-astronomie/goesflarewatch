@@ -1,10 +1,6 @@
-.. Bla documentation master file, created by
-   sphinx-quickstart on Wed Dec 23 16:36:22 2020.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-==============================================
+===============================================
 Welcome to the Solar Flare Alert documentation!
-==============================================
+===============================================
 
 Solar Flare Alert (formerly called goesflarewatch) is a set of applications
 to display the state of activity of the Sun using diverse hardware front ends,
@@ -14,17 +10,18 @@ The back end reads the last value delivered by the GOES spacecraft
 and sends it to the processor, which then controls the LEDs in customizable
 manner.
 
-For There is a python versions, part of the code is written in a
+The micropython version is very handy
+as it does everything ont the microprocessor,
+no need for the jupyter notebooks. You can just install micropython on your
+ESP32, download two files, and off you go!
+
+There is a python version, part of the code is written in a
 jupyter notebook that organises the access to the GOES data and
 then transforms the value into a number that can be used by the
 arduino to control the LEDs.
 Finally, the notebook sends the value to the serial port of the computer.
 On the arduino side, a program gets the value from the serial port and
 sends it to the corresponding LED.
-
-The micropython version is very handy
-as it does everything ont the microprocessor,
-no need for the jupyter notebooks.
 
 The Raspberry PI version is still in construction.
 
@@ -34,7 +31,7 @@ project, and everyone is welcome to contribute!
 How to get started
 ==================
 
-There are several versions of this
+There are several versions available
 
 * The micropython version is designed for the ESP32. **This is the one to use at the ECSITE 2022 conference**
 * The 4 LED version is the simplest. Best to get started
@@ -43,11 +40,12 @@ There are several versions of this
 
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+   :maxdepth: 3
+   :caption: Contents
 
-   summary
-   code
+   introduction
+   esp32
+   modules
 
 
 Indices and tables

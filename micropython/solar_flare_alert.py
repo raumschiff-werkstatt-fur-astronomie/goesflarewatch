@@ -1,79 +1,41 @@
-# Original version from :
-# Modified by A.Csillaghy for the new json format provided by NOAA
+# Original version from  morgulbrut Tillo
+# Modified in 2021 by A.Csillaghy for the new json format provided by NOAA
+# Included also the wifi manager for connecting to different wireless LANs
+# May 22 many changes for the ECSITE conference 2022
 
-# This software 
+"""
+This is the main micropython program that will run on the ESP32 microprocessor
+"""
+
+import gc
+import time
+from math import log
 
 import machine  # needed for Hardware stuff
-import urequests
-import usocket
-import time
-from math import log, ceil
-import network
 import ujson
-import gc
+import urequests
 
-import wifimgr
 import micropython
+import wifimgr
 
-#import urllib.urequest
-
-print("I am alive!")
+if __name__ == "__main__":
+    main()
 
 ###################################
-# Settings
+# First, let us look at the settings
 
 DEBUG = True  # more verbose output on the serial port
 RUN = True  # set False for testing, True for running
 
-# SSID = 'Raumschiff'
-# PASSWORD = '70524761197483070928'
-#SSID='Topinambour'
-#PASSWORD='57z0kmnvze8e8'
+if DEBUG:
+    print("I am alive!")
 
-#SSID = 'Raumschiff'
-# PASSWORD = '70524761197483070928'
-
-# SSID = 'csillag'
-# PASSWORD = '50768316143033105816'
-
-
-"""
-Status LED
-uses the internal LED:
-- fast blinking while connecting to WiFi
-- on while getting data from the internet
-"""
-STATUS_LED = 2
-
-"""
-LEDS
-uses GPIO, in order
-level 1 lights up LEDS[0]
-
-"""
-#This is the version with 4 LEDS
-#LEDS = [16, 17, 21, 22, 25]
-#LEDS = [13, 12, 14, 27]
-
-#This is the version with one single LED, usually done for the FLARE MODE. 
-LEDS = [27]
-
-status_led = machine.Pin(STATUS_LED, machine.Pin.OUT)
-
-leds = []
-for led in LEDS:
-    this_led = machine.PWM( machine.Pin(27), freq=1, duty=512)
-#     leds.append(machine.Pin(led, machine.Pin.OUT))
-    leds.append(this_led)
-    print("PWM freq, duty:", this_led.freq(), this_led.duty())
-    
-"""
-FLARE mode vs activity confinguration: if you want the LED to light up only when there
-is a flare (i.e. larger than GOES M), then you need to set up the FLARE mode. Otherwise
-the system will display the flare activity on the specified number of LEDS.
-
-"""
 FLARE_MODE = True
+"""
+FLARE mode vs solar activity configuration: if you want the LED to light up only when there
+is a flare (e.g. larger than GOES_M), then you need to set up FLARE_MODE to True. Otherwise
+the system will display the flare activity on the specified number of LEDS.
+"""
 
 GOES_X=1e-04
 GOES_M=1e-05
@@ -81,36 +43,56 @@ GOES_C=1e-06
 GOES_B=1e-07
 
 
+STATUS_LED = 2
+# Status LED uses the internal LED for
+# - blinking while connecting to WiFi
+# - on while getting data from the internet
+# - off while waiting
+
+LEDS = [27]
+"""
+The LEDS variable decides the action of the program
+LEDS uses the GPIO, inorder to control the status of the LEDs.
+
+In the current ECSITE 22 version, we use just one. 
+The version with one single LED is usually good with the FLARE MODE. 
+
+With 4 LEDS, you would use e.g.
+#LEDS = [13, 12, 14, 27]
+
+Possible is also:
+#LEDS = [16, 17, 21, 22, 25]
+
+"""
+
+status_led = machine.Pin(STATUS_LED, machine.Pin.OUT)
+
+leds = []
+for led in LEDS:
+    if FLARE_MODE:
+        this_led = machine.PWM(machine.Pin(27), freq=1, duty=512)
+        leds.append(this_led)
+        if DEBUG:
+            print("PWM freq, duty:", this_led.freq(), this_led.duty())
+    else:
+        leds.append(machine.Pin(led, machine.Pin.OUT))
+
+
 def do_connect():
     """
-    Connect to the network from the MicroPython manual:
-    http://docs.micropython.org/en/v1.9.3/esp8266/esp8266/tutorial/network_basics.html
+    Connect to the network using the Wifi Manager
     """
-#     sta_if = network.WLAN(network.STA_IF)
-#     if sta_if.isconnected() :
-#         sta_if.connect(SSID, 'gaga')
-     
-#         print('connecting to network...')
-#         sta_if.active(True)
-#         sta_if.connect(SSID, PASSWORD)
-#         while not sta_if.isconnected():
-#             # blink LED while connecting
-#             status_led.on()
-#             time.sleep(0.5)
-#             status_led.off()
-#             time.sleep(0.5)
                             
     wlan = wifimgr.get_connection()
     if wlan is None:
         print("Could not initialize the network connection.")
 #         while True:
 #             pass  # you shall not pass :D
+# ACS May 22, this has been commented out because it can lead to a deadlock
 
-
-# Main Code goes here, wlan is a working network.WLAN(STA_IF) instance.
-    print("ESP OK")
-
-    print('network config:', wlan.ifconfig())
+    if DEBUG:
+        print("ESP OK")
+        print('network config:', wlan.ifconfig())
 
 
 def get_current_goes_val( log_scale=True ):
@@ -282,12 +264,11 @@ def blink_led(val):
 #         
     led.off()
     time.sleep(time)
-        
-    
-    
+
+
 def boot_up():
     """
-    Boot up animation, lights up every LED
+    Boot up animation, lights up every LED. In PWM mode, blink the output LED.
     """
 
     for led in leds:
@@ -303,7 +284,8 @@ def boot_up():
 
 def print_led_vals():
     """
-    Prints out a list with the LED values
+    This is a helper program that prints out on the console a list with the LED values.
+    This is usually used only in debug mode and connected to a terminal or Thonny
     """
     lp = []
     for led in leds:
@@ -311,52 +293,52 @@ def print_led_vals():
     print('LED vals: ', lp)
 
 
-#--------
-''' HERE STARTS THE MAIN PROGRAM
-'''
+def main():
+    """
+    This program starts the pipeline that runs on the microprocessor.
+    """
 
-do_connect()
-boot_up()
+    do_connect() # first go to the wireless LAN
+    boot_up() # then start up the program
 
-n_diff=100
-diff = [0.0]*n_diff
+    n_diff=100
+    diff = [0.0]*n_diff
+
+    while RUN:
+
+    #     if DEBUG: print_led_vals()
+
+        status_led.on()
+
+        current_goes_val = get_current_goes_val( log_scale=not FLARE_MODE )
+
+        if FLARE_MODE:
+
+            freq, duty = goes_to_freq_duty( current_goes_val )
+            set_leds( freq=freq, duty=duty )
 
 
-while(RUN):
-    
-#     if DEBUG: print_led_vals()
+        else:
 
-    status_led.on()
-    
-    current_goes_val = get_current_goes_val( log_scale=not FLARE_MODE )
-    
-    if FLARE_MODE:
+            diff[0:-1] = diff[1:]      # shift array to make space to the new value
+            diff[-1] = current_goes_val
+            if DEBUG: print( "Diff array is: ", diff )
 
-        freq, duty = goes_to_freq_duty( current_goes_val )
-        set_leds( freq=freq, duty=duty )
-        
-        
-    else:
-        
-        diff[0:-1] = diff[1:]      # shift array to make space to the new value
-        diff[-1] = current_goes_val
-        if DEBUG: print( "Diff array is: ", diff )
-    
-    
-        level = goes_to_int( current_goes_val,
-                         input_range = [min([i for i in diff if i > 0]), max(diff)])
 
-    
-        if DEBUG : print('level: ', level)
-    #led_no = val_str2int(val, len(leds))
-    
-        set_leds(level)
-#     set_leds(0)
+            level = goes_to_int( current_goes_val,
+                             input_range = [min([i for i in diff if i > 0]), max(diff)])
 
-    status_led.off()
 
-    if DEBUG:
-        print(current_goes_val)
-#         print_led_vals()
-    
-    time.sleep(60)
+            if DEBUG : print('level: ', level)
+        #led_no = val_str2int(val, len(leds))
+
+            set_leds(level)
+    #     set_leds(0)
+
+        status_led.off()
+
+        if DEBUG:
+            print(current_goes_val)
+    #         print_led_vals()
+
+        time.sleep(60)
