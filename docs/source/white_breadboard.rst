@@ -1,7 +1,7 @@
 Instructions for the white breadboard
 =====================================
 
-.. figure:: ../images/IMG_2619.jpeg
+.. figure:: ../images/IMG_2619.png
    :width: 400
 
 You will need:

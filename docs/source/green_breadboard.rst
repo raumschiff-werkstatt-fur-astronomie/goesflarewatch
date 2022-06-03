@@ -1,7 +1,7 @@
 Instructions for the green breadboard
 =====================================
 
-.. figure:: ../images/IMG_2619.jpeg
+.. figure:: ../images/IMG_2619.png
    :width: 400
 
 This is very similar to the instructions for the white breadboard
