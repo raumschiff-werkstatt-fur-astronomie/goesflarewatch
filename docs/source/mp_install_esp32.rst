@@ -52,6 +52,6 @@ The pins deliver 3.3V and some sources say max 12mA, we use a 110 Ohm resistor.
 
 Testing
 =======
-In line 11 set RUN to False,
+In `solar_flare_alert.py` set RUN to False,
 the program loop wont run and you can test the functions.
 For example if the LED lights up correctly.
