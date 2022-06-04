@@ -1,6 +1,12 @@
 How to use the ESP32 version
 ============================
 
+In short: if you are looking for the micropython programs necessary, here they are:
+
+https://raw.githubusercontent.com/raumschiff-werkstatt-fur-astronomie/goesflarewatch/master/micropython/solar_flare_alert.py
+
+https://raw.githubusercontent.com/raumschiff-werkstatt-fur-astronomie/goesflarewatch/master/micropython/wifimgr.py
+
 There are two versions of the kit. The first version uses a white breadboard to assemble the components.
 The second version uses a green breadboard circuit board, and needs soldering (but is more compact).
 

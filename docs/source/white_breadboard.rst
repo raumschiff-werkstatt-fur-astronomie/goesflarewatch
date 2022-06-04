@@ -6,10 +6,10 @@ Instructions for the white breadboard
 
 You will need:
 
-* A tennis ball
+* A table tennis ball
 * One white breadboard
 * Wires
-* One LED
+* One LED wth a LED holder
 * One wire holder
 * One  ESP32 development board
 * One 110 Ohm resistor
@@ -19,8 +19,8 @@ How to proceed:
 ^^^^^^^^^^^^^^^
 
 #. Take the tennis ball, and make a hole in it, not too big, but sufficient to be able to mount the LED hold
-#. Put a wire at each end of the LED
-#. Insert the LED into the hole of the tennis ball
+#. Connect a wire at each end of the LED
+#. Mount the LED holder into the hole of the tennis ball
 #. Now, assemble the wire holder, with, at both ends one of the wire of the LED. Pay attention that the longer "foot" of the LED will be connected to the ground
 #. Mount the wire holder on the breadboard
 #. Take the ESP32 and look at the pin. Locate the pin number 27

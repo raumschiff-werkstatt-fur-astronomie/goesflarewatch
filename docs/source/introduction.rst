@@ -13,7 +13,7 @@ ultraviolet light.
 
 Flares are the sites where particles (electrons, protons, and heavier particles) are accelerated.
 
-.. figure:: ../images/Solar_flare_2_March.jpg
+.. figure:: ../images/Solar_flare_2_March.gif
    :width: 400
 
 The Sun unleashed a powerful flare on 4 November 2003. The Extreme ultraviolet Imager in the 195A emission line aboard the SOHO spacecraft captured the event. Credit:  ESA & NASA/S

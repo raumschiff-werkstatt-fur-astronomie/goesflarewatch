@@ -15,9 +15,9 @@ and you should find easily one near you.
 * Run ``esptool.py --chip esp32 --port /dev/ttyUSB0 --baud 460800 write_flash -z 0x1000 <DOWNLOADED_FIRMWARE>.bin`` to flash it.
 * Open a serial terminal (screen, putty, picocom) to check if you get a python shell.
 
-ESP32 MicroPython tutorial:
+ESP32 MicroPython tutorial
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-https://docs.micropython.org/en/latest/esp32/quickref.html
+See https://docs.micropython.org/en/latest/esp32/quickref.html
 
 Installing Thonny
 -----------------
@@ -32,7 +32,7 @@ To install it, the go to https://thonny.org/
 Thonny tutorial
 ^^^^^^^^^^^^^^^
 
-https://randomnerdtutorials.com/getting-started-thonny-micropython-python-ide-esp32-esp8266/
+See https://randomnerdtutorials.com/getting-started-thonny-micropython-python-ide-esp32-esp8266/
 
 Upload code
 ===========
