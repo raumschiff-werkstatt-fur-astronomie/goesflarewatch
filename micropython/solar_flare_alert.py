@@ -31,14 +31,14 @@ RUN = True  # set False for testing, True for running
 if DEBUG:
     print("I am alive!")
 
-FLARE_MODE = False
+FLARE_MODE = True
 """
 FLARE mode vs solar activity configuration: if you want the LED to light up only when there
 is a flare (e.g. larger than GOES_M), then you need to set up FLARE_MODE to True. Otherwise
 the system will display the flare activity on the specified number of LEDS.
 """
 SINGLE_LED_MODE = False
-LED_STRIP_MODE = True
+LED_STRIP_MODE = False
 """
 Now we also need to know whether what kind of hardware are we trying to drive. We have several 
 modes. 
@@ -59,8 +59,8 @@ STATUS_LED = 2
 # - on while getting data from the internet
 # - off while waiting
 
-#LEDS = [27]
-LEDS = [13, 12, 14]
+LEDS = [27]
+#LEDS = [13, 12, 14]
 """
 The LEDS variable decides the action of the program
 LEDS uses the GPIO, inorder to control the status of the LEDs.
@@ -100,14 +100,16 @@ for led in LEDS:
         this_led = machine.PWM(machine.Pin(led), freq=1, duty=512)
         leds.append(this_led)
         if DEBUG:
-            print(", this_led, PWM freq, duty:", this_led, this_led.freq(), this_led.duty())
+            print("this_led, PWM freq, duty:", this_led, this_led.freq(), this_led.duty())
     else:
         #just straight connection is used for the rest
         leds.append(machine.Pin(led, machine.Pin.OUT))
 
 # this is needed to start autonomously on the microcontroller
-if __name__ == "__main__":
-    _main()
+# if __name__ == "__main__":
+#     if DEBUG:
+#         print( "Start main program" )
+#     _main()
 
 def do_connect():
     """
@@ -177,21 +179,24 @@ def get_current_goes_val(log_scale=True):
                 break
 
         except:
+            
             if DEBUG:
-                print("Wrong goes channel, re-reading")
+                print("Wrong goes channel, dont care and exit with 1e-9")
+            
+            return 1e-9
 
         i = i - 1
 
     # TODO: remove unnecessary garbage collection
     # Let's do some more garbage collection, but this is probably too much.
     # We probably can take this away.
-    gc.collect()
-    gc.threshold(gc.mem_free() // 4 + gc.mem_alloc())
-    if DEBUG:
-        micropython.mem_info()
-        print('-----------------------------')
-        print('free: {} allocated: {}'.format(gc.mem_free(), gc.mem_alloc()))
-        print('-----------------------------')
+#     gc.collect()
+#     gc.threshold(gc.mem_free() // 4 + gc.mem_alloc())
+#     if DEBUG:
+#         micropython.mem_info()
+#         print('-----------------------------')
+#         print('free: {} allocated: {}'.format(gc.mem_free(), gc.mem_alloc()))
+#         print('-----------------------------')
 
     if log_scale:
         return abs(log(response_json["flux"]))
@@ -244,17 +249,18 @@ def goes_to_freq_duty(val, rgb=False):
 
     else:
         freq = 500
-        duty = 200
+        duty = 0
 
-        if GOES_C < val < GOES_M:
+        if GOES_B < val < GOES_M:
 #            duty = int(round(val / 1e-6 * 80)) + 200
-            duty = convert( val, GOES_B, GOES_M, 200, 1023 )
+# new way of calculating the duty 2022-11-27 ACs
+            duty = int(convert( val, GOES_B, GOES_M, 0, 1023 ))
 
         elif GOES_M < val < GOES_X:
             duty = 1023
             freq = 1
 
-        else:
+        elif val > GOES_X:
             duty = 1023
             freq = 3
 
@@ -372,7 +378,7 @@ def boot_up():
 
         else:
 
-            for color in rainbow_color_table:
+            for color in color_table:
                 led.sleep(0.4)
 
     time.sleep(10)
@@ -448,3 +454,4 @@ def _main():
 
         time.sleep(60)
 
+_main()
