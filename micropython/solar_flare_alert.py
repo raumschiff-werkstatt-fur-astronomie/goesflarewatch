@@ -31,11 +31,21 @@ RUN = True  # set False for testing, True for running
 if DEBUG:
     print("I am alive!")
 
-FLARE_MODE = True
+FLARE_MODE = False
 """
 FLARE mode vs solar activity configuration: if you want the LED to light up only when there
 is a flare (e.g. larger than GOES_M), then you need to set up FLARE_MODE to True. Otherwise
 the system will display the flare activity on the specified number of LEDS.
+"""
+SINGLE_LED_MODE = False
+LED_STRIP_MODE = True
+"""
+Now we also need to know whether what kind of hardware are we trying to drive. We have several 
+modes. 
+SINGLE_LED_MODE is used to display with PWM the information on a single LED. This is the mode of
+the solar flare alert designed for the ECSITE conference
+LED_STRIP_MODE is used to drive a RGB LED strip with different colors. Technically, it could also 
+be used with the FLARE mode, but it is more to change colors depending on a specific solar activity. 
 """
 
 GOES_X = 1e-04
@@ -49,7 +59,8 @@ STATUS_LED = 2
 # - on while getting data from the internet
 # - off while waiting
 
-LEDS = [27]
+#LEDS = [27]
+LEDS = [13, 12, 14]
 """
 The LEDS variable decides the action of the program
 LEDS uses the GPIO, inorder to control the status of the LEDs.
@@ -57,26 +68,44 @@ LEDS uses the GPIO, inorder to control the status of the LEDs.
 In the current ECSITE 22 version, we use just one. 
 The version with one single LED is usually good with the FLARE MODE. 
 
-With 4 LEDS, you would use e.g.
-#LEDS = [13, 12, 14, 27]
+TODO
+The version with 4 LEDS would display the solar activity as a "scale" going from low to high, i.e. B,C,M,X
 
-Possible is also:
+TODO
+Possible would be also A,B,C,M,X
 #LEDS = [16, 17, 21, 22, 25]
 
+Finally, the program is also able to steer an entire LED strip to display the solar activity as an rgb value.
+This requires the LED_STRIP_MODE and it uses 3 LED inputs, one for R, G and B, repectively. 
+
+Please be aware that LED_STRIP_MODE requires additionally MOSFETS to bring 12 V to the LED strip. 
+ 
 """
+
+color_table = []
+f = open('rainbow.rgb')
+lines = f.readlines()
+for line in lines:
+    color_table.append( line.strip().split() )
+if DEBUG:
+    print( "Color table loaded.")
 
 status_led = machine.Pin(STATUS_LED, machine.Pin.OUT)
 
 leds = []
 for led in LEDS:
-    if FLARE_MODE:
-        this_led = machine.PWM(machine.Pin(27), freq=1, duty=512)
+
+    if FLARE_MODE or LED_STRIP_MODE:
+        #PWM is used for these modes
+        this_led = machine.PWM(machine.Pin(led), freq=1, duty=512)
         leds.append(this_led)
         if DEBUG:
-            print("PWM freq, duty:", this_led.freq(), this_led.duty())
+            print(", this_led, PWM freq, duty:", this_led, this_led.freq(), this_led.duty())
     else:
+        #just straight connection is used for the rest
         leds.append(machine.Pin(led, machine.Pin.OUT))
 
+# this is needed to start autonomously on the microcontroller
 if __name__ == "__main__":
     _main()
 
@@ -89,6 +118,7 @@ def do_connect():
     wlan = wifimgr.get_connection()
     if wlan is None:
         print("Could not initialize the network connection.")
+    # TODO this needs to be fixed
     #         while True:
     #             pass  # you shall not pass :D
     # ACS May 22, this has been commented out because it can lead to a deadlock
@@ -151,6 +181,7 @@ def get_current_goes_val(log_scale=True):
                 print("Wrong goes channel, re-reading")
 
         i = i - 1
+
     # TODO: remove unnecessary garbage collection
     # Let's do some more garbage collection, but this is probably too much.
     # We probably can take this away.
@@ -167,10 +198,19 @@ def get_current_goes_val(log_scale=True):
     else:
         return response_json["flux"]
 
+# ---------
+def convert(x, i_m, i_M, o_m, o_M):
 
-# ----------
+    """
+    Will return an integer between out_min (o_m) and out_max (o_M)
+    From the Internet: https://forum.micropython.org/viewtopic.php?f=2&t=7615
+    """
+    return max(min(o_M, (x - i_m) * (o_M - o_m) // (i_M - i_m) + o_m), o_m)
 
-def goes_to_freq_duty(val):
+# ---------
+
+def goes_to_freq_duty(val, rgb=False):
+
     """
     This function transforms the GOES values into frequency and duty cycles that can be used to control the
     Pulse Width Modulation, when operating a single LED. The idea behind this is that
@@ -179,26 +219,44 @@ def goes_to_freq_duty(val):
     * If the value is in M, it blinks slowly
     * If the value is above X, it blinks strongly
 
+    The range of the GOES value is assumed to be between 10-9 and 10-2 [W/m2]
+
     :param val: The GOES value
+    :param rgb: Boolean variable to tell if rgb values are needed or just a single freq/duty
     :return: Values for `duty` and `frequency` - the values that can be used in the PWM module
     :rtype: (int, int)
     """
 
-    if val < GOES_C:
+    if rgb:
+        freq = (500,500,500)
+        duty = (200,200,200)
+
+        duty_index = convert( val, GOES_B, GOES_M, 0, 255 )
+        duty_rgb = color_table[duty_index]
+        duty = duty_rgb*0
+        for i in range(3):
+           duty[i] = convert( duty_rgb[i], 0, 255, 0, 1023 )
+
+        if GOES_M < val < GOES_X:
+            freq = 1
+        elif val > GOES_X:
+            freq = 3
+
+    else:
         freq = 500
         duty = 200
 
-    if GOES_C < val < GOES_M:
-        duty = int(round(val / 1e-6 * 80)) + 200
-        freq = 500
+        if GOES_C < val < GOES_M:
+#            duty = int(round(val / 1e-6 * 80)) + 200
+            duty = convert( val, GOES_B, GOES_M, 200, 1023 )
 
-    elif val > GOES_M and val > GOES_X:
-        duty = 1023
-        freq = 1
+        elif GOES_M < val < GOES_X:
+            duty = 1023
+            freq = 1
 
-    else:
-        duty = 1023
-        freq = 3
+        else:
+            duty = 1023
+            freq = 3
 
     if DEBUG:
         print("freq, duty =", freq, duty)
@@ -256,20 +314,27 @@ def set_leds(val=None, duty=512, freq=500):
 
     Parameters:
     val (int): number of LEDs to light up
+    :rtype: object
     """
 
-    if val == None:
+    if val is None:
         leds[0].freq(freq)
         leds[0].duty(duty)
         return
 
-    for led in leds:
-        led.off()
-    if val >= 0:
-        for led in leds[:val]:
-            led.on()
+    if not LED_STRIP_MODE:
+
+        for led in leds:
+            led.off()
+        if val >= 0:
+            for led in leds[:val]:
+                led.on()
+        else:
+            leds[-1].on()
+
     else:
-        leds[-1].on()
+
+        r, g, b = rainbow_color_table[val]
 
 
 def blink_led(val):
@@ -297,9 +362,18 @@ def boot_up():
 
     # TODO This works currently only for one LED in PWM mode. Needs to be done for any LED number
 
-    for led in leds:
-        #         led.on()
-        time.sleep(0.4)
+    if not FLARE_MODE:
+
+        if not LED_STRIP_MODE:
+
+            for led in leds:
+                #         led.on()
+                time.sleep(0.4)
+
+        else:
+
+            for color in rainbow_color_table:
+                led.sleep(0.4)
 
     time.sleep(10)
 
@@ -330,6 +404,7 @@ def _main():
     do_connect()  # first go to the wireless LAN
     boot_up()  # then start up the program
 
+    # number of goes values to keep
     n_diff = 100
     diff = [0.0] * n_diff
 
@@ -343,24 +418,25 @@ def _main():
 
         if FLARE_MODE:
 
-            freq, duty = goes_to_freq_duty(current_goes_val)
+            freq, duty = goes_to_freq_duty(current_goes_val, rgb=LED_STRIP_MODE)
             set_leds(freq=freq, duty=duty)
-
 
         else:
 
-            diff[0:-1] = diff[1:]  # shift array to make space to the new value
+            diff[0:-1] = diff[1:]  # shift array to make space for the new value
             diff[-1] = current_goes_val
-            if DEBUG: print("Diff array is: ", diff)
+            if DEBUG:
+                print("Diff array is: ", diff)
 
+# TODO this needs to be revisited
             level = goes_to_int(current_goes_val,
                                 input_range=[min([i for i in diff if i > 0]), max(diff)])
 
-            if DEBUG: print('level: ', level)
+            if DEBUG:
+                print('level: ', level)
             # led_no = val_str2int(val, len(leds))
 
             set_leds(level)
-        #     set_leds(0)
 
         status_led.off()
 
@@ -371,3 +447,4 @@ def _main():
         #         print_led_vals()
 
         time.sleep(60)
+
