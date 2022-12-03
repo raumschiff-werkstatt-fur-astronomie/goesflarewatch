@@ -2,6 +2,7 @@
 # Modified in 2021 by A.Csillaghy for the new json format provided by NOAA
 # Included also the wifi manager for connecting to different wireless LANs
 # May 22 many changes for the ECSITE conference 2022
+# Nov 22 many changes for support of the LED_STRIP
 
 """
 This is the main micropython program that runs on the ESP32 microprocessor.
