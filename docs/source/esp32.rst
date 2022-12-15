@@ -1,5 +1,5 @@
-How to use the ESP32 version
-============================
+How to set up the ESP32 version
+===============================
 
 In short: if you are looking for the micropython programs necessary, here they are:
 
@@ -26,13 +26,14 @@ microprocessor and transfer two programs called solar_flare_alert.py and wifimgr
 Usage
 =====
 
-Once you have assembled the board, you will have to first connect to the local WIFI network. This is
+Once you have assembled the board, you will have to first connect to
+the local WIFI network. This is
 done as follows:
 
 #. Power on the solar flare alert. The lamp starts blinking
 #. If the lamp stops blinking after a while, that means the solar flare alert found a known network and connected, so you are all set.
 #. If the lamps continues blinking, go tho the list of WIFI networks and locate the WifiMgr access point. Connect to it.
-#. Once connected, go into a browser and type the address 192.168.4.1
+#. Once connected, go into a browser and type the address **192.168.4.1**
 #. After a while, you should see the list of access points available. Select the one you want to connect, and type in your password
 #. That's it. Now you can connect back to your regular network.
 

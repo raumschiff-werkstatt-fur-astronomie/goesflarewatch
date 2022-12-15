@@ -22,6 +22,8 @@ import urequests
 import micropython
 import wifimgr
 
+from plasma import plasma_data
+
 ###################################
 # First, let us look at the settings
 
@@ -94,11 +96,12 @@ Please be aware that LED_STRIP_MODE requires additionally MOSFETS to bring 12 V 
 """
 
 if LED_STRIP_MODE:
-    color_table = []
-    f = open('rainbow.rgb')
-    lines = f.readlines()
-    for line in lines:
-        color_table.append(line.strip().split())
+    #     color_table = []
+    #     f = open('rainbow.rgb')
+    #     lines = f.readlines()
+    #     for line in lines:
+    #         color_table.append(line.strip().split())
+    color_table = plasma_data
     if DEBUG:
         print("Color table loaded.")
 
@@ -144,7 +147,7 @@ def do_connect():
         print('network config:', wlan.ifconfig())
 
 
-def get_current_goes_val( ) -> float:
+def get_current_goes_val() -> float:
     """
     This function gets the GOES data from the Internet, more precisely from the services
     offered by NOAAA. It gets the last part of the corresponding JSON file and extracts the
@@ -259,7 +262,8 @@ def goes_to_freq_duty(val, rgb=False):
             print("val, duty_index, duty_rgb = ", val, duty_index, duty_rgb)
 
         for i in range(3):
-            duty[i] = convert(int(duty_rgb[i]), 0, 255, 0, 1023)
+            # duty[i] = convert(int(duty_rgb[i]), 0, 255, 0, 1023)
+            duty[i] = convert(int(duty_rgb[i]), 0., 1., 0, 1023)
 
         if GOES_M < val < GOES_X:
             freq = [1, 1, 1]
@@ -387,8 +391,6 @@ def boot_up():
     Boot up animation, lights up every LED. In PWM mode, blink the output LED.
     """
 
-    # TODO This works currently only for one LED in PWM mode. Needs to be done for any LED number
-
     if not SINGLE_LED_MODE:
 
         if not LED_STRIP_MODE:
@@ -403,10 +405,14 @@ def boot_up():
             leds[2].freq(500)
             for color in color_table:
                 for i in range(3):
-                    this_duty = int(convert(int(color[i]), 0, 255, 0, 1023))
-                    # print( "color, duty =  ", color[i], this_duty )
+                    # this_duty = int(convert(int(color[i]), 0, 255, 0, 1023))
+                    this_duty = int(convert(int(color[i]), 0., 1., 0, 1023))
                     leds[i].duty(this_duty)
+                    if DEBUG:
+                        print("color, duty, leds[i] =  ", color[i], this_duty, leds[i].duty(), leds[i].freq())
             time.sleep(0.4)
+
+    # TODO This works currently only for one LED in PWM mode. Needs to be done for any LED number
 
     time.sleep(10)
 
