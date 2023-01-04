@@ -1,5 +1,5 @@
 /*
-  GOESFlareWatch4LED - Version with 4 LEDs
+  GOESFlareWatch8LED - Version with 4 LEDs
 
   This program receives through the serial interface
   data from its brother Python program about the size of 
@@ -13,6 +13,10 @@
   (Origin is the program BLIK.)
   
 */
+
+#include <SPI.h>
+#include <WiFiNINA.h>
+
 
 // the setup function runs once when you press reset or power the board
 

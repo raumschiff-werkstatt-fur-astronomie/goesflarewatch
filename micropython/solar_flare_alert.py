@@ -15,6 +15,7 @@ import gc
 import time
 from math import log
 
+
 import machine  # needed for Hardware stuff
 import ujson
 import urequests
@@ -24,14 +25,12 @@ import wifimgr
 
 from plasma import plasma_data
 
+
 ###################################
-# First, let us look at the settings
+# CONFIGURATION SECTION
 
 DEBUG = True  # more verbose output on the serial port
 RUN = True  # set False for testing, True for running
-
-if DEBUG:
-    print("I am alive!")
 
 FLARE_MODE = False
 """
@@ -42,8 +41,8 @@ acs 30.11.22 :
 I am changing this. Flare mode should really be a mode for itself with a flare detection algorithm.
 This is another todo. FLARE_MODE is therefore replaced with SINGLE_LED_MODE
 """
-SINGLE_LED_MODE = True
-LED_STRIP_MODE = False
+SINGLE_LED_MODE = False
+LED_STRIP_MODE = True
 """
 Now we also need to know what kind of hardware are we trying to drive. We have several 
 modes. 
@@ -94,6 +93,19 @@ This requires the LED_STRIP_MODE and it uses 3 LED inputs, one for R, G and B, r
 Please be aware that LED_STRIP_MODE requires additionally MOSFETS to bring 12 V to the LED strip. 
  
 """
+
+# Default values for PWM:
+DEFAULT_FREQ = 500
+DEFAULT_DUTY = 500
+SLOW_BLINKING = 1
+FAST_BLINKING = 3
+
+# END OF CONFIGURATION SECTION
+# ================================
+
+if DEBUG:
+    print("I am alive!")
+
 
 if LED_STRIP_MODE:
     #     color_table = []
@@ -147,7 +159,7 @@ def do_connect():
         print('network config:', wlan.ifconfig())
 
 
-def get_current_goes_val() -> float:
+def get_current_goes_val( ) :
     """
     This function gets the GOES data from the Internet, more precisely from the services
     offered by NOAAA. It gets the last part of the corresponding JSON file and extracts the
@@ -158,7 +170,7 @@ def get_current_goes_val() -> float:
     """
 
     # we do not need to read the entire file
-    my_headers = {'Range': 'bytes=162000-164000'}
+    my_headers = {'Range': 'bytes=162000-166000'}
 
     try:
         response = urequests.get("https://services.swpc.noaa.gov/json/goes/primary/xrays-6-hour.json",
@@ -174,7 +186,7 @@ def get_current_goes_val() -> float:
         # gc.threshold(gc.mem_free() // 4 + gc.mem_alloc())
         # print('*** MEMORY ERROR ***')
         # micropython.mem_info()
-        return 0
+        return GOES_LIMIT
 
     if DEBUG:
         print('Response: ', text)
@@ -217,6 +229,8 @@ def get_current_goes_val() -> float:
 
     # do we ever need the non-log case? let's try with logs
     # if log_scale:
+    
+    success = True
     return log(response_json["flux"]) - GOES_LIMIT
     # else:
     #     return response_json["flux"]
@@ -225,7 +239,7 @@ def get_current_goes_val() -> float:
 # ---------
 def convert(x, i_m, i_M, o_m, o_M):
     """
-    Will return an integer between out_min (o_m) and out_max (o_M)
+    Return an integer between out_min (o_m) and out_max (o_M)
     From the Internet: https://forum.micropython.org/viewtopic.php?f=2&t=7615
     """
     return max(min(o_M, (x - i_m) * (o_M - o_m) // (i_M - i_m) + o_m), o_m)
@@ -251,28 +265,28 @@ def goes_to_freq_duty(val, rgb=False):
     """
 
     if rgb:
-        freq = [500, 500, 500]
-        duty = [200, 200, 200]
+        freq = [DEFAULT_FREQ, DEFAULT_FREQ, DEFAULT_FREQ]
+        duty = [DEFAULT_DUTY, DEFAULT_DUTY, DEFAULT_DUTY]
 
         # TODO this has too many type conversions, color table should be corrected to 0..1023 and ints not stings
         duty_index = int(convert(val, GOES_B, GOES_M, 0, len(color_table) - 1))
         duty_rgb = color_table[duty_index]
 
-        if DEBUG:
-            print("val, duty_index, duty_rgb = ", val, duty_index, duty_rgb)
-
         for i in range(3):
             # duty[i] = convert(int(duty_rgb[i]), 0, 255, 0, 1023)
-            duty[i] = convert(int(duty_rgb[i]), 0., 1., 0, 1023)
+            duty[i] = int(convert(duty_rgb[i], 0., 1., 0, 1023))
 
         if GOES_M < val < GOES_X:
-            freq = [1, 1, 1]
+            freq = [SLOW_BLINKING, SLOW_BLINKING, SLOW_BLINKING]
         elif val > GOES_X:
-            freq = [3, 3, 3]
+            freq = [FAST_BLINKING, FAST_BLINKING, FAST_BLINKING]
+
+        if DEBUG:
+            print("val, duty_index, duty_rgb, duty = ", val, duty_index, duty_rgb, duty)
 
     else:
-        freq = 500
-        duty = 0
+        freq = DEFAULT_FREQ
+        duty = DEFAULT_DUTY
 
         if GOES_B < val < GOES_M:
             # duty = int(round(val / 1e-6 * 80)) + 200
@@ -280,12 +294,10 @@ def goes_to_freq_duty(val, rgb=False):
             duty = int(convert(val, GOES_B, GOES_M, 0, 1023))
 
         elif GOES_M < val < GOES_X:
-            duty = 1023
-            freq = 1
+            freq = SLOW_BLINKING
 
         elif val > GOES_X:
-            duty = 1023
-            freq = 3
+            freq = FAST_BLINKING
 
     if DEBUG:
         print("freq, duty =", freq, duty)
@@ -406,10 +418,10 @@ def boot_up():
             for color in color_table:
                 for i in range(3):
                     # this_duty = int(convert(int(color[i]), 0, 255, 0, 1023))
-                    this_duty = int(convert(int(color[i]), 0., 1., 0, 1023))
+                    this_duty = int(convert(color[i], 0., 1., 0, 1023))
                     leds[i].duty(this_duty)
                     if DEBUG:
-                        print("color, duty, leds[i] =  ", color[i], this_duty, leds[i].duty(), leds[i].freq())
+                        print("color, duty, leds[i] =  ", color[i], this_duty, leds[0].duty(), leds[1].duty(), leds[2].duty())
             time.sleep(0.4)
 
     # TODO This works currently only for one LED in PWM mode. Needs to be done for any LED number
@@ -454,12 +466,13 @@ def _main():
         status_led.on()
 
         # current_goes_val = get_current_goes_val(log_scale=not FLARE_MODE and not LED_STRIP_MODE)
-        current_goes_val = get_current_goes_val()  # always in log scale
+        current_goes_val = get_current_goes_val( )  # always in log scale
 
         if SINGLE_LED_MODE or LED_STRIP_MODE:
 
-            freq, duty = goes_to_freq_duty(current_goes_val, rgb=LED_STRIP_MODE)
-            set_leds(freq=freq, duty=duty)
+            if current_goes_val > GOES_LIMIT:
+                freq, duty = goes_to_freq_duty(current_goes_val, rgb=LED_STRIP_MODE)
+                set_leds(freq=freq, duty=duty)
 
         else:
 
