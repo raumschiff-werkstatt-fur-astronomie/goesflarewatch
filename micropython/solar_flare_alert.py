@@ -41,8 +41,8 @@ acs 30.11.22 :
 I am changing this. Flare mode should really be a mode for itself with a flare detection algorithm.
 This is another todo. FLARE_MODE is therefore replaced with SINGLE_LED_MODE
 """
-SINGLE_LED_MODE = False
-LED_STRIP_MODE = True
+SINGLE_LED_MODE = True
+LED_STRIP_MODE = False
 """
 Now we also need to know what kind of hardware are we trying to drive. We have several 
 modes. 
@@ -291,7 +291,7 @@ def goes_to_freq_duty(val, rgb=False):
         if GOES_B < val < GOES_M:
             # duty = int(round(val / 1e-6 * 80)) + 200
             # use now convert for calculating the duty 2022-11-27 ACs
-            duty = int(convert(val, GOES_B, GOES_M, 0, 1023))
+            duty = int(convert(val, GOES_B, GOES_M, 0, 512))
 
         elif GOES_M < val < GOES_X:
             freq = SLOW_BLINKING
