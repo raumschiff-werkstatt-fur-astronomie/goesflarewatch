@@ -3,6 +3,7 @@
 # Included also the wifi manager for connecting to different wireless LANs
 # May 22 many changes for the ECSITE conference 2022
 # Nov 22 many changes for support of the LED_STRIP
+# Nov 23 some changes in the json from NOAA required a smarter way to process the response string
 
 """
 This is the main micropython program that runs on the ESP32 microprocessor.
@@ -15,7 +16,6 @@ import gc
 import time
 from math import log
 
-
 import machine  # needed for Hardware stuff
 import ujson
 import urequests
@@ -24,7 +24,6 @@ import micropython
 import wifimgr
 
 from plasma import plasma_data
-
 
 ###################################
 # CONFIGURATION SECTION
@@ -106,7 +105,6 @@ FAST_BLINKING = 3
 if DEBUG:
     print("I am alive!")
 
-
 if LED_STRIP_MODE:
     #     color_table = []
     #     f = open('rainbow.rgb')
@@ -159,7 +157,7 @@ def do_connect():
         print('network config:', wlan.ifconfig())
 
 
-def get_current_goes_val( ) :
+def get_current_goes_val():
     """
     This function gets the GOES data from the Internet, more precisely from the services
     offered by NOAAA. It gets the last part of the corresponding JSON file and extracts the
@@ -188,32 +186,66 @@ def get_current_goes_val( ) :
         # micropython.mem_info()
         return GOES_LIMIT
 
-    if DEBUG:
-        print('Response: ', text)
+    # transform the string into a valid json string:
+    # this is from Nov 23
+    # this wasnt working any more I needed to fix it
+
+    # Find the index of the first occurrence of '{'
+    start_index = text.find('{')
+
+    if start_index != -1:
+        # Find the index of the first occurrence of '}' after the '{'
+        end_index = text.rfind('}')
+
+        if end_index != -1:
+            # Slice the string from the '{' to '}' (including both)
+            result_string = text[start_index:end_index + 1]
+            if DEBUG:
+                print('Response: ', result_string)
+
+
+            # Convert the resulting string to a JSON object
+#             try:
+#                 json_object = ujson.loads(result_string)
+#                 #print(json_object)
+#             except:
+#                 print("Invalid JSON format in the extracted string.")
+#                 return GOES_LIMIT
+        else:
+            print("The '}' character was not found after the '{'.")
+    else:
+        print("The '{' character was not found in the string.")
 
     # unfortunately, it is not fully deterministic when the high channel is at the correct position
     # to be extracted from the json. Therefore, we need to scan through the records in the response
     # to find the correct channel (i.e. 01-0.8nm)
 
+    if DEBUG:
+        print(" ")
+        print('Result string: ', result_string)
+        print(" ")
+
+    # we need to split the result string otherwise the json.loads does not work;
+    # but never mind it does not care about the last "}"
+    result_string = result_string.split("},")
     i = -1
+
+    # note: this will crash if no json entry has an "energy" tag.
     while True:
 
-        try:
-            response_processed = "{" + text.split(", {")[i]
-            if DEBUG:
-                print('Response processed: ', response_processed)
-            response_json = ujson.loads(response_processed)
-            if response_json["energy"] == "0.1-0.8nm":
-                break
-
-        except:
-
-            # Brute force: ignore errors in the json file and wait for the next value
-            if DEBUG:
-                print("Wrong goes channel, dont care and exit with 1e-9")
-
-            return GOES_LIMIT
-
+        response_processed = result_string[i]
+        if DEBUG:
+            print('Response processed: ', response_processed)
+        response_json = ujson.loads(response_processed)
+        if response_json["energy"] == "0.1-0.8nm":
+            break
+#         except:
+# 
+#             # Brute force: ignore errors in the json file and wait for the next value
+#             if DEBUG:
+#                 print("Wrong json object, dont care and exit with 1e-9")
+# 
+#             return GOES_LIMIT
         i = i - 1
 
     # TODO: remove unnecessary garbage collection
@@ -229,8 +261,12 @@ def get_current_goes_val( ) :
 
     # do we ever need the non-log case? let's try with logs
     # if log_scale:
-    
+
+#     if i == 0:
+#         return GOES_LIMIT
+
     success = True
+    print( "Flux:", response_json["flux"])
     return log(response_json["flux"]) - GOES_LIMIT
     # else:
     #     return response_json["flux"]
@@ -421,7 +457,8 @@ def boot_up():
                     this_duty = int(convert(color[i], 0., 1., 0, 1023))
                     leds[i].duty(this_duty)
                     if DEBUG:
-                        print("color, duty, leds[i] =  ", color[i], this_duty, leds[0].duty(), leds[1].duty(), leds[2].duty())
+                        print("color, duty, leds[i] =  ", color[i], this_duty, leds[0].duty(), leds[1].duty(),
+                              leds[2].duty())
             time.sleep(0.4)
 
     # TODO This works currently only for one LED in PWM mode. Needs to be done for any LED number
@@ -466,7 +503,7 @@ def _main():
         status_led.on()
 
         # current_goes_val = get_current_goes_val(log_scale=not FLARE_MODE and not LED_STRIP_MODE)
-        current_goes_val = get_current_goes_val( )  # always in log scale
+        current_goes_val = get_current_goes_val()  # always in log scale
 
         if SINGLE_LED_MODE or LED_STRIP_MODE:
 
