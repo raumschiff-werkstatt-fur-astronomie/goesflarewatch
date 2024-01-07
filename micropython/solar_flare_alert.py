@@ -3,7 +3,6 @@
 # Included also the wifi manager for connecting to different wireless LANs
 # May 22 many changes for the ECSITE conference 2022
 # Nov 22 many changes for support of the LED_STRIP
-# Nov 23 some changes in the json from NOAA required a smarter way to process the response string
 
 """
 This is the main micropython program that runs on the ESP32 microprocessor.
@@ -23,13 +22,14 @@ import urequests
 import micropython
 import wifimgr
 
-from plasma import plasma_data
-
 ###################################
-# CONFIGURATION SECTION
+# First, let us look at the settings
 
 DEBUG = True  # more verbose output on the serial port
 RUN = True  # set False for testing, True for running
+
+if DEBUG:
+    print("I am alive!")
 
 FLARE_MODE = False
 """
@@ -93,25 +93,12 @@ Please be aware that LED_STRIP_MODE requires additionally MOSFETS to bring 12 V 
  
 """
 
-# Default values for PWM:
-DEFAULT_FREQ = 500
-DEFAULT_DUTY = 500
-SLOW_BLINKING = 1
-FAST_BLINKING = 3
-
-# END OF CONFIGURATION SECTION
-# ================================
-
-if DEBUG:
-    print("I am alive!")
-
 if LED_STRIP_MODE:
-    #     color_table = []
-    #     f = open('rainbow.rgb')
-    #     lines = f.readlines()
-    #     for line in lines:
-    #         color_table.append(line.strip().split())
-    color_table = plasma_data
+    color_table = []
+    f = open('rainbow.rgb')
+    lines = f.readlines()
+    for line in lines:
+        color_table.append(line.strip().split())
     if DEBUG:
         print("Color table loaded.")
 
@@ -157,7 +144,7 @@ def do_connect():
         print('network config:', wlan.ifconfig())
 
 
-def get_current_goes_val():
+def get_current_goes_val( ) -> float:
     """
     This function gets the GOES data from the Internet, more precisely from the services
     offered by NOAAA. It gets the last part of the corresponding JSON file and extracts the
@@ -168,7 +155,7 @@ def get_current_goes_val():
     """
 
     # we do not need to read the entire file
-    my_headers = {'Range': 'bytes=162000-166000'}
+    my_headers = {'Range': 'bytes=162000-164000'}
 
     try:
         response = urequests.get("https://services.swpc.noaa.gov/json/goes/primary/xrays-6-hour.json",
@@ -184,68 +171,43 @@ def get_current_goes_val():
         # gc.threshold(gc.mem_free() // 4 + gc.mem_alloc())
         # print('*** MEMORY ERROR ***')
         # micropython.mem_info()
-        return GOES_LIMIT
+        return 0
 
-    # transform the string into a valid json string:
-    # this is from Nov 23
-    # this wasnt working any more I needed to fix it
-
-    # Find the index of the first occurrence of '{'
-    start_index = text.find('{')
-
-    if start_index != -1:
-        # Find the index of the first occurrence of '}' after the '{'
-        end_index = text.rfind('}')
-
-        if end_index != -1:
-            # Slice the string from the '{' to '}' (including both)
-            result_string = text[start_index:end_index + 1]
-            if DEBUG:
-                print('Response: ', result_string)
-
-
-            # Convert the resulting string to a JSON object
-#             try:
-#                 json_object = ujson.loads(result_string)
-#                 #print(json_object)
-#             except:
-#                 print("Invalid JSON format in the extracted string.")
-#                 return GOES_LIMIT
-        else:
-            print("The '}' character was not found after the '{'.")
-    else:
-        print("The '{' character was not found in the string.")
+    if DEBUG:
+        print('Response: ', text)
 
     # unfortunately, it is not fully deterministic when the high channel is at the correct position
     # to be extracted from the json. Therefore, we need to scan through the records in the response
     # to find the correct channel (i.e. 01-0.8nm)
 
-    if DEBUG:
-        print(" ")
-        print('Result string: ', result_string)
-        print(" ")
-
-    # we need to split the result string otherwise the json.loads does not work;
-    # but never mind it does not care about the last "}"
-    result_string = result_string.split("},")
     i = -1
+    response_processed = text.split(", {")
+    if DEBUG:
+        print('\n Response processed: ', response_processed)
 
-    # note: this will crash if no json entry has an "energy" tag.
-    while True:
+    while abs(i) < len(response_processed):
+        
+        return_value = 0 
+        try:
+#            response_processed = "{" + text.split(", {")[i]
+            this_item= "{" + response_processed[i]
+            if DEBUG:
+                print('\n In loop: i, this item: ', i, this_item)
+                
+            response_json = ujson.loads(this_item)
+            if response_json["energy"] == "0.1-0.8nm":
+                return_value = log(response_json["flux"]) - GOES_LIMIT
+                break
 
-        response_processed = result_string[i]
-        if DEBUG:
-            print('Response processed: ', response_processed)
-        response_json = ujson.loads(response_processed)
-        if response_json["energy"] == "0.1-0.8nm":
-            break
-#         except:
-# 
-#             # Brute force: ignore errors in the json file and wait for the next value
-#             if DEBUG:
-#                 print("Wrong json object, dont care and exit with 1e-9")
-# 
-#             return GOES_LIMIT
+        except:
+
+            # Brute force: ignore errors in the json file and wait for the next value
+            if DEBUG:
+#                print("Wrong goes channel, dont care and exit with 1e-9")
+                print("Wrong goes channel, check further")
+
+#            return GOES_LIMIT
+
         i = i - 1
 
     # TODO: remove unnecessary garbage collection
@@ -261,13 +223,9 @@ def get_current_goes_val():
 
     # do we ever need the non-log case? let's try with logs
     # if log_scale:
+    
+    return return_value
 
-#     if i == 0:
-#         return GOES_LIMIT
-
-    success = True
-    print( "Flux:", response_json["flux"])
-    return log(response_json["flux"]) - GOES_LIMIT
     # else:
     #     return response_json["flux"]
 
@@ -275,7 +233,7 @@ def get_current_goes_val():
 # ---------
 def convert(x, i_m, i_M, o_m, o_M):
     """
-    Return an integer between out_min (o_m) and out_max (o_M)
+    Will return an integer between out_min (o_m) and out_max (o_M)
     From the Internet: https://forum.micropython.org/viewtopic.php?f=2&t=7615
     """
     return max(min(o_M, (x - i_m) * (o_M - o_m) // (i_M - i_m) + o_m), o_m)
@@ -301,39 +259,40 @@ def goes_to_freq_duty(val, rgb=False):
     """
 
     if rgb:
-        freq = [DEFAULT_FREQ, DEFAULT_FREQ, DEFAULT_FREQ]
-        duty = [DEFAULT_DUTY, DEFAULT_DUTY, DEFAULT_DUTY]
+        freq = [500, 500, 500]
+        duty = [200, 200, 200]
 
         # TODO this has too many type conversions, color table should be corrected to 0..1023 and ints not stings
         duty_index = int(convert(val, GOES_B, GOES_M, 0, len(color_table) - 1))
         duty_rgb = color_table[duty_index]
 
+        if DEBUG:
+            print("val, duty_index, duty_rgb = ", val, duty_index, duty_rgb)
+
         for i in range(3):
-            # duty[i] = convert(int(duty_rgb[i]), 0, 255, 0, 1023)
-            duty[i] = int(convert(duty_rgb[i], 0., 1., 0, 1023))
+            duty[i] = convert(int(duty_rgb[i]), 0, 255, 0, 1023)
 
         if GOES_M < val < GOES_X:
-            freq = [SLOW_BLINKING, SLOW_BLINKING, SLOW_BLINKING]
+            freq = [1, 1, 1]
         elif val > GOES_X:
-            freq = [FAST_BLINKING, FAST_BLINKING, FAST_BLINKING]
-
-        if DEBUG:
-            print("val, duty_index, duty_rgb, duty = ", val, duty_index, duty_rgb, duty)
+            freq = [3, 3, 3]
 
     else:
-        freq = DEFAULT_FREQ
-        duty = DEFAULT_DUTY
+        freq = 500
+        duty = 1
 
-        if GOES_B < val < GOES_M:
+        if GOES_C < val < GOES_M:
             # duty = int(round(val / 1e-6 * 80)) + 200
             # use now convert for calculating the duty 2022-11-27 ACs
-            duty = int(convert(val, GOES_B, GOES_M, 0, 512))
+            duty = int(convert(val, GOES_C, GOES_M, 0, 500))
 
         elif GOES_M < val < GOES_X:
-            freq = SLOW_BLINKING
+            duty = 500
+            freq = 1
 
         elif val > GOES_X:
-            freq = FAST_BLINKING
+            duty = 500
+            freq = 3
 
     if DEBUG:
         print("freq, duty =", freq, duty)
@@ -439,6 +398,8 @@ def boot_up():
     Boot up animation, lights up every LED. In PWM mode, blink the output LED.
     """
 
+    # TODO This works currently only for one LED in PWM mode. Needs to be done for any LED number
+
     if not SINGLE_LED_MODE:
 
         if not LED_STRIP_MODE:
@@ -453,15 +414,10 @@ def boot_up():
             leds[2].freq(500)
             for color in color_table:
                 for i in range(3):
-                    # this_duty = int(convert(int(color[i]), 0, 255, 0, 1023))
-                    this_duty = int(convert(color[i], 0., 1., 0, 1023))
+                    this_duty = int(convert(int(color[i]), 0, 255, 0, 1023))
+                    # print( "color, duty =  ", color[i], this_duty )
                     leds[i].duty(this_duty)
-                    if DEBUG:
-                        print("color, duty, leds[i] =  ", color[i], this_duty, leds[0].duty(), leds[1].duty(),
-                              leds[2].duty())
             time.sleep(0.4)
-
-    # TODO This works currently only for one LED in PWM mode. Needs to be done for any LED number
 
     time.sleep(10)
 
@@ -504,36 +460,40 @@ def _main():
 
         # current_goes_val = get_current_goes_val(log_scale=not FLARE_MODE and not LED_STRIP_MODE)
         current_goes_val = get_current_goes_val()  # always in log scale
+        if DEBUG:
+            print( '\n current GOES value: ', current_goes_val )
+            
+        if current_goes_val != 0 :            
 
-        if SINGLE_LED_MODE or LED_STRIP_MODE:
+            if SINGLE_LED_MODE or LED_STRIP_MODE:
 
-            if current_goes_val > GOES_LIMIT:
                 freq, duty = goes_to_freq_duty(current_goes_val, rgb=LED_STRIP_MODE)
                 set_leds(freq=freq, duty=duty)
 
+            else:
+
+                diff[0:-1] = diff[1:]  # shift array to make space for the new value
+                diff[-1] = current_goes_val
+                if DEBUG:
+                    print("Diff array is: ", diff)
+
+                # TODO this needs to be revisited
+                level = goes_to_int(current_goes_val,
+                                    input_range=[min([i for i in diff if i > 0]), max(diff)])
+
+                if DEBUG:
+                    print('\n Level: ', level)
+                # led_no = val_str2int(val, len(leds))
+
+                set_leds(level)
+                
         else:
-
-            diff[0:-1] = diff[1:]  # shift array to make space for the new value
-            diff[-1] = current_goes_val
             if DEBUG:
-                print("Diff array is: ", diff)
-
-            # TODO this needs to be revisited
-            level = goes_to_int(current_goes_val,
-                                input_range=[min([i for i in diff if i > 0]), max(diff)])
-
-            if DEBUG:
-                print('level: ', level)
-            # led_no = val_str2int(val, len(leds))
-
-            set_leds(level)
+              print( '\n No correct GOES val returned, skip this time' )
+              
 
         status_led.off()
 
-        if DEBUG:
-            print(current_goes_val)
-        # TODO repair this
-        #         print_led_vals()
 
         time.sleep(60)
 
