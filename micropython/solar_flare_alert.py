@@ -155,10 +155,11 @@ def get_current_goes_val( ) -> float:
     """
 
     # we do not need to read the entire file
-    my_headers = {'Range': 'bytes=162000-164000'}
+    #my_headers = {'Range': 'bytes=159000-161000'}
+    my_headers = {'Range': 'bytes=-2000'}
 
     try:
-        response = urequests.get("https://services.swpc.noaa.gov/json/goes/primary/xrays-6-hour.json",
+        response = urequests.get(url="https://services.swpc.noaa.gov/json/goes/primary/xrays-6-hour.json",
                                  headers=my_headers)
         text = response.text[:-1]
         response.close()
@@ -171,6 +172,8 @@ def get_current_goes_val( ) -> float:
         # gc.threshold(gc.mem_free() // 4 + gc.mem_alloc())
         # print('*** MEMORY ERROR ***')
         # micropython.mem_info()
+        print('Response: ', response.text)
+
         return 0
 
     if DEBUG:
@@ -185,9 +188,10 @@ def get_current_goes_val( ) -> float:
     if DEBUG:
         print('\n Response processed: ', response_processed)
 
+    return_value = 0 
+
     while abs(i) < len(response_processed):
         
-        return_value = 0 
         try:
 #            response_processed = "{" + text.split(", {")[i]
             this_item= "{" + response_processed[i]
@@ -333,7 +337,7 @@ def goes_to_int(val, nb_LED=4, debug=True, input_range=[1e-8, 1e-7]):
         val = int(round(slope / val + 1))
 
         if DEBUG:
-            print('range, solpe, val = ', range, slope, val)
+            print('range, slope, val = ', range, slope, val)
 
         return val
 
