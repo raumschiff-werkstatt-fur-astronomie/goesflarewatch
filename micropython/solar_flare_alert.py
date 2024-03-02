@@ -144,7 +144,7 @@ def do_connect():
         print('network config:', wlan.ifconfig())
 
 
-def get_current_goes_val( ) -> float:
+def get_current_goes_val() -> float:
     """
     This function gets the GOES data from the Internet, more precisely from the services
     offered by NOAAA. It gets the last part of the corresponding JSON file and extracts the
@@ -165,7 +165,7 @@ def get_current_goes_val( ) -> float:
     except:
         # TODO: ESP32 correct heap memory management -- might not be necessary
         # There is a memory error handling necessary with the ESP. It has to do with filling up
-        # the heap. Howevert, this explicit garbage collection might not help too much. For now,
+        # the heap. However, this explicit garbage collection might not help too much. For now,
         # however this does allow to continue and re-read the file to get the correct number.
         # gc.collect()
         # gc.threshold(gc.mem_free() // 4 + gc.mem_alloc())
@@ -186,14 +186,14 @@ def get_current_goes_val( ) -> float:
         print('\n Response processed: ', response_processed)
 
     while abs(i) < len(response_processed):
-        
-        return_value = 0 
+
+        return_value = 0
         try:
-#            response_processed = "{" + text.split(", {")[i]
-            this_item= "{" + response_processed[i]
+            #            response_processed = "{" + text.split(", {")[i]
+            this_item = "{" + response_processed[i]
             if DEBUG:
                 print('\n In loop: i, this item: ', i, this_item)
-                
+
             response_json = ujson.loads(this_item)
             if response_json["energy"] == "0.1-0.8nm":
                 return_value = log(response_json["flux"]) - GOES_LIMIT
@@ -203,27 +203,13 @@ def get_current_goes_val( ) -> float:
 
             # Brute force: ignore errors in the json file and wait for the next value
             if DEBUG:
-#                print("Wrong goes channel, dont care and exit with 1e-9")
+                #                print("Wrong goes channel, dont care and exit with 1e-9")
                 print("Wrong goes channel, check further")
 
-#            return GOES_LIMIT
+        #            return GOES_LIMIT
 
         i = i - 1
 
-    # TODO: remove unnecessary garbage collection
-    # Let's do some more garbage collection, but this is probably too much.
-    # We probably can take this away.
-    #     gc.collect()
-    #     gc.threshold(gc.mem_free() // 4 + gc.mem_alloc())
-    #     if DEBUG:
-    #         micropython.mem_info()
-    #         print('-----------------------------')
-    #         print('free: {} allocated: {}'.format(gc.mem_free(), gc.mem_alloc()))
-    #         print('-----------------------------')
-
-    # do we ever need the non-log case? let's try with logs
-    # if log_scale:
-    
     return return_value
 
     # else:
@@ -461,9 +447,9 @@ def _main():
         # current_goes_val = get_current_goes_val(log_scale=not FLARE_MODE and not LED_STRIP_MODE)
         current_goes_val = get_current_goes_val()  # always in log scale
         if DEBUG:
-            print( '\n current GOES value: ', current_goes_val )
-            
-        if current_goes_val != 0 :            
+            print('\n current GOES value: ', current_goes_val)
+
+        if current_goes_val != 0:
 
             if SINGLE_LED_MODE or LED_STRIP_MODE:
 
@@ -486,14 +472,12 @@ def _main():
                 # led_no = val_str2int(val, len(leds))
 
                 set_leds(level)
-                
+
         else:
             if DEBUG:
-              print( '\n No correct GOES val returned, skip this time' )
-              
+                print('\n No correct GOES val returned, skip this time')
 
         status_led.off()
-
 
         time.sleep(60)
 
