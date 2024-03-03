@@ -103,6 +103,7 @@ if LED_STRIP_MODE:
             gc.threshold(gc.mem_free() // 4 + gc.mem_alloc())
     if DEBUG:
         print("Color table loaded.")
+        #print(color_table)
 
 status_led = machine.Pin(STATUS_LED, machine.Pin.OUT)
 
