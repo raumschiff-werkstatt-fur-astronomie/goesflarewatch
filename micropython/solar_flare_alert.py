@@ -40,8 +40,8 @@ acs 30.11.22 :
 I am changing this. Flare mode should really be a mode for itself with a flare detection algorithm.
 This is another todo. FLARE_MODE is therefore replaced with SINGLE_LED_MODE
 """
-SINGLE_LED_MODE = True
-LED_STRIP_MODE = False
+SINGLE_LED_MODE = False
+LED_STRIP_MODE = True
 """
 Now we also need to know what kind of hardware are we trying to drive. We have several 
 modes. 
@@ -68,7 +68,7 @@ STATUS_LED = 2
 if SINGLE_LED_MODE:
     LEDS = [27]
 elif LED_STRIP_MODE:
-    LEDS = [13, 12, 27]
+    LEDS = [18, 19, 21]
 else:
     # TODO this needs to be implemented, that is just a place holder
     LEDS = [13, 12, 27]
@@ -95,10 +95,12 @@ Please be aware that LED_STRIP_MODE requires additionally MOSFETS to bring 12 V 
 
 if LED_STRIP_MODE:
     color_table = []
-    f = open('rainbow.rgb')
-    lines = f.readlines()
-    for line in lines:
-        color_table.append(line.strip().split())
+    with open('rainbow2.rgb') as f:
+         for line in f:
+            #print(line.strip().split())
+            color_table.append([int(x) for x in line.strip().split()])
+            gc.collect()
+            gc.threshold(gc.mem_free() // 4 + gc.mem_alloc())
     if DEBUG:
         print("Color table loaded.")
 
@@ -109,7 +111,7 @@ for led in LEDS:
 
     if SINGLE_LED_MODE or LED_STRIP_MODE:
         # PWM is used for these modes
-        this_led = machine.PWM(machine.Pin(led), freq=500, duty=512)
+        this_led = machine.PWM(machine.Pin(led), freq=500, duty=1023)
         leds.append(this_led)
         if DEBUG:
             print("this_led, PWM freq, duty:", this_led, this_led.freq(), this_led.duty())
@@ -118,6 +120,15 @@ for led in LEDS:
         # just standard connection is used for the other cases
         leds.append(machine.Pin(led, machine.Pin.OUT))
 
+if LED_STRIP_MODE:
+    for line in color_table:
+        print(line)
+        for i in range(3):
+            # why is duty inversed? No idea about this, but it works that way
+            leds[i].duty(1023-line[i]*2)
+            leds[i].freq(500)
+            time.sleep(0.01)
+    
 
 # this is needed to start autonomously on the microcontroller
 # if __name__ == "__main__":
@@ -155,7 +166,7 @@ def get_current_goes_val() -> float:
     """
 
     # we do not need to read the entire file
-    my_headers = {'Range': 'bytes=162000-164000'}
+    my_headers = {'Range': 'bytes=-2000'}
 
     try:
         response = urequests.get("https://services.swpc.noaa.gov/json/goes/primary/xrays-6-hour.json",
@@ -245,8 +256,9 @@ def goes_to_freq_duty(val, rgb=False):
     """
 
     if rgb:
+        
         freq = [500, 500, 500]
-        duty = [200, 200, 200]
+        duty = [1023, 1023, 1023]
 
         # TODO this has too many type conversions, color table should be corrected to 0..1023 and ints not stings
         duty_index = int(convert(val, GOES_B, GOES_M, 0, len(color_table) - 1))
@@ -256,7 +268,7 @@ def goes_to_freq_duty(val, rgb=False):
             print("val, duty_index, duty_rgb = ", val, duty_index, duty_rgb)
 
         for i in range(3):
-            duty[i] = convert(int(duty_rgb[i]), 0, 255, 0, 1023)
+            duty[i] = 1023-convert(int(duty_rgb[i]), 0, 255, 0, 1023)
 
         if GOES_M < val < GOES_X:
             freq = [1, 1, 1]
