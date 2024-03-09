@@ -22,8 +22,10 @@ import urequests
 import micropython
 import wifimgr
 
+import rainbow2.py
+
 ###################################
-# First, let us look at the settings
+# CONFIGURATION SECTION
 
 DEBUG = True  # more verbose output on the serial port
 RUN = True  # set False for testing, True for running
@@ -68,7 +70,7 @@ STATUS_LED = 2
 if SINGLE_LED_MODE:
     LEDS = [27]
 elif LED_STRIP_MODE:
-    LEDS = [18, 19, 21]
+    LEDS = [13, 12, 27]
 else:
     # TODO this needs to be implemented, that is just a place holder
     LEDS = [13, 12, 27]
@@ -93,17 +95,28 @@ Please be aware that LED_STRIP_MODE requires additionally MOSFETS to bring 12 V 
  
 """
 
+# Default values for PWM:
+DEFAULT_FREQ = 500
+DEFAULT_DUTY = 1023
+SLOW_BLINKING = 1
+FAST_BLINKING = 3
+
+# END OF CONFIGURATION SECTION
+# ================================
+
+if DEBUG:
+    print("I am alive!")
+
+
 if LED_STRIP_MODE:
-    color_table = []
-    with open('rainbow2.rgb') as f:
-         for line in f:
-            #print(line.strip().split())
-            color_table.append([int(x) for x in line.strip().split()])
-            gc.collect()
-            gc.threshold(gc.mem_free() // 4 + gc.mem_alloc())
+    #     color_table = []
+    #     f = open('rainbow.rgb')
+    #     lines = f.readlines()
+    #     for line in lines:
+    #         color_table.append(line.strip().split())
+    color_table = rainbow2
     if DEBUG:
         print("Color table loaded.")
-        #print(color_table)
 
 status_led = machine.Pin(STATUS_LED, machine.Pin.OUT)
 
@@ -129,7 +142,7 @@ if LED_STRIP_MODE:
             leds[i].duty(1023-line[i]*2)
             leds[i].freq(500)
             time.sleep(0.01)
-    
+
 
 # this is needed to start autonomously on the microcontroller
 # if __name__ == "__main__":
@@ -183,7 +196,7 @@ def get_current_goes_val() -> float:
         # gc.threshold(gc.mem_free() // 4 + gc.mem_alloc())
         # print('*** MEMORY ERROR ***')
         # micropython.mem_info()
-        return 0
+        return GOES_LIMIT
 
     if DEBUG:
         print('Response: ', text)
@@ -257,28 +270,28 @@ def goes_to_freq_duty(val, rgb=False):
     """
 
     if rgb:
-        
-        freq = [500, 500, 500]
-        duty = [1023, 1023, 1023]
+        freq = [DEFAULT_FREQ, DEFAULT_FREQ, DEFAULT_FREQ]
+        duty = [DEFAULT_DUTY, DEFAULT_DUTY, DEFAULT_DUTY]
 
         # TODO this has too many type conversions, color table should be corrected to 0..1023 and ints not stings
         duty_index = int(convert(val, GOES_B, GOES_M, 0, len(color_table) - 1))
         duty_rgb = color_table[duty_index]
 
-        if DEBUG:
-            print("val, duty_index, duty_rgb = ", val, duty_index, duty_rgb)
-
         for i in range(3):
-            duty[i] = 1023-convert(int(duty_rgb[i]), 0, 255, 0, 1023)
+            # duty[i] = convert(int(duty_rgb[i]), 0, 255, 0, 1023)
+            duty[i] = int(convert(duty_rgb[i], 0., 1., 0, 1023))
 
         if GOES_M < val < GOES_X:
-            freq = [1, 1, 1]
+            freq = [SLOW_BLINKING, SLOW_BLINKING, SLOW_BLINKING]
         elif val > GOES_X:
-            freq = [3, 3, 3]
+            freq = [FAST_BLINKING, FAST_BLINKING, FAST_BLINKING]
+
+        if DEBUG:
+            print("val, duty_index, duty_rgb, duty = ", val, duty_index, duty_rgb, duty)
 
     else:
-        freq = 500
-        duty = 1
+        freq = DEFAULT_FREQ
+        duty = DEFAULT_DUTY
 
         if GOES_C < val < GOES_M:
             # duty = int(round(val / 1e-6 * 80)) + 200
@@ -290,8 +303,7 @@ def goes_to_freq_duty(val, rgb=False):
             freq = 1
 
         elif val > GOES_X:
-            duty = 500
-            freq = 3
+            freq = FAST_BLINKING
 
     if DEBUG:
         print("freq, duty =", freq, duty)
@@ -397,8 +409,6 @@ def boot_up():
     Boot up animation, lights up every LED. In PWM mode, blink the output LED.
     """
 
-    # TODO This works currently only for one LED in PWM mode. Needs to be done for any LED number
-
     if not SINGLE_LED_MODE:
 
         if not LED_STRIP_MODE:
@@ -416,7 +426,11 @@ def boot_up():
                     this_duty = int(convert(int(color[i]), 0, 255, 0, 1023))
                     # print( "color, duty =  ", color[i], this_duty )
                     leds[i].duty(this_duty)
+                    if DEBUG:
+                        print("color, duty, leds[i] =  ", color[i], this_duty, leds[0].duty(), leds[1].duty(), leds[2].duty())
             time.sleep(0.4)
+
+    # TODO This works currently only for one LED in PWM mode. Needs to be done for any LED number
 
     time.sleep(10)
 
@@ -491,6 +505,11 @@ def _main():
                 print('\n No correct GOES val returned, skip this time')
 
         status_led.off()
+
+        if DEBUG:
+            print(current_goes_val)
+        # TODO repair this
+        #         print_led_vals()
 
         time.sleep(60)
 
