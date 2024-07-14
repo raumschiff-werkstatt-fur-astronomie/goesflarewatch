@@ -2,26 +2,24 @@
 Welcome to the Solar Flare Alert documentation!
 ===============================================
 
-Solar Flare Alert (formerly called goesflarewatch) is an application
-to display the state of activity of the Sun using diverse hardware back ends,
-including ESP32 and formerly Arduino, to light up LEDs.
+Solar Flare Alert, formerly known as goesflarewatch, is a tool designed to monitor the Sun's activity
+using various hardware back ends, including an ESP32 microprocessor, for control of diverse LEDs
 
-The back end reads the last value delivered by the
-`GOES spacecraft <https://www.swpc.noaa.gov/products/goes-x-ray-flux>`_
-and sends it to the processor, which then controls the LEDs in a customizable
-manner.
+The system fetches current data values from the
+`GOES spacecraft <https://www.swpc.noaa.gov/products/goes-x-ray-flux>`_,
+which is then processed and routed to either a singular LED or an LED strip.
+The illumination and color patterns of the LED(s) change dynamically, visually representing the current solar activity.
 
-The two currently existing front ends are:
+The two supported front ends currently implemented are:
+* A single LED that gradually brightens with increasing solar activity.
+It initiates a blinking pattern when a flare larger than the M-class occurs,
+and the blinking gets faster for X-class flares.
+* An LED strip that varies color based on the intensity of the solar activity.
 
-* A single LED which gets increasingly bright as the solar activity increases, and starts blinking when a flare larger than the M-class happens, blinking even faster for X-class flares.
-* An LED strip that changes color according to the intensity of the solar activity.
+The project utilizes `micropython` aimed at running directly on the ESP32 microprocessor.
+All you need to get started is installing `micropython` on your ESP32 and downloading the relevant files.
 
-The code is written in micropython, it does everything on the ESP32
-microprocessor. You can just install micropython on your
-ESP32, download two files, and off you go!
-
-The python code for the Arduino is deprecated.
-I'll get back to this eventually.
+Please note, the Python code for the Arduino is deprecated and will be revisited in due course.
 
 ..  Theoretically, part of the code is written in a
     jupyter notebook that organises the access to the GOES data and
@@ -31,20 +29,27 @@ I'll get back to this eventually.
     On the arduino side, a program gets the value from the serial port and
     sends it to the corresponding LED.
 
-The Raspberry PI version is still in construction.
+The Raspberry PI version is under construction.
 
-Note that all these programs are continuously updated. This is a tinkering
-project, and everyone is welcome to contribute!
+We continually update all these programs as this project is a constant work in progress.
+This is a tinkering
+project, contributions are always welcome!
 
-How to get started
+Getting Started
 ==================
 
-There are several versions available
+We have different versions to cater to different requirements:
 
-* The micropython version is designed for the ESP32. **This is the one to use at the ECSITE 2022 conference**
-* The 4 LED version is the simplest. Best to get started
-* You can increase the number of LEDs at your convenience. The changes should be obvious. I have a 4 and 8 LED version
-* The one I am working now is a version that should work for LED strips, making the light color of your environment dependent on the solar activity.
+* **Micropython Version** (Recommended for the ESWW 2024 conference):
+  Specifically designed for the ESP32.
+* **LED Strip Version**:
+  This version adjusts the color of the LED strip based on solar activity, using a specific color map.
+* **4 LED Version**:
+  A simplified version that displays the B,C,M,X activity with 4 LEDs
+* **Multi-LED Versions**:
+  For those seeking to expand beyond 4 LEDs. Changes to accommodate more LEDs should not to be too hard to do.
+    We provide an implementation for 8 LEDs.
+
 
 
 .. toctree::

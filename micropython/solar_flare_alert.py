@@ -147,7 +147,7 @@ def do_connect():
 def get_current_goes_val() -> float:
     """
     This function gets the GOES data from the Internet, more precisely from the services
-    offered by NOAAA. It gets the last part of the corresponding JSON file and extracts the
+    offered by NOAA. It gets the last part of the corresponding JSON file and extracts the
     value for the high channel of the XRS instrument.
 
     :return: the flux value as a real number.
@@ -171,6 +171,8 @@ def get_current_goes_val() -> float:
         # gc.threshold(gc.mem_free() // 4 + gc.mem_alloc())
         # print('*** MEMORY ERROR ***')
         # micropython.mem_info()
+        if DEBUG:
+            print("Something went wrong, return 0")
         return 0
 
     if DEBUG:
@@ -187,7 +189,7 @@ def get_current_goes_val() -> float:
 
     while abs(i) < len(response_processed):
 
-        return_value = 0
+        return_value = 0.0
         try:
             #            response_processed = "{" + text.split(", {")[i]
             this_item = "{" + response_processed[i]
@@ -196,17 +198,14 @@ def get_current_goes_val() -> float:
 
             response_json = ujson.loads(this_item)
             if response_json["energy"] == "0.1-0.8nm":
-                return_value = log(response_json["flux"]) - GOES_LIMIT
-                break
+                return log(response_json["flux"]) - GOES_LIMIT
 
         except:
 
             # Brute force: ignore errors in the json file and wait for the next value
             if DEBUG:
-                #                print("Wrong goes channel, dont care and exit with 1e-9")
-                print("Wrong goes channel, check further")
-
-        #            return GOES_LIMIT
+                print("Wrong goes channel, returning 0")
+            return 0
 
         i = i - 1
 
