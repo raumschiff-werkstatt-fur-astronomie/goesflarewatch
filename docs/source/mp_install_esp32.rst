@@ -1,3 +1,17 @@
+How to Use the Solar Flare Alert on MicroPython
+===============================================
+
+Flashing MicroPython to ESP32
+-----------------------------
+
+The ESP32 development board is available at
+various places, such as `Bastelgarage <https://www.bastelgarage.ch/nodemcu-32s-esp32-wifi-bluetooth-entwicklungs-board?search=wroom>`_, where you can easily find one near you.
+
+1. Install ``esptool`` either by running ``pip install esptool`` or through your package manager on Linux.
+2. Download the latest firmware from `MicroPython downloads <http://micropython.org/download#esp32>`_.
+3. Navigate to the folder where you downloaded the firmware and run:
+``esptool.py --chip esp32 --port /dev/ttyUSB0 erase_flash`` to erase the flash
+
 How to use the solar flare alert on micropython
 ===============================================
 
