@@ -7,26 +7,9 @@ Flashing MicroPython to ESP32
 The ESP32 development board is available at
 various places, such as `Bastelgarage <https://www.bastelgarage.ch/nodemcu-32s-esp32-wifi-bluetooth-entwicklungs-board?search=wroom>`_, where you can easily find one near you.
 
-1. Install ``esptool`` either by running ``pip install esptool`` or through your package manager on Linux.
-2. Download the latest firmware from `MicroPython downloads <http://micropython.org/download#esp32>`_.
-3. Navigate to the folder where you downloaded the firmware and run:
-``esptool.py --chip esp32 --port /dev/ttyUSB0 erase_flash`` to erase the flash
-
-How to use the solar flare alert on micropython
-===============================================
-
-Flashing MicroPython to ESP32
------------------------------
-
-The board is a development kit and is
-available at many places, e.g.
-https://www.bastelgarage.ch/nodemcu-32s-esp32-wifi-bluetooth-entwicklungs-board?search=wroom
-and you should find easily one near you.
-
-* Install ``esptool`` either using ``pip install esptool`` or trough your package manager on Linux
-* Download the recent firmware from http://micropython.org/download#esp32
-* From the folder were you downloaded the firmware run ``esptool.py --chip esp32 --port /dev/ttyUSB0 erase_flash`` to erase the flash
-* Run ``esptool.py --chip esp32 --port /dev/ttyUSB0 --baud 460800 write_flash -z 0x1000 <DOWNLOADED_FIRMWARE>.bin`` to flash it. But read remark below.
+* Install ``esptool`` either by running ``pip install esptool`` or through your package manager on Linux.
+* Download the latest firmware from `MicroPython downloads <http://micropython.org/download#esp32>`_.
+* Navigate to the folder where you downloaded the firmware and run: ``esptool.py --chip esp32 --port /dev/ttyUSB0 erase_flash`` to erase the flash
 * Open a serial terminal (screen, putty, picocom) to check if you get a python shell.
 
 The port where the ESP is attached may vary depending on the computer
