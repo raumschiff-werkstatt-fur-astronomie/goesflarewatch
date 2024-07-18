@@ -42,8 +42,8 @@ acs 30.11.22 :
 I am changing this. Flare mode should really be a mode for itself with a flare detection algorithm.
 This is another todo. FLARE_MODE is therefore replaced with SINGLE_LED_MODE
 """
-SINGLE_LED_MODE = False
-LED_STRIP_MODE = True
+SINGLE_LED_MODE = True
+LED_STRIP_MODE = False
 """
 Now we also need to know what kind of hardware are we trying to drive. We have several 
 modes. 
@@ -172,7 +172,7 @@ def do_connect():
 def get_current_goes_val() -> float:
     """
     This function gets the GOES data from the Internet, more precisely from the services
-    offered by NOAAA. It gets the last part of the corresponding JSON file and extracts the
+    offered by NOAA. It gets the last part of the corresponding JSON file and extracts the
     value for the high channel of the XRS instrument.
 
     :return: the flux value as a real number.
@@ -196,7 +196,9 @@ def get_current_goes_val() -> float:
         # gc.threshold(gc.mem_free() // 4 + gc.mem_alloc())
         # print('*** MEMORY ERROR ***')
         # micropython.mem_info()
-        return GOES_LIMIT
+        if DEBUG:
+            print("Something went wrong, return 0")
+        return 0
 
     if DEBUG:
         print('Response: ', text)
@@ -212,7 +214,7 @@ def get_current_goes_val() -> float:
 
     while abs(i) < len(response_processed):
 
-        return_value = 0
+        return_value = 0.0
         try:
             #            response_processed = "{" + text.split(", {")[i]
             this_item = "{" + response_processed[i]
@@ -221,17 +223,14 @@ def get_current_goes_val() -> float:
 
             response_json = ujson.loads(this_item)
             if response_json["energy"] == "0.1-0.8nm":
-                return_value = log(response_json["flux"]) - GOES_LIMIT
-                break
+                return log(response_json["flux"]) - GOES_LIMIT
 
         except:
 
             # Brute force: ignore errors in the json file and wait for the next value
             if DEBUG:
-                #                print("Wrong goes channel, dont care and exit with 1e-9")
-                print("Wrong goes channel, check further")
-
-        #            return GOES_LIMIT
+                print("Wrong goes channel, returning 0")
+            return 0
 
         i = i - 1
 
@@ -408,6 +407,8 @@ def boot_up():
     :meta private:
     Boot up animation, lights up every LED. In PWM mode, blink the output LED.
     """
+
+    # TODO This works currently only for one LED in PWM mode. Needs to be done for any LED number
 
     if not SINGLE_LED_MODE:
 

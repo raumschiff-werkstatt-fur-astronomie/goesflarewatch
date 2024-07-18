@@ -1,21 +1,28 @@
-How to set up the ESP32 version
+How to Set Up the ESP32 Version
 ===============================
 
-In short: if you are looking for the micropython programs necessary, here they are:
+If you are looking for the necessary MicroPython programs,
+here they are:
 
-https://raw.githubusercontent.com/raumschiff-werkstatt-fur-astronomie/goesflarewatch/master/micropython/solar_flare_alert.py
+- `solar_flare_alert.py <https://raw.githubusercontent.com/raumschiff-werkstatt-fur-astronomie/goesflarewatch/master/micropython/solar_flare_alert.py>`_ :
+Contains the program that controls the LED, including the
+connection and processing of the data from the GOES data center.
 
-https://raw.githubusercontent.com/raumschiff-werkstatt-fur-astronomie/goesflarewatch/master/micropython/wifimgr.py
+- `wifimgr.py <https://raw.githubusercontent.com/raumschiff-werkstatt-fur-astronomie/goesflarewatch/master/micropython/wifimgr.py>`_:
+Contains the program that allows connecting the
+solar flare alert to a WiFi network.
 
-There are two versions of the kit. The first version uses a white breadboard to assemble the components.
-The second version uses a green breadboard circuit board, and needs soldering (but is more compact).
+There are two versions of the kit available:
 
-Both rely on an ESP32 microprocessor development board. Beforehand, you need to install Micropython on the
-microprocessor and transfer two programs called solar_flare_alert.py and wifimgr.py:
+1. The first version utilizes a white breadboard for assembling the components.
+2. The second version uses a green breadboard circuit board and requires soldering, but it is more compact.
 
-* solar_flare_alert.py contains the program that connects to the spacecraft data centers;
-* wifimgr.py contains the program that allows to connect the solar flare alert to a WIFI network.
+Both versions rely on an ESP32 microprocessor development board.
+Before proceeding, you will need to install MicroPython on the
+microprocessor and transfer the following two programs:
 
+- **solar_flare_alert.py**:
+- **wifimgr.py**:
 .. toctree::
    :maxdepth: 3
 
@@ -26,15 +33,27 @@ microprocessor and transfer two programs called solar_flare_alert.py and wifimgr
 Usage
 =====
 
-Once you have assembled the board, you will have to first connect to
-the local WIFI network. This is
-done as follows:
+Once you have assembled the board,
+you will need to connect to your local WiFi network.
+Follow these steps:
 
-#. Power on the solar flare alert. The lamp starts blinking
-#. If the lamp stops blinking after a while, that means the solar flare alert found a known network and connected, so you are all set.
-#. If the lamps continues blinking, go tho the list of WIFI networks and locate the WifiMgr access point. Connect to it.
-#. Once connected, go into a browser and type the address **192.168.4.1**
-#. After a while, you should see the list of access points available. Select the one you want to connect, and type in your password
-#. That's it. Now you can connect back to your regular network.
+1. Power on the solar flare alert. The indicator lamp will start
+blinking.
 
-After this, the solar flare alert will indicate the level of activity of the sun.
+2. If the blinking stops after a while, it means the solar flare alert
+has successfully connected to a known network, and you are
+ready to proceed.
+
+3. If the blinking continues, access the list of WiFi networks on
+your device and locate the WifiMgr access point. Connect to it.
+
+4. Once connected, open a web browser and enter the address
+**192.168.4.1**.
+
+5. After a moment, you should see a list of available access points.
+Select your desired network and enter the password.
+
+6. That's it! You can now reconnect to your regular WiFi network.
+
+After completing these steps, the solar flare alert will indicate
+the level of solar activity.
