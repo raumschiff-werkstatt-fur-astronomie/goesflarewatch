@@ -1,56 +1,45 @@
-===============================================
-Welcome to the Solar Flare Alert documentation!
-===============================================
+Welcome to the Solar Flare Alert Documentation!
+================================================
 
-Solar Flare Alert, formerly known as goesflarewatch, is a tool designed to monitor the Sun's activity
-using various hardware back ends, including an ESP32 microprocessor, for control of diverse LEDs
+Solar Flare Alert (formerly known as **goesflarewatch**) is a set of applications designed to monitor the Sun's activity using various hardware backends, including the **ESP32 microprocessor**, which controls diverse LEDs. This system fetches real-time data from the **GOES spacecraft** and processes it to dynamically adjust the LEDs, either through brightness or color changes, visually representing solar activity.
 
-The system fetches current data values from the
-`GOES spacecraft <https://www.swpc.noaa.gov/products/goes-x-ray-flux>`_,
-which is then processed and routed to either a singular LED or an LED strip.
-The illumination and color patterns of the LED(s) change dynamically, visually representing the current solar activity.
+Overview of the System
+----------------------
 
-The two supported front ends currently implemented are:
-* A single LED that gradually brightens with increasing solar activity.
-It initiates a blinking pattern when a flare larger than the M-class occurs,
-and the blinking gets faster for X-class flares.
-* An LED strip that varies color based on the intensity of the solar activity.
+The system uses the **GOES spacecraft** data to fetch the solar activity levels, and it controls the LED(s) based on this data. The two main front-end versions currently implemented are:
 
-The project utilizes `micropython` aimed at running directly on the ESP32 microprocessor.
-All you need to get started is installing `micropython` on your ESP32 and downloading the relevant files.
+1. **Single LED Version**: A single LED gradually brightens with increasing solar activity. It blinks when a flare larger than the M-class occurs, and the blinking speeds up for X-class flares.
+2. **LED Strip Version**: An LED strip that varies in color according to the intensity of solar activity.
 
-Please note, the Python code for the Arduino is deprecated and will be revisited in due course.
+The project uses **Micropython**, specifically running on the **ESP32**, which is very efficient as it requires no external processing (e.g., Jupyter notebooks). You can install **Micropython** directly onto the ESP32, download the necessary files, and get started right away.
 
-..  Theoretically, part of the code is written in a
-    jupyter notebook that organises the access to the GOES data and
-    then transforms the value into a number that can be used by the
-    arduino to control the LEDs.
-    Finally, the notebook sends the value to the serial port of the computer.
-    On the arduino side, a program gets the value from the serial port and
-    sends it to the corresponding LED.
+While there is a **Python version** of the code for Arduino (which is now deprecated), it involves using a Jupyter notebook to fetch the data from the GOES spacecraft, process it, and send it to an Arduino via the serial port. The Arduino then controls the LEDs based on the received values.
 
-The Raspberry PI version is under construction.
+A **Raspberry Pi** version is still under development.
 
-We continually update all these programs as this project is a constant work in progress.
-This is a tinkering
-project, contributions are always welcome!
+All these programs are continuously updated as part of the tinkering nature of the project, and contributions are always welcome.
 
 Getting Started
-==================
+===============
 
-We have different versions to cater to different requirements:
+There are several versions available, catering to different needs and configurations:
 
-* **Micropython Version** (Recommended for the ESWW 2024 conference):
-  Specifically designed for the ESP32.
-* **LED Strip Version**:
-  This version adjusts the color of the LED strip based on solar activity, using a specific color map.
-* **4 LED Version**:
-  A simplified version that displays the B,C,M,X activity with 4 LEDs
-* **Multi-LED Versions**:
-  For those seeking to expand beyond 4 LEDs. Changes to accommodate more LEDs should not to be too hard to do.
-    We provide an implementation for 8 LEDs.
+1. **Micropython Version** (Recommended for the **ESWW 2024** conference):
+   This version is designed specifically for the **ESP32** microprocessor. It’s the ideal choice if you want to get started quickly and efficiently, especially for conference setups.
 
+2. **LED Strip Version**:
+   This version is designed to control an LED strip. The color of the LEDs dynamically adjusts based on the solar activity, using a predefined color map to show the intensity of solar events.
 
+3. **4 LED Version**:
+   A simplified version with 4 LEDs, which displays solar activity in 4 stages (B, C, M, X-class). This is an easy way to get started with the system and visually monitor solar activity.
+
+4. **Multi-LED Versions**:
+   This version is suitable for those who want to extend the system beyond 4 LEDs. It's easy to expand, and we have already implemented it for up to 8 LEDs. The code changes for increasing the number of LEDs are straightforward.
+
+A Note About Updates
+===================
+
+We are continually updating these programs, as this project is always evolving. It's a tinkering project, and we encourage everyone to contribute!
 
 .. toctree::
    :maxdepth: 3
