@@ -3,6 +3,7 @@
 # Included also the wifi manager for connecting to different wireless LANs
 # May 22 many changes for the ECSITE conference 2022
 # Nov 22 many changes for support of the LED_STRIP
+# Updated in March 2025 to use an improved Wi-Fi Manager ACs
 
 """
 This is the main micropython program that runs on the ESP32 microprocessor.
@@ -11,6 +12,11 @@ It needs the boot.py program that will call it, and collaborates
 with the wifi manager that handles the connection to a specific access point
 """
 
+# TODO Now the new wifi_manager is included, needs testing with a new esp32 to see if it works better
+# TODO Once this is tested, remove old wifimgr.py
+# TODO Then make an own version of the script that creates the web page
+# TODO enccrypt the json file
+
 import gc
 import time
 from math import log
@@ -18,11 +24,16 @@ from math import log
 import machine  # needed for Hardware stuff
 import ujson
 import urequests
+import rainbow2.py
 
 import micropython
-import wifimgr
+#import wifimgr
 
-import rainbow2.py
+import sys
+sys.path.append('/libs/micropython-wifi_manager')  # Add the submodule path
+
+import wifi_manager  # ✅ Updated to use wifi_manager.py
+
 
 ###################################
 # CONFIGURATION SECTION
@@ -107,7 +118,6 @@ FAST_BLINKING = 3
 if DEBUG:
     print("I am alive!")
 
-
 if LED_STRIP_MODE:
     #     color_table = []
     #     f = open('rainbow.rgb')
@@ -139,7 +149,7 @@ if LED_STRIP_MODE:
         print(line)
         for i in range(3):
             # why is duty inversed? No idea about this, but it works that way
-            leds[i].duty(1023-line[i]*2)
+            leds[i].duty(1023 - line[i] * 2)
             leds[i].freq(500)
             time.sleep(0.01)
 
@@ -152,21 +162,18 @@ if LED_STRIP_MODE:
 
 def do_connect():
     """
-    Connects to the network using the Wifi Manager. It actually just sends the program control to this
-    other module.
+    Connects to the network using the Wi-Fi Manager.
+    If no network is found, it starts an Access Point for configuration.
     """
+    wifi_manager.connect_wifi()  # ✅ Updated to use new Wi-Fi Manager
+    wlan = network.WLAN(network.STA_IF)
 
-    wlan = wifimgr.get_connection()
-    if wlan is None:
-        print("Could not initialize the network connection.")
-    # TODO this needs to be fixed
-    #         while True:
-    #             pass  # you shall not pass :D
-    # ACS May 22, this has been commented out because it can lead to a deadlock
-
-    if DEBUG:
-        print("ESP OK")
-        print('network config:', wlan.ifconfig())
+    if wlan.isconnected():
+        if DEBUG:
+            print("Connected to Wi-Fi!")
+            print("Network config:", wlan.ifconfig())
+    else:
+        print("Could not connect to Wi-Fi.")
 
 
 def get_current_goes_val() -> float:
@@ -428,7 +435,8 @@ def boot_up():
                     # print( "color, duty =  ", color[i], this_duty )
                     leds[i].duty(this_duty)
                     if DEBUG:
-                        print("color, duty, leds[i] =  ", color[i], this_duty, leds[0].duty(), leds[1].duty(), leds[2].duty())
+                        print("color, duty, leds[i] =  ", color[i], this_duty, leds[0].duty(), leds[1].duty(),
+                              leds[2].duty())
             time.sleep(0.4)
 
     # TODO This works currently only for one LED in PWM mode. Needs to be done for any LED number
@@ -459,7 +467,7 @@ def _main():
     This program starts the pipeline that runs on the microprocessor.
     """
 
-    do_connect()  # first go to the wireless LAN
+    do_connect()  # first establish wireless LAN connection
     boot_up()  # then start up the program
 
     # number of goes values to keep
