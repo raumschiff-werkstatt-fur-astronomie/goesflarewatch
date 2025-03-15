@@ -12,13 +12,15 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../../micropython'))
+# sys.path.insert(0, os.path.abspath('../../micropython'))
+sys.path.insert(0, os.path.abspath('.'))
+
 
 
 # -- Project information -----------------------------------------------------
 
 project = 'Solar Flare Alert'
-copyright = '2022'
+copyright = '2025'
 author = 'André Csillaghy'
 
 # The full version, including alpha/beta/rc tags
