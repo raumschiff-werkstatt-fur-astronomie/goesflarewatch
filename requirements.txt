@@ -1,5 +1,5 @@
 sphinx
-sphinx_rtd_theme
+sphinx-rtd-theme
 docutils~=0.21.2
 lxml~=4.9.1
 jupyter~=1.0.0
