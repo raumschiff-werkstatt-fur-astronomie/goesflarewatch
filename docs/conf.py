@@ -36,6 +36,10 @@ extensions = [
     'sphinx.ext.autodoc',
 ]
 
+# The suffix of source filenames.
+# We use .rst files, but you can add .md if you're using Markdown as well
+source_suffix = '.rst'  # or ['.rst', '.md'] for mixed content
+
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 

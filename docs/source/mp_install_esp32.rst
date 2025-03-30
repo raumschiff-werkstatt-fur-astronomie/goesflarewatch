@@ -47,7 +47,7 @@ See https://randomnerdtutorials.com/getting-started-thonny-micropython-python-id
 Upload code
 ===========
 
-Open `solar_flare_alert.py`, `wifimgr.py`, and `plasma.py` in Thonny.
+Open `solar_flare_alert.py`, `libs/micropython-wifi_manager.py`, and `rainbow.py` in Thonny.
 In `solar_flare_alert.py`, check if the options are correct, especially if the \
 LED pins are correct,
 the pin names on ESPs are a bit weird from time to time.
@@ -56,7 +56,7 @@ In the file boot.py, which should already be on the board, change the line
 `import main` to `import solar_flare_alert` if it is there, or else
 just add the line `import solar_flare_alert`
 
-Save all files in the esp32 directory.
+Save all files in the esp32 directory. You do not need to make subfolders, you
 
 
 Wiring

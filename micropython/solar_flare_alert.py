@@ -24,7 +24,7 @@ from math import log
 import machine  # needed for Hardware stuff
 import ujson
 import urequests
-import rainbow2.py
+import rainbow2
 
 import micropython
 #import wifimgr
@@ -32,7 +32,7 @@ import micropython
 import sys
 sys.path.append('/libs/micropython-wifi_manager')  # Add the submodule path
 
-import wifi_manager  # ✅ Updated to use wifi_manager.py
+from wifi_manager import WifiManager  # ✅ Updated to use wifi_manager.py
 
 
 ###################################
@@ -165,13 +165,15 @@ def do_connect():
     Connects to the network using the Wi-Fi Manager.
     If no network is found, it starts an Access Point for configuration.
     """
-    wifi_manager.connect_wifi()  # ✅ Updated to use new Wi-Fi Manager
-    wlan = network.WLAN(network.STA_IF)
+    
+    wlan = WifiManager()
+    wlan.connect()  # ✅ Updated to use new Wi-Fi Manager
+    #wlan = network.WLAN(network.STA_IF)
 
-    if wlan.isconnected():
+    if wlan.is_connected():
         if DEBUG:
             print("Connected to Wi-Fi!")
-            print("Network config:", wlan.ifconfig())
+            print("Network config:", wlan.get_address())
     else:
         print("Could not connect to Wi-Fi.")
 

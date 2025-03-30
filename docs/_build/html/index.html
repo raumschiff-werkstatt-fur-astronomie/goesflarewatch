@@ -1,24 +1,25 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welcome to the Solar Flare Alert documentation! &mdash; Solar Flare Alert 0.1 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+  <title>Welcome to the Solar Flare Alert Documentation! &mdash; goesflarewatch 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2709fde1"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="A general introduction to solar flares" href="introduction.html" /> 
+    <link rel="next" title="Introduction to Solar Flares" href="source/introduction.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -26,11 +27,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="#" class="icon icon-home"> Solar Flare Alert
+
+          
+          
+          <a href="#" class="icon icon-home">
+            goesflarewatch
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -38,10 +43,10 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="introduction.html">A general introduction to solar flares</a></li>
-<li class="toctree-l1"><a class="reference internal" href="esp32.html">How to use the ESP32 version</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/introduction.html">Introduction to Solar Flares</a></li>
+<li class="toctree-l1"><a class="reference internal" href="esp32.html">How to Set Up the ESP32 Version</a></li>
 <li class="toctree-l1"><a class="reference internal" href="esp32.html#usage">Usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="modules.html">micropython</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/modules.html">micropython</a></li>
 </ul>
 
         </div>
@@ -50,15 +55,15 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="#">Solar Flare Alert</a>
+          <a href="#">goesflarewatch</a>
       </nav>
 
       <div class="wy-nav-content">
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
-      <li>Welcome to the Solar Flare Alert documentation!</li>
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Welcome to the Solar Flare Alert Documentation!</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -69,91 +74,79 @@
            <div itemprop="articleBody">
              
   <section id="welcome-to-the-solar-flare-alert-documentation">
-<h1>Welcome to the Solar Flare Alert documentation!<a class="headerlink" href="#welcome-to-the-solar-flare-alert-documentation" title="Permalink to this headline"></a></h1>
-<p>Solar Flare Alert (formerly called goesflarewatch) is a set of applications
-to display the state of activity of the Sun using diverse hardware back ends,
-especially microprocessors ESP32.</p>
-      <p>The idea is to have either a single LED that changes intensity with the solar activity and blinks when a flare happens,
-          or an LED light chain that changes color.
-<p>The back end reads the last value delivered by the GOES spacecraft
-and sends it to the processor, which then controls the LEDs in customizable
-manner.</p>
-<p>The micropython version is very handy
-as it does everything ont the microprocessor,
-no need for the jupyter notebooks. You can just install micropython on your
-ESP32, download two files, and off you go!</p>
-<p>There is a python version, part of the code is written in a
-jupyter notebook that organises the access to the GOES data and
-then transforms the value into a number that can be used by the
-arduino to control the LEDs.
-Finally, the notebook sends the value to the serial port of the computer.
-On the arduino side, a program gets the value from the serial port and
-sends it to the corresponding LED.</p>
-<p>A Raspberry PI version is still in construction.</p>
-<p>Note that all these programs are continuously updated. This is a tinkering
-project, and everyone is welcome to contribute!</p>
-<section id="how-to-get-started">
-<h2>How to get started<a class="headerlink" href="#how-to-get-started" title="Permalink to this headline"></a></h2>
-<p>There are several versions available</p>
-<ul class="simple">
-<li><p>The micropython version is designed for the ESP32. <strong>This is the one to use at the ECSITE 2022 conference</strong></p></li>
-<li><p>The 4 LED version is the simplest. Best to get started</p></li>
-<li><p>You can increase the number of LEDs at your convenience. The changes should be obvious. I have a 4 and 8 LED version</p></li>
-<li><p>The one I am working now is a version that should work for LED strips, making the light color of your environment dependent on the solar activity.</p></li>
-</ul>
+<h1>Welcome to the Solar Flare Alert Documentation!<a class="headerlink" href="#welcome-to-the-solar-flare-alert-documentation" title="Link to this heading"></a></h1>
+<p>Solar Flare Alert (formerly known as <strong>goesflarewatch</strong>) is a set of applications designed to monitor the Sun’s activity using various hardware backends, including the <strong>ESP32 microprocessor</strong>, which controls diverse LEDs. This system fetches real-time data from the <strong>GOES spacecraft</strong> and processes it to dynamically adjust the LEDs, either through brightness or color changes, visually representing solar activity.</p>
+<section id="overview-of-the-system">
+<h2>Overview of the System<a class="headerlink" href="#overview-of-the-system" title="Link to this heading"></a></h2>
+<p>The system uses the <strong>GOES spacecraft</strong> data to fetch the solar activity levels, and it controls the LED(s) based on this data. The two main front-end versions currently implemented are:</p>
+<ol class="arabic simple">
+<li><p><strong>Single LED Version</strong>: A single LED gradually brightens with increasing solar activity. It blinks when a flare larger than the M-class occurs, and the blinking speeds up for X-class flares.</p></li>
+<li><p><strong>LED Strip Version</strong>: An LED strip that varies in color according to the intensity of solar activity.</p></li>
+</ol>
+<p>The project uses <strong>Micropython</strong>, specifically running on the <strong>ESP32</strong>,
+which is very efficient as it requires no external processing (e.g., Jupyter notebooks).
+You can install <strong>Micropython</strong> directly onto the ESP32, download the necessary files,
+and get started right away. Check out <a class="reference external" href="esp32.html">esp32.html</a>.</p>
+<p>While there is a <strong>Python version</strong> of the code for Arduino (which is now deprecated), it involves using a Jupyter notebook to fetch the data from the GOES spacecraft, process it, and send it to an Arduino via the serial port. The Arduino then controls the LEDs based on the received values.</p>
+<p>A <strong>Raspberry Pi</strong> version is still under development.</p>
+<p>All these programs are continuously updated as part of the tinkering nature of the project, and contributions are always welcome.</p>
+</section>
+<section id="a-note-about-updates">
+<h2>A Note About Updates<a class="headerlink" href="#a-note-about-updates" title="Link to this heading"></a></h2>
+<p>We are continually updating these programs, as this project is always evolving. It’s a tinkering project, and we encourage everyone to contribute!</p>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="introduction.html">A general introduction to solar flares</a></li>
-<li class="toctree-l1"><a class="reference internal" href="esp32.html">How to use the ESP32 version</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="mp_install_esp32.html">How to use the solar flare alert on micropython</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="mp_install_esp32.html#flashing-micropython-to-esp32">Flashing MicroPython to ESP32</a></li>
-<li class="toctree-l3"><a class="reference internal" href="mp_install_esp32.html#installing-thonny">Installing Thonny</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/introduction.html">Introduction to Solar Flares</a></li>
+<li class="toctree-l1"><a class="reference internal" href="esp32.html">How to Set Up the ESP32 Version</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="source/mp_install_esp32.html">How to use the solar flare alert on micropython</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="source/mp_install_esp32.html#flashing-micropython-to-esp32">Flashing MicroPython to ESP32</a></li>
+<li class="toctree-l3"><a class="reference internal" href="source/mp_install_esp32.html#on-mac">On Mac:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="source/mp_install_esp32.html#installing-thonny">Installing Thonny</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="mp_install_esp32.html#upload-code">Upload code</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mp_install_esp32.html#wiring">Wiring</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mp_install_esp32.html#testing">Testing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="white_breadboard.html">Instructions for the white breadboard</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="white_breadboard.html#how-to-proceed">How to proceed:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/mp_install_esp32.html#upload-code">Upload code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/mp_install_esp32.html#wiring">Wiring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/mp_install_esp32.html#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/white_breadboard.html">Instructions for the white breadboard</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="source/white_breadboard.html#how-to-proceed">How to proceed:</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="green_breadboard.html">Instructions for the green breadboard</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="green_breadboard.html#how-to-proceed">How to proceed:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/green_breadboard.html">Instructions for the green breadboard</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="source/green_breadboard.html#how-to-proceed">How to proceed:</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="esp32.html#usage">Usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="modules.html">micropython</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="solar_flare_alert.html">solar_flare_alert module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="wifimgr.html">wifimgr module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/modules.html">micropython</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="source/solar_flare_alert.html">solar_flare_alert module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/wifimgr.html">wifimgr module</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </section>
+</section>
 <section id="indices-and-tables">
-<h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline"></a></h2>
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Link to this heading"></a></h1>
 <ul class="simple">
 <li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
-<li><p>:ref:<a href="#id1"><span class="problematic" id="id2">`</span></a>mod</p></li>
 <li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
 </ul>
-</section>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="introduction.html" class="btn btn-neutral float-right" title="A general introduction to solar flares" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="source/introduction.html" class="btn btn-neutral float-right" title="Introduction to Solar Flares" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2022.</p>
+    <p>&#169; Copyright 2025.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

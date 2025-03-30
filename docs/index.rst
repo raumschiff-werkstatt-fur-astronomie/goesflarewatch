@@ -9,9 +9,13 @@ Overview of the System
 The system uses the **GOES spacecraft** data to fetch the solar activity levels, and it controls the LED(s) based on this data. The two main front-end versions currently implemented are:
 
 1. **Single LED Version**: A single LED gradually brightens with increasing solar activity. It blinks when a flare larger than the M-class occurs, and the blinking speeds up for X-class flares.
+
 2. **LED Strip Version**: An LED strip that varies in color according to the intensity of solar activity.
 
-The project uses **Micropython**, specifically running on the **ESP32**, which is very efficient as it requires no external processing (e.g., Jupyter notebooks). You can install **Micropython** directly onto the ESP32, download the necessary files, and get started right away.
+The project uses **Micropython**, specifically running on the **ESP32**,
+which is very efficient as it requires no external processing (e.g., Jupyter notebooks).
+You can install **Micropython** directly onto the ESP32, download the necessary files,
+and get started right away. Check out `<esp32.html>`_.
 
 While there is a **Python version** of the code for Arduino (which is now deprecated), it involves using a Jupyter notebook to fetch the data from the GOES spacecraft, process it, and send it to an Arduino via the serial port. The Arduino then controls the LEDs based on the received values.
 
@@ -19,25 +23,8 @@ A **Raspberry Pi** version is still under development.
 
 All these programs are continuously updated as part of the tinkering nature of the project, and contributions are always welcome.
 
-Getting Started
-===============
-
-There are several versions available, catering to different needs and configurations:
-
-1. **Micropython Version** (Recommended for the **ESWW 2024** conference):
-   This version is designed specifically for the **ESP32** microprocessor. It’s the ideal choice if you want to get started quickly and efficiently, especially for conference setups.
-
-2. **LED Strip Version**:
-   This version is designed to control an LED strip. The color of the LEDs dynamically adjusts based on the solar activity, using a predefined color map to show the intensity of solar events.
-
-3. **4 LED Version**:
-   A simplified version with 4 LEDs, which displays solar activity in 4 stages (B, C, M, X-class). This is an easy way to get started with the system and visually monitor solar activity.
-
-4. **Multi-LED Versions**:
-   This version is suitable for those who want to extend the system beyond 4 LEDs. It's easy to expand, and we have already implemented it for up to 8 LEDs. The code changes for increasing the number of LEDs are straightforward.
-
 A Note About Updates
-===================
+--------------------
 
 We are continually updating these programs, as this project is always evolving. It's a tinkering project, and we encourage everyone to contribute!
 
@@ -45,14 +32,13 @@ We are continually updating these programs, as this project is always evolving. 
    :maxdepth: 3
    :caption: Contents
 
-   introduction
+   source/introduction
    esp32
-   modules
+   source/modules
 
 
 Indices and tables
 ==================
 
 * :ref:`genindex`
-* :ref:`mod
 * :ref:`search`

@@ -1,56 +1,44 @@
-===============================================
-Welcome to the Solar Flare Alert documentation!
-===============================================
+Welcome to the Solar Flare Alert Documentation!
+================================================
 
-Solar Flare Alert (formerly called goesflarewatch) is a set of applications
-to display the state of activity of the Sun using diverse hardware front ends,
-including arduino, and ESP32 to light up LEDs.
+Solar Flare Alert (formerly known as **goesflarewatch**) is a set of applications designed to monitor the Sun's activity using various hardware backends, including the **ESP32 microprocessor**, which controls diverse LEDs. This system fetches real-time data from the **GOES spacecraft** and processes it to dynamically adjust the LEDs, either through brightness or color changes, visually representing solar activity.
 
-The back end reads the last value delivered by the GOES spacecraft
-and sends it to the processor, which then controls the LEDs in customizable
-manner.
+Overview of the System
+----------------------
 
-The micropython version is very handy
-as it does everything ont the microprocessor,
-no need for the jupyter notebooks. You can just install micropython on your
-ESP32, download two files, and off you go!
+The system uses the **GOES spacecraft** data to fetch the solar activity levels, and it controls the LED(s) based on this data. The two main front-end versions currently implemented are:
 
-There is a python version, part of the code is written in a
-jupyter notebook that organises the access to the GOES data and
-then transforms the value into a number that can be used by the
-arduino to control the LEDs.
-Finally, the notebook sends the value to the serial port of the computer.
-On the arduino side, a program gets the value from the serial port and
-sends it to the corresponding LED.
+1. **Single LED Version**: A single LED gradually brightens with increasing solar activity. It blinks when a flare larger than the M-class occurs, and the blinking speeds up for X-class flares.
 
-The Raspberry PI version is still in construction.
+2. **LED Strip Version**: An LED strip that varies in color according to the intensity of solar activity.
 
-Note that all these programs are continuously updated. This is a tinkering
-project, and everyone is welcome to contribute!
+The project uses **Micropython**, specifically running on the **ESP32**,
+which is very efficient as it requires no external processing (e.g., Jupyter notebooks).
+You can install **Micropython** directly onto the ESP32, download the necessary files,
+and get started right away. Check out `<esp32.html>`_.
 
-How to get started
-==================
+While there is a **Python version** of the code for Arduino (which is now deprecated), it involves using a Jupyter notebook to fetch the data from the GOES spacecraft, process it, and send it to an Arduino via the serial port. The Arduino then controls the LEDs based on the received values.
 
-There are several versions available
+A **Raspberry Pi** version is still under development.
 
-* The micropython version is designed for the ESP32. **This is the one to use at the ECSITE 2022 conference**
-* The 4 LED version is the simplest. Best to get started
-* You can increase the number of LEDs at your convenience. The changes should be obvious. I have a 4 and 8 LED version
-* The one I am working now is a version that should work for LED strips, making the light color of your environment dependent on the solar activity.
+All these programs are continuously updated as part of the tinkering nature of the project, and contributions are always welcome.
 
+A Note About Updates
+--------------------
+
+We are continually updating these programs, as this project is always evolving. It's a tinkering project, and we encourage everyone to contribute!
 
 .. toctree::
    :maxdepth: 3
    :caption: Contents
 
-   introduction
+   source/introduction
    esp32
-   modules
+   source/modules
 
 
 Indices and tables
 ==================
 
 * :ref:`genindex`
-* :ref:`mod
 * :ref:`search`
