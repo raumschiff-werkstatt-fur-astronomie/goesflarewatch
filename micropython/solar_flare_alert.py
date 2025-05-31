@@ -30,7 +30,7 @@ import micropython
 #import wifimgr
 
 import sys
-sys.path.append('/libs/micropython-wifi_manager')  # Add the submodule path
+#sys.path.append('/libs/micropython-wifi_manager')  # Add the submodule path
 
 from wifi_manager import WifiManager  # ✅ Updated to use wifi_manager.py
 

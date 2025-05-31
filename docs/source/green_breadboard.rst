@@ -21,11 +21,9 @@ You will need:
 How to proceed:
 ^^^^^^^^^^^^^^^
 
-#. Take the tennis ball, and make a hole in it, not too big, but sufficient to be able to mount the LED hold
-#. Connect a wire at each end of the LED
+#. Take the tennis ball and carefully create a small hole in it, ensuring it’s not too large but sufficient to mount the LED holder. To achieve this, I use a fine awl to start the hole and then gently enlarge it with precision pliers.#. Connect a wire at each end of the LED
 #. Mount the LED holder into the hole of the tennis ball
-#. Now, assemble the wire holder, with, at both ends one of the wire of the LED. Pay attention that the longer "foot" of the LED will be connected to the ground
-#. Solder the wire holder on the breadboard
+#. Now, assemble the wire holder, ensuring that one end of each wire is connected to the LED. Take care to note that the longer “leg” of the LED should be connected to the ground.#. Solder the wire holder on the breadboard
 #. Take the ESP32 and look at the pin. Locate the pin number 27
 #. Solder the two wire holders on the breadboard such that they can accommodate the dev board later
 #. Solder a wire from the ground to the ground line of the breadboard
