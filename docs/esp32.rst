@@ -29,31 +29,3 @@ microprocessor and transfer the following two programs:
    source/mp_install_esp32
    source/white_breadboard
    source/green_breadboard
-
-Usage
-=====
-
-Once you have assembled the board,
-you will need to connect to your local WiFi network.
-Follow these steps:
-
-1. Power on the solar flare alert. The indicator lamp will start
-blinking.
-
-2. If the blinking stops after a while, it means the solar flare alert
-has successfully connected to a known network, and you are
-ready to proceed.
-
-3. If the blinking continues, access the list of WiFi networks on
-your device and locate the WifiMgr access point. Connect to it.
-
-4. Once connected, open a web browser and enter the address
-**192.168.4.1**.
-
-5. After a moment, you should see a list of available access points.
-Select your desired network and enter the password.
-
-6. That's it! You can now reconnect to your regular WiFi network.
-
-After completing these steps, the solar flare alert will indicate
-the level of solar activity.

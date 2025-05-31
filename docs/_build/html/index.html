@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Welcome to the Solar Flare Alert Documentation! &mdash; goesflarewatch 0.1 documentation</title>
@@ -11,16 +11,13 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/documentation_options.js?v=2709fde1"></script>
+        <script src="_static/doctools.js?v=9bcbadda"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Introduction to Solar Flares" href="source/introduction.html" /> 
+    <link rel="next" title="How It Works" href="overview.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -40,9 +37,10 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">How It Works</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">How to use the solar flare alert</a></li>
 <li class="toctree-l1"><a class="reference internal" href="source/introduction.html">Introduction to Solar Flares</a></li>
 <li class="toctree-l1"><a class="reference internal" href="esp32.html">How to Set Up the ESP32 Version</a></li>
-<li class="toctree-l1"><a class="reference internal" href="esp32.html#usage">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="source/modules.html">micropython</a></li>
 </ul>
 
@@ -71,29 +69,71 @@
            <div itemprop="articleBody">
              
   <section id="welcome-to-the-solar-flare-alert-documentation">
-<h1>Welcome to the Solar Flare Alert Documentation!<a class="headerlink" href="#welcome-to-the-solar-flare-alert-documentation" title="Permalink to this heading"></a></h1>
-<p>Solar Flare Alert (formerly known as <strong>goesflarewatch</strong>) is a set of applications designed to monitor the Sun’s activity using various hardware backends, including the <strong>ESP32 microprocessor</strong>, which controls diverse LEDs. This system fetches real-time data from the <strong>GOES spacecraft</strong> and processes it to dynamically adjust the LEDs, either through brightness or color changes, visually representing solar activity.</p>
-<section id="overview-of-the-system">
-<h2>Overview of the System<a class="headerlink" href="#overview-of-the-system" title="Permalink to this heading"></a></h2>
-<p>The system uses the <strong>GOES spacecraft</strong> data to fetch the solar activity levels, and it controls the LED(s) based on this data. The two main front-end versions currently implemented are:</p>
+<h1>Welcome to the Solar Flare Alert Documentation!<a class="headerlink" href="#welcome-to-the-solar-flare-alert-documentation" title="Link to this heading"></a></h1>
+<p>The <strong>Solar Flare Alert</strong> is a compact, WiFi-enabled device designed to notify users in
+real-time of significant solar flare activity. Solar flares are intense bursts of radiation
+from the sun that can disrupt satellite operations, GPS systems, radio communications, and even power grids on Earth.</p>
+<p>This alert system monitors solar X-ray flux data provided by a spacecraft and
+translates that data into an LED brightness. The LED changes brightness or flashes
+depending on the current intensity of solar flare activity — providing an immediate, ambient indication
+without the need to check apps or websites.</p>
+<section id="how-to-use-the-solar-flare-alert">
+<h2>How to use the solar flare alert<a class="headerlink" href="#how-to-use-the-solar-flare-alert" title="Link to this heading"></a></h2>
+<section id="assmbling-the-device">
+<h3>Assmbling the device<a class="headerlink" href="#assmbling-the-device" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
-<li><p><strong>Single LED Version</strong>: A single LED gradually brightens with increasing solar activity. It blinks when a flare larger than the M-class occurs, and the blinking speeds up for X-class flares.</p></li>
-<li><p><strong>LED Strip Version</strong>: An LED strip that varies in color according to the intensity of solar activity.</p></li>
+<li><p>Insert the wire ring in the center of the socket strip.</p></li>
+<li><p>Insert the LED into the ping-pong ball.</p></li>
+<li><p>Plug the cables into the outer plugs of the socket strip. It is important that the black cable is on the left-hand side of the strip when viewed from the perspective of the computer chip.</p></li>
+<li><p>Plug in the USB cable.</p></li>
 </ol>
-<p>The project uses <strong>Micropython</strong>, specifically running on the <strong>ESP32</strong>,
-which is very efficient as it requires no external processing (e.g., Jupyter notebooks).
-You can install <strong>Micropython</strong> directly onto the ESP32, download the necessary files,
-and get started right away. Check out <a class="reference external" href="esp32.html">esp32.html</a>.</p>
-<p>While there is a <strong>Python version</strong> of the code for Arduino (which is now deprecated), it involves using a Jupyter notebook to fetch the data from the GOES spacecraft, process it, and send it to an Arduino via the serial port. The Arduino then controls the LEDs based on the received values.</p>
-<p>A <strong>Raspberry Pi</strong> version is still under development.</p>
-<p>All these programs are continuously updated as part of the tinkering nature of the project, and contributions are always welcome.</p>
 </section>
-<section id="a-note-about-updates">
-<h2>A Note About Updates<a class="headerlink" href="#a-note-about-updates" title="Permalink to this heading"></a></h2>
-<p>We are continually updating these programs, as this project is always evolving. It’s a tinkering project, and we encourage everyone to contribute!</p>
+<section id="connecting-to-the-wifi">
+<h3>Connecting to the wifi<a class="headerlink" href="#connecting-to-the-wifi" title="Link to this heading"></a></h3>
+<p>Once you have assembled the board,
+you will need to connect to your local WiFi network.
+Follow these steps:</p>
+<p>1. Power on the solar flare alert. The indicator lamp will start
+blinking.</p>
+<p>2. If the blinking stops after a while, it means the solar flare alert
+has successfully connected to a known network, and you are
+ready to proceed.</p>
+<p>3. If the blinking continues, access the list of WiFi networks on
+your device and locate the WifiMgr access point. Connect to it.</p>
+<p>4. Once connected, open a web browser and enter the address
+<strong>192.168.4.1</strong>.</p>
+<p>5. After a moment, you should see a list of available access points.
+Select your desired network and enter the password.</p>
+<ol class="arabic simple" start="6">
+<li><p>That’s it! You can now reconnect to your regular WiFi network.</p></li>
+</ol>
+<p>After completing these steps, the solar flare alert will indicate
+the level of solar activity.</p>
+</section>
+</section>
+</section>
+<section id="how-it-works">
+<h1>How It Works<a class="headerlink" href="#how-it-works" title="Link to this heading"></a></h1>
+<ul class="simple">
+<li><p>The device uses a small computer chip connected to your local WiFi network.</p></li>
+<li><p>It regularly fetches the latest solar X-ray flux measurements from a NOAA GOES satellite</p></li>
+<li><p>The device interprets the data and uses a simple LED to display:
+- <strong>No activity</strong> → dim or steady light
+- <strong>Low-level activity</strong> → slow blink
+- <strong>High activity</strong> → fast blinking</p></li>
+<li><p>Configuration is done via a built-in WiFi setup portal, making it easy to connect the device to any home network.</p></li>
+</ul>
+<p>This makes the Solar Flare Alert a practical, hands-free monitoring tool for astronomy educators,
+radio operators, scientists, or anyone interested in real-time space weather awareness.</p>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">How It Works</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">How to use the solar flare alert</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#assmbling-the-device">Assmbling the device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#connecting-to-the-wifi">Connecting to the wifi</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="source/introduction.html">Introduction to Solar Flares</a></li>
 <li class="toctree-l1"><a class="reference internal" href="esp32.html">How to Set Up the ESP32 Version</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="source/mp_install_esp32.html">How to use the solar flare alert on micropython</a><ul>
@@ -115,7 +155,6 @@ and get started right away. Check out <a class="reference external" href="esp32.
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="esp32.html#usage">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="source/modules.html">micropython</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="source/solar_flare_alert.html">solar_flare_alert module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="source/wifimgr.html">wifimgr module</a></li>
@@ -124,9 +163,8 @@ and get started right away. Check out <a class="reference external" href="esp32.
 </ul>
 </div>
 </section>
-</section>
 <section id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this heading"></a></h1>
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Link to this heading"></a></h1>
 <ul class="simple">
 <li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
 <li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
@@ -137,7 +175,7 @@ and get started right away. Check out <a class="reference external" href="esp32.
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="source/introduction.html" class="btn btn-neutral float-right" title="Introduction to Solar Flares" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="overview.html" class="btn btn-neutral float-right" title="How It Works" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
