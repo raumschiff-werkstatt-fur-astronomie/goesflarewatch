@@ -1,19 +1,21 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Welcome to the Solar Flare Alert Documentation! &mdash; goesflarewatch 0.1 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
   
-        <script src="_static/documentation_options.js?v=2709fde1"></script>
-        <script src="_static/doctools.js?v=9bcbadda"></script>
-        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2709fde1"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -25,11 +27,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="#" class="icon icon-home"> goesflarewatch
+
+          
+          
+          <a href="#" class="icon icon-home">
+            goesflarewatch
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -38,7 +44,7 @@
               <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="overview.html">How It Works</a></li>
-<li class="toctree-l1"><a class="reference internal" href="usage.html">How to use the solar flare alert</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">How to Use the Solar Flare Alert</a></li>
 <li class="toctree-l1"><a class="reference internal" href="source/introduction.html">Introduction to Solar Flares</a></li>
 <li class="toctree-l1"><a class="reference internal" href="esp32.html">How to Set Up the ESP32 Version</a></li>
 <li class="toctree-l1"><a class="reference internal" href="source/modules.html">micropython</a></li>
@@ -57,8 +63,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
-      <li>Welcome to the Solar Flare Alert Documentation!</li>
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Welcome to the Solar Flare Alert Documentation!</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -77,39 +83,56 @@ from the sun that can disrupt satellite operations, GPS systems, radio communica
 translates that data into an LED brightness. The LED changes brightness or flashes
 depending on the current intensity of solar flare activity — providing an immediate, ambient indication
 without the need to check apps or websites.</p>
+</section>
 <section id="how-to-use-the-solar-flare-alert">
-<h2>How to use the solar flare alert<a class="headerlink" href="#how-to-use-the-solar-flare-alert" title="Link to this heading"></a></h2>
-<section id="assmbling-the-device">
-<h3>Assmbling the device<a class="headerlink" href="#assmbling-the-device" title="Link to this heading"></a></h3>
+<h1>How to Use the Solar Flare Alert<a class="headerlink" href="#how-to-use-the-solar-flare-alert" title="Link to this heading"></a></h1>
+<section id="assembling-the-device">
+<h2>Assembling the Device<a class="headerlink" href="#assembling-the-device" title="Link to this heading"></a></h2>
+<dl>
+<dt>Here are all the components of the device:</dt><dd><figure class="align-center">
+<a class="reference internal image-reference" href="_images/IMG_1751.jpeg"><img alt="Wire ring inserted in socket strip" src="_images/IMG_1751.jpeg" style="width: 400px;" />
+</a>
+</figure>
+</dd>
+</dl>
+<p>1. Insert the wire ring in the center of the
+socket strip and insert the LED into the ping-pong ball.</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="_images/IMG_1752.jpeg"><img alt="LED placed inside ping-pong ball" class="align-center" src="_images/IMG_1752.jpeg" style="width: 400px;" />
+</a>
+</div></blockquote>
+<ol class="arabic" start="2">
+<li><p>Plug the cables into the outer plugs of the socket strip.
+Ensure the <strong>black cable is on the left side</strong> when viewed from the perspective of the ESP32.</p>
+<a class="reference internal image-reference" href="_images/IMG_1753.jpeg"><img alt="Cables correctly inserted in socket strip" class="align-center" src="_images/IMG_1753.jpeg" style="width: 400px;" />
+</a>
+</li>
+</ol>
+<p>Make sure the black cable goes to the left side, marked with a black marker</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="_images/IMG_1754.jpeg"><img alt="USB cable plugged in" class="align-center" src="_images/IMG_1754.jpeg" style="width: 400px;" />
+</a>
+</div></blockquote>
+<ol class="arabic" start="3">
+<li><p>Plug in the USB cable to power the device.</p>
+<a class="reference internal image-reference" href="_images/IMG_1755.jpeg"><img alt="Fully assembled Solar Flare Alert device" class="align-center" src="_images/IMG_1755.jpeg" style="width: 400px;" />
+</a>
+</li>
+</ol>
+<p>Your solar flare alert is now physically assembled and ready for WiFi setup.</p>
+</section>
+<section id="connecting-to-wifi">
+<h2>Connecting to WiFi<a class="headerlink" href="#connecting-to-wifi" title="Link to this heading"></a></h2>
 <ol class="arabic simple">
-<li><p>Insert the wire ring in the center of the socket strip.</p></li>
-<li><p>Insert the LED into the ping-pong ball.</p></li>
-<li><p>Plug the cables into the outer plugs of the socket strip. It is important that the black cable is on the left-hand side of the strip when viewed from the perspective of the computer chip.</p></li>
-<li><p>Plug in the USB cable.</p></li>
+<li><p>Power on the solar flare alert. The LED will start blinking.</p></li>
+<li><p>If the blinking <strong>stops after a few seconds</strong>, the device successfully connected to a known WiFi network.</p></li>
+<li><p>If it <strong>keeps blinking</strong>, open the WiFi settings on your phone or computer and connect to the access point named <strong>WifiMgr</strong>.</p></li>
+<li><p>Open a web browser and navigate to: <code class="docutils literal notranslate"><span class="pre">192.168.4.1</span></code></p></li>
+<li><p>Choose your home WiFi network from the list and enter the password.</p></li>
+<li><p>You’re done! Reconnect your device to your normal WiFi. The solar flare alert will now show the Sun’s activity level.</p></li>
 </ol>
-</section>
-<section id="connecting-to-the-wifi">
-<h3>Connecting to the wifi<a class="headerlink" href="#connecting-to-the-wifi" title="Link to this heading"></a></h3>
-<p>Once you have assembled the board,
-you will need to connect to your local WiFi network.
-Follow these steps:</p>
-<p>1. Power on the solar flare alert. The indicator lamp will start
-blinking.</p>
-<p>2. If the blinking stops after a while, it means the solar flare alert
-has successfully connected to a known network, and you are
-ready to proceed.</p>
-<p>3. If the blinking continues, access the list of WiFi networks on
-your device and locate the WifiMgr access point. Connect to it.</p>
-<p>4. Once connected, open a web browser and enter the address
-<strong>192.168.4.1</strong>.</p>
-<p>5. After a moment, you should see a list of available access points.
-Select your desired network and enter the password.</p>
-<ol class="arabic simple" start="6">
-<li><p>That’s it! You can now reconnect to your regular WiFi network.</p></li>
-</ol>
-<p>After completing these steps, the solar flare alert will indicate
-the level of solar activity.</p>
-</section>
+<hr class="docutils" />
+<p>Let me know if you’d like this saved to a file or want help reordering or resizing the images.</p>
 </section>
 </section>
 <section id="how-it-works">
@@ -129,9 +152,9 @@ radio operators, scientists, or anyone interested in real-time space weather awa
 <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="overview.html">How It Works</a></li>
-<li class="toctree-l1"><a class="reference internal" href="usage.html">How to use the solar flare alert</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#assmbling-the-device">Assmbling the device</a></li>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#connecting-to-the-wifi">Connecting to the wifi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">How to Use the Solar Flare Alert</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#assembling-the-device">Assembling the Device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#connecting-to-wifi">Connecting to WiFi</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="source/introduction.html">Introduction to Solar Flares</a></li>

@@ -4,6 +4,11 @@
 # list see the documentation:
 # http://www.sphinx-doc.org/en/master/config
 
+# this needs the command sphinx-build -b html . _build/html
+# and chcke with open _build/html/index.html
+# it does not work with make html.
+# André Csillaghy 14.6.25
+
 # -- Path setup --------------------------------------------------------------
 
 # If extensions (or modules to document with autodoc) are in another directory,
@@ -38,7 +43,10 @@ extensions = [
 
 # The suffix of source filenames.
 # We use .rst files, but you can add .md if you're using Markdown as well
-source_suffix = '.rst'  # or ['.rst', '.md'] for mixed content
+#source_suffix = '.rst'  # or ['.rst', '.md'] for mixed content
+source_suffix = {
+    '.rst': 'restructuredtext',
+}
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
