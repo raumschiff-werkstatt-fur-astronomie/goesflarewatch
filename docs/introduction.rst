@@ -16,14 +16,15 @@ light, in particular, are particularly important
 for monitoring flare activities.
 Flares also serve as acceleration sites for particles (electrons,
 protons, and heavier particles).
-.. figure:: ../images/Solar_flare_2_March.gif
-   :width: 400
 
-On November 4, 2003, the Sun unleashed a powerful flare.
-The event was captured by the Extreme Ultraviolet Imager
-aboard the SOHO spacecraft
-in the 195A emission
-line . Credit: ESA & NASA/Spacecraft
+  .. image:: images/Solar_flare_2_March.gif
+     :width: 400
+In the picture above, you see the Sun unleashing a powerful flare that
+generates X-ray emission.
+The event was captured by the Extreme Ultraviolet Imager EUI, and the
+X-ray Telescope STIX
+aboard the Solar Orbiter spacecraft
+(Credit: ESA).
 
 
 The X-ray flux emitted by the sun plays a fundamental role in
@@ -36,7 +37,7 @@ During an x-ray flare, the X-ray flux rapidly increases
 to its peak over 10 - 20 minutes, then gradually returns to
 background levels over the subsequent 1 to 2 hours.
 
-.. figure:: ../images/goes-x-ray-flux-1-minute.png
+.. image:: images/goes-x-ray-flux-1-minute.png
    :width: 400
 
 The illustration above shows monitoring of solar flux

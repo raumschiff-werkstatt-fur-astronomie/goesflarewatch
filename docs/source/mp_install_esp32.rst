@@ -1,5 +1,5 @@
-How to use the solar flare alert on micropython
-===============================================
+How to install the solar flare alert on software on the ESP32 board
+===================================================================
 
 Flashing MicroPython to ESP32
 -----------------------------
@@ -47,16 +47,29 @@ See https://randomnerdtutorials.com/getting-started-thonny-micropython-python-id
 Upload code
 ===========
 
-Open `solar_flare_alert.py`, `libs/micropython-wifi_manager/wifi_manager.py`, and `rainbow2.py` in Thonny.
+All the code for this project is on GitHub. It's a bit a mess, but for the micropython you
+should look at the corresponding directory.
+
+There are three files needed,`solar_flare_alert.py`,
+`libs/micropython-wifi_manager/wifi_manager.py`, and `rainbow2.py`
+
+You can open them in Thonny.
+
 In `solar_flare_alert.py`, check if the options are correct, especially if the \
-LED pins are correct,
-the pin names on ESPs are a bit weird from time to time.
+LED pins are correct, the pin names on ESPs are a bit weird from time to time.
 
 In the file boot.py, which should already be on the board, change the line
 `import main` to `import solar_flare_alert` if it is there, or else
-just add the line `import solar_flare_alert`
+just add the line `import solar_flare_alert`. This will make sure that the program
+starts automatically when the board is powered.
 
-Save all files in the esp32 directory. You do not need to make subfolders, you can save everything in the main folder.
+On the esp32 board, you will see that the files are already there. You can of course
+work on those ones too. They might be outdated though, so you can decide whatever is
+best for you. If you want to contribute and submit them to GitHub you *have to* use
+the latest ones.
+
+Saving files from Thonny to the esp32 board, you do not need to make
+subfolders there, you can save everything in the main folder.
 
 
 Wiring

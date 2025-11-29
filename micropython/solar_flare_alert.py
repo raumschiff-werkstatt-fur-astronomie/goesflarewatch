@@ -166,14 +166,20 @@ def do_connect():
     If no network is found, it starts an Access Point for configuration.
     """
     
-    wlan = WifiManager()
+    wlan = WifiManager( authmode=0 )
+    #makes the LED blink
+    set_leds( freq=1 )
     wlan.connect()  # ✅ Updated to use new Wi-Fi Manager
     #wlan = network.WLAN(network.STA_IF)
+    #stop the blinking
+    set_leds()
+
 
     if wlan.is_connected():
         if DEBUG:
             print("Connected to Wi-Fi!")
             print("Network config:", wlan.get_address())
+
     else:
         print("Could not connect to Wi-Fi.")
 

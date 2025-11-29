@@ -10,19 +10,23 @@ translates that data into an LED brightness. The LED changes brightness or flash
 depending on the current intensity of solar flare activity — providing an immediate, ambient indication
 without the need to check apps or websites.
 
-.. include::  usage.rst
-.. include::  overview.rst
+There are two versions of the Solar Flare Alert: a green version and a white version.
+Check which one you have an jump to the corresponding assembling instruction.
 
+* I have the :doc:`green version <green_version>`
+* I have the :doc:`white version <white_version>`
+
+.. include::  overview.rst
 
 .. toctree::
    :maxdepth: 3
    :caption: Contents
 
+   green_version
+   white_version
    overview
-   usage
-   source/introduction
+   introduction
    esp32
-   source/modules
 
 
 Indices and tables

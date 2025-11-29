@@ -24,12 +24,12 @@ sys.path.insert(0, os.path.abspath('.'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'goesflarewatch'
-copyright = '2025'
+project = 'Solar Flare Alert Lamp'
+copyright = 'Raumschiff 2025'
 author = 'André Csillaghy'
 
 # The full version, including alpha/beta/rc tags
-release = '0.1'
+release = '0.2'
 
 
 # -- General configuration ---------------------------------------------------
@@ -70,3 +70,7 @@ html_theme = "sphinx_rtd_theme"
 #html_static_path = ['_static']
 
 autodoc_mock_imports = ["machine", 'network', 'ujson', 'ure', 'urequests', 'micropython', 'sys']
+
+language = 'en'
+locale_dirs = ['locales/']
+gettext_compact = False

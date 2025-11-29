@@ -1,5 +1,5 @@
-Instructions for the green breadboard
-=====================================
+Instructions for the building the green version
+===============================================
 
 .. figure:: ../images/IMG_2618.png
    :width: 400
