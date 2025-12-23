@@ -15,6 +15,11 @@ radio operators, scientists, or anyone interested in real-time space weather awa
 OK. And now, you might be interested in learning more about solar flares?
 :doc:`Here it goes then <introduction>`.
 
-Do you know that you can also contribute to the development of the solar flare alert and the
+And, finally, if you fell courageous, you can also program the ESP32 microprocessor, which is
+the core of this project.
+:doc:`More instructions are given here <mp_install_esp32>`.
+
+If you are going to make extensions or new version of the software,
+you can also contribute using our GitHup page.
 
 Have fun!

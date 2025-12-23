@@ -1,21 +1,18 @@
 How to work with the ESP32 solar flare alert micropython programs
 =================================================================
 
-There is one micropython program necessary for the solar flare alert lamp:
+There are a few micropython program necessary for the solar flare alert lamp:
 
 - `solar_flare_alert.py <https://raw.githubusercontent.com/raumschiff-werkstatt-fur-astronomie/goesflarewatch/master/micropython/solar_flare_alert.py>`_ :
   Contains the program that controls the LED, including the connection and processing of the data from the GOES data center.
 
-The other important program is the wifi manager which allows to connect the device to the Internet.
-This is an external program tough, but is part of the library.
 - `wifimgr.py <https://raw.githubusercontent.com/raumschiff-werkstatt-fur-astronomie/goesflarewatch/master/micropython/wifimgr.py>`_:
-  Contains the program that allows connecting the
-  solar flare alert to a WiFi network.
+  Contains the program that allows connecting the solar flare alert to a WiFi network. This is an external program, but is part of the library.
 
 Note that you find on GitHub also other programs for other platforms, such as Arduino and Raspberry PIs,
 but a lot of these are not actively maintained.
 
-Concerning the hardware, as shownt in the assembling instructions, there
+Concerning the hardware, as shown in the assembling instructions, there
 are two versions of the kit available:
 
 1. The first version utilizes a white breadboard for assembling the device, please refer

@@ -1,4 +1,4 @@
-How to use the Solar Flare Alert - Standard White Version
+How to use the Solar Flare Alert - Extended White Version
 =========================================================
 
 .. figure:: /images/img.png
@@ -6,8 +6,8 @@ How to use the Solar Flare Alert - Standard White Version
 
 What you have in your kit:
 
-* A white lamp bulb with an LED mounted on it
-.. figure:: /images/IMG_2570.jpg
+* A table tennis ball
+.. figure:: /images/IMG_2586.jpg
    :width: 100
 
 * One white breadboard
@@ -18,7 +18,11 @@ What you have in your kit:
 .. figure:: /images/IMG_2562.jpg
    :width: 100
 
-* One lamp stand 
+* One LED with an LED holder
+.. figure:: /images/IMG_2564.jpg
+   :width: 100
+
+* One wire holder
 .. figure:: /images/IMG_2557.jpg
    :width: 100
 
@@ -30,9 +34,14 @@ What you have in your kit:
 .. figure:: /images/IMG_2566.jpg
    :width: 100
 
+* One lamp stand
+.. figure:: /images/IMG_2559.jpg
+   :width: 100
+
 * A USB cable and power adapter
 .. figure:: /images/IMG_2567.jpg
    :width: 100
+
 
 
 Assembling the device
@@ -42,13 +51,13 @@ Assembling the device
 .. figure:: /images/IMG_2571.jpg
    :width: 400
 
-2. Mount the lamp stand onto the breadboard, leaving one breadboard slot on both sides
+2. Mount the wire holder with LED onto the breadboard, leaving one breadboard slot on both sides
 
-.. figure:: /images/IMG_2573.jpg
+.. figure:: /images/IMG_2572.jpg
    :width: 400
 
-3. Place the resistor into a free space on the breadboard, and connect it to 
-another free space above or below the lamo stand.
+
+3. Place the resistor into a free space on the breadboard, and connect it to the free space above or below the LED holder.
 
 .. figure:: /images/IMG_2574.jpg
    :width: 400
@@ -63,19 +72,35 @@ another free space above or below the lamo stand.
 .. figure:: /images/IMG_2585.jpg
    :width: 400
 
-7. Connect a wire to each leg of the LED in the lamp bulb. Remember the color of the
-cables that connects to the short leg LED.
+7. Take the table tennis ball and make a small hole large enough to mount the LED holder. (Some versions have the hole already prepared.)
 
-.. figure:: /images/IMG_2583.jpg
+.. figure:: /images/IMG_2569.jpg
    :width: 400
 
-8. Attach one LED wire to each side of the lamp stand. 
+8. Insert the LED into the LED holder. Note that the LED legs have different lengths.
+then place the holder into the hole in the tennis ball.
+
+.. figure:: /images/IMG_2570.jpg
+   :width: 400
+
+9. Insert th isolation tube over the wires that have a female plug.
+
+.. figure:: /images/IMG_2578.jpg
+   :width: 400
+
+10. Connect a wire to each leg of the LED. Remember the color of the
+cables that connects to the short leg LED.
+
+.. figure:: /images/IMG_2581.jpg
+   :width: 400
+
+11. Assemble the wire holder, attaching one LED wire to each side.
 Ensure that the **long leg of the LED (anode)** is connected to the **resistor side**, and the **short leg (cathode)** goes to **ground**.
 
-9. Insert the USB cable into the board, and plug it in. The LED should blink.
+12. Insert the USB cable into the board, and plug it in. The LED should blink.
 
 Your solar flare alert is now physically assembled and ready to connect to the WiFi.
 
 Note: the isolation tubes can be settled by warming them. They will reduce their size.
-
 .. include:: wifi_connection.rst
+

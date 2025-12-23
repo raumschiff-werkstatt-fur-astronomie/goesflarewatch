@@ -55,6 +55,4 @@ Connecting to the WiFi
 
 5. Choose your home WiFi network from the list and enter the password.
 
-6. You're done! Reconnect your device to your normal WiFi. The solar flare alert will now show the Sun’s activity level.
-
-----
+6. You're done! Reconnect your device to your normal WiFi. The solar flare alert will now show the Sun's activity level.

@@ -12,6 +12,12 @@ sphinx:
   # Fail on all warnings to avoid broken references
   # fail_on_warning: true
 
+# Enable multiple languages
+# English (en) is the default, German (de) is added
+# This will create URLs like:
+# - https://solar-flare-alert.readthedocs.io/en/latest/ (English)
+# - https://solar-flare-alert.readthedocs.io/de/latest/ (German)
+
 # Set the OS, Python version and other tools you might need
 build:
   os: ubuntu-22.04

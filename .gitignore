@@ -1,1 +1,23 @@
 .venv
+
+# Build artifacts
+docs/_build/
+docs/_build/html_de/
+
+# IDE files
+.idea/
+*.iml
+
+# System files
+.DS_Store
+**/.DS_Store
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Jupyter
+.ipynb_checkpoints

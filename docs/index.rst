@@ -10,11 +10,16 @@ translates that data into an LED brightness. The LED changes brightness or flash
 depending on the current intensity of solar flare activity — providing an immediate, ambient indication
 without the need to check apps or websites.
 
-There are two versions of the Solar Flare Alert: a green version and a white version.
+There are several versions of the Solar Flare Alert: the white version is the standard
+one; it can be assembled out of the box. The extended white version is the same, 
+but needs to be built from scratch and is used usually in dedicatedworkshops. 
+The green version is a bit more complex, it needs components to be soldered on the breadboard.
+
 Check which one you have an jump to the corresponding assembling instruction.
 
-* I have the :doc:`green version <green_version>`
 * I have the :doc:`white version <white_version>`
+* I have the :doc:`extended white version <extended_white_version>`
+* I have the :doc:`green version <green_version>`
 
 .. include::  overview.rst
 
@@ -22,11 +27,12 @@ Check which one you have an jump to the corresponding assembling instruction.
    :maxdepth: 3
    :caption: Contents
 
-   green_version
    white_version
+   extended_white_version
+   green_version
    overview
    introduction
-   esp32
+   mp_install_esp32
 
 
 Indices and tables

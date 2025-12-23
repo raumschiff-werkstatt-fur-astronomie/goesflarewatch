@@ -44,7 +44,11 @@ The illustration above shows monitoring of solar flux
 over a span of almost three days. Each peak recorded
 indicates a solar flare.
 
-Our Solar Flare Alert system gradually increases the intensity of the
+Here is the current (live!) solar activity of the sun:
+https://www.swpc.noaa.gov/products/goes-x-ray-flux
+from wich the Solar Flare Alert Lamp always uses the last available value.
+
+Our Solar Flare Alert Lamp gradually increases the intensity of the
 LED with increasing flux. It is turned off in absence of activity.
 It flashes to signify a
 solar flare in progress when the X-ray flux exceeds

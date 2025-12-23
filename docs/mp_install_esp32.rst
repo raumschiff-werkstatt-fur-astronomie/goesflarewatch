@@ -1,4 +1,4 @@
-How to install the solar flare alert on software on the ESP32 board
+How to install the solar flare alert software on the ESP32 board
 ===================================================================
 
 Flashing MicroPython to ESP32

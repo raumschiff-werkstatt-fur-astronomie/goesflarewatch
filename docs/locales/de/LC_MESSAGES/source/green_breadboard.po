@@ -1,0 +1,126 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) Raumschiff 2025
+# This file is distributed under the same license as the Solar Flare Alert
+# Lamp package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Solar Flare Alert Lamp \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-11-29 06:47+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../source/green_breadboard.rst:2
+msgid "Instructions for the building the green version"
+msgstr ""
+
+#: ../../source/green_breadboard.rst:7
+msgid "This is very similar to the instructions for the white breadboard"
+msgstr ""
+
+#: ../../source/green_breadboard.rst:9
+msgid "You will need:"
+msgstr ""
+
+#: ../../source/green_breadboard.rst:11
+msgid "A table tennis ball"
+msgstr ""
+
+#: ../../source/green_breadboard.rst:12
+msgid "One green breadboard"
+msgstr ""
+
+#: ../../source/green_breadboard.rst:13
+msgid "Wires"
+msgstr ""
+
+#: ../../source/green_breadboard.rst:14
+msgid "Soldering material"
+msgstr ""
+
+#: ../../source/green_breadboard.rst:15
+msgid "One LED with LED plastic holder"
+msgstr ""
+
+#: ../../source/green_breadboard.rst:16
+msgid "Three wire holder"
+msgstr ""
+
+#: ../../source/green_breadboard.rst:17
+msgid "One ESP32 development board"
+msgstr ""
+
+#: ../../source/green_breadboard.rst:18
+msgid "One 110 Ohm resistor"
+msgstr ""
+
+#: ../../source/green_breadboard.rst:22
+msgid "How to proceed:"
+msgstr ""
+
+#: ../../source/green_breadboard.rst:24
+msgid ""
+"Take the tennis ball and carefully create a small hole in it, ensuring "
+"it’s not too large but sufficient to mount the LED holder. To achieve "
+"this, I use a fine awl to start the hole and then gently enlarge it with "
+"precision pliers.#. Connect a wire at each end of the LED"
+msgstr ""
+
+#: ../../source/green_breadboard.rst:25
+msgid "Mount the LED holder into the hole of the tennis ball"
+msgstr ""
+
+#: ../../source/green_breadboard.rst:26
+msgid ""
+"Now, assemble the wire holder, ensuring that one end of each wire is "
+"connected to the LED. Take care to note that the longer “leg” of the LED "
+"should be connected to the ground.#. Solder the wire holder on the "
+"breadboard"
+msgstr ""
+
+#: ../../source/green_breadboard.rst:27
+msgid "Take the ESP32 and look at the pin. Locate the pin number 27"
+msgstr ""
+
+#: ../../source/green_breadboard.rst:28
+msgid ""
+"Solder the two wire holders on the breadboard such that they can "
+"accommodate the dev board later"
+msgstr ""
+
+#: ../../source/green_breadboard.rst:29
+msgid "Solder a wire from the ground to the ground line of the breadboard"
+msgstr ""
+
+#: ../../source/green_breadboard.rst:30
+msgid "Solder the resistor at a free space of the breadboard"
+msgstr ""
+
+#: ../../source/green_breadboard.rst:31
+msgid "Solder a wire from the pin 27 of the processor to the resistor"
+msgstr ""
+
+#: ../../source/green_breadboard.rst:32
+msgid "Solder a wire from the resistor to the one side of the wire holder"
+msgstr ""
+
+#: ../../source/green_breadboard.rst:33
+msgid ""
+"Solder a wire from the ground pin of the dev board to the other side of "
+"the wire holder"
+msgstr ""
+
+#: ../../source/green_breadboard.rst:34
+msgid "Plug it in and test it with Thonny, see also `Usage`__ or continue reading"
+msgstr ""
+

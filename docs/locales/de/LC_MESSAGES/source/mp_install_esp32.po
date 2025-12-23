@@ -1,0 +1,189 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) Raumschiff 2025
+# This file is distributed under the same license as the Solar Flare Alert
+# Lamp package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Solar Flare Alert Lamp \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-11-29 06:47+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../source/mp_install_esp32.rst:2
+msgid "How to install the solar flare alert on software on the ESP32 board"
+msgstr ""
+
+#: ../../source/mp_install_esp32.rst:5
+msgid "Flashing MicroPython to ESP32"
+msgstr ""
+
+#: ../../source/mp_install_esp32.rst:7
+msgid ""
+"The ESP32 development board is available at various places, such as "
+"`Bastelgarage <https://www.bastelgarage.ch/nodemcu-32s-esp32-wifi-"
+"bluetooth-entwicklungs-board?search=wroom>`_, where you can easily find "
+"one near you."
+msgstr ""
+
+#: ../../source/mp_install_esp32.rst:10
+msgid ""
+"Install ``esptool`` either using ``pip install esptool`` or trough your "
+"package manager on Linux"
+msgstr ""
+
+#: ../../source/mp_install_esp32.rst:11
+msgid "Download the recent firmware from http://micropython.org/download#esp32"
+msgstr ""
+
+#: ../../source/mp_install_esp32.rst:12
+msgid ""
+"From the folder were you downloaded the firmware run ``esptool.py --chip "
+"esp32 --port /dev/ttyUSB0 erase_flash`` to erase the flash"
+msgstr ""
+
+#: ../../source/mp_install_esp32.rst:13
+msgid ""
+"Run ``esptool.py --chip esp32 --port /dev/ttyUSB0 --baud 460800 "
+"write_flash -z 0x1000 <DOWNLOADED_FIRMWARE>.bin`` to flash it. But read "
+"remark below."
+msgstr ""
+
+#: ../../source/mp_install_esp32.rst:14
+msgid ""
+"Open a serial terminal (screen, putty, picocom) to check if you get a "
+"python shell."
+msgstr ""
+
+#: ../../source/mp_install_esp32.rst:17
+msgid "On Mac:"
+msgstr ""
+
+#: ../../source/mp_install_esp32.rst:19
+msgid "Mac doesnt know ``pip``, so you should use ``brew`` instead."
+msgstr ""
+
+#: ../../source/mp_install_esp32.rst:21
+msgid ""
+"The port where the ESP is attached may vary depending on the computer you"
+" are using. For instance, on an M1 I get /dev/cu.usbserial-0001. How to "
+"find out? You can do this by starting Thonny and hopefully it will find "
+"it automatically. On Mac, it might require an additional driver. If you "
+"dont see the device, this might be due to a wrong cable. -- my personal "
+"experience. Try another cable. One way is to open thonny and read the "
+"port on the lower right of the window."
+msgstr ""
+
+#: ../../source/mp_install_esp32.rst:29
+msgid "ESP32 MicroPython tutorial"
+msgstr ""
+
+#: ../../source/mp_install_esp32.rst:30
+msgid "See https://docs.micropython.org/en/latest/esp32/quickref.html"
+msgstr ""
+
+#: ../../source/mp_install_esp32.rst:33
+msgid "Installing Thonny"
+msgstr ""
+
+#: ../../source/mp_install_esp32.rst:35
+msgid ""
+"Thonny is a simple IDE for Python, MicroPython and CircuitPython "
+"(Adafruits MicroPython fork), it allows to upload your programs to a "
+"MicroPython board easily, also when it doesn't show up as a USB drive."
+msgstr ""
+
+#: ../../source/mp_install_esp32.rst:40
+msgid "To install it, the go to https://thonny.org/"
+msgstr ""
+
+#: ../../source/mp_install_esp32.rst:43
+msgid "Thonny tutorial"
+msgstr ""
+
+#: ../../source/mp_install_esp32.rst:45
+msgid ""
+"See https://randomnerdtutorials.com/getting-started-thonny-micropython-"
+"python-ide-esp32-esp8266/"
+msgstr ""
+
+#: ../../source/mp_install_esp32.rst:48
+msgid "Upload code"
+msgstr ""
+
+#: ../../source/mp_install_esp32.rst:50
+msgid ""
+"All the code for this project is on GitHub. It's a bit a mess, but for "
+"the micropython you should look at the corresponding directory."
+msgstr ""
+
+#: ../../source/mp_install_esp32.rst:53
+msgid ""
+"There are three files needed,`solar_flare_alert.py`, `libs/micropython-"
+"wifi_manager/wifi_manager.py`, and `rainbow2.py`"
+msgstr ""
+
+#: ../../source/mp_install_esp32.rst:56
+msgid "You can open them in Thonny."
+msgstr ""
+
+#: ../../source/mp_install_esp32.rst:58
+msgid ""
+"In `solar_flare_alert.py`, check if the options are correct, especially "
+"if the \\ LED pins are correct, the pin names on ESPs are a bit weird "
+"from time to time."
+msgstr ""
+
+#: ../../source/mp_install_esp32.rst:61
+msgid ""
+"In the file boot.py, which should already be on the board, change the "
+"line `import main` to `import solar_flare_alert` if it is there, or else "
+"just add the line `import solar_flare_alert`. This will make sure that "
+"the program starts automatically when the board is powered."
+msgstr ""
+
+#: ../../source/mp_install_esp32.rst:66
+msgid ""
+"On the esp32 board, you will see that the files are already there. You "
+"can of course work on those ones too. They might be outdated though, so "
+"you can decide whatever is best for you. If you want to contribute and "
+"submit them to GitHub you *have to* use the latest ones."
+msgstr ""
+
+#: ../../source/mp_install_esp32.rst:71
+msgid ""
+"Saving files from Thonny to the esp32 board, you do not need to make "
+"subfolders there, you can save everything in the main folder."
+msgstr ""
+
+#: ../../source/mp_install_esp32.rst:76
+msgid "Wiring"
+msgstr ""
+
+#: ../../source/mp_install_esp32.rst:77
+msgid ""
+"On our board the pins are labeled with **IOxx** so it is pretty straight "
+"forward. The pins deliver 3.3V and some sources say max 12mA, we use a "
+"110 Ohm resistor."
+msgstr ""
+
+#: ../../source/mp_install_esp32.rst:82
+msgid "Testing"
+msgstr ""
+
+#: ../../source/mp_install_esp32.rst:83
+msgid ""
+"In `solar_flare_alert.py` set RUN to False, the program loop wont run and"
+" you can test the functions. For example if the LED lights up correctly."
+msgstr ""
+
