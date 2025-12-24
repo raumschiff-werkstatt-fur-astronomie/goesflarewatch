@@ -1,0 +1,105 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) Raumschiff 2025
+# This file is distributed under the same license as the Solar Flare Alert Lamp package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Solar Flare Alert Lamp \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-23 10:56+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../index.rst:26
+msgid "Contents"
+msgstr ""
+
+#: ../../index.rst:2
+msgid "Welcome to the Solar Flare Alert Documentation!"
+msgstr ""
+
+#: ../../index.rst:4
+msgid "The **Solar Flare Alert** is a compact, WiFi-enabled device designed to notify users in real-time of significant solar flare activity. Solar flares are intense bursts of radiation from the sun that can disrupt satellite operations, GPS systems, radio communications, and even power grids on Earth."
+msgstr ""
+
+#: ../../index.rst:8
+msgid "This alert system monitors solar X-ray flux data provided by a spacecraft and translates that data into an LED brightness. The LED changes brightness or flashes depending on the current intensity of solar flare activity — providing an immediate, ambient indication without the need to check apps or websites."
+msgstr ""
+
+#: ../../index.rst:13
+msgid "There are several versions of the Solar Flare Alert: the white version is the standard one; it can be assembled out of the box. The extended white version is the same, but needs to be built from scratch and is used usually in dedicatedworkshops. The green version is a bit more complex, it needs components to be soldered on the breadboard."
+msgstr ""
+
+#: ../../index.rst:18
+msgid "Check which one you have an jump to the corresponding assembling instruction."
+msgstr ""
+
+#: ../../index.rst:20
+msgid "I have the :doc:`white version <white_version>`"
+msgstr ""
+
+#: ../../index.rst:21
+msgid "I have the :doc:`extended white version <extended_white_version>`"
+msgstr ""
+
+#: ../../index.rst:22
+msgid "I have the :doc:`green version <green_version>`"
+msgstr ""
+
+#: ../../overview.rst:2
+msgid "How It Works"
+msgstr ""
+
+#: ../../overview.rst:4
+msgid "The device uses a small computer chip connected to your local WiFi network."
+msgstr ""
+
+#: ../../overview.rst:5
+msgid "It regularly fetches the latest solar X-ray flux measurements from a NOAA GOES satellite"
+msgstr ""
+
+#: ../../overview.rst:6
+msgid "The device interprets the data and uses a simple LED to display: - **No activity** → dim or steady light - **Low-level activity** → slow blink - **High activity** → fast blinking"
+msgstr ""
+
+#: ../../overview.rst:10
+msgid "Configuration is done via a built-in WiFi setup portal, making it easy to connect the device to any home network."
+msgstr ""
+
+#: ../../overview.rst:12
+msgid "This makes the Solar Flare Alert a practical, hands-free monitoring tool for astronomy educators, radio operators, scientists, or anyone interested in real-time space weather awareness."
+msgstr ""
+
+#: ../../overview.rst:15
+msgid "OK. And now, you might be interested in learning more about solar flares? :doc:`Here it goes then <introduction>`."
+msgstr ""
+
+#: ../../overview.rst:18
+msgid "And, finally, if you fell courageous, you can also program the ESP32 microprocessor, which is the core of this project. :doc:`More instructions are given here <mp_install_esp32>`."
+msgstr ""
+
+#: ../../overview.rst:22
+msgid "If you are going to make extensions or new version of the software, you can also contribute using our GitHup page."
+msgstr ""
+
+#: ../../overview.rst:25
+msgid "Have fun!"
+msgstr ""
+
+#: ../../index.rst:39
+msgid "Indices and tables"
+msgstr ""
+
+#: ../../index.rst:41
+msgid ":ref:`genindex`"
+msgstr ""
+
+#: ../../index.rst:42
+msgid ":ref:`search`"
+msgstr ""

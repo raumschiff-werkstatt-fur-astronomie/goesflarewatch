@@ -1,0 +1,101 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) Raumschiff 2025
+# This file is distributed under the same license as the Solar Flare Alert Lamp package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Solar Flare Alert Lamp \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-23 10:56+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../green_version.rst:2
+msgid "How to Use the Solar Flare Alert - Green Version"
+msgstr ""
+
+#: ../../green_version.rst:5
+msgid "Assembling the Device"
+msgstr ""
+
+#: ../../green_version.rst:7
+msgid "Here are all the components of the device:"
+msgstr ""
+
+#: ../../green_version.rst:8
+msgid "Wire ring inserted in socket strip"
+msgstr ""
+
+#: ../../green_version.rst:13
+msgid "1. Insert the wire ring in the center of the socket strip and insert the LED into the ping-pong ball."
+msgstr ""
+
+#: ../../green_version.rst:16
+msgid "LED placed inside ping-pong ball"
+msgstr ""
+
+#: ../../green_version.rst:21
+msgid "Plug the cables into the outer plugs of the socket strip. Ensure the **black cable is on the left side** when viewed from the perspective of the ESP32."
+msgstr ""
+
+#: ../../green_version.rst:24
+msgid "Cables correctly inserted in socket strip"
+msgstr ""
+
+#: ../../green_version.rst:29
+msgid "Make sure the black cable goes to the left side, marked with a black marker"
+msgstr ""
+
+#: ../../green_version.rst:31
+msgid "USB cable plugged in"
+msgstr ""
+
+#: ../../green_version.rst:36
+msgid "Plug in the USB cable to power the device."
+msgstr ""
+
+#: ../../green_version.rst:38
+msgid "Fully assembled Solar Flare Alert device"
+msgstr ""
+
+#: ../../green_version.rst:43
+msgid "Your solar flare alert is now physically assembled and ready to connect to the WiFi."
+msgstr ""
+
+#: ../../wifi_connection.rst:2
+msgid "Connecting to the WiFi"
+msgstr ""
+
+#: ../../wifi_connection.rst:4
+msgid "Power on the Solar Flare Alert. After a few seconds, the LED will begin blinking."
+msgstr ""
+
+#: ../../wifi_connection.rst:6
+msgid "If the blinking **stops after a few seconds**, the device has successfully connected to a previously saved WiFi network."
+msgstr ""
+
+#: ../../wifi_connection.rst:8
+msgid "If the LED **continues blinking**, open the WiFi settings on your phone or computer and connect to the access point named **SolarFlareAlert-Setup**."
+msgstr ""
+
+#: ../../wifi_connection.rst:10
+msgid "Once connected, open a web browser and navigate to: ``http://192.168.4.1``"
+msgstr ""
+
+#: ../../wifi_connection.rst:12
+msgid "Select your home WiFi network from the list and enter the password."
+msgstr ""
+
+#: ../../wifi_connection.rst:14
+msgid "The device will reboot and attempt to join your network. When the LED turns solid green, the connection was successful."
+msgstr ""
+
+#: ../../wifi_connection.rst:16
+msgid "You're done. Reconnect your phone or computer to your normal WiFi. The Solar Flare Alert will now display the Sun’s current activity level."
+msgstr ""

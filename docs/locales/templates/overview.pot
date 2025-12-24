@@ -1,0 +1,57 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) Raumschiff 2025
+# This file is distributed under the same license as the Solar Flare Alert Lamp package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Solar Flare Alert Lamp \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-23 10:56+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../overview.rst:2
+msgid "How It Works"
+msgstr ""
+
+#: ../../overview.rst:4
+msgid "The device uses a small computer chip connected to your local WiFi network."
+msgstr ""
+
+#: ../../overview.rst:5
+msgid "It regularly fetches the latest solar X-ray flux measurements from a NOAA GOES satellite"
+msgstr ""
+
+#: ../../overview.rst:6
+msgid "The device interprets the data and uses a simple LED to display: - **No activity** → dim or steady light - **Low-level activity** → slow blink - **High activity** → fast blinking"
+msgstr ""
+
+#: ../../overview.rst:10
+msgid "Configuration is done via a built-in WiFi setup portal, making it easy to connect the device to any home network."
+msgstr ""
+
+#: ../../overview.rst:12
+msgid "This makes the Solar Flare Alert a practical, hands-free monitoring tool for astronomy educators, radio operators, scientists, or anyone interested in real-time space weather awareness."
+msgstr ""
+
+#: ../../overview.rst:15
+msgid "OK. And now, you might be interested in learning more about solar flares? :doc:`Here it goes then <introduction>`."
+msgstr ""
+
+#: ../../overview.rst:18
+msgid "And, finally, if you fell courageous, you can also program the ESP32 microprocessor, which is the core of this project. :doc:`More instructions are given here <mp_install_esp32>`."
+msgstr ""
+
+#: ../../overview.rst:22
+msgid "If you are going to make extensions or new version of the software, you can also contribute using our GitHup page."
+msgstr ""
+
+#: ../../overview.rst:25
+msgid "Have fun!"
+msgstr ""

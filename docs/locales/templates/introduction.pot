@@ -1,0 +1,57 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) Raumschiff 2025
+# This file is distributed under the same license as the Solar Flare Alert Lamp package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Solar Flare Alert Lamp \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-23 10:56+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../introduction.rst:2
+msgid "Introduction to Solar Flares"
+msgstr ""
+
+#: ../../introduction.rst:4
+msgid "Adapted from `NASA's description <https://www.nasa.gov/content/goddard/what-is-a-solar-flare>`_:"
+msgstr ""
+
+#: ../../introduction.rst:7
+msgid "Solar flares are intense radiation bursts resulting from the release of magnetic energy associated with sunspots. As the largest explosive events in our solar system, flares are noticeable as bright areas on the sun and can last from minutes to hours."
+msgstr ""
+
+#: ../../introduction.rst:13
+msgid "Solar flares primarily release photons, observable across all wavelengths of the spectrum. X-rays and extreme ultraviolet light, in particular, are particularly important for monitoring flare activities. Flares also serve as acceleration sites for particles (electrons, protons, and heavier particles)."
+msgstr ""
+
+#: ../../introduction.rst:22
+msgid "In the picture above, you see the Sun unleashing a powerful flare that generates X-ray emission. The event was captured by the Extreme Ultraviolet Imager EUI, and the X-ray Telescope STIX aboard the Solar Orbiter spacecraft (Credit: ESA)."
+msgstr ""
+
+#: ../../introduction.rst:30
+msgid "The X-ray flux emitted by the sun plays a fundamental role in monitoring solar activity. The Geostationary Operational Environmental Satellite (GOES) series, equipped with x-ray instruments, provides nearly real-time data that is updated every minute."
+msgstr ""
+
+#: ../../introduction.rst:36
+msgid "During an x-ray flare, the X-ray flux rapidly increases to its peak over 10 - 20 minutes, then gradually returns to background levels over the subsequent 1 to 2 hours."
+msgstr ""
+
+#: ../../introduction.rst:43
+msgid "The illustration above shows monitoring of solar flux over a span of almost three days. Each peak recorded indicates a solar flare."
+msgstr ""
+
+#: ../../introduction.rst:47
+msgid "Here is the current (live!) solar activity of the sun: https://www.swpc.noaa.gov/products/goes-x-ray-flux from wich the Solar Flare Alert Lamp always uses the last available value."
+msgstr ""
+
+#: ../../introduction.rst:51
+msgid "Our Solar Flare Alert Lamp gradually increases the intensity of the LED with increasing flux. It is turned off in absence of activity. It flashes to signify a solar flare in progress when the X-ray flux exceeds M1 (1 x 10E-5 Watts/m2). Such events are indeed exciting to observe!"
+msgstr ""
