@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Solar Flare Alert Lamp \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-23 10:56+0100\n"
+"POT-Creation-Date: 2025-12-24 10:06+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -89,7 +89,7 @@ msgid "Insert the USB cable into the board, and plug it in. The LED should blink
 msgstr ""
 
 #: ../../white_version.rst:77
-msgid "Your solar flare alert is now physically assembled and ready to connect to the WiFi."
+msgid "Your solar flare alert lamp is now physically assembled and ready to connect to the WiFi."
 msgstr ""
 
 #: ../../white_version.rst:79

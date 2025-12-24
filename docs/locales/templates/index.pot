@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Solar Flare Alert Lamp \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-23 10:56+0100\n"
+"POT-Creation-Date: 2025-12-24 10:06+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,7 +41,7 @@ msgid "Check which one you have an jump to the corresponding assembling instruct
 msgstr ""
 
 #: ../../index.rst:20
-msgid "I have the :doc:`white version <white_version>`"
+msgid "I have the :doc:`standard white version <white_version>`"
 msgstr ""
 
 #: ../../index.rst:21

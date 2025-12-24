@@ -8,18 +8,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Solar Flare Alert Lamp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-24 10:06+0100\n"
+"POT-Creation-Date: 2025-11-29 06:47+0100\n"
 "PO-Revision-Date: 2025-12-23 00:00+0000\n"
 "Last-Translator: Auto-translated by assistant\n"
 "Language-Team: de <LL@li.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.17.0\n"
 
-#: ../../index.rst:26
+#: ../../index.rst:21
 msgid "Contents"
 msgstr "Inhalt"
 
@@ -57,39 +57,21 @@ msgstr ""
 
 #: ../../index.rst:13
 msgid ""
-"There are several versions of the Solar Flare Alert: the white version is "
-"the standard one; it can be assembled out of the box. The extended white "
-"version is the same, but needs to be built from scratch and is used usually "
-"in dedicatedworkshops. The green version is a bit more complex, it needs "
-"components to be soldered on the breadboard."
-msgstr ""
-"Es gibt mehrere Versionen des Solar Flare Alert: Die weisse Version ist die "
-"Standardversion; Es kann sofort zusammengebaut werden. Die erweiterte weisse"
-" Version ist dieselbe, muss jedoch von Grund auf neu erstellt werden und "
-"wird normalerweise in speziellen Werkstätten verwendet. Die grüne Version "
-"ist etwas komplexer, sie erfordert Komponenten, die auf dem Steckbrett "
-"gelötet werden müssen."
-
-#: ../../index.rst:18
-msgid ""
-"Check which one you have an jump to the corresponding assembling "
+"There are two versions of the Solar Flare Alert: a green version and a white"
+" version. Check which one you have an jump to the corresponding assembling "
 "instruction."
 msgstr ""
-"Schauen Sie nach, welches Sie haben, um zur entsprechenden Montageanleitung "
-"zu gelangen."
+"Es gibt zwei Versionen des Solar Flare Alert: eine grüne Version und eine "
+"weisse Version. Schauen Sie nach, welches Sie haben, um zur entsprechenden "
+"Montageanleitung zu gelangen."
 
-#: ../../index.rst:20
-msgid "I have the :doc:`standard white version <white_version>`"
-msgstr "Ich habe die :doc:`Standard-Weissversion <white_version>`"
-
-#: ../../index.rst:21
-msgid "I have the :doc:`extended white version <extended_white_version>`"
-msgstr ""
-"Ich habe die :doc:`erweiterte weisse Version <extended_white_version>`"
-
-#: ../../index.rst:22
+#: ../../index.rst:16
 msgid "I have the :doc:`green version <green_version>`"
 msgstr "Ich habe die :doc:`grüne Version <green_version>`"
+
+#: ../../index.rst:17
+msgid "I have the :doc:`white version <white_version>`"
+msgstr "Ich habe die :doc:`weisse Version <white_version>`"
 
 #: ../../overview.rst:2
 msgid "How It Works"
@@ -148,53 +130,24 @@ msgstr ""
 
 #: ../../overview.rst:18
 msgid ""
-"And, finally, if you fell courageous, you can also program the ESP32 "
-"microprocessor, which is the core of this project. :doc:`More instructions "
-"are given here <mp_install_esp32>`."
+"Do you know that you can also contribute to the development of the solar "
+"flare alert and the"
 msgstr ""
-"Und wenn Sie den Mut haben, können Sie schliesslich auch den "
-"ESP32-Mikroprozessor programmieren, der das Herzstück dieses Projekts "
-"darstellt. :doc:`Weitere Anweisungen finden Sie hier <mp_install_esp32>`."
+"Wussten Sie, dass Sie auch zur Entwicklung des Sonneneruptionsalarms "
+"beitragen können?"
 
-#: ../../overview.rst:22
-msgid ""
-"If you are going to make extensions or new version of the software, you can "
-"also contribute using our GitHup page."
-msgstr ""
-"Wenn Sie Erweiterungen oder neue Versionen der Software erstellen möchten, "
-"können Sie auch über unsere GitHup-Seite einen Beitrag leisten."
-
-#: ../../overview.rst:25
+#: ../../overview.rst:20
 msgid "Have fun!"
 msgstr "Viel Spass!"
 
-#: ../../index.rst:39
+#: ../../index.rst:33
 msgid "Indices and tables"
 msgstr "Indizes und Tabellen"
 
-#: ../../index.rst:41
+#: ../../index.rst:35
 msgid ":ref:`genindex`"
 msgstr ":ref:`genindex`"
 
-#: ../../index.rst:42
+#: ../../index.rst:36
 msgid ":ref:`search`"
 msgstr ":ref:`Suche`"
-
-#~ msgid ""
-#~ "There are two versions of the Solar Flare Alert: a green version and a white"
-#~ " version. Check which one you have an jump to the corresponding assembling "
-#~ "instruction."
-#~ msgstr ""
-#~ "Es gibt zwei Versionen des Solar Flare Alert: eine grüne Version und eine "
-#~ "weisse Version. Schauen Sie nach, welches Sie haben, um zur entsprechenden "
-#~ "Montageanleitung zu gelangen."
-
-#~ msgid "I have the :doc:`white version <white_version>`"
-#~ msgstr "Ich habe die :doc:`weisse Version <white_version>`"
-
-#~ msgid ""
-#~ "Do you know that you can also contribute to the development of the solar "
-#~ "flare alert and the"
-#~ msgstr ""
-#~ "Wussten Sie, dass Sie auch zur Entwicklung des Sonneneruptionsalarms "
-#~ "beitragen können?"

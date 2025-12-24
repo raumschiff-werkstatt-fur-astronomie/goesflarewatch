@@ -8,143 +8,138 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Solar Flare Alert Lamp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-29 06:47+0100\n"
+"POT-Creation-Date: 2025-12-24 10:06+0100\n"
 "PO-Revision-Date: 2025-12-23 00:00+0000\n"
 "Last-Translator: Auto-translated by assistant\n"
 "Language-Team: de <LL@li.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: ../../white_version.rst:2
-msgid "How to use the Solar Flare Alert - White Version"
-msgstr "So verwenden Sie den Sonneneruptionsalarm – weisse Version"
+msgid "How to use the Solar Flare Alert - Standard White Version"
+msgstr "So verwenden Sie den Sonneneruptionsalarm – Standard-Weissversion"
 
 #: ../../white_version.rst:7
 msgid "What you have in your kit:"
 msgstr "Was Sie in Ihrem Kit haben:"
 
 #: ../../white_version.rst:9
-msgid "A table tennis ball"
-msgstr "Ein Tischtennisball"
+msgid "A white lamp bulb with an LED mounted on it"
+msgstr "Eine weisse Glühbirne mit einer darauf montierten LED"
 
-#: ../../white_version.rst:10
+#: ../../white_version.rst:13
 msgid "One white breadboard"
 msgstr "Ein weisses Steckbrett"
 
-#: ../../white_version.rst:11
+#: ../../white_version.rst:17
 msgid "Wires"
 msgstr "Drähte"
 
-#: ../../white_version.rst:12
-msgid "One LED with an LED holder"
-msgstr "Eine LED mit LED-Halterung"
+#: ../../white_version.rst:21
+msgid "One lamp stand"
+msgstr "Ein Lampenständer"
 
-#: ../../white_version.rst:13
-msgid "One wire holder"
-msgstr "Ein Drahthalter"
-
-#: ../../white_version.rst:14
+#: ../../white_version.rst:25
 msgid "One ESP32 development board"
 msgstr "Ein ESP32-Entwicklungsboard"
 
-#: ../../white_version.rst:15
+#: ../../white_version.rst:29
 msgid "One 110 Ohm resistor"
 msgstr "Ein 110-Ohm-Widerstand"
 
-#: ../../white_version.rst:18
+#: ../../white_version.rst:33
+msgid "A USB cable and power adapter"
+msgstr "Ein USB-Kabel und ein Netzteil"
+
+#: ../../white_version.rst:39
 msgid "Assembling the device"
 msgstr "Zusammenbau des Geräts"
 
-#: ../../white_version.rst:19
+#: ../../white_version.rst:40
+msgid "Insert the ESP32 development board onto the breadboard."
+msgstr "Setzen Sie die ESP32-Entwicklungsplatine auf das Steckbrett."
+
+#: ../../white_version.rst:45
 msgid ""
-"Take the table tennis ball and make a small hole large enough to mount the "
-"LED holder."
+"Mount the lamp stand onto the breadboard, leaving one breadboard slot on "
+"both sides"
 msgstr ""
-"Nehmen Sie den Tischtennisball und bohren Sie ein kleines Loch, das gross "
-"genug ist, um den LED-Halter zu montieren."
+"Montieren Sie den Lampenständer auf dem Steckbrett und lassen Sie auf beiden"
+" Seiten einen Steckplatz für das Steckbrett frei"
 
-#: ../../white_version.rst:20
-msgid "Connect a wire to each leg of the LED."
-msgstr "Verbinden Sie einen Draht mit jedem Bein der LED."
-
-#: ../../white_version.rst:21
+#: ../../white_version.rst:50
 msgid ""
-"Insert the LED into the LED holder, then place the holder into the hole in "
-"the tennis ball."
+"3. Place the resistor into a free space on the breadboard, and connect it to"
+" another free space above or below the lamo stand."
 msgstr ""
-"Setzen Sie die LED in den LED-Halter ein und setzen Sie den Halter dann in "
-"das Loch im Tennisball ein."
+"3. Platzieren Sie den Widerstand an einer freien Stelle auf dem Steckbrett "
+"und verbinden Sie ihn mit einer anderen freien Stelle über oder unter dem "
+"Lamo-Ständer."
 
-#: ../../white_version.rst:22
+#: ../../white_version.rst:56
 msgid ""
-"Assemble the wire holder, attaching one LED wire to each side. Ensure that "
-"the **long leg of the LED (anode)** is connected to the **resistor side**, "
-"and the **short leg (cathode)** goes to **ground**."
+"Locate pin **27** on the ESP32 development board. Connect a wire from **pin "
+"27** of the ESP32 to one of the free slot in the same breadboard column as "
+"the resistor."
 msgstr ""
-"Montieren Sie den Kabelhalter und befestigen Sie an jeder Seite ein LED-"
-"Kabel. Stellen Sie sicher, dass der **lange Schenkel der LED (Anode)** mit "
-"der **Widerstandsseite** verbunden ist und der **kurze Schenkel (Kathode)** "
-"mit **Masse** verbunden ist."
+"Suchen Sie Pin **27** auf der ESP32-Entwicklungsplatine. Verbinden Sie einen"
+" Draht von **Pin 27** des ESP32 mit einem der freien Steckplätze in "
+"derselben Steckbrettspalte wie der Widerstand."
 
-#: ../../white_version.rst:24
-msgid "Mount the wire holder with LED onto the breadboard."
-msgstr "Montieren Sie den Drahthalter mit LED auf dem Steckbrett."
-
-#: ../../white_version.rst:25
-msgid "Locate pin **27** on the ESP32 development board."
-msgstr "Suchen Sie Pin **27** auf der ESP32-Entwicklungsplatine."
-
-#: ../../white_version.rst:26
-msgid "Plug the ESP32 development board into the breadboard."
-msgstr "Stecken Sie das ESP32-Entwicklungsboard in das Steckbrett."
-
-#: ../../white_version.rst:27
+#: ../../white_version.rst:61
 msgid ""
-"Connect a wire from a **GND pin** of the ESP32 to the **ground rail** of the"
-" breadboard."
+"Connect a wire from a **GND pin** of the ESP32 to the other free slot below "
+"the LED holder."
 msgstr ""
-"Verbinden Sie einen Draht von einem **GND-Pin** des ESP32 mit der "
-"**Erdungsschiene** des Steckbretts."
+"Verbinden Sie einen Draht von einem **GND-Pin** des ESP32 mit dem anderen "
+"freien Steckplatz unterhalb der LED-Halterung."
 
-#: ../../white_version.rst:28
-msgid "Place the resistor into a free space on the breadboard."
-msgstr ""
-"Platzieren Sie den Widerstand an einer freien Stelle auf dem Steckbrett."
-
-#: ../../white_version.rst:29
+#: ../../white_version.rst:66
 msgid ""
-"Connect a wire from **pin 27** of the ESP32 to one end of the resistor."
+"7. Connect a wire to each leg of the LED in the lamp bulb. Remember the "
+"color of the cables that connects to the short leg LED."
 msgstr ""
-"Verbinden Sie einen Draht von **Pin 27** des ESP32 mit einem Ende des "
-"Widerstands."
+"7. Schliessen Sie einen Draht an jeden Zweig der LED in der Glühbirne an. "
+"Denken Sie an die Farbe der Kabel, die mit der LED mit kurzem Bein verbunden"
+" sind."
 
-#: ../../white_version.rst:30
+#: ../../white_version.rst:72
 msgid ""
-"Connect the other end of the resistor to one side of the wire holder (the "
-"LED’s long leg / anode)."
+"8. Attach one LED wire to each side of the lamp stand. Ensure that the "
+"**long leg of the LED (anode)** is connected to the **resistor side**, and "
+"the **short leg (cathode)** goes to **ground**."
 msgstr ""
-"Verbinden Sie das andere Ende des Widerstands mit einer Seite des "
-"Kabelhalters (dem langen Bein/Anode der LED)."
+"8. Befestigen Sie ein LED-Kabel an jeder Seite des Lampenständers. Stellen "
+"Sie sicher, dass der **lange Schenkel der LED (Anode)** mit der "
+"**Widerstandsseite** verbunden ist und der **kurze Schenkel (Kathode)** mit "
+"**Masse** verbunden ist."
 
-#: ../../white_version.rst:31
+#: ../../white_version.rst:75
 msgid ""
-"Connect a wire from the **ground rail** of the breadboard to the other side "
-"of the wire holder (LED short leg / cathode)."
+"Insert the USB cable into the board, and plug it in. The LED should blink."
 msgstr ""
-"Verbinden Sie einen Draht von der **Erdungsschiene** des Steckbretts mit der"
-" anderen Seite des Drahthalters (kurzes LED-Bein / Kathode)."
+"Stecken Sie das USB-Kabel in die Platine und stecken Sie es ein. Die LED "
+"sollte blinken."
 
-#: ../../white_version.rst:33
+#: ../../white_version.rst:77
 msgid ""
-"Your solar flare alert is now physically assembled and ready to connect to "
-"the WiFi."
+"Your solar flare alert lamp is now physically assembled and ready to connect"
+" to the WiFi."
 msgstr ""
-"Ihr Sonneneruptionsalarm ist jetzt physisch zusammengebaut und bereit für "
-"die Verbindung mit dem WLAN."
+"Ihre Sonneneruptions-Warnlampe ist jetzt physisch zusammengebaut und bereit "
+"für die Verbindung mit dem WLAN."
+
+#: ../../white_version.rst:79
+msgid ""
+"Note: the isolation tubes can be settled by warming them. They will reduce "
+"their size."
+msgstr ""
+"Hinweis: Die Isolationsrohre können durch Erwärmen stabilisiert werden. Sie "
+"werden ihre Grösse reduzieren."
 
 #: ../../wifi_connection.rst:2
 msgid "Connecting to the WiFi"
@@ -205,3 +200,89 @@ msgstr ""
 "Du bist fertig. Verbinden Sie Ihr Telefon oder Ihren Computer wieder mit "
 "Ihrem normalen WLAN. Der Sonneneruptionsalarm zeigt nun die aktuelle "
 "Aktivitätsstufe der Sonne an."
+
+#~ msgid "How to use the Solar Flare Alert - White Version"
+#~ msgstr "So verwenden Sie den Sonneneruptionsalarm – weisse Version"
+
+#~ msgid "A table tennis ball"
+#~ msgstr "Ein Tischtennisball"
+
+#~ msgid "One LED with an LED holder"
+#~ msgstr "Eine LED mit LED-Halterung"
+
+#~ msgid "One wire holder"
+#~ msgstr "Ein Drahthalter"
+
+#~ msgid ""
+#~ "Take the table tennis ball and make a small hole large enough to mount the "
+#~ "LED holder."
+#~ msgstr ""
+#~ "Nehmen Sie den Tischtennisball und bohren Sie ein kleines Loch, das gross "
+#~ "genug ist, um den LED-Halter zu montieren."
+
+#~ msgid "Connect a wire to each leg of the LED."
+#~ msgstr "Verbinden Sie einen Draht mit jedem Bein der LED."
+
+#~ msgid ""
+#~ "Insert the LED into the LED holder, then place the holder into the hole in "
+#~ "the tennis ball."
+#~ msgstr ""
+#~ "Setzen Sie die LED in den LED-Halter ein und setzen Sie den Halter dann in "
+#~ "das Loch im Tennisball ein."
+
+#~ msgid ""
+#~ "Assemble the wire holder, attaching one LED wire to each side. Ensure that "
+#~ "the **long leg of the LED (anode)** is connected to the **resistor side**, "
+#~ "and the **short leg (cathode)** goes to **ground**."
+#~ msgstr ""
+#~ "Montieren Sie den Kabelhalter und befestigen Sie an jeder Seite ein LED-"
+#~ "Kabel. Stellen Sie sicher, dass der **lange Schenkel der LED (Anode)** mit "
+#~ "der **Widerstandsseite** verbunden ist und der **kurze Schenkel (Kathode)** "
+#~ "mit **Masse** verbunden ist."
+
+#~ msgid "Mount the wire holder with LED onto the breadboard."
+#~ msgstr "Montieren Sie den Drahthalter mit LED auf dem Steckbrett."
+
+#~ msgid "Locate pin **27** on the ESP32 development board."
+#~ msgstr "Suchen Sie Pin **27** auf der ESP32-Entwicklungsplatine."
+
+#~ msgid "Plug the ESP32 development board into the breadboard."
+#~ msgstr "Stecken Sie das ESP32-Entwicklungsboard in das Steckbrett."
+
+#~ msgid ""
+#~ "Connect a wire from a **GND pin** of the ESP32 to the **ground rail** of the"
+#~ " breadboard."
+#~ msgstr ""
+#~ "Verbinden Sie einen Draht von einem **GND-Pin** des ESP32 mit der "
+#~ "**Erdungsschiene** des Steckbretts."
+
+#~ msgid "Place the resistor into a free space on the breadboard."
+#~ msgstr ""
+#~ "Platzieren Sie den Widerstand an einer freien Stelle auf dem Steckbrett."
+
+#~ msgid ""
+#~ "Connect a wire from **pin 27** of the ESP32 to one end of the resistor."
+#~ msgstr ""
+#~ "Verbinden Sie einen Draht von **Pin 27** des ESP32 mit einem Ende des "
+#~ "Widerstands."
+
+#~ msgid ""
+#~ "Connect the other end of the resistor to one side of the wire holder (the "
+#~ "LED’s long leg / anode)."
+#~ msgstr ""
+#~ "Verbinden Sie das andere Ende des Widerstands mit einer Seite des "
+#~ "Kabelhalters (dem langen Bein/Anode der LED)."
+
+#~ msgid ""
+#~ "Connect a wire from the **ground rail** of the breadboard to the other side "
+#~ "of the wire holder (LED short leg / cathode)."
+#~ msgstr ""
+#~ "Verbinden Sie einen Draht von der **Erdungsschiene** des Steckbretts mit der"
+#~ " anderen Seite des Drahthalters (kurzes LED-Bein / Kathode)."
+
+#~ msgid ""
+#~ "Your solar flare alert is now physically assembled and ready to connect to "
+#~ "the WiFi."
+#~ msgstr ""
+#~ "Ihr Sonneneruptionsalarm ist jetzt physisch zusammengebaut und bereit für "
+#~ "die Verbindung mit dem WLAN."
