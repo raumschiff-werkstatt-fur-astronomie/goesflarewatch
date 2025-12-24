@@ -22,8 +22,11 @@ class WifiManager:
             raise Exception('The SSID cannot be longer than 32 characters.')
         else:
             self.ap_ssid = ssid
-        if len(password) < 8:
-            raise Exception('The password cannot be less than 8 characters long.')
+        #if len(password) < 8:
+        #    raise Exception('The password cannot be less than 8 characters long.')
+        # acs - this tests makes it impossible to have a hotspot without passwork
+        if len(password) < 0:
+            raise Exception('The password cannot be less than 0 characters long.') # acs - will never be executed but who cares?
         else:
             self.ap_password = password
             
@@ -115,7 +118,7 @@ class WifiManager:
         self.wlan_ap.active(True)
         # I cannot call config with a password and authmode of 0
         if self.ap_authmode == 0: 
-            self.wlan_ap.config(essid = self.ap_ssid, authmode = self.ap_authmode)
+            self.wlan_ap.config(essid = self.ap_ssid, authmode = 0 )
         else:
             self.wlan_ap.config(essid = self.ap_ssid, password = self.ap_password, authmode = self.ap_authmode)
 
