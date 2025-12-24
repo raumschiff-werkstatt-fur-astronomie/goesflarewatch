@@ -1,0 +1,22 @@
+# Weblate configuration file
+# This helps Weblate understand your project structure
+
+[files]
+# Path to translation files
+po = docs/locales/*/LC_MESSAGES/**/*.po
+
+[settings]
+# Component name template
+# This will create components for each PO file
+component = "{{ filename }}"
+
+# File mask for finding translation files
+file_format = po
+
+# Source language
+source_language = en
+
+# Translation files location
+# Weblate will look for files matching this pattern
+# docs/locales/<language>/LC_MESSAGES/**/*.po
+

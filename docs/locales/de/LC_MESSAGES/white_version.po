@@ -6,17 +6,17 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Solar Flare Alert Lamp \n"
+"Project-Id-Version: Solar Flare Alert Lamp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-29 06:47+0100\n"
 "PO-Revision-Date: 2025-12-23 00:00+0000\n"
 "Last-Translator: Auto-translated by assistant\n"
-"Language: de\n"
 "Language-Team: de <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: ../../white_version.rst:2
@@ -61,9 +61,11 @@ msgstr "Gerät zusammenbauen"
 
 #: ../../white_version.rst:19
 msgid ""
-"Take the table tennis ball and make a small hole large enough to mount "
-"the LED holder."
-msgstr "Bohre ein kleines Loch in den Tischtennisball, groß genug für den LED-Halter."
+"Take the table tennis ball and make a small hole large enough to mount the "
+"LED holder."
+msgstr ""
+"Bohre ein kleines Loch in den Tischtennisball, groß genug für den LED-"
+"Halter."
 
 #: ../../white_version.rst:20
 msgid "Connect a wire to each leg of the LED."
@@ -71,15 +73,16 @@ msgstr "Verbinde an jedes Bein der LED ein Kabel."
 
 #: ../../white_version.rst:21
 msgid ""
-"Insert the LED into the LED holder, then place the holder into the hole "
-"in the tennis ball."
-msgstr "Stecke die LED in den Halter und setze den Halter in das Loch des Balls ein."
+"Insert the LED into the LED holder, then place the holder into the hole in "
+"the tennis ball."
+msgstr ""
+"Stecke die LED in den Halter und setze den Halter in das Loch des Balls ein."
 
 #: ../../white_version.rst:22
 msgid ""
-"Assemble the wire holder, attaching one LED wire to each side. Ensure "
-"that the **long leg of the LED (anode)** is connected to the **resistor "
-"side**, and the **short leg (cathode)** goes to **ground**."
+"Assemble the wire holder, attaching one LED wire to each side. Ensure that "
+"the **long leg of the LED (anode)** is connected to the **resistor side**, "
+"and the **short leg (cathode)** goes to **ground**."
 msgstr ""
 "Montiere den Draht-Halter und befestige je ein LED-Kabel an jeder Seite. "
 "Achte darauf, dass das **lange LED-Bein (Anode)** mit der "
@@ -100,34 +103,41 @@ msgstr "Stecke das ESP32-Board ins Breadboard."
 
 #: ../../white_version.rst:27
 msgid ""
-"Connect a wire from a **GND pin** of the ESP32 to the **ground rail** of "
-"the breadboard."
-msgstr "Verbinde einen **GND-Pin** des ESP32 mit der **Masse-Leiste** des Breadboards."
+"Connect a wire from a **GND pin** of the ESP32 to the **ground rail** of the"
+" breadboard."
+msgstr ""
+"Verbinde einen **GND-Pin** des ESP32 mit der **Masse-Leiste** des "
+"Breadboards."
 
 #: ../../white_version.rst:28
 msgid "Place the resistor into a free space on the breadboard."
 msgstr "Stecke den Widerstand in einen freien Platz des Breadboards."
 
 #: ../../white_version.rst:29
-msgid "Connect a wire from **pin 27** of the ESP32 to one end of the resistor."
+msgid ""
+"Connect a wire from **pin 27** of the ESP32 to one end of the resistor."
 msgstr "Verbinde **Pin 27** des ESP32 mit einem Ende des Widerstands."
 
 #: ../../white_version.rst:30
 msgid ""
-"Connect the other end of the resistor to one side of the wire holder (the"
-" LED’s long leg / anode)."
-msgstr "Verbinde das andere Ende des Widerstands mit der Seite des Halters (langes LED-Bein / Anode)."
+"Connect the other end of the resistor to one side of the wire holder (the "
+"LED’s long leg / anode)."
+msgstr ""
+"Verbinde das andere Ende des Widerstands mit der Seite des Halters (langes "
+"LED-Bein / Anode)."
 
 #: ../../white_version.rst:31
 msgid ""
-"Connect a wire from the **ground rail** of the breadboard to the other "
-"side of the wire holder (LED short leg / cathode)."
-msgstr "Verbinde die **Masse-Leiste** des Breadboards mit der anderen Seite des Halters (kurzes LED-Bein / Kathode)."
+"Connect a wire from the **ground rail** of the breadboard to the other side "
+"of the wire holder (LED short leg / cathode)."
+msgstr ""
+"Verbinde die **Masse-Leiste** des Breadboards mit der anderen Seite des "
+"Halters (kurzes LED-Bein / Kathode)."
 
 #: ../../white_version.rst:33
 msgid ""
-"Your solar flare alert is now physically assembled and ready to connect "
-"to the WiFi."
+"Your solar flare alert is now physically assembled and ready to connect to "
+"the WiFi."
 msgstr "Deine Solar Flare Alert ist nun aufgebaut und bereit für das WLAN."
 
 #: ../../wifi_connection.rst:2
@@ -138,27 +148,32 @@ msgstr "Mit dem WLAN verbinden"
 msgid ""
 "Power on the Solar Flare Alert. After a few seconds, the LED will begin "
 "blinking."
-msgstr "Schalte die Solar Flare Alert ein. Nach einigen Sekunden beginnt die LED zu blinken."
+msgstr ""
+"Schalte die Solar Flare Alert ein. Nach einigen Sekunden beginnt die LED zu "
+"blinken."
 
 #: ../../wifi_connection.rst:6
 msgid ""
-"If the blinking **stops after a few seconds**, the device has "
-"successfully connected to a previously saved WiFi network."
-msgstr "Wenn das Blinken **nach einigen Sekunden stoppt**, hat sich das Gerät mit einem gespeicherten WLAN verbunden."
+"If the blinking **stops after a few seconds**, the device has successfully "
+"connected to a previously saved WiFi network."
+msgstr ""
+"Wenn das Blinken **nach einigen Sekunden stoppt**, hat sich das Gerät mit "
+"einem gespeicherten WLAN verbunden."
 
 #: ../../wifi_connection.rst:8
 msgid ""
-"If the LED **continues blinking**, open the WiFi settings on your phone "
-"or computer and connect to the access point named **SolarFlareAlert-"
-"Setup**."
+"If the LED **continues blinking**, open the WiFi settings on your phone or "
+"computer and connect to the access point named **SolarFlareAlert-Setup**."
 msgstr ""
-"Wenn die LED **weiter blinkt**, öffne die WLAN-Einstellungen deines "
-"Handys oder Computers und verbinde dich mit dem Access Point "
-"**SolarFlareAlert-Setup**."
+"Wenn die LED **weiter blinkt**, öffne die WLAN-Einstellungen deines Handys "
+"oder Computers und verbinde dich mit dem Access Point **SolarFlareAlert-"
+"Setup**."
 
 #: ../../wifi_connection.rst:10
-msgid "Once connected, open a web browser and navigate to: ``http://192.168.4.1``"
-msgstr "Sobald verbunden, öffne einen Browser und gehe zu: ``http://192.168.4.1``"
+msgid ""
+"Once connected, open a web browser and navigate to: ``http://192.168.4.1``"
+msgstr ""
+"Sobald verbunden, öffne einen Browser und gehe zu: ``http://192.168.4.1``"
 
 #: ../../wifi_connection.rst:12
 msgid "Select your home WiFi network from the list and enter the password."
@@ -166,15 +181,16 @@ msgstr "Wähle dein Heim-WLAN aus der Liste und gib das Passwort ein."
 
 #: ../../wifi_connection.rst:14
 msgid ""
-"The device will reboot and attempt to join your network. When the LED "
-"turns solid green, the connection was successful."
-msgstr "Das Gerät startet neu und versucht, deinem Netzwerk beizutreten. Leuchtet die LED dauerhaft grün, war die Verbindung erfolgreich."
+"The device will reboot and attempt to join your network. When the LED turns "
+"solid green, the connection was successful."
+msgstr ""
+"Das Gerät startet neu und versucht, deinem Netzwerk beizutreten. Leuchtet "
+"die LED dauerhaft grün, war die Verbindung erfolgreich."
 
 #: ../../wifi_connection.rst:16
 msgid ""
-"You're done. Reconnect your phone or computer to your normal WiFi. The "
-"Solar Flare Alert will now display the Sun’s current activity level."
+"You're done. Reconnect your phone or computer to your normal WiFi. The Solar"
+" Flare Alert will now display the Sun’s current activity level."
 msgstr ""
-"Fertig. Verbinde dein Gerät wieder mit deinem normalen WLAN. Die Solar "
-"Flare Alert zeigt nun die aktuelle Aktivität der Sonne."
-
+"Fertig. Verbinde dein Gerät wieder mit deinem normalen WLAN. Die Solar Flare"
+" Alert zeigt nun die aktuelle Aktivität der Sonne."

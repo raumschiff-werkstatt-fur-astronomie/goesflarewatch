@@ -74,7 +74,7 @@ Ensure that the **long leg of the LED (anode)** is connected to the **resistor s
 
 9. Insert the USB cable into the board, and plug it in. The LED should blink.
 
-Your solar flare alert is now physically assembled and ready to connect to the WiFi.
+Your solar flare alert lamp is now physically assembled and ready to connect to the WiFi.
 
 Note: the isolation tubes can be settled by warming them. They will reduce their size.
 

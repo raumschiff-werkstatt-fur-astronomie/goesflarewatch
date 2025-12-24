@@ -17,7 +17,7 @@ The green version is a bit more complex, it needs components to be soldered on t
 
 Check which one you have an jump to the corresponding assembling instruction.
 
-* I have the :doc:`white version <white_version>`
+* I have the :doc:`standard white version <white_version>`
 * I have the :doc:`extended white version <extended_white_version>`
 * I have the :doc:`green version <green_version>`
 

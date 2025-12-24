@@ -7,17 +7,17 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Solar Flare Alert Lamp \n"
+"Project-Id-Version: Solar Flare Alert Lamp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-29 06:47+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: de\n"
 "Language-Team: de <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: ../../wifi_connection.rst:2
@@ -25,8 +25,12 @@ msgid "Connecting to the WiFi"
 msgstr "Mit dem WLAN verbinden"
 
 #: ../../wifi_connection.rst:5
-msgid "Power on the Solar Flare Alert. After a few seconds, the LED will begin blinking."
-msgstr "Schalten Sie den Solar Flare Alert ein. Nach einigen Sekunden beginnt die LED zu blinken."
+msgid ""
+"Power on the Solar Flare Alert. After a few seconds, the LED will begin "
+"blinking."
+msgstr ""
+"Schalten Sie den Solar Flare Alert ein. Nach einigen Sekunden beginnt die "
+"LED zu blinken."
 
 #: ../../wifi_connection.rst:7
 msgid ""
@@ -54,21 +58,22 @@ msgstr ""
 
 #: ../../wifi_connection.rst:13
 msgid "Select your home WiFi network from the list and enter the password."
-msgstr "Wählen Sie Ihr Heim-WLAN aus der Liste aus und geben Sie das Passwort ein."
+msgstr ""
+"Wählen Sie Ihr Heim-WLAN aus der Liste aus und geben Sie das Passwort ein."
 
 #: ../../wifi_connection.rst:14
 msgid ""
-"The device will reboot and attempt to join your network. When the LED "
-"turns solid yellow, the connection was successful."
+"The device will reboot and attempt to join your network. When the LED turns "
+"solid yellow, the connection was successful."
 msgstr ""
-"Das Gerät wird neu gestartet und versucht, sich mit Ihrem Netzwerk zu verbinden. "
-"Wird die LED dauerhaft gelb, war die Verbindung erfolgreich."
+"Das Gerät wird neu gestartet und versucht, sich mit Ihrem Netzwerk zu "
+"verbinden. Wird die LED dauerhaft gelb, war die Verbindung erfolgreich."
 
 #: ../../wifi_connection.rst:16
 msgid ""
-"You're done. Reconnect your phone or computer to your normal WiFi. The "
-"Solar Flare Alert will now display the Sun’s current activity level."
+"You're done. Reconnect your phone or computer to your normal WiFi. The Solar"
+" Flare Alert will now display the Sun’s current activity level."
 msgstr ""
-"Sie sind fertig. Verbinden Sie Ihr Telefon oder Ihren Computer wieder mit Ihrem "
-"normalen WLAN. Der Solar Flare Alert zeigt nun den aktuellen Aktivitätszustand "
-"der Sonne an."
+"Sie sind fertig. Verbinden Sie Ihr Telefon oder Ihren Computer wieder mit "
+"Ihrem normalen WLAN. Der Solar Flare Alert zeigt nun den aktuellen "
+"Aktivitätszustand der Sonne an."
