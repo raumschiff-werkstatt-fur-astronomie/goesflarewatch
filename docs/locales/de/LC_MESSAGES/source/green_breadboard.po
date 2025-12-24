@@ -26,7 +26,7 @@ msgstr "Anleitung zum Bau der grünen Version"
 
 #: ../../source/green_breadboard.rst:7
 msgid "This is very similar to the instructions for the white breadboard"
-msgstr "Dies ist der Anleitung für das weiße Steckbrett sehr ähnlich"
+msgstr "Dies ist der Anleitung für das weisse Steckbrett sehr ähnlich"
 
 #: ../../source/green_breadboard.rst:9
 msgid "You will need:"
@@ -76,10 +76,10 @@ msgid ""
 "pliers.#. Connect a wire at each end of the LED"
 msgstr ""
 "Nehmen Sie den Tennisball und bohren Sie vorsichtig ein kleines Loch hinein."
-" Achten Sie darauf, dass es nicht zu groß, aber ausreichend ist, um den LED-"
-"Halter zu montieren. Um dies zu erreichen, beginne ich das Loch mit einer "
-"feinen Ahle und vergrößere es dann vorsichtig mit einer Präzisionszange.#. "
-"Schließen Sie an jedem Ende der LED einen Draht an"
+" Achten Sie darauf, dass es nicht zu gross, aber ausreichend ist, um den "
+"LED-Halter zu montieren. Um dies zu erreichen, beginne ich das Loch mit "
+"einer feinen Ahle und vergrössere es dann vorsichtig mit einer "
+"Präzisionszange.#. Schliessen Sie an jedem Ende der LED einen Draht an"
 
 #: ../../source/green_breadboard.rst:25
 msgid "Mount the LED holder into the hole of the tennis ball"
@@ -140,5 +140,5 @@ msgstr ""
 msgid ""
 "Plug it in and test it with Thonny, see also `Usage`__ or continue reading"
 msgstr ""
-"Schließen Sie es an und testen Sie es mit Thonny, siehe auch „Verwendung“__ "
-"oder lesen Sie weiter"
+"Schliessen Sie es an und testen Sie es mit Thonny, siehe auch „Verwendung“__"
+" oder lesen Sie weiter"

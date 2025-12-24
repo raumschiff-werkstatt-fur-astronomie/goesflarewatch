@@ -1,5 +1,10 @@
 # Simple Translation Guide
 
+## Available Languages
+
+- **German (de)**: `python translate_po.py de` or `python translate_po.py`
+- **Swiss Standard German (de-CH)**: `python translate_po.py de-CH` or `python translate_po.py ch`
+
 ## Quick Start (No API Key Needed)
 
 1. **Install dependencies:**
@@ -9,10 +14,16 @@
 
 2. **Run the translation script:**
    ```bash
-   python translate_po.py
+   # For German
+   python translate_po.py de
+   
+   # For Swiss Standard German (de-CH)
+   python translate_po.py de-CH
    ```
 
-3. **That's it!** All your PO files will be automatically translated to German.
+3. **That's it!** All your PO files will be automatically translated.
+
+**Note for Swiss Standard German (de-CH):** The script automatically converts all "ß" (beta) characters to "ss" to match Swiss conventions.
 
 ## Better Quality Translation (Optional - Free API Key)
 

@@ -57,13 +57,17 @@ if not translator_type:
     print("  Then set: export DEEPL_API_KEY='your-key'")
     sys.exit(1)
 
-def translate_text(text, target_lang='de', source_lang='en'):
+def translate_text(text, target_lang='de', source_lang='en', is_swiss=False):
     """Translate a single text string."""
     if not text or not text.strip():
         return ""
     
     try:
-        return translator.translate(text)
+        translated = translator.translate(text)
+        # For Swiss German (de-CH), replace ß with ss
+        if is_swiss:
+            translated = translated.replace('ß', 'ss').replace('ẞ', 'SS')
+        return translated
     except Exception as e:
         print(f"    Warning: Translation error: {e}")
         return ""
@@ -90,7 +94,8 @@ def translate_po_file(po_file_path, target_lang='de', source_lang='en'):
             continue
         
         # Translate the message
-        translated = translate_text(entry.msgid, target_lang, source_lang)
+        is_swiss = 'de-CH' in po_file_path
+        translated = translate_text(entry.msgid, target_lang, source_lang, is_swiss=is_swiss)
         if translated:
             entry.msgstr = translated
             translated_count += 1
@@ -106,8 +111,22 @@ def translate_po_file(po_file_path, target_lang='de', source_lang='en'):
 
 def main():
     """Main function to translate all PO files."""
+    # Get target language from command line or default to German
+    import sys
+    target_lang = 'de'  # Default
+    target_lang_code = 'de'
+    
+    if len(sys.argv) > 1:
+        lang_arg = sys.argv[1].lower()
+        if lang_arg in ['de-ch', 'ch', 'swiss', 'swiss-german']:
+            target_lang = 'de'
+            target_lang_code = 'de-CH'
+        elif lang_arg in ['de', 'german']:
+            target_lang = 'de'
+            target_lang_code = 'de'
+    
     # Find all PO files in the locales directory
-    locales_dir = "docs/locales/de/LC_MESSAGES"
+    locales_dir = f"docs/locales/{target_lang_code}/LC_MESSAGES"
     
     if not os.path.exists(locales_dir):
         print(f"Error: {locales_dir} not found!")
@@ -126,14 +145,26 @@ def main():
     print(f"Found {len(po_files)} PO files to translate\n")
     
     total_translated = 0
+    # Update translator for target language
+    global translator
+    if target_lang_code == 'de-CH':
+        # Swiss Standard German - use German and convert ß to ss
+        print(f"\nNote: Translating to Swiss Standard German (de-CH)")
+        print("Converting ß to ss for Swiss conventions\n")
+        target_lang = 'de'  # Use German as base
+    
+    translator = GoogleTranslator(source='en', target=target_lang)
+    
     for po_file in po_files:
         try:
-            count = translate_po_file(po_file, target_lang='de', source_lang='en')
+            count = translate_po_file(po_file, target_lang=target_lang, source_lang='en')
             total_translated += count
         except Exception as e:
             print(f"Error processing {po_file}: {e}\n")
     
     print(f"\n✓ All done! Translated {total_translated} strings across {len(po_files)} files")
+    if target_lang_code == 'de-CH':
+        print("\n✓ Swiss Standard German: All ß characters have been converted to ss.")
 
 if __name__ == "__main__":
     main()

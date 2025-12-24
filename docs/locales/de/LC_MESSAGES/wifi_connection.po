@@ -22,15 +22,15 @@ msgstr ""
 
 #: ../../wifi_connection.rst:2
 msgid "Connecting to the WiFi"
-msgstr "Mit dem WLAN verbinden"
+msgstr "Verbindung zum WLAN herstellen"
 
 #: ../../wifi_connection.rst:5
 msgid ""
 "Power on the Solar Flare Alert. After a few seconds, the LED will begin "
 "blinking."
 msgstr ""
-"Schalten Sie den Solar Flare Alert ein. Nach einigen Sekunden beginnt die "
-"LED zu blinken."
+"Schalten Sie den Sonneneruptionsalarm ein. Nach einigen Sekunden beginnt die"
+" LED zu blinken."
 
 #: ../../wifi_connection.rst:7
 msgid ""
@@ -38,42 +38,44 @@ msgid ""
 "connected to a previously saved WiFi network."
 msgstr ""
 "Wenn das Blinken **nach einigen Sekunden aufhört**, hat sich das Gerät "
-"erfolgreich mit einem zuvor gespeicherten WLAN verbunden."
+"erfolgreich mit einem zuvor gespeicherten WLAN-Netzwerk verbunden."
 
 #: ../../wifi_connection.rst:9
 msgid ""
 "If the LED **continues blinking**, open the WiFi settings on your phone or "
 "computer and connect to the access point named **SolarFlareAlert-Setup**."
 msgstr ""
-"Wenn die LED **weiterhin blinkt**, öffnen Sie die WLAN-Einstellungen Ihres "
-"Telefons oder Computers und verbinden Sie sich mit dem Zugangspunkt "
-"**SolarFlareAlert-Setup**."
+"Wenn die LED **weiterhin blinkt**, öffnen Sie die WLAN-Einstellungen auf "
+"Ihrem Telefon oder Computer und verbinden Sie sich mit dem Zugangspunkt "
+"namens **SolarFlareAlert-Setup**."
 
 #: ../../wifi_connection.rst:11
 msgid ""
 "Once connected, open a web browser and navigate to: ``http://192.168.4.1``"
 msgstr ""
-"Sobald Sie verbunden sind, öffnen Sie einen Webbrowser und rufen die Seite "
-"``http://192.168.4.1`` auf."
+"Sobald die Verbindung hergestellt ist, öffnen Sie einen Webbrowser und "
+"navigieren Sie zu: „http://192.168.4.1“."
 
 #: ../../wifi_connection.rst:13
 msgid "Select your home WiFi network from the list and enter the password."
 msgstr ""
-"Wählen Sie Ihr Heim-WLAN aus der Liste aus und geben Sie das Passwort ein."
+"Wählen Sie Ihr WLAN-Heimnetzwerk aus der Liste aus und geben Sie das "
+"Passwort ein."
 
 #: ../../wifi_connection.rst:14
 msgid ""
 "The device will reboot and attempt to join your network. When the LED turns "
 "solid yellow, the connection was successful."
 msgstr ""
-"Das Gerät wird neu gestartet und versucht, sich mit Ihrem Netzwerk zu "
-"verbinden. Wird die LED dauerhaft gelb, war die Verbindung erfolgreich."
+"Das Gerät wird neu gestartet und versucht, sich Ihrem Netzwerk "
+"anzuschliessen. Wenn die LED durchgehend gelb leuchtet, war die Verbindung "
+"erfolgreich."
 
 #: ../../wifi_connection.rst:16
 msgid ""
 "You're done. Reconnect your phone or computer to your normal WiFi. The Solar"
 " Flare Alert will now display the Sun’s current activity level."
 msgstr ""
-"Sie sind fertig. Verbinden Sie Ihr Telefon oder Ihren Computer wieder mit "
-"Ihrem normalen WLAN. Der Solar Flare Alert zeigt nun den aktuellen "
-"Aktivitätszustand der Sonne an."
+"Du bist fertig. Verbinden Sie Ihr Telefon oder Ihren Computer wieder mit "
+"Ihrem normalen WLAN. Der Sonneneruptionsalarm zeigt nun die aktuelle "
+"Aktivitätsstufe der Sonne an."

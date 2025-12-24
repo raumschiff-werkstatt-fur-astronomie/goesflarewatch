@@ -21,31 +21,31 @@ msgstr ""
 
 #: ../../source/white_breadboard.rst:2
 msgid "Instructions for the white breadboard"
-msgstr "Anleitung für das weiße Breadboard"
+msgstr "Anleitung für das weisse Steckbrett"
 
 #: ../../source/white_breadboard.rst:8
 msgid "You will need:"
-msgstr "Du benötigst:"
+msgstr "Sie benötigen:"
 
 #: ../../source/white_breadboard.rst:10
 msgid "A table tennis ball"
-msgstr "Einen Tischtennisball"
+msgstr "Ein Tischtennisball"
 
 #: ../../source/white_breadboard.rst:11
 msgid "One white breadboard"
-msgstr "Ein weißes Breadboard"
+msgstr "Ein weisses Steckbrett"
 
 #: ../../source/white_breadboard.rst:12
 msgid "Wires"
-msgstr "Kabel"
+msgstr "Drähte"
 
 #: ../../source/white_breadboard.rst:13
 msgid "One LED with an LED holder"
-msgstr "Eine LED mit LED-Halter"
+msgstr "Eine LED mit LED-Halterung"
 
 #: ../../source/white_breadboard.rst:14
 msgid "One wire holder"
-msgstr "Einen Draht-Halter"
+msgstr "Ein Drahthalter"
 
 #: ../../source/white_breadboard.rst:15
 msgid "One ESP32 development board"
@@ -53,11 +53,11 @@ msgstr "Ein ESP32-Entwicklungsboard"
 
 #: ../../source/white_breadboard.rst:16
 msgid "One 110 Ohm resistor"
-msgstr "Einen 110-Ohm-Widerstand"
+msgstr "Ein 110-Ohm-Widerstand"
 
 #: ../../source/white_breadboard.rst:19
 msgid "How to proceed:"
-msgstr "So gehst du vor:"
+msgstr "So gehen Sie vor:"
 
 #: ../../source/white_breadboard.rst:21
 msgid ""
@@ -77,16 +77,20 @@ msgid ""
 "test the setup using Thonny. For usage instructions, refer to the `Usage`__ "
 "section or continue reading."
 msgstr ""
-"#. Bohre ein kleines Loch in den Ball, groß genug für den LED-Halter. #. "
-"Verbinde an jedes LED-Bein ein Kabel. #. Setze den LED-Halter in das Loch "
-"des Balls. #. Montiere den Draht-Halter und befestige je ein LED-Kabel an "
-"beiden Enden. Achte darauf, dass das längere LED-Bein mit dem Massekabel "
-"verbunden ist. #. Setze den Draht-Halter aufs Breadboard. #. Finde Pin 27 "
-"auf dem ESP32-Board. #. Stecke das ESP32-Board ins Breadboard. #. Verbinde "
-"einen Masse-Pin des ESP32 mit der Masse-Leiste des Breadboards. #. Stecke "
-"den Widerstand in einen freien Platz. #. Verbinde Pin 27 des ESP32 mit einem"
-" Ende des Widerstands. #. Verbinde das andere Ende des Widerstands mit einer"
-" Seite des Halters. #. Verbinde die Masse-Leiste des Breadboards mit der "
-"anderen Seite des Halters. #. Stecke das ESP32 ein und teste den Aufbau mit "
-"Thonny. Hinweise zur Nutzung findest du im Abschnitt `Usage`__ oder lies "
-"weiter."
+"#. Nehmen Sie den Tennisball und bohren Sie ein kleines Loch hinein, das "
+"gross genug ist, um den LED-Halter zu montieren. #. Schliessen Sie an jedes "
+"Ende der LED einen Draht an. #. Stecken Sie den LED-Halter in das Loch im "
+"Tennisball. #. Montieren Sie den Drahthalter, wobei an jedem Ende ein Draht "
+"der LED befestigt ist. Stellen Sie sicher, dass das längere „Bein“ der LED "
+"mit dem Erdungskabel verbunden ist. #. Montieren Sie den Drahthalter auf dem"
+" Steckbrett. #. Suchen Sie Pin Nummer 27 auf der ESP32-Entwicklungsplatine. "
+"#. Stecken Sie das ESP32-Entwicklungsboard in das Steckbrett. #. Verbinden "
+"Sie einen Draht vom Erdungsstift der ESP32-Platine mit der Erdungsleitung "
+"auf dem Steckbrett. #. Setzen Sie den Widerstand in eine freie Stelle auf "
+"dem Steckbrett ein. #. Verbinden Sie einen Draht von Pin 27 der "
+"ESP32-Platine mit einem Ende des Widerstands. #. Verbinden Sie einen "
+"weiteren Draht vom anderen Ende des Widerstands mit einer Seite des "
+"Drahthalters. #. Verbinden Sie ein Kabel von der Erdungsleitung auf dem "
+"Steckbrett mit der anderen Seite des Kabelhalters. #. Schliessen Sie das "
+"ESP32-Entwicklungsboard an und testen Sie das Setup mit Thonny. Anweisungen "
+"zur Verwendung finden Sie im Abschnitt „Verwendung“__ oder lesen Sie weiter."

@@ -36,7 +36,7 @@ msgid ""
 "It regularly fetches the latest solar X-ray flux measurements from a NOAA "
 "GOES satellite"
 msgstr ""
-"Es ruft regelmäßig die neuesten Messungen des solaren Röntgenflusses von "
+"Es ruft regelmässig die neuesten Messungen des solaren Röntgenflusses von "
 "einem NOAA GOES-Satelliten ab"
 
 #: ../../overview.rst:6
@@ -85,4 +85,4 @@ msgstr ""
 
 #: ../../overview.rst:20
 msgid "Have fun!"
-msgstr "Viel Spaß!"
+msgstr "Viel Spass!"

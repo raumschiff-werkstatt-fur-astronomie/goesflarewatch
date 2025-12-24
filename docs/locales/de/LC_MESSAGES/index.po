@@ -25,7 +25,7 @@ msgstr "Inhalt"
 
 #: ../../index.rst:2
 msgid "Welcome to the Solar Flare Alert Documentation!"
-msgstr "Willkommen bei der Dokumentation der Solar Flare Alert Lampe!"
+msgstr "Willkommen zur Dokumentation zur Sonneneruptionswarnung!"
 
 #: ../../index.rst:4
 msgid ""
@@ -35,10 +35,11 @@ msgid ""
 "operations, GPS systems, radio communications, and even power grids on "
 "Earth."
 msgstr ""
-"Die **Solar Flare Alert** ist ein kompaktes, WLAN-fähiges Gerät, das dich in"
-" Echtzeit über starke Sonnenflares informiert. Sonnenflares sind intensive "
-"Strahlungsausbrüche der Sonne, die Satellitenbetrieb, GPS, Funkkommunikation"
-" und sogar Stromnetze auf der Erde stören können."
+"Der **Solar Flare Alert** ist ein kompaktes, WLAN-fähiges Gerät, das "
+"Benutzer in Echtzeit über erhebliche Sonneneruptionsaktivitäten informieren "
+"soll. Sonneneruptionen sind intensive Strahlungsausbrüche der Sonne, die den"
+" Satellitenbetrieb, GPS-Systeme, die Funkkommunikation und sogar die "
+"Stromnetze auf der Erde stören können."
 
 #: ../../index.rst:8
 msgid ""
@@ -48,10 +49,11 @@ msgid ""
 "providing an immediate, ambient indication without the need to check apps or"
 " websites."
 msgstr ""
-"Das Warnsystem überwacht den solaren Röntgenfluss eines Satelliten und setzt"
-" die Messwerte in eine LED-Helligkeit um. Die LED passt ihre Helligkeit oder"
-" Blinkfrequenz an die aktuelle Stärke der Sonnenflares an – so erhältst du "
-"sofort und ohne Apps oder Webseiten einen Hinweis."
+"Dieses Warnsystem überwacht die von einem Raumschiff bereitgestellten Daten "
+"zum solaren Röntgenfluss und wandelt diese Daten in eine LED-Helligkeit um. "
+"Die LED ändert ihre Helligkeit oder blinkt abhängig von der aktuellen "
+"Intensität der Sonneneruptionsaktivität – und liefert so eine sofortige "
+"Umgebungsanzeige, ohne dass Apps oder Websites überprüft werden müssen."
 
 #: ../../index.rst:13
 msgid ""
@@ -59,8 +61,9 @@ msgid ""
 " version. Check which one you have an jump to the corresponding assembling "
 "instruction."
 msgstr ""
-"Es gibt zwei Versionen der Solar Flare Alert: eine grüne und eine weiße. "
-"Schau nach, welche du hast, und springe zur passenden Aufbauanleitung."
+"Es gibt zwei Versionen des Solar Flare Alert: eine grüne Version und eine "
+"weisse Version. Schauen Sie nach, welches Sie haben, um zur entsprechenden "
+"Montageanleitung zu gelangen."
 
 #: ../../index.rst:16
 msgid "I have the :doc:`green version <green_version>`"
@@ -68,26 +71,26 @@ msgstr "Ich habe die :doc:`grüne Version <green_version>`"
 
 #: ../../index.rst:17
 msgid "I have the :doc:`white version <white_version>`"
-msgstr "Ich habe die :doc:`weiße Version <white_version>`"
+msgstr "Ich habe die :doc:`weisse Version <white_version>`"
 
 #: ../../overview.rst:2
 msgid "How It Works"
-msgstr "Funktionsweise"
+msgstr "Wie es funktioniert"
 
 #: ../../overview.rst:4
 msgid ""
 "The device uses a small computer chip connected to your local WiFi network."
 msgstr ""
-"Das Gerät nutzt einen kleinen Computerchip, der mit deinem lokalen WLAN "
-"verbunden ist."
+"Das Gerät verwendet einen kleinen Computerchip, der mit Ihrem lokalen WLAN-"
+"Netzwerk verbunden ist."
 
 #: ../../overview.rst:5
 msgid ""
 "It regularly fetches the latest solar X-ray flux measurements from a NOAA "
 "GOES satellite"
 msgstr ""
-"Es ruft regelmäßig die aktuellen solaren Röntgenfluss-Messungen eines NOAA-"
-"GOES-Satelliten ab."
+"Es ruft regelmässig die neuesten Messungen des solaren Röntgenflusses von "
+"einem NOAA GOES-Satelliten ab"
 
 #: ../../overview.rst:6
 msgid ""
@@ -95,10 +98,9 @@ msgid ""
 "activity** → dim or steady light - **Low-level activity** → slow blink - "
 "**High activity** → fast blinking"
 msgstr ""
-"Das Gerät interpretiert die Daten und zeigt sie über eine einfache LED an:\n"
-"- **Keine Aktivität** → gedimmtes oder konstantes Licht\n"
-"- **Geringe Aktivität** → langsames Blinken\n"
-"- **Hohe Aktivität** → schnelles Blinken"
+"Das Gerät interpretiert die Daten und verwendet eine einfache LED zur "
+"Anzeige: - **Keine Aktivität** → schwaches oder konstantes Licht - **Geringe"
+" Aktivität** → langsames Blinken - **Hohe Aktivität** → schnelles Blinken"
 
 #: ../../overview.rst:10
 msgid ""
@@ -106,7 +108,7 @@ msgid ""
 "connect the device to any home network."
 msgstr ""
 "Die Konfiguration erfolgt über ein integriertes WLAN-Setup-Portal, sodass "
-"sich das Gerät leicht mit jedem Heimnetz verbinden lässt."
+"das Gerät problemlos mit jedem Heimnetzwerk verbunden werden kann."
 
 #: ../../overview.rst:12
 msgid ""
@@ -114,29 +116,29 @@ msgid ""
 " astronomy educators, radio operators, scientists, or anyone interested in "
 "real-time space weather awareness."
 msgstr ""
-"Damit ist die Solar Flare Alert ein praktisches, freihändiges "
-"Überwachungstool für Astronomie-Lehrende, Funkamateure, Wissenschaftler oder"
-" alle, die sich für Weltraumwetter in Echtzeit interessieren."
+"Dies macht den Solar Flare Alert zu einem praktischen, freihändigen "
+"Überwachungstool für Astronomiepädagogen, Funker, Wissenschaftler und alle, "
+"die sich für Echtzeit-Erkennung des Weltraumwetters interessieren."
 
 #: ../../overview.rst:15
 msgid ""
 "OK. And now, you might be interested in learning more about solar flares? "
 ":doc:`Here it goes then <introduction>`."
 msgstr ""
-"Okay. Möchtest du mehr über Sonnenflares erfahren? :doc:`Hier geht es weiter"
-" <introduction>`."
+"OK. Und jetzt interessieren Sie sich vielleicht dafür, mehr über "
+"Sonneneruptionen zu erfahren? :doc:`Hier geht es dann <Einführung>`."
 
 #: ../../overview.rst:18
 msgid ""
 "Do you know that you can also contribute to the development of the solar "
 "flare alert and the"
 msgstr ""
-"Wusstest du, dass du auch zur Weiterentwicklung der Solar Flare Alert "
-"beitragen kannst?"
+"Wussten Sie, dass Sie auch zur Entwicklung des Sonneneruptionsalarms "
+"beitragen können?"
 
 #: ../../overview.rst:20
 msgid "Have fun!"
-msgstr "Viel Spaß!"
+msgstr "Viel Spass!"
 
 #: ../../index.rst:33
 msgid "Indices and tables"
@@ -148,4 +150,4 @@ msgstr ":ref:`genindex`"
 
 #: ../../index.rst:36
 msgid ":ref:`search`"
-msgstr ":ref:`search`"
+msgstr ":ref:`Suche`"
