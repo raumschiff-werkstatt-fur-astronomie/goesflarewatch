@@ -6,17 +6,17 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Solar Flare Alert Lamp \n"
+"Project-Id-Version: Solar Flare Alert Lamp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-29 06:47+0100\n"
 "PO-Revision-Date: 2025-12-23 00:00+0000\n"
 "Last-Translator: Auto-translated by assistant\n"
-"Language: de\n"
 "Language-Team: de <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: ../../green_version.rst:2
@@ -37,9 +37,11 @@ msgstr "Drahtring in die Steckleiste eingesetzt"
 
 #: ../../green_version.rst:13
 msgid ""
-"1. Insert the wire ring in the center of the socket strip and insert the "
-"LED into the ping-pong ball."
-msgstr "1. Setze den Drahtring in die Mitte der Steckleiste und die LED in den Tischtennisball."
+"1. Insert the wire ring in the center of the socket strip and insert the LED"
+" into the ping-pong ball."
+msgstr ""
+"1. Setze den Drahtring in die Mitte der Steckleiste und die LED in den "
+"Tischtennisball."
 
 #: ../../green_version.rst:16
 msgid "LED placed inside ping-pong ball"
@@ -47,13 +49,11 @@ msgstr "LED im Tischtennisball platziert"
 
 #: ../../green_version.rst:21
 msgid ""
-"Plug the cables into the outer plugs of the socket strip. Ensure the "
-"**black cable is on the left side** when viewed from the perspective of "
-"the ESP32."
+"Plug the cables into the outer plugs of the socket strip. Ensure the **black"
+" cable is on the left side** when viewed from the perspective of the ESP32."
 msgstr ""
-"Stecke die Kabel in die äußeren Buchsen der Steckleiste. Achte darauf, "
-"dass das **schwarze Kabel links** liegt, wenn du aus Sicht des ESP32 "
-"schaust."
+"Stecke die Kabel in die äußeren Buchsen der Steckleiste. Achte darauf, dass "
+"das **schwarze Kabel links** liegt, wenn du aus Sicht des ESP32 schaust."
 
 #: ../../green_version.rst:24
 msgid "Cables correctly inserted in socket strip"
@@ -61,9 +61,10 @@ msgstr "Kabel korrekt in die Steckleiste gesteckt"
 
 #: ../../green_version.rst:29
 msgid ""
-"Make sure the black cable goes to the left side, marked with a black "
-"marker"
-msgstr "Stelle sicher, dass das schwarze Kabel nach links geht (mit schwarzer Markierung)."
+"Make sure the black cable goes to the left side, marked with a black marker"
+msgstr ""
+"Stelle sicher, dass das schwarze Kabel nach links geht (mit schwarzer "
+"Markierung)."
 
 #: ../../green_version.rst:31
 msgid "USB cable plugged in"
@@ -79,8 +80,8 @@ msgstr "Vollständig aufgebautes Solar Flare Alert Gerät"
 
 #: ../../green_version.rst:43
 msgid ""
-"Your solar flare alert is now physically assembled and ready to connect "
-"to the WiFi."
+"Your solar flare alert is now physically assembled and ready to connect to "
+"the WiFi."
 msgstr "Deine Solar Flare Alert ist jetzt aufgebaut und bereit fürs WLAN."
 
 #: ../../wifi_connection.rst:2
@@ -91,27 +92,32 @@ msgstr "Mit dem WLAN verbinden"
 msgid ""
 "Power on the Solar Flare Alert. After a few seconds, the LED will begin "
 "blinking."
-msgstr "Schalte die Solar Flare Alert ein. Nach einigen Sekunden beginnt die LED zu blinken."
+msgstr ""
+"Schalte die Solar Flare Alert ein. Nach einigen Sekunden beginnt die LED zu "
+"blinken."
 
 #: ../../wifi_connection.rst:6
 msgid ""
-"If the blinking **stops after a few seconds**, the device has "
-"successfully connected to a previously saved WiFi network."
-msgstr "Wenn das Blinken **nach einigen Sekunden stoppt**, hat sich das Gerät mit einem gespeicherten WLAN verbunden."
+"If the blinking **stops after a few seconds**, the device has successfully "
+"connected to a previously saved WiFi network."
+msgstr ""
+"Wenn das Blinken **nach einigen Sekunden stoppt**, hat sich das Gerät mit "
+"einem gespeicherten WLAN verbunden."
 
 #: ../../wifi_connection.rst:8
 msgid ""
-"If the LED **continues blinking**, open the WiFi settings on your phone "
-"or computer and connect to the access point named **SolarFlareAlert-"
-"Setup**."
+"If the LED **continues blinking**, open the WiFi settings on your phone or "
+"computer and connect to the access point named **SolarFlareAlert-Setup**."
 msgstr ""
-"Wenn die LED **weiter blinkt**, öffne die WLAN-Einstellungen deines "
-"Handys oder Computers und verbinde dich mit dem Access Point "
-"**SolarFlareAlert-Setup**."
+"Wenn die LED **weiter blinkt**, öffne die WLAN-Einstellungen deines Handys "
+"oder Computers und verbinde dich mit dem Access Point **SolarFlareAlert-"
+"Setup**."
 
 #: ../../wifi_connection.rst:10
-msgid "Once connected, open a web browser and navigate to: ``http://192.168.4.1``"
-msgstr "Sobald verbunden, öffne einen Browser und gehe zu: ``http://192.168.4.1``"
+msgid ""
+"Once connected, open a web browser and navigate to: ``http://192.168.4.1``"
+msgstr ""
+"Sobald verbunden, öffne einen Browser und gehe zu: ``http://192.168.4.1``"
 
 #: ../../wifi_connection.rst:12
 msgid "Select your home WiFi network from the list and enter the password."
@@ -119,15 +125,16 @@ msgstr "Wähle dein Heim-WLAN aus der Liste und gib das Passwort ein."
 
 #: ../../wifi_connection.rst:14
 msgid ""
-"The device will reboot and attempt to join your network. When the LED "
-"turns solid green, the connection was successful."
-msgstr "Das Gerät startet neu und versucht, deinem Netzwerk beizutreten. Leuchtet die LED dauerhaft grün, war die Verbindung erfolgreich."
+"The device will reboot and attempt to join your network. When the LED turns "
+"solid green, the connection was successful."
+msgstr ""
+"Das Gerät startet neu und versucht, deinem Netzwerk beizutreten. Leuchtet "
+"die LED dauerhaft grün, war die Verbindung erfolgreich."
 
 #: ../../wifi_connection.rst:16
 msgid ""
-"You're done. Reconnect your phone or computer to your normal WiFi. The "
-"Solar Flare Alert will now display the Sun’s current activity level."
+"You're done. Reconnect your phone or computer to your normal WiFi. The Solar"
+" Flare Alert will now display the Sun’s current activity level."
 msgstr ""
-"Fertig. Verbinde dein Gerät wieder mit deinem normalen WLAN. Die Solar "
-"Flare Alert zeigt nun die aktuelle Aktivität der Sonne."
-
+"Fertig. Verbinde dein Gerät wieder mit deinem normalen WLAN. Die Solar Flare"
+" Alert zeigt nun die aktuelle Aktivität der Sonne."

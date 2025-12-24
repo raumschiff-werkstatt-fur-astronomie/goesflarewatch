@@ -6,17 +6,17 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Solar Flare Alert Lamp \n"
+"Project-Id-Version: Solar Flare Alert Lamp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-29 06:47+0100\n"
 "PO-Revision-Date: 2025-12-23 00:00+0000\n"
 "Last-Translator: Auto-translated by assistant\n"
-"Language: de\n"
 "Language-Team: de <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.17.0\n"
 
 #: ../../usage.rst:2
@@ -37,9 +37,11 @@ msgstr "Drahtring in die Steckleiste eingesetzt"
 
 #: ../../usage.rst:13
 msgid ""
-"1. Insert the wire ring in the center of the socket strip and insert the "
-"LED into the ping-pong ball."
-msgstr "1. Setze den Drahtring in die Mitte der Steckleiste und die LED in den Tischtennisball."
+"1. Insert the wire ring in the center of the socket strip and insert the LED"
+" into the ping-pong ball."
+msgstr ""
+"1. Setze den Drahtring in die Mitte der Steckleiste und die LED in den "
+"Tischtennisball."
 
 #: ../../usage.rst:16
 msgid "LED placed inside ping-pong ball"
@@ -47,13 +49,11 @@ msgstr "LED im Tischtennisball platziert"
 
 #: ../../usage.rst:21
 msgid ""
-"Plug the cables into the outer plugs of the socket strip. Ensure the "
-"**black cable is on the left side** when viewed from the perspective of "
-"the ESP32."
+"Plug the cables into the outer plugs of the socket strip. Ensure the **black"
+" cable is on the left side** when viewed from the perspective of the ESP32."
 msgstr ""
-"Stecke die Kabel in die äußeren Buchsen der Steckleiste. Achte darauf, "
-"dass das **schwarze Kabel links** liegt, wenn du aus Sicht des ESP32 "
-"schaust."
+"Stecke die Kabel in die äußeren Buchsen der Steckleiste. Achte darauf, dass "
+"das **schwarze Kabel links** liegt, wenn du aus Sicht des ESP32 schaust."
 
 #: ../../usage.rst:24
 msgid "Cables correctly inserted in socket strip"
@@ -61,9 +61,10 @@ msgstr "Kabel korrekt in die Steckleiste gesteckt"
 
 #: ../../usage.rst:29
 msgid ""
-"Make sure the black cable goes to the left side, marked with a black "
-"marker"
-msgstr "Stelle sicher, dass das schwarze Kabel nach links geht (mit schwarzer Markierung)."
+"Make sure the black cable goes to the left side, marked with a black marker"
+msgstr ""
+"Stelle sicher, dass das schwarze Kabel nach links geht (mit schwarzer "
+"Markierung)."
 
 #: ../../usage.rst:31
 msgid "USB cable plugged in"
@@ -79,8 +80,8 @@ msgstr "Vollständig aufgebautes Solar Flare Alert Gerät"
 
 #: ../../usage.rst:43
 msgid ""
-"Your solar flare alert is now physically assembled and ready to connect "
-"to the WiFi."
+"Your solar flare alert is now physically assembled and ready to connect to "
+"the WiFi."
 msgstr "Deine Solar Flare Alert ist jetzt aufgebaut und bereit fürs WLAN."
 
 #: ../../usage.rst:46
@@ -101,8 +102,8 @@ msgstr ""
 
 #: ../../usage.rst:52
 msgid ""
-"If it **keeps blinking**, open the WiFi settings on your phone or "
-"computer and connect to the access point named **WifiMgr**."
+"If it **keeps blinking**, open the WiFi settings on your phone or computer "
+"and connect to the access point named **WifiMgr**."
 msgstr ""
 "Wenn es **weiter blinkt**, öffne die WLAN-Einstellungen auf deinem Handy "
 "oder Computer und verbinde dich mit dem Access Point **WifiMgr**."
@@ -120,6 +121,5 @@ msgid ""
 "You're done! Reconnect your device to your normal WiFi. The solar flare "
 "alert will now show the Sun’s activity level."
 msgstr ""
-"Fertig! Verbinde dein Gerät wieder mit deinem normalen WLAN. Die Solar "
-"Flare Alert zeigt jetzt den Aktivitätslevel der Sonne."
-
+"Fertig! Verbinde dein Gerät wieder mit deinem normalen WLAN. Die Solar Flare"
+" Alert zeigt jetzt den Aktivitätslevel der Sonne."
