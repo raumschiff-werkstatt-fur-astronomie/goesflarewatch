@@ -99,6 +99,7 @@ msgstr ""
 "freien Steckplatz unterhalb der LED-Halterung."
 
 #: ../../white_version.rst:66
+#, fuzzy
 msgid ""
 "7. Connect a wire to each leg of the LED in the lamp bulb. Remember the "
 "color of the cables that connects to the short leg LED."

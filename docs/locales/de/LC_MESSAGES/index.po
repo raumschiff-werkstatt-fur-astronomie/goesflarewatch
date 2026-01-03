@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Solar Flare Alert Lamp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-24 10:06+0100\n"
-"PO-Revision-Date: 2025-12-23 00:00+0000\n"
+"POT-Creation-Date: 2026-01-01 12:06+0100\n"
+"PO-Revision-Date: 2026-01-01 11:28+0100\n"
 "Last-Translator: Auto-translated by assistant\n"
 "Language-Team: de <LL@li.org>\n"
 "Language: de\n"
@@ -19,21 +19,22 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.17.0\n"
 
-#: ../../index.rst:26
+#: ../../index.rst:28
 msgid "Contents"
 msgstr "Inhalt"
 
 #: ../../index.rst:2
-msgid "Welcome to the Solar Flare Alert Documentation!"
-msgstr "Willkommen zur Dokumentation zur Sonneneruptionswarnung!"
+#, fuzzy
+msgid "Welcome to the Solar Flare Alert Lamp User Guide!"
+msgstr "Willkommen zur Dokumentation zur Solar Flare Alert!"
 
 #: ../../index.rst:4
+#, fuzzy
 msgid ""
-"The **Solar Flare Alert** is a compact, WiFi-enabled device designed to "
-"notify users in real-time of significant solar flare activity. Solar flares "
-"are intense bursts of radiation from the sun that can disrupt satellite "
-"operations, GPS systems, radio communications, and even power grids on "
-"Earth."
+"The **Solar Flare Alert Lamp** is a compact, WiFi-enabled device designed to"
+" notify users in real-time of solar flare activity. Solar flares are intense"
+" bursts of radiation from the sun that can disrupt satellite operations, GPS"
+" systems, radio communications, and even power grids on Earth."
 msgstr ""
 "Der **Solar Flare Alert** ist ein kompaktes, WLAN-fähiges Gerät, das "
 "Benutzer in Echtzeit über erhebliche Sonneneruptionsaktivitäten informieren "
@@ -41,13 +42,14 @@ msgstr ""
 " Satellitenbetrieb, GPS-Systeme, die Funkkommunikation und sogar die "
 "Stromnetze auf der Erde stören können."
 
-#: ../../index.rst:8
+#: ../../index.rst:9
+#, fuzzy
 msgid ""
 "This alert system monitors solar X-ray flux data provided by a spacecraft "
-"and translates that data into an LED brightness. The LED changes brightness "
-"or flashes depending on the current intensity of solar flare activity — "
-"providing an immediate, ambient indication without the need to check apps or"
-" websites."
+"and translates that data into an brightness of the lamp. The lamp changes "
+"brightness or flashes depending on the current intensity of solar flare "
+"activity — providing an immediate, ambient indication without the need to "
+"check apps or websites."
 msgstr ""
 "Dieses Warnsystem überwacht die von einem Raumschiff bereitgestellten Daten "
 "zum solaren Röntgenfluss und wandelt diese Daten in eine LED-Helligkeit um. "
@@ -55,12 +57,13 @@ msgstr ""
 "Intensität der Sonneneruptionsaktivität – und liefert so eine sofortige "
 "Umgebungsanzeige, ohne dass Apps oder Websites überprüft werden müssen."
 
-#: ../../index.rst:13
+#: ../../index.rst:15
+#, fuzzy
 msgid ""
 "There are several versions of the Solar Flare Alert: the white version is "
 "the standard one; it can be assembled out of the box. The extended white "
 "version is the same, but needs to be built from scratch and is used usually "
-"in dedicatedworkshops. The green version is a bit more complex, it needs "
+"in dedicated workshops. The green version is a bit more complex, it needs "
 "components to be soldered on the breadboard."
 msgstr ""
 "Es gibt mehrere Versionen des Solar Flare Alert: Die weisse Version ist die "
@@ -70,7 +73,7 @@ msgstr ""
 "ist etwas komplexer, sie erfordert Komponenten, die auf dem Steckbrett "
 "gelötet werden müssen."
 
-#: ../../index.rst:18
+#: ../../index.rst:20
 msgid ""
 "Check which one you have an jump to the corresponding assembling "
 "instruction."
@@ -78,16 +81,16 @@ msgstr ""
 "Schauen Sie nach, welches Sie haben, um zur entsprechenden Montageanleitung "
 "zu gelangen."
 
-#: ../../index.rst:20
+#: ../../index.rst:22
 msgid "I have the :doc:`standard white version <white_version>`"
 msgstr "Ich habe die :doc:`Standard-Weissversion <white_version>`"
 
-#: ../../index.rst:21
+#: ../../index.rst:23
 msgid "I have the :doc:`extended white version <extended_white_version>`"
 msgstr ""
 "Ich habe die :doc:`erweiterte weisse Version <extended_white_version>`"
 
-#: ../../index.rst:22
+#: ../../index.rst:24
 msgid "I have the :doc:`green version <green_version>`"
 msgstr "Ich habe die :doc:`grüne Version <green_version>`"
 
@@ -168,15 +171,15 @@ msgstr ""
 msgid "Have fun!"
 msgstr "Viel Spass!"
 
-#: ../../index.rst:39
+#: ../../index.rst:41
 msgid "Indices and tables"
 msgstr "Indizes und Tabellen"
 
-#: ../../index.rst:41
+#: ../../index.rst:43
 msgid ":ref:`genindex`"
 msgstr ":ref:`genindex`"
 
-#: ../../index.rst:42
+#: ../../index.rst:44
 msgid ":ref:`search`"
 msgstr ":ref:`Suche`"
 

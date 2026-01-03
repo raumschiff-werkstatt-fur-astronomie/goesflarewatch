@@ -74,3 +74,13 @@ autodoc_mock_imports = ["machine", 'network', 'ujson', 'ure', 'urequests', 'micr
 language = 'en'
 locale_dirs = ['locales/']
 gettext_compact = False
+
+# -- Options for LaTeX output -------------------------------------------------
+# Use fonts that are available in BasicTeX
+latex_elements = {
+    'preamble': r'''
+\usepackage{times}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+''',
+}

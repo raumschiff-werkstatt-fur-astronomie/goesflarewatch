@@ -72,8 +72,12 @@ def translate_text(text, target_lang='de', source_lang='en', is_swiss=False):
         print(f"    Warning: Translation error: {e}")
         return ""
 
-def translate_po_file(po_file_path, target_lang='de', source_lang='en'):
-    """Translate a PO file from English to target language."""
+def translate_po_file(po_file_path, target_lang='de', source_lang='en', translate_fuzzy=False):
+    """Translate a PO file from English to target language.
+    
+    Preserves existing translations and fuzzy entries (unless translate_fuzzy=True).
+    Only translates completely untranslated entries.
+    """
     print(f"\nTranslating {po_file_path}...")
     
     # Load the PO file
@@ -82,18 +86,36 @@ def translate_po_file(po_file_path, target_lang='de', source_lang='en'):
     # Translate each entry
     translated_count = 0
     skipped_count = 0
+    fuzzy_count = 0
+    preserved_count = 0
     
     for entry in po:
-        # Skip if already translated
-        if entry.msgstr and entry.msgstr.strip():
-            skipped_count += 1
-            continue
-            
         # Skip if no source text
         if not entry.msgid or not entry.msgid.strip():
             continue
         
-        # Translate the message
+        # Check if entry is fuzzy (needs manual review)
+        is_fuzzy = 'fuzzy' in entry.flags
+        
+        # Skip if already translated (preserve existing translations)
+        if entry.msgstr and entry.msgstr.strip():
+            if is_fuzzy:
+                fuzzy_count += 1
+                # Only translate fuzzy if explicitly requested
+                if translate_fuzzy:
+                    is_swiss = 'de-CH' in po_file_path
+                    translated = translate_text(entry.msgid, target_lang, source_lang, is_swiss=is_swiss)
+                    if translated:
+                        entry.msgstr = translated
+                        entry.flags.discard('fuzzy')  # Remove fuzzy flag after translation
+                        translated_count += 1
+                else:
+                    preserved_count += 1
+            else:
+                skipped_count += 1
+            continue
+        
+        # Translate untranslated entries
         is_swiss = 'de-CH' in po_file_path
         translated = translate_text(entry.msgid, target_lang, source_lang, is_swiss=is_swiss)
         if translated:
@@ -106,8 +128,17 @@ def translate_po_file(po_file_path, target_lang='de', source_lang='en'):
     
     # Save the translated PO file
     po.save(po_file_path)
-    print(f"✓ Completed! Translated {translated_count} new strings, {skipped_count} already had translations\n")
-    return translated_count
+    
+    status_msg = f"✓ Completed! Translated {translated_count} new strings"
+    if skipped_count > 0:
+        status_msg += f", {skipped_count} already translated"
+    if fuzzy_count > 0:
+        status_msg += f", {fuzzy_count} fuzzy entries preserved for review"
+    if preserved_count > 0:
+        status_msg += f" ({preserved_count} kept as-is)"
+    print(status_msg + "\n")
+    
+    return translated_count, fuzzy_count
 
 def main():
     """Main function to translate all PO files."""
@@ -115,18 +146,23 @@ def main():
     import sys
     target_lang = 'de'  # Default
     target_lang_code = 'de'
+    translate_fuzzy = False
     
+    # Parse command line arguments
     if len(sys.argv) > 1:
-        lang_arg = sys.argv[1].lower()
-        if lang_arg in ['de-ch', 'ch', 'swiss', 'swiss-german']:
-            target_lang = 'de'
-            target_lang_code = 'de-CH'
-        elif lang_arg in ['de', 'german']:
-            target_lang = 'de'
-            target_lang_code = 'de'
+        for arg in sys.argv[1:]:
+            arg_lower = arg.lower()
+            if arg_lower in ['de-ch', 'ch', 'swiss', 'swiss-german']:
+                target_lang = 'de'
+                target_lang_code = 'de-CH'
+            elif arg_lower in ['de', 'german']:
+                target_lang = 'de'
+                target_lang_code = 'de'
+            elif arg_lower in ['--translate-fuzzy', '-f']:
+                translate_fuzzy = True
     
     # Find all PO files in the locales directory
-    locales_dir = f"docs/locales/{target_lang_code}/LC_MESSAGES"
+    locales_dir = f"locales/{target_lang_code}/LC_MESSAGES"
     
     if not os.path.exists(locales_dir):
         print(f"Error: {locales_dir} not found!")
@@ -135,16 +171,22 @@ def main():
     po_files = []
     for root, dirs, files in os.walk(locales_dir):
         for file in files:
-            if file.endswith('.po'):
+            if file.endswith('.po') and not file.endswith('.po~'):
                 po_files.append(os.path.join(root, file))
     
     if not po_files:
         print(f"No PO files found in {locales_dir}")
         return
     
-    print(f"Found {len(po_files)} PO files to translate\n")
+    print(f"Found {len(po_files)} PO files to translate")
+    if translate_fuzzy:
+        print("⚠ Mode: Will also translate fuzzy entries (existing translations may be overwritten)")
+    else:
+        print("✓ Mode: Preserving existing translations and fuzzy entries for manual review")
+    print()
     
     total_translated = 0
+    total_fuzzy = 0
     # Update translator for target language
     global translator
     if target_lang_code == 'de-CH':
@@ -157,12 +199,15 @@ def main():
     
     for po_file in po_files:
         try:
-            count = translate_po_file(po_file, target_lang=target_lang, source_lang='en')
+            count, fuzzy = translate_po_file(po_file, target_lang=target_lang, source_lang='en', translate_fuzzy=translate_fuzzy)
             total_translated += count
+            total_fuzzy += fuzzy
         except Exception as e:
             print(f"Error processing {po_file}: {e}\n")
     
     print(f"\n✓ All done! Translated {total_translated} strings across {len(po_files)} files")
+    if total_fuzzy > 0:
+        print(f"📝 {total_fuzzy} fuzzy entries preserved - review them in Poedit")
     if target_lang_code == 'de-CH':
         print("\n✓ Swiss Standard German: All ß characters have been converted to ss.")
 

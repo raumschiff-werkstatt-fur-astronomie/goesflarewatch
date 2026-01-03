@@ -32,6 +32,6 @@ please see these instructions.
 .. toctree::
    :maxdepth: 3
 
-   source/mp_install_esp32
-   source/white_breadboard
-   source/green_breadboard
+   mp_install_esp32
+   white_breadboard
+   green_breadboard
