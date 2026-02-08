@@ -1,5 +1,5 @@
-How to use the Solar Flare Alert - Extended White Version
-=========================================================
+How to use the Solar Flare Alert - Workshop Version
+====================================================
 
 .. figure:: images/img.png
    :width: 400

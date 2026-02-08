@@ -33,7 +33,7 @@ msgid "This alert system monitors solar X-ray flux data provided by a spacecraft
 msgstr ""
 
 #: ../../index.rst:13
-msgid "There are several versions of the Solar Flare Alert: the white version is the standard one; it can be assembled out of the box. The extended white version is the same, but needs to be built from scratch and is used usually in dedicatedworkshops. The green version is a bit more complex, it needs components to be soldered on the breadboard."
+msgid "There are several versions of the Solar Flare Alert Lamp: the white version is the standard one; it can be assembled out of the box. The workshop version is the same, but needs a bit more assembly skills and willingness to tinker. It is usually put into practice in dedicated workshops. The green version is a bit more complex, it needs components to be soldered on the breadboard."
 msgstr ""
 
 #: ../../index.rst:18
@@ -45,7 +45,7 @@ msgid "I have the :doc:`standard white version <white_version>`"
 msgstr ""
 
 #: ../../index.rst:21
-msgid "I have the :doc:`extended white version <extended_white_version>`"
+msgid "I have the :doc:`workshop version <workshop_version>`"
 msgstr ""
 
 #: ../../index.rst:22

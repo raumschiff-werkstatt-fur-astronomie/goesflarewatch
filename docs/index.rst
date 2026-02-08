@@ -13,15 +13,15 @@ depending on the current intensity of solar flare activity — providing an imme
 without the need to check apps or websites.
 
 There are several versions of the Solar Flare Alert Lamp: the white version is the standard one; 
-it can be assembled out of the box. The extended white version is the same, 
-but needs a bit more assembly skills and willingness to tinker. 
+it can be assembled out of the box. The workshop version is the same,
+but needs a bit more assembly skills and willingness to tinker.
 It is usually put into practice in dedicated workshops. 
 The green version is a bit more complex, it needs components to be soldered on the breadboard.
 
 Check which one you have an jump to the corresponding assembling instruction.
 
 * I have the :doc:`standard white version <white_version>`
-* I have the :doc:`extended white version <extended_white_version>`
+* I have the :doc:`workshop version <workshop_version>`
 * I have the :doc:`green version <green_version>`
 
 .. include::  overview.rst
@@ -31,7 +31,7 @@ Check which one you have an jump to the corresponding assembling instruction.
    :caption: Contents
 
    white_version
-   extended_white_version
+   workshop_version
    green_version
    overview
    introduction

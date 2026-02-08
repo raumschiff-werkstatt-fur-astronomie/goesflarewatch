@@ -17,59 +17,59 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../../extended_white_version.rst:2
-msgid "How to use the Solar Flare Alert - Extended White Version"
-msgstr "So verwenden Sie den Solar Flare Alert – Erweiterte weisse Version"
+#: ../../workshop_version.rst:2
+msgid "How to use the Solar Flare Alert - Workshop Version"
+msgstr "So verwenden Sie den Solar Flare Alert – Workshop-Version"
 
-#: ../../extended_white_version.rst:7
+#: ../../workshop_version.rst:7
 msgid "What you have in your kit:"
 msgstr "Was Sie in Ihrem Kit haben:"
 
-#: ../../extended_white_version.rst:9
+#: ../../workshop_version.rst:9
 msgid "A table tennis ball"
 msgstr "Ein Tischtennisball"
 
-#: ../../extended_white_version.rst:13
+#: ../../workshop_version.rst:13
 msgid "One white breadboard"
 msgstr "Ein weisses Steckbrett"
 
-#: ../../extended_white_version.rst:17
+#: ../../workshop_version.rst:17
 msgid "Wires"
 msgstr "Drähte"
 
-#: ../../extended_white_version.rst:21
+#: ../../workshop_version.rst:21
 msgid "One LED with an LED holder"
 msgstr "Eine LED mit LED-Halterung"
 
-#: ../../extended_white_version.rst:25
+#: ../../workshop_version.rst:25
 msgid "One wire holder"
 msgstr "Ein Drahthalter"
 
-#: ../../extended_white_version.rst:29
+#: ../../workshop_version.rst:29
 msgid "One ESP32 development board"
 msgstr "Ein ESP32-Entwicklungsboard"
 
-#: ../../extended_white_version.rst:33
+#: ../../workshop_version.rst:33
 msgid "One 110 Ohm resistor"
 msgstr "Ein 110-Ohm-Widerstand"
 
-#: ../../extended_white_version.rst:37
+#: ../../workshop_version.rst:37
 msgid "One lamp stand"
 msgstr "Ein Lampenständer"
 
-#: ../../extended_white_version.rst:41
+#: ../../workshop_version.rst:41
 msgid "A USB cable and power adapter"
 msgstr "Ein USB-Kabel und ein Netzteil"
 
-#: ../../extended_white_version.rst:48
+#: ../../workshop_version.rst:48
 msgid "Assembling the device"
 msgstr "Zusammenbau des Geräts"
 
-#: ../../extended_white_version.rst:49
+#: ../../workshop_version.rst:49
 msgid "Insert the ESP32 development board onto the breadboard."
 msgstr "Setzen Sie die ESP32-Entwicklungsplatine auf das Steckbrett."
 
-#: ../../extended_white_version.rst:54
+#: ../../workshop_version.rst:54
 msgid ""
 "Mount the wire holder with LED onto the breadboard, leaving one breadboard "
 "slot on both sides"
@@ -77,7 +77,7 @@ msgstr ""
 "Montieren Sie den Drahthalter mit LED auf dem Steckbrett und lassen Sie auf "
 "beiden Seiten einen Steckplatz für das Steckbrett frei"
 
-#: ../../extended_white_version.rst:60
+#: ../../workshop_version.rst:60
 msgid ""
 "Place the resistor into a free space on the breadboard, and connect it to "
 "the free space above or below the LED holder."
@@ -85,7 +85,7 @@ msgstr ""
 "Platzieren Sie den Widerstand in einer freien Stelle auf dem Steckbrett und "
 "verbinden Sie ihn mit der freien Stelle über oder unter der LED-Halterung."
 
-#: ../../extended_white_version.rst:65
+#: ../../workshop_version.rst:65
 msgid ""
 "Locate pin **27** on the ESP32 development board. Connect a wire from **pin "
 "27** of the ESP32 to one of the free slot in the same breadboard column as "
@@ -95,7 +95,7 @@ msgstr ""
 " Draht von **Pin 27** des ESP32 mit einem der freien Steckplätze in "
 "derselben Steckbrettspalte wie der Widerstand."
 
-#: ../../extended_white_version.rst:70
+#: ../../workshop_version.rst:70
 msgid ""
 "Connect a wire from a **GND pin** of the ESP32 to the other free slot below "
 "the LED holder."
@@ -103,7 +103,7 @@ msgstr ""
 "Verbinden Sie einen Draht von einem **GND-Pin** des ESP32 mit dem anderen "
 "freien Steckplatz unterhalb der LED-Halterung."
 
-#: ../../extended_white_version.rst:75
+#: ../../workshop_version.rst:75
 msgid ""
 "Take the table tennis ball and make a small hole large enough to mount the "
 "LED holder. (Some versions have the hole already prepared.)"
@@ -112,7 +112,7 @@ msgstr ""
 "genug ist, um den LED-Halter zu montieren. (Bei einigen Versionen ist das "
 "Loch bereits vorbereitet.)"
 
-#: ../../extended_white_version.rst:80
+#: ../../workshop_version.rst:80
 msgid ""
 "8. Insert the LED into the LED holder. Note that the LED legs have different"
 " lengths. then place the holder into the hole in the tennis ball."
@@ -121,11 +121,11 @@ msgstr ""
 "Beine unterschiedliche Längen haben. Setzen Sie dann den Halter in das Loch "
 "im Tennisball ein."
 
-#: ../../extended_white_version.rst:86
+#: ../../workshop_version.rst:86
 msgid "Insert th isolation tube over the wires that have a female plug."
 msgstr "Führen Sie den Isolierschlauch über die Drähte mit Buchsenstecker."
 
-#: ../../extended_white_version.rst:91
+#: ../../workshop_version.rst:91
 msgid ""
 "10. Connect a wire to each leg of the LED. Remember the color of the cables "
 "that connects to the short leg LED."
@@ -133,7 +133,7 @@ msgstr ""
 "10. Verbinden Sie einen Draht mit jedem Bein der LED. Denken Sie an die "
 "Farbe der Kabel, die mit der LED mit kurzem Bein verbunden sind."
 
-#: ../../extended_white_version.rst:97
+#: ../../workshop_version.rst:97
 msgid ""
 "11. Assemble the wire holder, attaching one LED wire to each side. Ensure "
 "that the **long leg of the LED (anode)** is connected to the **resistor "
@@ -144,14 +144,14 @@ msgstr ""
 "der **Widerstandsseite** verbunden ist und der **kurze Schenkel (Kathode)** "
 "mit **Masse** verbunden ist."
 
-#: ../../extended_white_version.rst:100
+#: ../../workshop_version.rst:100
 msgid ""
 "Insert the USB cable into the board, and plug it in. The LED should blink."
 msgstr ""
 "Stecken Sie das USB-Kabel in die Platine und stecken Sie es ein. Die LED "
 "sollte blinken."
 
-#: ../../extended_white_version.rst:102
+#: ../../workshop_version.rst:102
 msgid ""
 "Your solar flare alert is now physically assembled and ready to connect to "
 "the WiFi."
@@ -159,7 +159,7 @@ msgstr ""
 "Ihr Sonneneruptionsalarm ist jetzt physisch zusammengebaut und bereit für "
 "die Verbindung mit dem WLAN."
 
-#: ../../extended_white_version.rst:104
+#: ../../workshop_version.rst:104
 msgid ""
 "Note: the isolation tubes can be settled by warming them. They will reduce "
 "their size. .. include:: wifi_connection.rst"

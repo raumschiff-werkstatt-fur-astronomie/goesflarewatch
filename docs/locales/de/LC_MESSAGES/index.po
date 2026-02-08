@@ -86,9 +86,8 @@ msgid "I have the :doc:`standard white version <white_version>`"
 msgstr "Ich habe die :doc:`Standard-Weissversion <white_version>`"
 
 #: ../../index.rst:23
-msgid "I have the :doc:`extended white version <extended_white_version>`"
-msgstr ""
-"Ich habe die :doc:`erweiterte weisse Version <extended_white_version>`"
+msgid "I have the :doc:`workshop version <workshop_version>`"
+msgstr "Ich habe die :doc:`Workshop-Version <workshop_version>`"
 
 #: ../../index.rst:24
 msgid "I have the :doc:`green version <green_version>`"
