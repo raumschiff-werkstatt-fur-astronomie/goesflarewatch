@@ -6,7 +6,7 @@ Assembling the Device
 
 Here are all the components of the device:
    .. figure:: ./images/IMG_1751.jpeg
-      :width: 400px
+      :width: 80%
       :align: center
       :alt: Wire ring inserted in socket strip
 
@@ -14,7 +14,7 @@ Here are all the components of the device:
 socket strip and insert the LED into the ping-pong ball.
 
    .. image:: ./images/IMG_1752.jpeg
-      :width: 400px
+      :width: 80%
       :align: center
       :alt: LED placed inside ping-pong ball
 
@@ -22,21 +22,21 @@ socket strip and insert the LED into the ping-pong ball.
    Ensure the **black cable is on the left side** when viewed from the perspective of the ESP32.
 
    .. image:: images/IMG_1753.jpeg
-      :width: 400px
+      :width: 80%
       :align: center
       :alt: Cables correctly inserted in socket strip
 
 Make sure the black cable goes to the left side, marked with a black marker
 
    .. image:: images/IMG_1754.jpeg
-      :width: 400px
+      :width: 80%
       :align: center
       :alt: USB cable plugged in
 
 3. Plug in the USB cable to power the device.
 
    .. image:: images/IMG_1755.jpeg
-      :width: 400px
+      :width: 80%
       :align: center
       :alt: Fully assembled Solar Flare Alert device
 

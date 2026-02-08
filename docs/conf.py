@@ -17,19 +17,19 @@
 #
 import os
 import sys
-# sys.path.insert(0, os.path.abspath('../../micropython'))
-sys.path.insert(0, os.path.abspath('.'))
 
+# sys.path.insert(0, os.path.abspath('../../micropython'))
+sys.path.insert(0, os.path.abspath("."))
 
 
 # -- Project information -----------------------------------------------------
 
-project = 'Solar Flare Alert Lamp'
-copyright = 'Raumschiff 2025'
-author = 'André Csillaghy'
+project = "Solar Flare Alert Lamp"
+copyright = "Raumschiff 2025"
+author = "André Csillaghy"
 
 # The full version, including alpha/beta/rc tags
-release = '0.2'
+release = "0.2"
 
 
 # -- General configuration ---------------------------------------------------
@@ -38,18 +38,18 @@ release = '0.2'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'sphinx.ext.autodoc',
+    "sphinx.ext.autodoc",
 ]
 
 # The suffix of source filenames.
 # We use .rst files, but you can add .md if you're using Markdown as well
-#source_suffix = '.rst'  # or ['.rst', '.md'] for mixed content
+# source_suffix = '.rst'  # or ['.rst', '.md'] for mixed content
 source_suffix = {
-    '.rst': 'restructuredtext',
+    ".rst": "restructuredtext",
 }
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
+templates_path = ["_templates"]
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -67,20 +67,49 @@ html_theme = "sphinx_rtd_theme"
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-#html_static_path = ['_static']
+# html_static_path = ['_static']
 
-autodoc_mock_imports = ["machine", 'network', 'ujson', 'ure', 'urequests', 'micropython', 'sys']
+autodoc_mock_imports = [
+    "machine",
+    "network",
+    "ujson",
+    "ure",
+    "urequests",
+    "micropython",
+    "sys",
+]
 
-language = 'en'
-locale_dirs = ['locales/']
+language = "en"
+locale_dirs = ["locales/"]
 gettext_compact = False
 
 # -- Options for LaTeX output -------------------------------------------------
-# Use fonts that are available in BasicTeX
+
+latex_engine = "pdflatex"
+
+latex_documents = [
+    (
+        "index",
+        "SolarFlareAlertLamp.tex",
+        "Solar Flare Alert Lamp",
+        "André Csillaghy",
+        "manual",
+    ),
+]
+
 latex_elements = {
-    'preamble': r'''
-\usepackage{times}
+    "papersize": "a4paper",
+    "pointsize": "11pt",
+    # Better font setup (times is deprecated)
+    "preamble": r"""
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{mathptmx}
 \usepackage{helvet}
 \renewcommand{\familydefault}{\sfdefault}
-''',
+""",
+    # Reduce image overflow
+    "figure_align": "H",
+    # Fix long lines in code blocks
+    "fncychap": r"\usepackage[Bjornstrup]{fncychap}",
 }
