@@ -17,7 +17,7 @@ with the wifi manager that handles the connection to a specific access point
 # TODO Then make an own version of the script that creates the web page
 # TODO enccrypt the json file
 
-import gc
+import gc  # noqa: F401 - used by MicroPython runtime
 import time
 from math import log
 
@@ -26,15 +26,15 @@ import ujson
 import urequests
 import rainbow2
 
-import micropython
+import micropython  # noqa: F401 - used by MicroPython runtime
 
 # import wifimgr
 
-import sys
+import sys  # noqa: F401 - used by MicroPython runtime
 
 # sys.path.append('/libs/micropython-wifi_manager')  # Add the submodule path
 
-from wifi_manager import WifiManager  # ✅ Updated to use wifi_manager.py
+from wifi_manager import WifiManager  # noqa: E402
 
 
 ###################################
@@ -51,19 +51,19 @@ FLARE_MODE = False
 FLARE mode vs solar activity configuration: if you want the LED to light up only when there
 is a flare (e.g. larger than GOES_M), then you need to set up FLARE_MODE to True. Otherwise
 the system will display the flare activity on the specified number of LEDS.
-acs 30.11.22 : 
+acs 30.11.22 :
 I am changing this. Flare mode should really be a mode for itself with a flare detection algorithm.
 This is another todo. FLARE_MODE is therefore replaced with SINGLE_LED_MODE
 """
 SINGLE_LED_MODE = True
 LED_STRIP_MODE = False
 """
-Now we also need to know what kind of hardware are we trying to drive. We have several 
-modes. 
+Now we also need to know what kind of hardware are we trying to drive. We have several
+modes.
 SINGLE_LED_MODE is used to display with PWM the information on a single LED. This is the mode of
 the solar flare alert designed for the ECSITE conference
-LED_STRIP_MODE is used to drive a RGB LED strip with different colors. Technically, it could also 
-be used with the FLARE mode, but it is more to change colors depending on a specific solar activity. 
+LED_STRIP_MODE is used to drive a RGB LED strip with different colors. Technically, it could also
+be used with the FLARE mode, but it is more to change colors depending on a specific solar activity.
 """
 
 GOES_LIMIT = log(1e-09)
@@ -96,8 +96,8 @@ else:
 The LEDS variable decides the action of the program
 LEDS uses the GPIO, inorder to control the status of the LEDs.
 
-In the current ECSITE 22 version, we use just one. 
-The version with one single LED is usually good with the SINGLE_LED. 
+In the current ECSITE 22 version, we use just one.
+The version with one single LED is usually good with the SINGLE_LED.
 
 TODO
 The version with 4 LEDS would display the solar activity as a "scale" going from low to high, i.e. B,C,M,X
@@ -107,10 +107,9 @@ Possible would be also A,B,C,M,X
 #LEDS = [16, 17, 21, 22, 25]
 
 Finally, the program is also able to steer an entire LED strip to display the solar activity as an rgb value.
-This requires the LED_STRIP_MODE and it uses 3 LED inputs, one for R, G and B, repectively. 
+This requires the LED_STRIP_MODE and it uses 3 LED inputs, one for R, G and B, repectively.
 
-Please be aware that LED_STRIP_MODE requires additionally MOSFETS to bring 12 V to the LED strip. 
- 
+Please be aware that LED_STRIP_MODE requires additionally MOSFETS to bring 12 V to the LED strip.
 """
 
 # Default values for PWM:
@@ -214,7 +213,7 @@ else:
         status_led = test_pin
         if DEBUG:
             print("Status LED auto-detected on pin 2")
-    except Exception as e:
+    except Exception:
         # No built-in LED available (e.g., ESP32-D board)
         status_led = None
         if DEBUG:
@@ -299,7 +298,7 @@ def get_current_goes_val() -> float:
         )
         text = response.text[:-1]
         response.close()
-    except:
+    except Exception:
         # TODO: ESP32 correct heap memory management -- might not be necessary
         # There is a memory error handling necessary with the ESP. It has to do with filling up
         # the heap. However, this explicit garbage collection might not help too much. For now,
@@ -337,8 +336,7 @@ def get_current_goes_val() -> float:
             if response_json["energy"] == "0.1-0.8nm":
                 return log(response_json["flux"]) - GOES_LIMIT
 
-        except:
-
+        except Exception:
             # Brute force: ignore errors in the json file and wait for the next value
             if DEBUG:
                 print("Wrong goes channel, returning 0")
@@ -385,7 +383,8 @@ def goes_to_freq_duty(val, rgb=False):
         freq = [DEFAULT_FREQ, DEFAULT_FREQ, DEFAULT_FREQ]
         duty = [DEFAULT_DUTY, DEFAULT_DUTY, DEFAULT_DUTY]
 
-        # TODO this has too many type conversions, color table should be corrected to 0..PWM_MAX_DUTY and ints not stings
+        # TODO this has too many type conversions, color table should be
+        # corrected to 0..PWM_MAX_DUTY and ints not strings
         duty_index = int(convert(val, GOES_B, GOES_M, 0, len(color_table) - 1))
         duty_rgb = color_table[duty_index]
 
@@ -570,7 +569,7 @@ def test_goes_to_freq_duty(
         time.sleep(0.5)
 
         # Phase 1: Brightness sweep from GOES_C to GOES_M
-        print(f"\n--- Phase 1: Brightness sweep (GOES_C to GOES_M) ---")
+        print("\n--- Phase 1: Brightness sweep (GOES_C to GOES_M) ---")
         print(f"Test range: {GOES_C:.4f} to {GOES_M:.4f}")
         print(f"Step duration: {duration_per_step}s")
         print("-" * 70)
@@ -600,7 +599,7 @@ def test_goes_to_freq_duty(
 
         # Phase 2: Slow blinking (GOES_M to GOES_X)
         print("-" * 70)
-        print(f"\n--- Phase 2: Slow blinking (GOES_M to GOES_X) ---")
+        print("\n--- Phase 2: Slow blinking (GOES_M to GOES_X) ---")
         print(f"Frequency: {SLOW_BLINKING} Hz, Duty: {HIGH_DUTY // 2} (50%)")
         print(f"Blinking for {blink_duration} seconds...")
 
@@ -615,7 +614,7 @@ def test_goes_to_freq_duty(
 
         # Phase 3: Fast blinking (above GOES_X)
         print("-" * 70)
-        print(f"\n--- Phase 3: Fast blinking (above GOES_X) ---")
+        print("\n--- Phase 3: Fast blinking (above GOES_X) ---")
         print(f"Frequency: {FAST_BLINKING} Hz, Duty: {HIGH_DUTY // 2} (50%)")
         print(f"Blinking for {blink_duration} seconds...")
 
