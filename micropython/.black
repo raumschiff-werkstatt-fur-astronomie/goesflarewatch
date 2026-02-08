@@ -1,0 +1,4 @@
+# Black formatter configuration for MicroPython
+# More lenient line length to avoid breaking long URLs and strings
+line-length = 120
+target-version = ['py3']

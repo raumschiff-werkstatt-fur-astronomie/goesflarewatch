@@ -21,3 +21,6 @@ __pycache__/
 
 # Jupyter
 .ipynb_checkpoints
+
+# WiFi credentials
+micropython/wifi.dat

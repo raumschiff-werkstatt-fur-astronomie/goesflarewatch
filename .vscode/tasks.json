@@ -1,0 +1,54 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Find ESP32 Port",
+      "type": "shell",
+      "command": "ls /dev/cu.* | grep -i usb",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "Upload to ESP32",
+      "type": "shell",
+      "command": "${workspaceFolder}/micropython/upload_to_esp32.py",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    },
+    {
+      "label": "Upload Single File",
+      "type": "shell",
+      "command": "${workspaceFolder}/micropython/upload_to_esp32.py",
+      "args": ["${file}"],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    },
+    {
+      "label": "Open Serial Monitor",
+      "type": "shell",
+      "command": "screen ${input:esp32Port} 115200",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "id": "esp32Port",
+      "type": "promptString",
+      "description": "Enter ESP32 serial port (e.g., /dev/cu.usbserial-0001)"
+    }
+  ]
+}
+

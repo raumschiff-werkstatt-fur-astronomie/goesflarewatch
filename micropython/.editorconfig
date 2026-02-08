@@ -1,0 +1,6 @@
+# EditorConfig for MicroPython files
+# Disable auto-formatting or use more lenient settings
+
+[*.py]
+# Increase line length to avoid breaking long URLs
+max_line_length = 120

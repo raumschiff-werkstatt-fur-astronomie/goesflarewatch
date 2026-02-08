@@ -1,0 +1,63 @@
+{
+  // Python settings for MicroPython development
+  "python.defaultInterpreterPath": "python3",
+  "python.linting.enabled": true,
+  "python.linting.pylintEnabled": false,
+  "python.linting.flake8Enabled": true,
+  "python.linting.flake8Args": ["--max-line-length=120"],
+  "python.formatting.provider": "black",
+  
+  // File associations
+  "files.associations": {
+    "*.py": "python",
+    "boot.py": "python",
+    "main.py": "python"
+  },
+  
+  // Editor settings for MicroPython
+  "editor.tabSize": 4,
+  "editor.insertSpaces": true,
+  "editor.formatOnSave": true,
+  "editor.rulers": [120],
+  "editor.wordWrap": "wordWrapColumn",
+  "editor.wordWrapColumn": 120,
+  
+  // Exclude patterns
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/*.pyc": true,
+    "**/.DS_Store": true
+  },
+  
+  // Search exclusions
+  "search.exclude": {
+    "**/__pycache__": true,
+    "**/*.pyc": true,
+    "**/_build": true,
+    "**/node_modules": true
+  },
+  
+  // MicroPython specific settings
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    }
+  },
+  
+  // Disable auto-formatting for micropython directory (uncomment if you prefer manual formatting)
+  // "files.watcherExclude": {
+  //   "**/micropython/**": false
+  // },
+  
+  // Terminal settings
+  "terminal.integrated.defaultProfile.osx": "zsh",
+  
+  // File watcher settings (for auto-upload if desired)
+  "files.watcherExclude": {
+    "**/__pycache__/**": true,
+    "**/.git/**": true
+  }
+}
+
