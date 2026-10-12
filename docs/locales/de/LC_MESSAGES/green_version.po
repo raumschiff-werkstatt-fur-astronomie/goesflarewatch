@@ -149,7 +149,7 @@ msgid ""
 "You're done. Reconnect your phone or computer to your normal WiFi. The Solar"
 " Flare Alert will now display the Sun’s current activity level."
 msgstr ""
-"Du bist fertig. Verbinden Sie Ihr Telefon oder Ihren Computer wieder mit "
+"Sie sind fertig. Verbinden Sie Ihr Telefon oder Ihren Computer wieder mit "
 "Ihrem normalen WLAN. Der Sonneneruptionsalarm zeigt nun die aktuelle "
 "Aktivitätsstufe der Sonne an."
 
