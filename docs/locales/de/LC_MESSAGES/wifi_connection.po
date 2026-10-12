@@ -43,18 +43,24 @@ msgstr ""
 #: ../../wifi_connection.rst:8
 msgid ""
 "If the LED **continues blinking**, open the WiFi settings on your phone or "
-"computer and connect to the access point named **SolarFlareAlert-Setup**."
+"computer and connect to the access point named **WifiManager**."
 msgstr ""
 "Wenn die LED **weiterhin blinkt**, öffnen Sie die WLAN-Einstellungen auf "
 "Ihrem Telefon oder Computer und verbinden Sie sich mit dem Zugangspunkt "
-"namens **SolarFlareAlert-Setup**."
+"namens **WifiManager**."
 
 #: ../../wifi_connection.rst:10
 msgid ""
-"Once connected, open a web browser and navigate to: ``http://192.168.4.1``"
+"The phone should show a sign-in page. If it does not, open a web browser on "
+"the phone and type ``http://192.168.4.1`` in the address field. Stay on "
+"**WifiManager** while that page loads. If it still does not open, turn "
+"mobile data off and try again."
 msgstr ""
-"Sobald die Verbindung hergestellt ist, öffnen Sie einen Webbrowser und "
-"navigieren Sie zu: „http://192.168.4.1“."
+"Das Telefon sollte eine Anmeldeseite anzeigen. Wenn nicht, öffnen Sie auf "
+"dem Telefon einen Webbrowser und tippen Sie im Adressfeld "
+"``http://192.168.4.1``. Bleiben Sie bei **WifiManager**, während die Seite "
+"lädt. Wenn sie sich immer noch nicht öffnet, schalten Sie die mobilen Daten "
+"aus und versuchen Sie es erneut."
 
 #: ../../wifi_connection.rst:12
 msgid "Select your home WiFi network from the list and enter the password."
@@ -79,6 +85,82 @@ msgstr ""
 "Du bist fertig. Verbinden Sie Ihr Telefon oder Ihren Computer wieder mit "
 "Ihrem normalen WLAN. Der Sonneneruptionsalarm zeigt nun die aktuelle "
 "Aktivitätsstufe der Sonne an."
+
+#: ../../wifi_connection.rst:19
+msgid "Earlier lamps"
+msgstr "Ältere Lampen"
+
+#: ../../wifi_connection.rst:21
+msgid ""
+"Lamps sold before this setup page was updated do not show a sign-in window. "
+"The phone can be connected to the lamp while the browser still cannot open "
+"the page. Try the following once."
+msgstr ""
+"Lampen, die verkauft wurden, bevor diese Einrichtungsseite aktualisiert "
+"wurde, zeigen kein Anmeldefenster. Das Telefon kann mit der Lampe verbunden "
+"sein, während der Browser die Seite trotzdem nicht öffnen kann. Versuchen "
+"Sie Folgendes einmal."
+
+#: ../../wifi_connection.rst:23
+msgid ""
+"Watch the LED. If it **stops blinking**, the lamp has already joined a "
+"saved network. Reconnect your phone to your home Wi-Fi. Nothing else is "
+"required."
+msgstr ""
+"Beobachten Sie die LED. Wenn sie **aufhört zu blinken**, hat sich die Lampe "
+"bereits mit einem gespeicherten Netzwerk verbunden. Verbinden Sie Ihr "
+"Telefon wieder mit Ihrem WLAN zu Hause. Mehr ist nicht nötig."
+
+#: ../../wifi_connection.rst:25
+msgid ""
+"If the LED **keeps blinking**, join the Wi-Fi network **WifiManager**. It "
+"is an open network and has no password."
+msgstr ""
+"Wenn die LED **weiterhin blinkt**, verbinden Sie sich mit dem WLAN "
+"**WifiManager**. Es ist ein offenes Netzwerk und hat kein Passwort."
+
+#: ../../wifi_connection.rst:27
+msgid ""
+"Turn mobile data off, and stay on **WifiManager** when the phone says the "
+"network has no internet. Otherwise the phone sends the address through the "
+"mobile network, and the lamp never sees it."
+msgstr ""
+"Schalten Sie die mobilen Daten aus und bleiben Sie bei **WifiManager**, "
+"wenn das Telefon meldet, dass das Netzwerk kein Internet hat. Sonst sendet "
+"das Telefon die Adresse über das Mobilnetz, und die Lampe sieht sie nie."
+
+#: ../../wifi_connection.rst:29
+msgid ""
+"On the phone, open a web browser and type ``http://192.168.4.1`` in the "
+"address field. Keep the ``http://``. Typing the number into a search box "
+"does not reach the lamp."
+msgstr ""
+"Öffnen Sie auf dem Telefon einen Webbrowser und tippen Sie im Adressfeld "
+"``http://192.168.4.1``. Lassen Sie ``http://`` stehen. Wenn Sie die Zahl in "
+"ein Suchfeld eingeben, erreichen Sie die Lampe nicht."
+
+#: ../../wifi_connection.rst:31
+msgid ""
+"If the page does not load, turn the lamp off, wait ten seconds, turn it "
+"on, and repeat from step 2."
+msgstr ""
+"Wenn die Seite nicht lädt, schalten Sie die Lampe aus, warten Sie zehn "
+"Sekunden, schalten Sie sie wieder ein und wiederholen Sie ab Schritt 2."
+
+#: ../../wifi_connection.rst:33
+msgid ""
+"If the page is still blank, stop retrying. On these lamps the setup program "
+"accepts the Wi-Fi connection and then does not answer, whether the browser "
+"is on a phone or a computer. The lamp needs the updated setup program "
+"(``wifi_manager.py``) before it can be joined to a new network. A network "
+"it has already saved keeps working."
+msgstr ""
+"Wenn die Seite weiterhin leer bleibt, hören Sie auf, es erneut zu versuchen. "
+"Bei diesen Lampen nimmt das Einrichtungsprogramm die WLAN-Verbindung an und "
+"antwortet danach nicht, weder auf einem Telefon noch auf einem Computer. Die "
+"Lampe braucht das aktualisierte Einrichtungsprogramm (``wifi_manager.py``), "
+"bevor sie mit einem neuen Netzwerk verbunden werden kann. Ein bereits "
+"gespeichertes Netzwerk funktioniert weiterhin."
 
 #~ msgid ""
 #~ "The device will reboot and attempt to join your network. When the LED turns "

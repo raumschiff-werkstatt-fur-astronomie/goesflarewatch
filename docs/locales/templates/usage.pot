@@ -81,11 +81,43 @@ msgid "If the blinking **stops after a few seconds**, the device successfully co
 msgstr ""
 
 #: ../../usage.rst:52
-msgid "If it **keeps blinking**, open the WiFi settings on your phone or computer and connect to the access point named **WifiMgr**."
+msgid "If it **keeps blinking**, open the WiFi settings on your phone or computer and connect to the access point named **WifiManager**."
 msgstr ""
 
 #: ../../usage.rst:54
-msgid "Open a web browser and navigate to: ``192.168.4.1``"
+msgid "The phone should show a sign-in page. If it does not, open a web browser on the phone and type ``http://192.168.4.1`` in the address field. Stay on **WifiManager** while that page loads. If it still does not open, turn mobile data off and try again."
+msgstr ""
+
+#: ../../usage.rst:60
+msgid "Earlier lamps"
+msgstr ""
+
+#: ../../usage.rst:63
+msgid "Lamps sold before this setup page was updated do not show a sign-in window. The phone can be connected to the lamp while the browser still cannot open the page. Try the following once."
+msgstr ""
+
+#: ../../usage.rst:65
+msgid "Watch the LED. If it **stops blinking**, the lamp has already joined a saved network. Reconnect your phone to your home Wi-Fi. Nothing else is required."
+msgstr ""
+
+#: ../../usage.rst:67
+msgid "If the LED **keeps blinking**, join the Wi-Fi network **WifiManager**. It is an open network and has no password."
+msgstr ""
+
+#: ../../usage.rst:69
+msgid "Turn mobile data off, and stay on **WifiManager** when the phone says the network has no internet. Otherwise the phone sends the address through the mobile network, and the lamp never sees it."
+msgstr ""
+
+#: ../../usage.rst:71
+msgid "On the phone, open a web browser and type ``http://192.168.4.1`` in the address field. Keep the ``http://``. Typing the number into a search box does not reach the lamp."
+msgstr ""
+
+#: ../../usage.rst:73
+msgid "If the page does not load, turn the lamp off, wait ten seconds, turn it on, and repeat from step 2."
+msgstr ""
+
+#: ../../usage.rst:75
+msgid "If the page is still blank, stop retrying. On these lamps the setup program accepts the Wi-Fi connection and then does not answer, whether the browser is on a phone or a computer. The lamp needs the updated setup program (``wifi_manager.py``) before it can be joined to a new network. A network it has already saved keeps working."
 msgstr ""
 
 #: ../../usage.rst:56

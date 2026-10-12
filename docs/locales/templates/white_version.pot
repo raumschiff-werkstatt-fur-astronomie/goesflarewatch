@@ -109,7 +109,7 @@ msgid "If the blinking **stops after a few seconds**, the device has successfull
 msgstr ""
 
 #: ../../wifi_connection.rst:8
-msgid "If the LED **continues blinking**, open the WiFi settings on your phone or computer and connect to the access point named **SolarFlareAlert-Setup**."
+msgid "If the LED **continues blinking**, open the WiFi settings on your phone or computer and connect to the access point named **WifiManager**."
 msgstr ""
 
 #: ../../wifi_connection.rst:10
