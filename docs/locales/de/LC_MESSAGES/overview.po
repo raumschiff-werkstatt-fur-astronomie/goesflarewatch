@@ -72,8 +72,9 @@ msgid ""
 "OK. And now, you might be interested in learning more about solar flares? "
 ":doc:`Here it goes then <introduction>`."
 msgstr ""
-"OK. Und jetzt interessieren Sie sich vielleicht dafür, mehr über "
-"Sonneneruptionen zu erfahren? :doc:`Hier geht es dann <Einführung>`."
+"Und jetzt interessieren Sie sich vielleicht dafür, mehr über "
+"Sonneneruptionen zu erfahren? `Hier "
+"<https://de.wikipedia.org/wiki/Sonneneruption>`_ geht es dann."
 
 #: ../../overview.rst:18
 msgid ""
