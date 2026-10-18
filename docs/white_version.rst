@@ -91,9 +91,9 @@ Assembling the device
    **resistor side**, and the **short leg (cathode)** goes to **ground**.
 
 
-9. Insert the USB cable into the board, and plug it in. The LED should blink.
+8. Plug the USB cable into the board at one end and into a power source at the other. The LED should blink.
 
-Your solar flare alert lamp is now physically assembled and ready to connect to the WiFi.
+Your solar flare alert is now physically assembled and ready to connect to the WiFi.
 
 
 .. include:: wifi_connection.rst

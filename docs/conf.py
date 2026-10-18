@@ -25,7 +25,7 @@ sys.path.insert(0, os.path.abspath("."))
 # -- Project information -----------------------------------------------------
 
 project = "Solar Flare Alert Lamp"
-copyright = "Raumschiff 2025"
+copyright = "Raumschiff 2026"
 author = "André Csillaghy"
 
 # The full version, including alpha/beta/rc tags

@@ -13,4 +13,8 @@ Connecting to the WiFi
 
 6. The page lists every network it can reach. Choose your own and enter the password.
 
-7. The lamp saves the password. You can use your normal Wi-Fi again.
+7. The device saves the password, restarts, and tries to join your network.
+
+8. If the LED stays lit, the connection was successful.
+
+9. You are done. If this has not already happened automatically, you can connect your phone or your computer back to your normal Wi-Fi. The solar flare alert now shows the Sun's current activity level.

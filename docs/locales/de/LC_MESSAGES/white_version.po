@@ -119,20 +119,6 @@ msgstr ""
 "**Widerstandsseite** verbunden ist und der **kurze Schenkel (Kathode)** "
 "mit **Masse** verbunden ist."
 
-#: ../../white_version.rst:75
-msgid "Insert the USB cable into the board, and plug it in. The LED should blink."
-msgstr ""
-"Stecken Sie das USB-Kabel in die Platine und stecken Sie es ein. Die LED "
-"sollte blinken."
-
-#: ../../white_version.rst:77
-msgid ""
-"Your solar flare alert lamp is now physically assembled and ready to "
-"connect to the WiFi."
-msgstr ""
-"Ihre Sonneneruptions-Warnlampe ist jetzt physisch zusammengebaut und "
-"bereit für die Verbindung mit dem WLAN."
-
 #: ../../white_version.rst:79
 msgid ""
 "Note: the isolation tubes can be settled by warming them. They will "
@@ -392,10 +378,37 @@ msgstr ""
 "Auf der Seite werden alle erreichbaren Netzwerke aufgelistet. Wählen Sie "
 "Ihr eigenes und geben Sie das Passwort ein."
 
-msgid "The lamp saves the password. You can use your normal Wi-Fi again."
+msgid ""
+"Plug the USB cable into the board at one end and into a power source at "
+"the other. The LED should blink."
 msgstr ""
-"Die Lampe speichert das Passwort. Sie können wieder auf Ihr normales WLAN"
-" zugreifen."
+"Stecken Sie das USB-Kabel einerseits in die Platine und andererseits in "
+"eine Stromquelle. Die LED sollte blinken."
+
+msgid "The device saves the password, restarts, and tries to join your network."
+msgstr ""
+"Das Gerät speichert das Passwort, startet neu und versucht, sich an Ihr "
+"Netzwerk anzuschliessen."
+
+msgid "If the LED stays lit, the connection was successful."
+msgstr "Wenn die LED durchgehend leuchtet, war die Verbindung erfolgreich."
+
+msgid ""
+"You are done. If this has not already happened automatically, you can "
+"connect your phone or your computer back to your normal Wi-Fi. The solar "
+"flare alert now shows the Sun's current activity level."
+msgstr ""
+"Sie sind fertig. Wenn es nicht automatisch schon passiert ist, können Sie"
+" Ihr Telefon oder Ihren Computer wieder mit Ihrem normalen WLAN "
+"verbinden. Der Sonneneruptionsalarm zeigt nun die aktuelle "
+"Aktivitätsstufe der Sonne an."
+
+msgid ""
+"Your solar flare alert is now physically assembled and ready to connect "
+"to the WiFi."
+msgstr ""
+"Ihr Sonneneruptionsalarm ist jetzt physisch zusammengebaut und bereit für"
+" die Verbindung mit dem WLAN."
 
 #~ msgid "How to use the Solar Flare Alert - White Version"
 #~ msgstr "So verwenden Sie den Sonneneruptionsalarm – weisse Version"

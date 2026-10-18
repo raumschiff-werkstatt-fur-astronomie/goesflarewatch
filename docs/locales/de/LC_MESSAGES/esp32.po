@@ -30,7 +30,7 @@ msgid ""
 "There are a few micropython program necessary for the solar flare alert "
 "lamp:"
 msgstr ""
-"Für die Sonneneruptions-Warnlampe sind einige Micropython-Programme "
+"Für den Sonneneruptionsalarm sind einige Micropython-Programme "
 "erforderlich:"
 
 #: ../../esp32.rst:6
