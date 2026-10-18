@@ -1,0 +1,15 @@
+[
+  {
+    "version": "2025.03",
+    "date": "2025-03",
+    "latest": true,
+    "files": [
+      {"name": "version.py", "file": "versions/2025.03/version.py"},
+      {"name": "solar_flare_alert.py", "file": "versions/2025.03/solar_flare_alert.py"}
+    ],
+    "notes": {
+      "en": "The current Solar Flare Alert program. It still uses an external Wi-Fi manager for the setup page. The next version replaces that library.",
+      "de": "Das aktuelle Programm des Sonneneruptionsalarms. Es benutzt noch einen externen WLAN-Manager für die Einrichtungsseite. Die nächste Version ersetzt diese Bibliothek."
+    }
+  }
+]

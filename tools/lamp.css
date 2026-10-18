@@ -1,0 +1,209 @@
+:root {
+  color: #1c1915;
+  background: #f7f4ee;
+  font-family: "Iowan Old Style", Palatino, "Palatino Linotype", Georgia, serif;
+  font-size: 1.125rem;
+  line-height: 1.45;
+}
+
+body {
+  margin: 0;
+  padding: 2.5rem 1.25rem 4rem;
+}
+
+main {
+  max-width: 38rem;
+  margin: 0 auto;
+}
+
+.lang {
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
+  font-size: 0.85rem;
+  margin: 0 0 1.5rem;
+}
+
+.lang button {
+  font: inherit;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  color: #1c1915;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.15;
+  margin: 0 0 0.75rem;
+}
+
+.step-count {
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin: 0 0 0.8rem;
+}
+
+[data-step] .lead {
+  font-size: 1.45rem;
+  line-height: 1.35;
+}
+
+.lead, .note, .status, form p, .choice p {
+  margin: 0 0 1rem;
+}
+
+a {
+  color: #1c1915;
+}
+
+.choices {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.choice {
+  display: block;
+  padding: 1rem 1.1rem;
+  background: #fff;
+  border: 1px solid #d9d2c5;
+  text-decoration: none;
+}
+
+.choice strong {
+  display: block;
+  font-size: 1.25rem;
+  margin-bottom: 0.35rem;
+}
+
+label {
+  display: block;
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
+  font-size: 0.95rem;
+  margin-bottom: 0.3rem;
+}
+
+input[type="text"],
+input[type="password"] {
+  font: inherit;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.55rem 0.6rem;
+  border: 1px solid #b7ad9e;
+  background: #fff;
+}
+
+.show-password {
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
+  font-size: 0.95rem;
+}
+
+button.action {
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
+  font-size: 1rem;
+  padding: 0.7rem 1rem;
+  background: #1c1915;
+  color: #f7f4ee;
+  border: 0;
+  cursor: pointer;
+}
+
+button.action:disabled {
+  opacity: 0.55;
+  cursor: wait;
+}
+
+.warning, .status {
+  padding: 0.8rem 0.9rem;
+  background: #fff;
+  border: 1px solid #d9d2c5;
+}
+
+.status[data-kind="ok"] {
+  border-color: #2f6b45;
+}
+
+.status[data-kind="bad"] {
+  border-color: #8a3b2d;
+}
+
+details {
+  margin-top: 1.25rem;
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
+  font-size: 0.9rem;
+}
+
+pre {
+  white-space: pre-wrap;
+  word-break: break-word;
+  background: #fff;
+  border: 1px solid #d9d2c5;
+  padding: 0.8rem;
+  max-height: 16rem;
+  overflow: auto;
+}
+
+.hidden {
+  display: none;
+}
+
+.release {
+  background: #fff;
+  border: 1px solid #d9d2c5;
+  padding: 1rem 1.1rem;
+  margin: 0 0 0.8rem;
+}
+
+.release.featured {
+  border-color: #1c1915;
+  margin-bottom: 1.5rem;
+}
+
+.release h2,
+#releases > h2 {
+  font-size: 1.35rem;
+  margin: 0 0 0.3rem;
+}
+
+#releases > h2 {
+  font-size: 1.15rem;
+  margin: 0.4rem 0 0.8rem;
+}
+
+.badge {
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+
+.release-date {
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
+  font-size: 0.9rem;
+  margin: 0 0 0.6rem;
+}
+
+.release-actions,
+.wizard-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+button.text-button {
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
+  font-size: 1rem;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  color: #1c1915;
+  text-decoration: underline;
+  cursor: pointer;
+}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Solar Flare Alert</title>
+    <link rel="stylesheet" href="lamp.css" />
+  </head>
+  <body>
+    <main>
+      <p class="lang"><button type="button" data-lang></button></p>
+      <h1 data-i18n="homeTitle"></h1>
+      <p class="lead" data-i18n="homeLead"></p>
+      <div class="choices">
+        <a class="choice" href="set-up-wifi.html">
+          <strong data-i18n="homeWifi"></strong>
+          <span data-i18n="homeWifiBody"></span>
+        </a>
+        <a class="choice" href="update-software.html">
+          <strong data-i18n="homeUpgrade"></strong>
+          <span data-i18n="homeUpgradeBody"></span>
+        </a>
+      </div>
+    </main>
+    <script src="lamp.js"></script>
+    <script>
+      LampTools.initHome(document);
+    </script>
+  </body>
+</html>

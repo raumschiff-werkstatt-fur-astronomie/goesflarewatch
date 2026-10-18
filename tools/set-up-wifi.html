@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Set up Wi-Fi for the Solar Flare Alert</title>
+    <link rel="stylesheet" href="lamp.css" />
+  </head>
+  <body>
+    <main>
+      <p class="lang"><button type="button" data-lang></button></p>
+      <h1 data-i18n="wifiTitle"></h1>
+      <p class="warning" hidden></p>
+      <p class="step-count" data-step-count></p>
+
+      <section data-step="1">
+        <p class="lead" data-i18n="wifiStep1"></p>
+        <button type="button" class="action" data-goto="2" data-i18n="wifiNextPlug"></button>
+      </section>
+
+      <section data-step="2" hidden>
+        <p class="lead" data-i18n="wifiStep2"></p>
+        <form>
+          <p>
+            <label for="ssid" data-i18n="ssid"></label>
+            <input id="ssid" name="ssid" type="text" autocomplete="off" spellcheck="false" />
+          </p>
+          <p>
+            <label for="password" data-i18n="password"></label>
+            <input id="password" name="password" type="password" autocomplete="off" />
+          </p>
+          <p class="show-password">
+            <label><input type="checkbox" /> <span data-i18n="show"></span></label>
+          </p>
+          <p class="note" data-i18n="emptyPassword"></p>
+          <p class="note" data-i18n="wifiPrivate"></p>
+          <button type="submit" class="action" data-i18n="wifiNextNet"></button>
+        </form>
+        <p><button type="button" class="text-button" id="reset" data-i18n="wifiReset"></button></p>
+      </section>
+
+      <section data-step="clear" hidden>
+        <p class="lead" data-i18n="wifiResetLead"></p>
+        <button type="button" class="action" id="clear" data-i18n="wifiResetChoose"></button>
+        <p><button type="button" class="text-button" id="reset-back" data-i18n="wifiResetBack"></button></p>
+      </section>
+
+      <section data-step="3" hidden>
+        <p class="lead" data-i18n="wifiStep3"></p>
+        <button type="button" class="action" id="choose" data-i18n="wifiChoose"></button>
+      </section>
+
+      <p class="status" hidden></p>
+      <p><button type="button" class="action" id="again" hidden data-i18n="wifiAgain"></button></p>
+
+      <details>
+        <summary data-i18n="serialLog"></summary>
+        <pre></pre>
+      </details>
+      <p class="note"><a href="update-software.html" data-i18n="wifiOther"></a></p>
+    </main>
+    <script src="lamp.js"></script>
+    <script>
+      LampTools.initWifi(document);
+    </script>
+  </body>
+</html>

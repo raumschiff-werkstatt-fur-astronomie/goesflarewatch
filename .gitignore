@@ -24,3 +24,6 @@ __pycache__/
 
 # WiFi credentials
 micropython/wifi.dat
+
+# External Wi-Fi library. The lamp site must not publish it.
+tools/wifi_manager.py
