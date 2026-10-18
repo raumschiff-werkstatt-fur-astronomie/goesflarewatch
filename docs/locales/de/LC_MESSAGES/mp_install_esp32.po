@@ -12,19 +12,19 @@ msgstr ""
 "POT-Creation-Date: 2025-12-23 10:56+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: de <LL@li.org>\n"
 "Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Generated-By: Babel 2.17.0\n"
+"Generated-By: Babel 2.18.0\n"
 
 #: ../../mp_install_esp32.rst:2
 msgid "How to install the solar flare alert software on the ESP32 board"
 msgstr ""
-"So installieren Sie die Software zur Warnung vor Sonneneruptionen auf dem "
-"ESP32-Board"
+"So installieren Sie die Software zur Warnung vor Sonneneruptionen auf dem"
+" ESP32-Board"
 
 #: ../../mp_install_esp32.rst:5
 msgid "Flashing MicroPython to ESP32"
@@ -33,13 +33,14 @@ msgstr "MicroPython auf ESP32 flashen"
 #: ../../mp_install_esp32.rst:7
 msgid ""
 "The ESP32 development board is available at various places, such as "
-"`Bastelgarage <https://www.bastelgarage.ch/nodemcu-32s-esp32-wifi-bluetooth-"
-"entwicklungs-board?search=wroom>`_, where you can easily find one near you."
+"`Bastelgarage <https://www.bastelgarage.ch/nodemcu-32s-esp32-wifi-"
+"bluetooth-entwicklungs-board?search=wroom>`_, where you can easily find "
+"one near you."
 msgstr ""
 "Das ESP32-Entwicklungsboard ist an verschiedenen Orten erhältlich, "
-"beispielsweise in „Bastelgarage "
-"<https://www.bastelgarage.ch/nodemcu-32s-esp32-wifi-bluetooth-entwicklungs-"
-"board?search=wroom>“, wo Sie ganz einfach eines in Ihrer Nähe finden können."
+"beispielsweise in „Bastelgarage <https://www.bastelgarage.ch/nodemcu-32s-"
+"esp32-wifi-bluetooth-entwicklungs-board?search=wroom>“, wo Sie ganz "
+"einfach eines in Ihrer Nähe finden können."
 
 #: ../../mp_install_esp32.rst:10
 msgid ""
@@ -50,37 +51,37 @@ msgstr ""
 "Ihren Paketmanager unter Linux"
 
 #: ../../mp_install_esp32.rst:11
-msgid ""
-"Download the recent firmware from http://micropython.org/download#esp32"
+msgid "Download the recent firmware from http://micropython.org/download#esp32"
 msgstr ""
-"Laden Sie die aktuelle Firmware von http://micropython.org/download#esp32 "
-"herunter"
+"Laden Sie die aktuelle Firmware von http://micropython.org/download#esp32"
+" herunter"
 
 #: ../../mp_install_esp32.rst:12
 msgid ""
 "From the folder were you downloaded the firmware run ``esptool.py --chip "
 "esp32 --port /dev/ttyUSB0 erase_flash`` to erase the flash"
 msgstr ""
-"Führen Sie aus dem Ordner, in den Sie die Firmware heruntergeladen haben, "
-"„esptool.py --chip esp32 --port /dev/ttyUSB0 erase_flash“ aus, um den Flash "
-"zu löschen"
+"Führen Sie aus dem Ordner, in den Sie die Firmware heruntergeladen haben,"
+" „esptool.py --chip esp32 --port /dev/ttyUSB0 erase_flash“ aus, um den "
+"Flash zu löschen"
 
 #: ../../mp_install_esp32.rst:13
 msgid ""
-"Run ``esptool.py --chip esp32 --port /dev/ttyUSB0 --baud 460800 write_flash "
-"-z 0x1000 <DOWNLOADED_FIRMWARE>.bin`` to flash it. But read remark below."
+"Run ``esptool.py --chip esp32 --port /dev/ttyUSB0 --baud 460800 "
+"write_flash -z 0x1000 <DOWNLOADED_FIRMWARE>.bin`` to flash it. But read "
+"remark below."
 msgstr ""
 "Führen Sie „esptool.py --chip esp32 --port /dev/ttyUSB0 --baud 460800 "
-"write_flash -z 0x1000 <DOWNLOADED_FIRMWARE>.bin“ aus, um es zu flashen. Aber"
-" lesen Sie den Kommentar unten."
+"write_flash -z 0x1000 <DOWNLOADED_FIRMWARE>.bin“ aus, um es zu flashen. "
+"Aber lesen Sie den Kommentar unten."
 
 #: ../../mp_install_esp32.rst:14
 msgid ""
-"Open a serial terminal (screen, putty, picocom) to check if you get a python"
-" shell."
+"Open a serial terminal (screen, putty, picocom) to check if you get a "
+"python shell."
 msgstr ""
-"Öffnen Sie ein serielles Terminal (Screen, Putty, Picocom), um zu prüfen, ob"
-" Sie eine Python-Shell erhalten."
+"Öffnen Sie ein serielles Terminal (Screen, Putty, Picocom), um zu prüfen,"
+" ob Sie eine Python-Shell erhalten."
 
 #: ../../mp_install_esp32.rst:17
 msgid "On Mac:"
@@ -88,28 +89,27 @@ msgstr "Auf dem Mac:"
 
 #: ../../mp_install_esp32.rst:19
 msgid "Mac doesnt know ``pip``, so you should use ``brew`` instead."
-msgstr ""
-"Mac kennt „pip“ nicht, daher sollten Sie stattdessen „brew“ verwenden."
+msgstr "Mac kennt „pip“ nicht, daher sollten Sie stattdessen „brew“ verwenden."
 
 #: ../../mp_install_esp32.rst:21
 msgid ""
-"The port where the ESP is attached may vary depending on the computer you "
-"are using. For instance, on an M1 I get /dev/cu.usbserial-0001. How to find "
-"out? You can do this by starting Thonny and hopefully it will find it "
-"automatically. On Mac, it might require an additional driver. If you dont "
-"see the device, this might be due to a wrong cable. -- my personal "
-"experience. Try another cable. One way is to open thonny and read the port "
-"on the lower right of the window."
+"The port where the ESP is attached may vary depending on the computer you"
+" are using. For instance, on an M1 I get /dev/cu.usbserial-0001. How to "
+"find out? You can do this by starting Thonny and hopefully it will find "
+"it automatically. On Mac, it might require an additional driver. If you "
+"dont see the device, this might be due to a wrong cable. -- my personal "
+"experience. Try another cable. One way is to open thonny and read the "
+"port on the lower right of the window."
 msgstr ""
 "Der Port, an dem das ESP angeschlossen ist, kann je nach verwendetem "
 "Computer variieren. Auf einem M1 erhalte ich beispielsweise "
-"/dev/cu.usbserial-0001. Wie finde ich das heraus? Sie können dies tun, indem"
-" Sie Thonny starten und hoffentlich wird es automatisch gefunden. Auf dem "
-"Mac ist möglicherweise ein zusätzlicher Treiber erforderlich. Wenn Sie das "
-"Gerät nicht sehen, liegt das möglicherweise an einem falschen Kabel. – meine"
-" persönliche Erfahrung. Versuchen Sie es mit einem anderen Kabel. Eine "
-"Möglichkeit besteht darin, Thonny zu öffnen und den Port unten rechts im "
-"Fenster zu lesen."
+"/dev/cu.usbserial-0001. Wie finde ich das heraus? Sie können dies tun, "
+"indem Sie Thonny starten und hoffentlich wird es automatisch gefunden. "
+"Auf dem Mac ist möglicherweise ein zusätzlicher Treiber erforderlich. "
+"Wenn Sie das Gerät nicht sehen, liegt das möglicherweise an einem "
+"falschen Kabel. – meine persönliche Erfahrung. Versuchen Sie es mit einem"
+" anderen Kabel. Eine Möglichkeit besteht darin, Thonny zu öffnen und den "
+"Port unten rechts im Fenster zu lesen."
 
 #: ../../mp_install_esp32.rst:29
 msgid "ESP32 MicroPython tutorial"
@@ -125,14 +125,14 @@ msgstr "Thonny installieren"
 
 #: ../../mp_install_esp32.rst:35
 msgid ""
-"Thonny is a simple IDE for Python, MicroPython and CircuitPython (Adafruits "
-"MicroPython fork), it allows to upload your programs to a MicroPython board "
-"easily, also when it doesn't show up as a USB drive."
+"Thonny is a simple IDE for Python, MicroPython and CircuitPython "
+"(Adafruits MicroPython fork), it allows to upload your programs to a "
+"MicroPython board easily, also when it doesn't show up as a USB drive."
 msgstr ""
 "Thonny ist eine einfache IDE für Python, MicroPython und CircuitPython "
-"(Adafruits MicroPython-Fork). Sie ermöglicht das einfache Hochladen Ihrer "
-"Programme auf ein MicroPython-Board, auch wenn es nicht als USB-Laufwerk "
-"angezeigt wird."
+"(Adafruits MicroPython-Fork). Sie ermöglicht das einfache Hochladen Ihrer"
+" Programme auf ein MicroPython-Board, auch wenn es nicht als USB-Laufwerk"
+" angezeigt wird."
 
 #: ../../mp_install_esp32.rst:40
 msgid "To install it, the go to https://thonny.org/"
@@ -156,8 +156,8 @@ msgstr "Code hochladen"
 
 #: ../../mp_install_esp32.rst:50
 msgid ""
-"All the code for this project is on GitHub. It's a bit a mess, but for the "
-"micropython you should look at the corresponding directory."
+"All the code for this project is on GitHub. It's a bit a mess, but for "
+"the micropython you should look at the corresponding directory."
 msgstr ""
 "Der gesamte Code für dieses Projekt ist auf GitHub. Es ist ein bisschen "
 "chaotisch, aber für den Micropython sollte man sich das entsprechende "
@@ -168,8 +168,8 @@ msgid ""
 "There are three files needed,`solar_flare_alert.py`, `libs/micropython-"
 "wifi_manager/wifi_manager.py`, and `rainbow2.py`"
 msgstr ""
-"Es werden drei Dateien benötigt: „solar_flare_alert.py“, „libs/micropython-"
-"wifi_manager/wifi_manager.py“ und „rainbow2.py“."
+"Es werden drei Dateien benötigt: „solar_flare_alert.py“, „libs"
+"/micropython-wifi_manager/wifi_manager.py“ und „rainbow2.py“."
 
 #: ../../mp_install_esp32.rst:56
 msgid "You can open them in Thonny."
@@ -177,47 +177,48 @@ msgstr "Sie können sie in Thonny öffnen."
 
 #: ../../mp_install_esp32.rst:58
 msgid ""
-"In `solar_flare_alert.py`, check if the options are correct, especially if "
-"the \\ LED pins are correct, the pin names on ESPs are a bit weird from time"
-" to time."
+"In `solar_flare_alert.py`, check if the options are correct, especially "
+"if the \\ LED pins are correct, the pin names on ESPs are a bit weird "
+"from time to time."
 msgstr ""
 "Überprüfen Sie in „solar_flare_alert.py“, ob die Optionen korrekt sind, "
-"insbesondere ob die LED-Pins korrekt sind. Die Pin-Namen auf ESPs sind von "
-"Zeit zu Zeit etwas seltsam."
+"insbesondere ob die LED-Pins korrekt sind. Die Pin-Namen auf ESPs sind "
+"von Zeit zu Zeit etwas seltsam."
 
 #: ../../mp_install_esp32.rst:61
 msgid ""
-"In the file boot.py, which should already be on the board, change the line "
-"`import main` to `import solar_flare_alert` if it is there, or else just add"
-" the line `import solar_flare_alert`. This will make sure that the program "
-"starts automatically when the board is powered."
+"In the file boot.py, which should already be on the board, change the "
+"line `import main` to `import solar_flare_alert` if it is there, or else "
+"just add the line `import solar_flare_alert`. This will make sure that "
+"the program starts automatically when the board is powered."
 msgstr ""
-"Ändern Sie in der Datei boot.py, die sich bereits auf der Platine befinden "
-"sollte, die Zeile „import main“ in „import solar_flare_alert“, falls "
-"vorhanden, oder fügen Sie einfach die Zeile „import solar_flare_alert“ "
-"hinzu. Dadurch wird sichergestellt, dass das Programm automatisch startet, "
-"wenn das Board mit Strom versorgt wird."
+"Ändern Sie in der Datei boot.py, die sich bereits auf der Platine "
+"befinden sollte, die Zeile „import main“ in „import solar_flare_alert“, "
+"falls vorhanden, oder fügen Sie einfach die Zeile „import "
+"solar_flare_alert“ hinzu. Dadurch wird sichergestellt, dass das Programm "
+"automatisch startet, wenn das Board mit Strom versorgt wird."
 
 #: ../../mp_install_esp32.rst:66
 msgid ""
-"On the esp32 board, you will see that the files are already there. You can "
-"of course work on those ones too. They might be outdated though, so you can "
-"decide whatever is best for you. If you want to contribute and submit them "
-"to GitHub you *have to* use the latest ones."
+"On the esp32 board, you will see that the files are already there. You "
+"can of course work on those ones too. They might be outdated though, so "
+"you can decide whatever is best for you. If you want to contribute and "
+"submit them to GitHub you *have to* use the latest ones."
 msgstr ""
 "Auf dem esp32-Board sehen Sie, dass die Dateien bereits vorhanden sind. "
 "Natürlich können Sie auch daran arbeiten. Möglicherweise sind sie jedoch "
-"veraltet, sodass Sie entscheiden können, was für Sie am besten ist. Wenn Sie"
-" einen Beitrag leisten und diese an GitHub übermitteln möchten, *müssen* Sie"
-" die neuesten Versionen verwenden."
+"veraltet, sodass Sie entscheiden können, was für Sie am besten ist. Wenn "
+"Sie einen Beitrag leisten und diese an GitHub übermitteln möchten, "
+"*müssen* Sie die neuesten Versionen verwenden."
 
 #: ../../mp_install_esp32.rst:71
 msgid ""
 "Saving files from Thonny to the esp32 board, you do not need to make "
 "subfolders there, you can save everything in the main folder."
 msgstr ""
-"Wenn Sie Dateien von Thonny auf dem esp32-Board speichern, müssen Sie dort "
-"keine Unterordner erstellen, sondern können alles im Hauptordner speichern."
+"Wenn Sie Dateien von Thonny auf dem esp32-Board speichern, müssen Sie "
+"dort keine Unterordner erstellen, sondern können alles im Hauptordner "
+"speichern."
 
 #: ../../mp_install_esp32.rst:76
 msgid "Wiring"
@@ -226,12 +227,12 @@ msgstr "Verdrahtung"
 #: ../../mp_install_esp32.rst:77
 msgid ""
 "On our board the pins are labeled with **IOxx** so it is pretty straight "
-"forward. The pins deliver 3.3V and some sources say max 12mA, we use a 110 "
-"Ohm resistor."
+"forward. The pins deliver 3.3V and some sources say max 12mA, we use a "
+"110 Ohm resistor."
 msgstr ""
-"Auf unserem Board sind die Pins mit **IOxx** beschriftet, sodass es ziemlich"
-" einfach ist. Die Pins liefern 3,3 V und einige Quellen sagen maximal 12 mA,"
-" wir verwenden einen 110-Ohm-Widerstand."
+"Auf unserem Board sind die Pins mit **IOxx** beschriftet, sodass es "
+"ziemlich einfach ist. Die Pins liefern 3,3 V und einige Quellen sagen "
+"maximal 12 mA, wir verwenden einen 110-Ohm-Widerstand."
 
 #: ../../mp_install_esp32.rst:82
 msgid "Testing"
@@ -239,9 +240,202 @@ msgstr "Testen"
 
 #: ../../mp_install_esp32.rst:83
 msgid ""
-"In `solar_flare_alert.py` set RUN to False, the program loop wont run and "
-"you can test the functions. For example if the LED lights up correctly."
+"In `solar_flare_alert.py` set RUN to False, the program loop wont run and"
+" you can test the functions. For example if the LED lights up correctly."
 msgstr ""
 "Setzen Sie in „solar_flare_alert.py“ RUN auf False, die Programmschleife "
-"wird nicht ausgeführt und Sie können die Funktionen testen. Zum Beispiel, ob"
-" die LED richtig leuchtet."
+"wird nicht ausgeführt und Sie können die Funktionen testen. Zum Beispiel,"
+" ob die LED richtig leuchtet."
+
+#: ../../../Users/csillag/Projects/goesflarewatch/docs/mp_install_esp32.rst:5
+msgid "Prerequisites"
+msgstr "Voraussetzungen"
+
+#: ../../../Users/csillag/Projects/goesflarewatch/docs/mp_install_esp32.rst:7
+msgid "Install the required tools on your computer:"
+msgstr "Installieren Sie die benötigten Werkzeuge auf Ihrem Computer:"
+
+#: ../../../Users/csillag/Projects/goesflarewatch/docs/mp_install_esp32.rst:20
+msgid "Find your ESP32 port by running ``ls /dev/cu.*`` in the terminal"
+msgstr ""
+"Ermitteln Sie den ESP32-Anschluss, indem Sie im Terminal ``ls /dev/cu.*``"
+" ausführen"
+
+#: ../../../Users/csillag/Projects/goesflarewatch/docs/mp_install_esp32.rst:21
+msgid ""
+"Erase the flash: ``esptool.py --chip esp32 --port /dev/cu.usbserial-0001 "
+"erase_flash``"
+msgstr ""
+"Löschen Sie den Flash: ``esptool.py --chip esp32 --port "
+"/dev/cu.usbserial-0001 erase_flash``"
+
+#: ../../../Users/csillag/Projects/goesflarewatch/docs/mp_install_esp32.rst:22
+msgid ""
+"Flash the firmware: ``esptool.py --chip esp32 --port "
+"/dev/cu.usbserial-0001 --baud 460800 write_flash -z 0x1000 "
+"<DOWNLOADED_FIRMWARE>.bin``"
+msgstr ""
+"Schreiben Sie die Firmware: ``esptool.py --chip esp32 --port "
+"/dev/cu.usbserial-0001 --baud 460800 write_flash -z 0x1000 "
+"<DOWNLOADED_FIRMWARE>.bin``"
+
+#: ../../../Users/csillag/Projects/goesflarewatch/docs/mp_install_esp32.rst:23
+msgid ""
+"Open a serial terminal to check if you get a Python shell: ``screen "
+"/dev/cu.usbserial-0001 115200``"
+msgstr ""
+"Öffnen Sie ein serielles Terminal und prüfen Sie, ob eine Python-Shell "
+"erscheint: ``screen /dev/cu.usbserial-0001 115200``"
+
+#: ../../../Users/csillag/Projects/goesflarewatch/docs/mp_install_esp32.rst:25
+msgid ""
+"On Mac, the port is typically ``/dev/cu.usbserial-0001`` (M1/Apple "
+"Silicon) or ``/dev/cu.SLAB_USBtoUART`` (older Macs). If you don't see the"
+" device, try a different USB cable (must be a data cable, not just "
+"charging)."
+msgstr ""
+"Auf dem Mac ist der Anschluss normalerweise ``/dev/cu.usbserial-0001`` "
+"(M1/Apple Silicon) oder ``/dev/cu.SLAB_USBtoUART`` (ältere Macs). Wenn "
+"das Gerät nicht erscheint, versuchen Sie ein anderes USB-Kabel (es muss "
+"ein Datenkabel sein, nicht nur ein Ladekabel)."
+
+#: ../../../Users/csillag/Projects/goesflarewatch/docs/mp_install_esp32.rst:36
+msgid ""
+"All the code for this project is on GitHub in the ``micropython/`` "
+"directory."
+msgstr ""
+"Der gesamte Code für dieses Projekt liegt auf GitHub im Verzeichnis "
+"``micropython/``."
+
+#: ../../../Users/csillag/Projects/goesflarewatch/docs/mp_install_esp32.rst:38
+msgid "The following files need to be uploaded to the ESP32:"
+msgstr "Die folgenden Dateien müssen auf den ESP32 hochgeladen werden:"
+
+#: ../../../Users/csillag/Projects/goesflarewatch/docs/mp_install_esp32.rst:40
+msgid "``wifi.dat`` -- WiFi credentials (upload first)"
+msgstr "``wifi.dat`` -- WLAN-Zugangsdaten (zuerst hochladen)"
+
+#: ../../../Users/csillag/Projects/goesflarewatch/docs/mp_install_esp32.rst:41
+msgid "``solar_flare_alert.py`` -- main program"
+msgstr "``solar_flare_alert.py`` -- Hauptprogramm"
+
+#: ../../../Users/csillag/Projects/goesflarewatch/docs/mp_install_esp32.rst:42
+msgid "``wifi_manager.py`` -- WiFi connection manager"
+msgstr "``wifi_manager.py`` -- WLAN-Verbindungsverwaltung"
+
+#: ../../../Users/csillag/Projects/goesflarewatch/docs/mp_install_esp32.rst:43
+msgid "``rainbow2.py`` -- color table for LED strip mode"
+msgstr "``rainbow2.py`` -- Farbtabelle für den LED-Streifen-Modus"
+
+#: ../../../Users/csillag/Projects/goesflarewatch/docs/mp_install_esp32.rst:44
+msgid "``boot.py`` -- auto-start on boot (upload last)"
+msgstr "``boot.py`` -- Autostart beim Einschalten (zuletzt hochladen)"
+
+#: ../../../Users/csillag/Projects/goesflarewatch/docs/mp_install_esp32.rst:47
+msgid "Uploading with ampy"
+msgstr "Hochladen mit ampy"
+
+#: ../../../Users/csillag/Projects/goesflarewatch/docs/mp_install_esp32.rst:49
+msgid "Upload all files from the Cursor terminal (``boot.py`` last):"
+msgstr "Laden Sie alle Dateien aus dem Cursor-Terminal hoch (``boot.py`` zuletzt):"
+
+#: ../../../Users/csillag/Projects/goesflarewatch/docs/mp_install_esp32.rst:60
+msgid "Or as a single command:"
+msgstr "Oder als ein einziger Befehl:"
+
+#: ../../../Users/csillag/Projects/goesflarewatch/docs/mp_install_esp32.rst:67
+msgid "If the board is running the old program"
+msgstr "Wenn auf dem Board noch das alte Programm läuft"
+
+#: ../../../Users/csillag/Projects/goesflarewatch/docs/mp_install_esp32.rst:69
+msgid "If the old ``boot.py`` auto-starts the program, you need to stop it first:"
+msgstr ""
+"Wenn die alte ``boot.py`` das Programm automatisch startet, müssen Sie es"
+" zuerst anhalten:"
+
+#: ../../../Users/csillag/Projects/goesflarewatch/docs/mp_install_esp32.rst:71
+msgid "Connect via screen: ``screen /dev/cu.usbserial-0001 115200``"
+msgstr "Verbinden Sie sich über screen: ``screen /dev/cu.usbserial-0001 115200``"
+
+#: ../../../Users/csillag/Projects/goesflarewatch/docs/mp_install_esp32.rst:72
+msgid "Press ``Ctrl+C`` (maybe several times) to get the ``>>>`` REPL prompt"
+msgstr ""
+"Drücken Sie ``Ctrl+C`` (gegebenenfalls mehrmals), bis die "
+"Eingabeaufforderung ``>>>`` erscheint"
+
+#: ../../../Users/csillag/Projects/goesflarewatch/docs/mp_install_esp32.rst:73
+msgid "Wipe boot.py: ``f = open('boot.py', 'w'); f.write(''); f.close()``"
+msgstr "Leeren Sie boot.py: ``f = open('boot.py', 'w'); f.write(''); f.close()``"
+
+#: ../../../Users/csillag/Projects/goesflarewatch/docs/mp_install_esp32.rst:74
+msgid "Exit screen: ``Ctrl+A``, then ``K``, then ``Y``"
+msgstr "Beenden Sie screen: ``Ctrl+A``, dann ``K``, dann ``Y``"
+
+#: ../../../Users/csillag/Projects/goesflarewatch/docs/mp_install_esp32.rst:75
+msgid "Now upload files with ampy as described above"
+msgstr "Laden Sie die Dateien jetzt wie oben beschrieben mit ampy hoch"
+
+#: ../../../Users/csillag/Projects/goesflarewatch/docs/mp_install_esp32.rst:78
+msgid "Verifying uploaded files"
+msgstr "Hochgeladene Dateien prüfen"
+
+#: ../../../Users/csillag/Projects/goesflarewatch/docs/mp_install_esp32.rst:80
+msgid "Connect to the REPL and check file names and sizes:"
+msgstr "Verbinden Sie sich mit der REPL und prüfen Sie Dateinamen und Grössen:"
+
+#: ../../../Users/csillag/Projects/goesflarewatch/docs/mp_install_esp32.rst:91
+msgid "Configuration"
+msgstr "Konfiguration"
+
+#: ../../../Users/csillag/Projects/goesflarewatch/docs/mp_install_esp32.rst:93
+msgid ""
+"In ``solar_flare_alert.py``, check if the options are correct, especially"
+" if the LED pins are correct. The pin names on ESPs are a bit weird from "
+"time to time."
+msgstr ""
+"Prüfen Sie in ``solar_flare_alert.py``, ob die Optionen stimmen, "
+"insbesondere die LED-Pins. Die Pin-Namen auf ESPs sind manchmal etwas "
+"eigenwillig."
+
+#: ../../../Users/csillag/Projects/goesflarewatch/docs/mp_install_esp32.rst:96
+msgid ""
+"The ``boot.py`` file imports ``solar_flare_alert`` and calls ``_main()`` "
+"if ``RUN = True``. This makes the program start automatically when the "
+"board is powered."
+msgstr ""
+"Die Datei ``boot.py`` importiert ``solar_flare_alert`` und ruft "
+"``_main()`` auf, wenn ``RUN = True`` ist. Dadurch startet das Programm "
+"automatisch, sobald das Board eingeschaltet wird."
+
+#: ../../../Users/csillag/Projects/goesflarewatch/docs/mp_install_esp32.rst:105
+msgid ""
+"For boards without a built-in status LED (e.g., ESP32-D), set "
+"``STATUS_LED = None`` in ``solar_flare_alert.py`` for auto-detection, or "
+"``STATUS_LED = False`` to disable it entirely."
+msgstr ""
+"Bei Boards ohne eingebaute Status-LED (zum Beispiel ESP32-D) setzen Sie "
+"in ``solar_flare_alert.py`` ``STATUS_LED = None`` für die automatische "
+"Erkennung, oder ``STATUS_LED = False``, um sie ganz abzuschalten."
+
+#: ../../../Users/csillag/Projects/goesflarewatch/docs/mp_install_esp32.rst:111
+msgid ""
+"In ``solar_flare_alert.py`` set ``RUN = False``, the program loop won't "
+"run and you can test the functions from the REPL."
+msgstr ""
+"Setzen Sie in ``solar_flare_alert.py`` ``RUN = False``. Dann läuft die "
+"Programmschleife nicht, und Sie können die Funktionen in der REPL testen."
+
+#: ../../../Users/csillag/Projects/goesflarewatch/docs/mp_install_esp32.rst:114
+msgid "Connect to the REPL via ``screen /dev/cu.usbserial-0001 115200``, then:"
+msgstr ""
+"Verbinden Sie sich über ``screen /dev/cu.usbserial-0001 115200`` mit der "
+"REPL und dann:"
+
+#: ../../../Users/csillag/Projects/goesflarewatch/docs/mp_install_esp32.rst:121
+msgid ""
+"For more details on the development workflow, see "
+"``micropython/DEVELOPMENT.md``."
+msgstr ""
+"Weitere Einzelheiten zum Entwicklungsablauf stehen in "
+"``micropython/DEVELOPMENT.md``."
+

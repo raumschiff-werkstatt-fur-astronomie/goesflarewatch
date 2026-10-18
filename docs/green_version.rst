@@ -10,8 +10,7 @@ Here are all the components of the device:
       :align: center
       :alt: Wire ring inserted in socket strip
 
-1. Insert the wire ring in the center of the
-socket strip and insert the LED into the ping-pong ball.
+1. Insert the wire ring in the center of the socket strip and insert the LED into the ping-pong ball.
 
    .. image:: ./images/IMG_1752.jpeg
       :width: 80%
