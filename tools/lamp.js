@@ -376,6 +376,8 @@
       wifiUnknown: "The Wi-Fi was written to the lamp, and the lamp restarted. If the light stops blinking, it is connected.",
       upgradeTitle: "Solar Flare Alert versions",
       checkLamp: "Check this lamp",
+      checkStep1: "Plug the Solar Flare Alert into this computer with a USB cable that carries data. A lamp that is already running does not blink.",
+      checkNextPlug: "The lamp is plugged in",
       checkStep2: "This reads the version from the lamp. It does not change the program or the Wi-Fi. Next, the browser asks which device to allow. Choose the lamp. It may be named USB Serial, CP2102, or USB JTAG.",
       checkChoose: "Choose the lamp and check",
       checkCurrent: "This Solar Flare Alert is {version}, the latest version on this page.",
@@ -385,14 +387,12 @@
       latest: "Latest",
       allVersions: "All versions",
       install: "Install",
-      download: "Download",
       upgradeBack: "All versions",
       upgradeStep1: "Plug the Solar Flare Alert into this computer with a USB cable that carries data. Wait until the light is blinking.",
       upgradeNextPlug: "The light is blinking",
       upgradeInstalling: "This installs Solar Flare Alert {version}. The saved Wi-Fi stays as it is. The external Wi-Fi manager is left as it is.",
       upgradeStep2: "Next, the browser asks which device to allow. Choose the lamp. It may be named USB Serial, CP2102, or USB JTAG.",
       upgradeChoose: "Choose the lamp and install",
-      upgradeOther: "Setting up Wi-Fi for the Solar Flare Alert is a different page.",
       upgradeAgain: "Start again",
       upgradeProgress: "Copying the Solar Flare Alert program…",
       upgradeUpdated: "Solar Flare Alert {version} is on the lamp. The saved Wi-Fi is unchanged.",
@@ -452,6 +452,8 @@
       wifiUnknown: "Das WLAN wurde auf die Lampe geschrieben, und die Lampe hat neu gestartet. Wenn das Licht aufhört zu blinken, ist sie verbunden.",
       upgradeTitle: "Versionen des Sonneneruptionsalarms",
       checkLamp: "Diese Lampe prüfen",
+      checkStep1: "Verbinden Sie den Sonneneruptionsalarm mit einem USB-Kabel, das Daten überträgt, mit diesem Computer. Eine Lampe, die bereits läuft, blinkt nicht.",
+      checkNextPlug: "Die Lampe ist angeschlossen",
       checkStep2: "Damit wird die Version von der Lampe gelesen. Das Programm und das WLAN bleiben, wie sie sind. Als Nächstes fragt der Browser, welches Gerät erlaubt werden soll. Wählen Sie die Lampe. Sie kann USB Serial, CP2102 oder USB JTAG heissen.",
       checkChoose: "Lampe auswählen und prüfen",
       checkCurrent: "Dieser Sonneneruptionsalarm hat Version {version}, die aktuelle Version auf dieser Seite.",
@@ -461,14 +463,12 @@
       latest: "Aktuell",
       allVersions: "Alle Versionen",
       install: "Installieren",
-      download: "Herunterladen",
       upgradeBack: "Alle Versionen",
       upgradeStep1: "Verbinden Sie den Sonneneruptionsalarm mit einem USB-Kabel, das Daten überträgt, mit diesem Computer. Warten Sie, bis das Licht blinkt.",
       upgradeNextPlug: "Das Licht blinkt",
       upgradeInstalling: "Damit wird Sonneneruptionsalarm {version} installiert. Das gespeicherte WLAN bleibt, wie es ist. Der externe WLAN-Manager bleibt, wie er ist.",
       upgradeStep2: "Als Nächstes fragt der Browser, welches Gerät erlaubt werden soll. Wählen Sie die Lampe. Sie kann USB Serial, CP2102 oder USB JTAG heissen.",
       upgradeChoose: "Lampe auswählen und installieren",
-      upgradeOther: "Das WLAN für den Sonneneruptionsalarm wird auf einer anderen Seite eingerichtet.",
       upgradeAgain: "Von vorn beginnen",
       upgradeProgress: "Das Programm des Sonneneruptionsalarms wird kopiert …",
       upgradeUpdated: "Sonneneruptionsalarm {version} ist auf der Lampe. Das gespeicherte WLAN ist unverändert.",
@@ -766,6 +766,10 @@
         var installing = root.querySelector("[data-installing]");
         var deviceStep = root.querySelector("[data-device-step]");
         if (mode === "check") {
+          var plugLead = root.querySelector("[data-step='1'] .lead");
+          var plugNext = root.querySelector("[data-step='1'] [data-goto='2']");
+          if (plugLead) plugLead.textContent = text().checkStep1;
+          if (plugNext) plugNext.textContent = text().checkNextPlug;
           if (installing) installing.textContent = text().checkStep2;
           if (deviceStep) deviceStep.hidden = true;
           choose.textContent = text().checkChoose;
@@ -820,13 +824,6 @@
         redraw();
       });
       actions.appendChild(install);
-      (item.files || []).forEach(function (file) {
-        var download = document.createElement("a");
-        download.href = file.file;
-        download.setAttribute("download", file.name);
-        download.textContent = strings.download + " " + file.name;
-        actions.appendChild(download);
-      });
       card.appendChild(title);
       card.appendChild(date);
       card.appendChild(notes);
