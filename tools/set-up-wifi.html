@@ -16,6 +16,17 @@
       <section data-step="1">
         <p class="lead" data-i18n="wifiStep1"></p>
         <button type="button" class="action" data-goto="2" data-i18n="wifiNextPlug"></button>
+        <p><button type="button" class="text-button" id="not-blinking" data-i18n="wifiNotBlinking"></button></p>
+      </section>
+
+      <section data-step="running" hidden>
+        <p class="lead" data-i18n="wifiRunning"></p>
+        <button type="button" class="action" id="leave" data-i18n="wifiLeave"></button>
+        <p><button type="button" class="text-button" id="replace" data-i18n="wifiReplace"></button></p>
+      </section>
+
+      <section data-step="steady" hidden>
+        <p class="lead" data-i18n="wifiSteady"></p>
       </section>
 
       <section data-step="2" hidden>

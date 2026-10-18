@@ -81,9 +81,30 @@
     return this.since().indexOf(">>>") !== -1;
   };
 
-  LampPort.prototype.prepare = async function () {
-    await this.hardReset(false);
-    var ready = await this.interrupt();
+  LampPort.prototype.enterRaw = async function () {
+    await this.writeBytes(new Uint8Array([3]));
+    await sleep(150);
+    this.mark = this.buffer.length;
+    await this.writeBytes(new Uint8Array([13, 1]));
+    var banner = await this.waitFor("raw REPL; CTRL-B to exit", 4000);
+    if (banner.indexOf("raw REPL; CTRL-B to exit") === -1) {
+      var raw = new Error("no-raw");
+      raw.captured = banner;
+      throw raw;
+    }
+    await sleep(200);
+  };
+
+  LampPort.prototype.prepare = async function (options) {
+    var ready = false;
+    if (options && options.reset === false) {
+      this.mark = this.buffer.length;
+      ready = await this.interrupt();
+    }
+    if (!ready) {
+      await this.hardReset(false);
+      ready = await this.interrupt();
+    }
     if (!ready) {
       await this.hardReset(true);
       ready = await this.interrupt();
@@ -93,16 +114,7 @@
       missed.captured = this.since();
       throw missed;
     }
-    await this.writeBytes(new Uint8Array([13, 3]));
-    await sleep(100);
-    this.mark = this.buffer.length;
-    await this.writeBytes(new Uint8Array([13, 1]));
-    var banner = await this.waitFor("raw REPL; CTRL-B to exit", 3000);
-    if (banner.indexOf("raw REPL; CTRL-B to exit") === -1) {
-      var raw = new Error("no-raw");
-      raw.captured = banner;
-      throw raw;
-    }
+    await this.enterRaw();
   };
 
   LampPort.prototype.waitFor = async function (needle, timeout) {
@@ -270,33 +282,60 @@
     );
   }
 
-  async function readLampVersion(lamp) {
-    var reported = await lamp.execRaw(
-      "try:\n" +
-        "    import version\n" +
-        "    print(version.VERSION)\n" +
-        "except Exception:\n" +
-        "    print('none')\n"
-    );
-    var value = String(reported).trim().split(/\s+/).pop();
-    if (!value || value === "none") return null;
-    return value;
+  var LEGACY_VERSION = "2025.03";
+
+  async function execChecked(lamp, code) {
+    try {
+      return await lamp.execRaw(code, 15000);
+    } catch (error) {
+      if (error.message !== "exec") throw error;
+      await lamp.enterRaw();
+      return await lamp.execRaw(code, 15000);
+    }
   }
 
-  function judgeVersion(lampVersion, catalog) {
+  async function readLampState(lamp) {
+    var reported = await execChecked(
+      lamp,
+      "import os\n" +
+        "names = os.listdir()\n" +
+        "print('yes' if 'solar_flare_alert.py' in names else 'no')\n" +
+        "print('file' if 'version.py' in names else 'none')\n"
+    );
+    var lines = String(reported)
+      .replace(/\r/g, "")
+      .split("\n")
+      .map(function (line) {
+        return line.trim();
+      })
+      .filter(Boolean);
+    var hasProgram = lines.lastIndexOf("yes") > lines.lastIndexOf("no");
+    var version = null;
+    if (lines.lastIndexOf("file") > lines.lastIndexOf("none")) {
+      var numbered = await execChecked(lamp, "import version\nprint(version.VERSION)\n");
+      version = String(numbered).trim().split(/\s+/).pop();
+      if (!version || version === "none") version = null;
+    }
+    return { hasProgram: hasProgram, version: version };
+  }
+
+  function judgeVersion(state, catalog) {
     var latest = null;
     for (var i = 0; i < catalog.length; i++) {
       if (catalog[i].latest) latest = catalog[i];
     }
     if (!latest && catalog.length) latest = catalog[0];
-    if (!lampVersion) return { status: "unrecorded", latest: latest };
-    if (latest && lampVersion === latest.version) return { status: "current", latest: latest };
+    if (!state || !state.hasProgram) return { status: "new", version: null, latest: latest };
+    var lampVersion = state.version || LEGACY_VERSION;
+    if (latest && lampVersion === latest.version) {
+      return { status: "current", version: lampVersion, latest: latest };
+    }
     var known = false;
     for (var j = 0; j < catalog.length; j++) {
       if (catalog[j].version === lampVersion) known = true;
     }
-    if (known) return { status: "older", latest: latest };
-    return { status: "unknown", latest: latest };
+    if (known) return { status: "older", version: lampVersion, latest: latest };
+    return { status: "unknown", version: lampVersion, latest: latest };
   }
 
   function wifiResult(text) {
@@ -366,6 +405,11 @@
       stepCount: "Step {n} of {total}",
       wifiStep1: "Plug the Solar Flare Alert into this computer with a USB cable that carries data. Wait until the light is blinking.",
       wifiNextPlug: "The light is blinking",
+      wifiNotBlinking: "The light is not blinking",
+      wifiRunning: "The light is not blinking because the Solar Flare Alert is already running. It has already joined a Wi-Fi network. You can leave it as it is, or save a different network.",
+      wifiLeave: "Leave it as it is",
+      wifiReplace: "Save a different network",
+      wifiSteady: "You can unplug the cable. The lamp keeps the Wi-Fi it already has.",
       wifiStep2: "Type the Wi-Fi network this lamp should join.",
       wifiNextNet: "Continue",
       wifiStep3: "Next, the browser asks which device to allow. Choose the lamp. It may be named USB Serial, CP2102, or USB JTAG.",
@@ -384,6 +428,7 @@
       checkOlder: "This Solar Flare Alert is {version}. {latest} is newer.",
       checkUnrecorded: "This Solar Flare Alert has no version recorded. The latest on this page is {latest}.",
       checkUnknown: "This Solar Flare Alert reports {version}. That version is not listed here. The latest on this page is {latest}.",
+      checkNew: "This lamp does not have the Solar Flare Alert program yet. The latest on this page is {latest}.",
       latest: "Latest",
       allVersions: "All versions",
       install: "Install",
@@ -442,6 +487,11 @@
       stepCount: "Schritt {n} von {total}",
       wifiStep1: "Verbinden Sie den Sonneneruptionsalarm mit einem USB-Kabel, das Daten überträgt, mit diesem Computer. Warten Sie, bis das Licht blinkt.",
       wifiNextPlug: "Das Licht blinkt",
+      wifiNotBlinking: "Das Licht blinkt nicht",
+      wifiRunning: "Das Licht blinkt nicht, weil der Sonneneruptionsalarm bereits läuft. Er hat sich bereits mit einem WLAN verbunden. Sie können ihn so lassen oder ein anderes Netzwerk speichern.",
+      wifiLeave: "So lassen",
+      wifiReplace: "Ein anderes Netzwerk speichern",
+      wifiSteady: "Sie können das Kabel abziehen. Die Lampe behält das WLAN, das sie bereits hat.",
       wifiStep2: "Geben Sie das WLAN ein, mit dem diese Lampe sich verbinden soll.",
       wifiNextNet: "Weiter",
       wifiStep3: "Als Nächstes fragt der Browser, welches Gerät erlaubt werden soll. Wählen Sie die Lampe. Sie kann USB Serial, CP2102 oder USB JTAG heissen.",
@@ -460,6 +510,7 @@
       checkOlder: "Dieser Sonneneruptionsalarm hat Version {version}. {latest} ist neuer.",
       checkUnrecorded: "Auf diesem Sonneneruptionsalarm ist keine Version gespeichert. Die aktuelle Version auf dieser Seite ist {latest}.",
       checkUnknown: "Dieser Sonneneruptionsalarm meldet {version}. Diese Version steht hier nicht. Die aktuelle Version auf dieser Seite ist {latest}.",
+      checkNew: "Auf dieser Lampe ist das Programm des Sonneneruptionsalarms noch nicht vorhanden. Die aktuelle Version auf dieser Seite ist {latest}.",
       latest: "Aktuell",
       allVersions: "Alle Versionen",
       install: "Installieren",
@@ -527,7 +578,7 @@
     pre.textContent = text || "";
   }
 
-  async function withLamp(work) {
+  async function withLamp(work, options) {
     if (!navigator.serial) {
       var missing = new Error("browser");
       throw missing;
@@ -536,7 +587,7 @@
     var lamp = new LampPort(port);
     try {
       await lamp.open();
-      await lamp.prepare();
+      await lamp.prepare(options || {});
       return await work(lamp);
     } finally {
       await lamp.close();
@@ -586,9 +637,18 @@
       count.textContent = text().stepCount.replace("{n}", "2").replace("{total}", "2");
     }
 
+    function showNamed(name) {
+      root.querySelectorAll("[data-step]").forEach(function (section) {
+        section.hidden = section.getAttribute("data-step") !== name;
+      });
+      var count = root.querySelector("[data-step-count]");
+      if (count) count.hidden = true;
+    }
+
     function redraw() {
       fill(root);
       if (step === "clear") showClearStep();
+      else if (step === "running" || step === "steady") showNamed(step);
       else showStep(root, step, 3);
       if (!navigator.serial) setStatus(warning, "bad", text().browser);
     }
@@ -600,6 +660,24 @@
     root.querySelector("[data-goto='2']").addEventListener("click", function () {
       step = 2;
       showStep(root, step, 3);
+    });
+
+    root.querySelector("#not-blinking").addEventListener("click", function () {
+      status.hidden = true;
+      step = "running";
+      showNamed(step);
+    });
+
+    root.querySelector("#replace").addEventListener("click", function () {
+      status.hidden = true;
+      step = 2;
+      showStep(root, step, 3);
+    });
+
+    root.querySelector("#leave").addEventListener("click", function () {
+      status.hidden = true;
+      step = "steady";
+      showNamed(step);
     });
 
     form.addEventListener("submit", function (event) {
@@ -871,35 +949,40 @@
       setStatus(status, "", strings.working);
       try {
         if (mode === "check") {
-          var found = await withLamp(async function (lamp) {
-            var lampVersion = await readLampVersion(lamp);
-            await lamp.hardReset(false);
-            return lampVersion;
-          });
-          var verdict = judgeVersion(found, versions);
+          var state = await withLamp(
+            async function (lamp) {
+              var found = await readLampState(lamp);
+              await lamp.hardReset(false);
+              return found;
+            },
+            { reset: false }
+          );
+          var verdict = judgeVersion(state, versions);
           var latestName = verdict.latest ? verdict.latest.version : "";
+          var shown = verdict.version || "";
           function offerLatest() {
             if (!installLatest || !verdict.latest) return;
+            if (verdict.status === "current") return;
             installLatest.hidden = false;
             installLatest.textContent = strings.install + " " + latestName;
           }
           if (verdict.status === "current") {
-            setStatus(status, "ok", strings.checkCurrent.replace("{version}", found));
+            setStatus(status, "ok", strings.checkCurrent.replace("{version}", shown));
+          } else if (verdict.status === "new") {
+            setStatus(status, "", strings.checkNew.replace("{latest}", latestName));
+            offerLatest();
           } else if (verdict.status === "older") {
             setStatus(
               status,
               "",
-              strings.checkOlder.replace("{version}", found).replace("{latest}", latestName)
+              strings.checkOlder.replace("{version}", shown).replace("{latest}", latestName)
             );
-            offerLatest();
-          } else if (verdict.status === "unrecorded") {
-            setStatus(status, "", strings.checkUnrecorded.replace("{latest}", latestName));
             offerLatest();
           } else {
             setStatus(
               status,
               "",
-              strings.checkUnknown.replace("{version}", found || "").replace("{latest}", latestName)
+              strings.checkUnknown.replace("{version}", shown).replace("{latest}", latestName)
             );
           }
         } else {
