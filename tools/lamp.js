@@ -24,7 +24,9 @@
   }
 
   LampPort.prototype.open = async function () {
-    await this.port.open({ baudRate: 115200 });
+    // The boot text is 348 bytes. The browser default buffer is 255, so the
+    // port errors before the lamp can answer, and the details stay empty.
+    await this.port.open({ baudRate: 115200, bufferSize: 65536 });
     this.writer = this.port.writable.getWriter();
     this.reader = this.port.readable.getReader();
     this.reading = true;
@@ -39,11 +41,23 @@
         if (result.done) break;
         if (result.value) {
           this.buffer += decoder.decode(result.value, { stream: true });
+          this.note();
         }
       }
     } catch (error) {
+      error.captured = this.buffer.slice(-4000);
       this.readError = error;
+      this.note();
     }
+  };
+
+  LampPort.prototype.note = function () {
+    if (this.onText) this.onText(this.buffer.slice(-4000));
+  };
+
+  LampPort.prototype.fail = function (error) {
+    if (!error.captured) error.captured = this.buffer.slice(-4000);
+    throw error;
   };
 
   LampPort.prototype.since = function () {
@@ -51,7 +65,12 @@
   };
 
   LampPort.prototype.writeBytes = async function (bytes) {
-    await this.writer.write(bytes);
+    if (this.readError) this.fail(this.readError);
+    try {
+      await this.writer.write(bytes);
+    } catch (error) {
+      this.fail(error);
+    }
   };
 
   LampPort.prototype.hardReset = async function (inverted) {
@@ -74,6 +93,7 @@
       await this.writeBytes(new Uint8Array([13, 3, 3]));
       var look = Date.now() + 700;
       while (Date.now() < look) {
+        if (this.readError) this.fail(this.readError);
         if (this.since().indexOf(">>>") !== -1) {
           await sleep(150);
           return true;
@@ -146,8 +166,9 @@
     }
     slice = this.buffer.slice(start);
     if (slice.indexOf("OK") === -1 || slice.split("\u0004").length - 1 < 2) {
+      if (this.readError) this.fail(this.readError);
       var failed = new Error("exec");
-      failed.captured = slice;
+      failed.captured = slice || this.buffer.slice(-4000);
       throw failed;
     }
     var rest = slice.slice(slice.indexOf("OK") + 2);
@@ -423,7 +444,7 @@
       checkLamp: "Check this lamp",
       checkStep1: "Plug the Solar Flare Alert into this computer with a USB cable that carries data.",
       checkNextPlug: "The lamp is plugged in",
-      checkWorking: "Testing the lamp",
+      checkWorking: "Testing the lamp. Please wait.",
       checkStep2: "This reads the version from the lamp. It does not change the program or the Wi-Fi. Next, the browser asks which device to allow. Choose the lamp. It may be named USB Serial, CP2102, or USB JTAG.",
       checkChoose: "Choose the lamp and check",
       checkCurrent: "This Solar Flare Alert is {version}, the latest version on this page.",
@@ -506,7 +527,7 @@
       checkLamp: "Diese Lampe prüfen",
       checkStep1: "Verbinden Sie den Sonneneruptionsalarm mit einem USB-Kabel, das Daten überträgt, mit diesem Computer.",
       checkNextPlug: "Die Lampe ist angeschlossen",
-      checkWorking: "Die Lampe wird geprüft",
+      checkWorking: "Die Lampe wird geprüft. Bitte warten.",
       checkStep2: "Damit wird die Version von der Lampe gelesen. Das Programm und das WLAN bleiben, wie sie sind. Als Nächstes fragt der Browser, welches Gerät erlaubt werden soll. Wählen Sie die Lampe. Sie kann USB Serial, CP2102 oder USB JTAG heissen.",
       checkChoose: "Lampe auswählen und prüfen",
       checkCurrent: "Dieser Sonneneruptionsalarm hat Version {version}, die aktuelle Version auf dieser Seite.",
@@ -577,8 +598,18 @@
     return strings.exec;
   }
 
+  function failureText(error) {
+    var parts = [];
+    if (error && error.captured) parts.push(String(error.captured));
+    if (error && error.detail) parts.push(String(error.detail));
+    if (error && error.message && !text()[error.message]) {
+      parts.push((error.name || "Error") + ": " + error.message);
+    }
+    return parts.join("\n");
+  }
+
   function rememberLog(pre, text) {
-    pre.textContent = text || "";
+    if (pre) pre.textContent = text || "";
   }
 
   async function withLamp(work, options) {
@@ -588,6 +619,7 @@
     }
     var port = await navigator.serial.requestPort();
     var lamp = new LampPort(port);
+    lamp.onText = options && options.onText;
     try {
       await lamp.open();
       await lamp.prepare(options || {});
@@ -743,7 +775,7 @@
         else setStatus(status, "", strings.wifiUnknown);
         if (watched.result !== "connected") again.hidden = false;
       } catch (error) {
-        rememberLog(log, error.captured || error.detail || "");
+        rememberLog(log, failureText(error));
         setStatus(status, "bad", error.message === "browser" ? strings.browser : friendly(error));
         again.hidden = false;
       } finally {
@@ -775,7 +807,7 @@
         else setStatus(status, "", strings.wifiResetUnknown);
         if (watched.result !== "cleared") again.hidden = false;
       } catch (error) {
-        rememberLog(log, error.captured || error.detail || "");
+        rememberLog(log, failureText(error));
         setStatus(status, "bad", error.message === "browser" ? strings.browser : friendly(error));
         again.hidden = false;
       } finally {
@@ -950,16 +982,29 @@
       again.hidden = true;
       if (installLatest) installLatest.hidden = true;
       setStatus(status, "", mode === "check" ? strings.checkWorking : strings.working);
+      var details = log ? log.closest("details") : null;
+      if (details) details.open = true;
       try {
         if (mode === "check") {
           var state = await withLamp(
             async function (lamp) {
               var found = await readLampState(lamp);
-              await lamp.hardReset(false);
+              try {
+                await lamp.hardReset(false);
+              } catch (error) {
+                /* The version was already read. */
+              }
               return found;
             },
-            { reset: false }
+            {
+              reset: false,
+              onText: function (received) {
+                rememberLog(log, received);
+              },
+            }
           );
+          rememberLog(log, "");
+          if (details) details.open = false;
           var verdict = judgeVersion(state, versions);
           var latestName = verdict.latest ? verdict.latest.version : "";
           var shown = verdict.version || "";
@@ -1018,7 +1063,7 @@
           if (watched.result !== "updated") again.hidden = false;
         }
       } catch (error) {
-        rememberLog(log, error.captured || error.detail || "");
+        rememberLog(log, failureText(error));
         setStatus(status, "bad", error.message === "browser" ? strings.browser : friendly(error));
         again.hidden = false;
       } finally {
