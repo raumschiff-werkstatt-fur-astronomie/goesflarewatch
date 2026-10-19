@@ -69,21 +69,22 @@
   };
 
   LampPort.prototype.interrupt = async function () {
-    var deadline = Date.now() + 6000;
+    var deadline = Date.now() + 8000;
     while (Date.now() < deadline) {
-      await this.writeBytes(new Uint8Array([3]));
-      if (this.since().indexOf(">>>") !== -1) {
-        await sleep(200);
-        return true;
+      await this.writeBytes(new Uint8Array([13, 3, 3]));
+      var look = Date.now() + 700;
+      while (Date.now() < look) {
+        if (this.since().indexOf(">>>") !== -1) {
+          await sleep(150);
+          return true;
+        }
+        await sleep(40);
       }
-      await sleep(20);
     }
-    return this.since().indexOf(">>>") !== -1;
+    return false;
   };
 
   LampPort.prototype.enterRaw = async function () {
-    await this.writeBytes(new Uint8Array([3]));
-    await sleep(150);
     this.mark = this.buffer.length;
     await this.writeBytes(new Uint8Array([13, 1]));
     var banner = await this.waitFor("raw REPL; CTRL-B to exit", 4000);
@@ -420,8 +421,9 @@
       wifiUnknown: "The Wi-Fi was written to the lamp, and the lamp restarted. If the light stops blinking, it is connected.",
       upgradeTitle: "Solar Flare Alert versions",
       checkLamp: "Check this lamp",
-      checkStep1: "Plug the Solar Flare Alert into this computer with a USB cable that carries data. A lamp that is already running does not blink.",
+      checkStep1: "Plug the Solar Flare Alert into this computer with a USB cable that carries data.",
       checkNextPlug: "The lamp is plugged in",
+      checkWorking: "Testing the lamp",
       checkStep2: "This reads the version from the lamp. It does not change the program or the Wi-Fi. Next, the browser asks which device to allow. Choose the lamp. It may be named USB Serial, CP2102, or USB JTAG.",
       checkChoose: "Choose the lamp and check",
       checkCurrent: "This Solar Flare Alert is {version}, the latest version on this page.",
@@ -502,8 +504,9 @@
       wifiUnknown: "Das WLAN wurde auf die Lampe geschrieben, und die Lampe hat neu gestartet. Wenn das Licht aufhört zu blinken, ist sie verbunden.",
       upgradeTitle: "Versionen des Sonneneruptionsalarms",
       checkLamp: "Diese Lampe prüfen",
-      checkStep1: "Verbinden Sie den Sonneneruptionsalarm mit einem USB-Kabel, das Daten überträgt, mit diesem Computer. Eine Lampe, die bereits läuft, blinkt nicht.",
+      checkStep1: "Verbinden Sie den Sonneneruptionsalarm mit einem USB-Kabel, das Daten überträgt, mit diesem Computer.",
       checkNextPlug: "Die Lampe ist angeschlossen",
+      checkWorking: "Die Lampe wird geprüft",
       checkStep2: "Damit wird die Version von der Lampe gelesen. Das Programm und das WLAN bleiben, wie sie sind. Als Nächstes fragt der Browser, welches Gerät erlaubt werden soll. Wählen Sie die Lampe. Sie kann USB Serial, CP2102 oder USB JTAG heissen.",
       checkChoose: "Lampe auswählen und prüfen",
       checkCurrent: "Dieser Sonneneruptionsalarm hat Version {version}, die aktuelle Version auf dieser Seite.",
@@ -946,7 +949,7 @@
       showStep(root, step, 2);
       again.hidden = true;
       if (installLatest) installLatest.hidden = true;
-      setStatus(status, "", strings.working);
+      setStatus(status, "", mode === "check" ? strings.checkWorking : strings.working);
       try {
         if (mode === "check") {
           var state = await withLamp(
