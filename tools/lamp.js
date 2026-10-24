@@ -27,35 +27,68 @@
     // The boot text is 348 bytes. The browser default buffer is 255, so the
     // port errors before the lamp can answer, and the details stay empty.
     await this.port.open({ baudRate: 115200, bufferSize: 65536 });
-    this.writer = this.port.writable.getWriter();
-    this.reader = this.port.readable.getReader();
     this.reading = true;
     this._readLoop();
-    // Opening the port asserts both control lines and holds this lamp in
-    // reset, so it sends nothing. Listen first, then release the lines.
-    await this.port.setSignals({ dataTerminalReady: false, requestToSend: false });
+    await sleep(50);
+    // The browser asserts both lines and holds this lamp in reset. Clear DTR
+    // first, then RTS, and only after a read is already waiting.
+    await this.releaseLines();
+  };
+
+  LampPort.prototype.releaseLines = async function () {
+    await this.port.setSignals({ dataTerminalReady: false });
+    await sleep(50);
+    await this.port.setSignals({ requestToSend: false });
+    await sleep(100);
   };
 
   LampPort.prototype._readLoop = async function () {
     var decoder = new TextDecoder();
-    try {
-      while (this.reading) {
-        var result = await this.reader.read();
-        if (result.done) break;
-        if (result.value) {
-          this.buffer += decoder.decode(result.value, { stream: true });
-          if (this.buffer.length > 16000) {
-            var drop = this.buffer.length - 8000;
-            this.buffer = this.buffer.slice(drop);
-            this.mark = Math.max(0, this.mark - drop);
-          }
-          this.note();
-        }
+    while (this.reading && this.port.readable) {
+      var reader;
+      try {
+        reader = this.port.readable.getReader();
+      } catch (error) {
+        error.captured = this.buffer.slice(-4000);
+        this.readError = error;
+        this.note();
+        return;
       }
-    } catch (error) {
-      error.captured = this.buffer.slice(-4000);
-      this.readError = error;
-      this.note();
+      this.reader = reader;
+      try {
+        while (this.reading) {
+          var result = await reader.read();
+          if (result.done) {
+            this.readEnded = true;
+            break;
+          }
+          if (result.value && result.value.length) {
+            this.readEnded = false;
+            this.buffer += decoder.decode(result.value, { stream: true });
+            if (this.buffer.length > 16000) {
+              var drop = this.buffer.length - 8000;
+              this.buffer = this.buffer.slice(drop);
+              this.mark = Math.max(0, this.mark - drop);
+            }
+            this.note();
+          }
+        }
+      } catch (error) {
+        error.captured = this.buffer.slice(-4000);
+        this.readError = error;
+        this.note();
+        return;
+      } finally {
+        try {
+          reader.releaseLock();
+        } catch (error) {
+          /* Already released. */
+        }
+        if (this.reader === reader) this.reader = null;
+      }
+      // Firefox ends the read while the lamp is still in reset. Start again.
+      if (!this.reading || this.readError) return;
+      await sleep(20);
     }
   };
 
@@ -74,8 +107,12 @@
 
   LampPort.prototype.writeBytes = async function (bytes) {
     if (this.readError) this.fail(this.readError);
+    if (!this.writer) {
+      this.writer = this.port.writable.getWriter();
+    }
     try {
-      await this.writer.write(bytes);
+      var copy = new Uint8Array(bytes);
+      await this.writer.write(copy);
     } catch (error) {
       this.fail(error);
     }
@@ -127,12 +164,13 @@
   LampPort.prototype.prepare = async function () {
     var ready = await this.interrupt();
     if (!ready) {
-      await this.hardReset(false);
+      await this.releaseLines();
       ready = await this.interrupt();
     }
     if (!ready) {
       var missed = new Error("repl");
-      missed.captured = this.buffer.slice(-4000);
+      if (this.buffer) missed.captured = this.buffer.slice(-4000);
+      else missed.detail = this.readEnded ? text().streamClosed : text().silent;
       throw missed;
     }
     await this.enterRaw();
@@ -393,6 +431,7 @@
       repl: "The lamp did not stop for the computer. Unplug it, plug it back in, and try again.",
       raw: "The lamp did not open a connection the computer can use. Unplug it, plug it back in, and try again.",
       silent: "The lamp sent nothing.",
+      streamClosed: "The browser closed the connection before the lamp answered.",
       exec: "The lamp did not accept the command. Unplug it, plug it back in, and try again.",
       device: "The lamp reported an error. The details are below.",
       size: "The transfer stopped early. The lamp still has its previous program and its previous Wi-Fi.",
@@ -477,6 +516,7 @@
       repl: "Die Lampe hat für den Computer nicht angehalten. Ziehen Sie das Kabel ab, stecken Sie es wieder ein und versuchen Sie es erneut.",
       raw: "Die Lampe hat keine Verbindung geöffnet, die der Computer nutzen kann. Ziehen Sie das Kabel ab, stecken Sie es wieder ein und versuchen Sie es erneut.",
       silent: "Die Lampe hat nichts gesendet.",
+      streamClosed: "Der Browser hat die Verbindung geschlossen, bevor die Lampe geantwortet hat.",
       exec: "Die Lampe hat den Befehl nicht angenommen. Ziehen Sie das Kabel ab, stecken Sie es wieder ein und versuchen Sie es erneut.",
       device: "Die Lampe hat einen Fehler gemeldet. Die Einzelheiten stehen unten.",
       size: "Die Übertragung ist vorzeitig abgebrochen. Die Lampe hat weiterhin ihr bisheriges Programm und ihr bisheriges WLAN.",
