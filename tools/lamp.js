@@ -27,13 +27,13 @@
     // The boot text is 348 bytes. The browser default buffer is 255, so the
     // port errors before the lamp can answer, and the details stay empty.
     await this.port.open({ baudRate: 115200, bufferSize: 65536 });
-    // Opening the port asserts both control lines. On this lamp that holds the
-    // processor in reset, so it sends nothing until the lines are released.
-    await this.hardReset(false);
     this.writer = this.port.writable.getWriter();
     this.reader = this.port.readable.getReader();
     this.reading = true;
     this._readLoop();
+    // Opening the port asserts both control lines and holds this lamp in
+    // reset, so it sends nothing. Listen first, then release the lines.
+    await this.port.setSignals({ dataTerminalReady: false, requestToSend: false });
   };
 
   LampPort.prototype._readLoop = async function () {
