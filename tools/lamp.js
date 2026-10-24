@@ -27,6 +27,9 @@
     // The boot text is 348 bytes. The browser default buffer is 255, so the
     // port errors before the lamp can answer, and the details stay empty.
     await this.port.open({ baudRate: 115200, bufferSize: 65536 });
+    // Opening the port asserts both control lines. On this lamp that holds the
+    // processor in reset, so it sends nothing until the lines are released.
+    await this.hardReset(false);
     this.writer = this.port.writable.getWriter();
     this.reader = this.port.readable.getReader();
     this.reading = true;
@@ -41,6 +44,11 @@
         if (result.done) break;
         if (result.value) {
           this.buffer += decoder.decode(result.value, { stream: true });
+          if (this.buffer.length > 16000) {
+            var drop = this.buffer.length - 8000;
+            this.buffer = this.buffer.slice(drop);
+            this.mark = Math.max(0, this.mark - drop);
+          }
           this.note();
         }
       }
@@ -88,10 +96,10 @@
   };
 
   LampPort.prototype.interrupt = async function () {
-    var deadline = Date.now() + 8000;
+    var deadline = Date.now() + 12000;
     while (Date.now() < deadline) {
       await this.writeBytes(new Uint8Array([13, 3, 3]));
-      var look = Date.now() + 700;
+      var look = Date.now() + 200;
       while (Date.now() < look) {
         if (this.readError) this.fail(this.readError);
         if (this.since().indexOf(">>>") !== -1) {
@@ -109,30 +117,22 @@
     await this.writeBytes(new Uint8Array([13, 1]));
     var banner = await this.waitFor("raw REPL; CTRL-B to exit", 4000);
     if (banner.indexOf("raw REPL; CTRL-B to exit") === -1) {
-      var raw = new Error("no-raw");
+      var raw = new Error("raw");
       raw.captured = banner;
       throw raw;
     }
     await sleep(200);
   };
 
-  LampPort.prototype.prepare = async function (options) {
-    var ready = false;
-    if (options && options.reset === false) {
-      this.mark = this.buffer.length;
-      ready = await this.interrupt();
-    }
+  LampPort.prototype.prepare = async function () {
+    var ready = await this.interrupt();
     if (!ready) {
       await this.hardReset(false);
       ready = await this.interrupt();
     }
     if (!ready) {
-      await this.hardReset(true);
-      ready = await this.interrupt();
-    }
-    if (!ready) {
-      var missed = new Error("no-repl");
-      missed.captured = this.since();
+      var missed = new Error("repl");
+      missed.captured = this.buffer.slice(-4000);
       throw missed;
     }
     await this.enterRaw();
@@ -392,6 +392,7 @@
       talking: "The lamp is listening.",
       repl: "The lamp did not stop for the computer. Unplug it, plug it back in, and try again.",
       raw: "The lamp did not open a connection the computer can use. Unplug it, plug it back in, and try again.",
+      silent: "The lamp sent nothing.",
       exec: "The lamp did not accept the command. Unplug it, plug it back in, and try again.",
       device: "The lamp reported an error. The details are below.",
       size: "The transfer stopped early. The lamp still has its previous program and its previous Wi-Fi.",
@@ -475,6 +476,7 @@
       talking: "Die Lampe hört zu.",
       repl: "Die Lampe hat für den Computer nicht angehalten. Ziehen Sie das Kabel ab, stecken Sie es wieder ein und versuchen Sie es erneut.",
       raw: "Die Lampe hat keine Verbindung geöffnet, die der Computer nutzen kann. Ziehen Sie das Kabel ab, stecken Sie es wieder ein und versuchen Sie es erneut.",
+      silent: "Die Lampe hat nichts gesendet.",
       exec: "Die Lampe hat den Befehl nicht angenommen. Ziehen Sie das Kabel ab, stecken Sie es wieder ein und versuchen Sie es erneut.",
       device: "Die Lampe hat einen Fehler gemeldet. Die Einzelheiten stehen unten.",
       size: "Die Übertragung ist vorzeitig abgebrochen. Die Lampe hat weiterhin ihr bisheriges Programm und ihr bisheriges WLAN.",
@@ -602,6 +604,7 @@
     var parts = [];
     if (error && error.captured) parts.push(String(error.captured));
     if (error && error.detail) parts.push(String(error.detail));
+    if (!parts.length) parts.push(text().silent);
     if (error && error.message && !text()[error.message]) {
       parts.push((error.name || "Error") + ": " + error.message);
     }
