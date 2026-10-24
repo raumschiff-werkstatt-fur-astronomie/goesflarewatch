@@ -102,13 +102,16 @@ input[type="password"] {
   font-size: 0.95rem;
 }
 
-button.action {
+button.action,
+a.action {
+  display: inline-block;
   font-family: "Avenir Next", "Segoe UI", sans-serif;
   font-size: 1rem;
   padding: 0.7rem 1rem;
   background: #1c1915;
   color: #f7f4ee;
   border: 0;
+  text-decoration: none;
   cursor: pointer;
 }
 
@@ -145,6 +148,12 @@ pre {
   padding: 0.8rem;
   max-height: 16rem;
   overflow: auto;
+}
+
+pre.command {
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
+  font-size: 0.95rem;
+  user-select: all;
 }
 
 .hidden {

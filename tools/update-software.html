@@ -8,36 +8,21 @@
   </head>
   <body>
     <main>
-      <p class="lang"><button type="button" data-lang></button></p>
-      <h1 data-i18n="upgradeTitle"></h1>
+      <p class="lang"><button type="button" data-lang>Deutsch</button></p>
+      <h1 data-i18n="upgradeTitle">Solar Flare Alert versions</h1>
       <p class="warning" hidden></p>
-      <p><button type="button" class="action" id="check" data-i18n="checkLamp"></button></p>
+      <p class="lead" data-i18n="programLead">The browser cannot check this lamp. A program on the computer can.</p>
+      <p data-i18n="programPlug">Plug the Solar Flare Alert into this computer with a USB cable that carries data.</p>
+      <p><a class="action" href="lamp_setup.py?v=9" download="lamp_setup.py" data-i18n="download">Download the setup program</a></p>
+      <p data-i18n="programCheck">Open Terminal. Go to the folder where this file was saved. On a Mac that is usually Downloads. This reads the version. It does not change the program or the Wi-Fi.</p>
+      <pre class="command" data-i18n="cmdCheck">cd ~/Downloads
+python3 lamp_setup.py check</pre>
+      <p data-i18n="programInstall">To put the current version on the lamp, run this instead. The saved Wi-Fi stays as it is. The external Wi-Fi manager stays as it is.</p>
+      <pre class="command" data-i18n="cmdInstall">cd ~/Downloads
+python3 lamp_setup.py install</pre>
       <div id="releases"></div>
-
-      <div id="wizard" hidden>
-        <p class="step-count" data-step-count></p>
-        <section data-step="1">
-          <p class="lead" data-i18n="upgradeStep1"></p>
-          <button type="button" class="action" data-goto="2" data-i18n="upgradeNextPlug"></button>
-        </section>
-        <section data-step="2" hidden>
-          <p class="lead" data-installing></p>
-          <p data-i18n="upgradeStep2" data-device-step></p>
-          <button type="button" class="action" id="choose" data-i18n="upgradeChoose"></button>
-        </section>
-        <p class="status" hidden></p>
-        <p class="wizard-actions">
-          <button type="button" class="action" id="again" hidden data-i18n="upgradeAgain"></button>
-          <button type="button" class="action" id="install-latest" hidden data-i18n="install"></button>
-          <button type="button" class="text-button" id="back" data-i18n="upgradeBack"></button>
-        </p>
-        <details>
-          <summary data-i18n="serialLog"></summary>
-          <pre></pre>
-        </details>
-      </div>
     </main>
-    <script src="lamp.js?v=8"></script>
+    <script src="lamp.js?v=9"></script>
     <script>
       LampTools.initUpgrade(document);
     </script>

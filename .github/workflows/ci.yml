@@ -1,7 +1,8 @@
 # Documentation and a lamp release are different.
 # A push that only changes docs/ runs these checks and does not publish a new program.
 # A lamp release is a directory under tools/versions/ plus one latest entry in
-# tools/versions.json. That catalog is what the Install button offers.
+# tools/versions.json. The setup program installs that catalog. The page does not
+# open the lamp from the browser.
 
 name: CI
 
@@ -21,4 +22,4 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Check the release catalog
-        run: python3 -m unittest tests/test_pack_lamp_site.py
+        run: python3 -m unittest tests/test_pack_lamp_site.py tests/test_lamp_setup.py

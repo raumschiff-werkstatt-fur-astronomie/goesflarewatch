@@ -33,6 +33,11 @@ class PackLampSiteTest(unittest.TestCase):
             names = [entry["name"] for entry in latest[0]["files"]]
             self.assertIn("solar_flare_alert.py", names)
             self.assertNotIn("wifi_manager.py", names)
+            self.assertTrue((Path(dest) / "lamp_setup.py").is_file())
+            page = (Path(dest) / "update-software.html").read_text(encoding="utf-8")
+            self.assertIn("lamp_setup.py", page)
+            script = (Path(dest) / "lamp.js").read_text(encoding="utf-8")
+            self.assertNotIn("navigator.serial", script)
 
     def test_a_second_latest_release_is_rejected(self):
         with tempfile.TemporaryDirectory() as source, tempfile.TemporaryDirectory() as dest:

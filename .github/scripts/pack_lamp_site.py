@@ -12,6 +12,7 @@ PUBLIC_FILES = (
     "update-software.html",
     "lamp.css",
     "lamp.js",
+    "lamp_setup.py",
     "versions.json",
 )
 

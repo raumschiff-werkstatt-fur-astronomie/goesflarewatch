@@ -8,68 +8,21 @@
   </head>
   <body>
     <main>
-      <p class="lang"><button type="button" data-lang></button></p>
-      <h1 data-i18n="wifiTitle"></h1>
-      <p class="warning" hidden></p>
-      <p class="step-count" data-step-count></p>
-
-      <section data-step="1">
-        <p class="lead" data-i18n="wifiStep1"></p>
-        <button type="button" class="action" data-goto="2" data-i18n="wifiNextPlug"></button>
-        <p><button type="button" class="text-button" id="not-blinking" data-i18n="wifiNotBlinking"></button></p>
-      </section>
-
-      <section data-step="running" hidden>
-        <p class="lead" data-i18n="wifiRunning"></p>
-        <button type="button" class="action" id="leave" data-i18n="wifiLeave"></button>
-        <p><button type="button" class="text-button" id="replace" data-i18n="wifiReplace"></button></p>
-      </section>
-
-      <section data-step="steady" hidden>
-        <p class="lead" data-i18n="wifiSteady"></p>
-      </section>
-
-      <section data-step="2" hidden>
-        <p class="lead" data-i18n="wifiStep2"></p>
-        <form>
-          <p>
-            <label for="ssid" data-i18n="ssid"></label>
-            <input id="ssid" name="ssid" type="text" autocomplete="off" spellcheck="false" />
-          </p>
-          <p>
-            <label for="password" data-i18n="password"></label>
-            <input id="password" name="password" type="password" autocomplete="off" />
-          </p>
-          <p class="show-password">
-            <label><input type="checkbox" /> <span data-i18n="show"></span></label>
-          </p>
-          <p class="note" data-i18n="emptyPassword"></p>
-          <p class="note" data-i18n="wifiPrivate"></p>
-          <button type="submit" class="action" data-i18n="wifiNextNet"></button>
-        </form>
-        <p><button type="button" class="text-button" id="reset" data-i18n="wifiReset"></button></p>
-      </section>
-
-      <section data-step="clear" hidden>
-        <p class="lead" data-i18n="wifiResetLead"></p>
-        <button type="button" class="action" id="clear" data-i18n="wifiResetChoose"></button>
-        <p><button type="button" class="text-button" id="reset-back" data-i18n="wifiResetBack"></button></p>
-      </section>
-
-      <section data-step="3" hidden>
-        <p class="lead" data-i18n="wifiStep3"></p>
-        <button type="button" class="action" id="choose" data-i18n="wifiChoose"></button>
-      </section>
-
-      <p class="status" hidden></p>
-      <p><button type="button" class="action" id="again" hidden data-i18n="wifiAgain"></button></p>
-
-      <details>
-        <summary data-i18n="serialLog"></summary>
-        <pre></pre>
-      </details>
+      <p class="lang"><button type="button" data-lang>Deutsch</button></p>
+      <h1 data-i18n="wifiTitle">Set up Wi-Fi for the Solar Flare Alert</h1>
+      <p class="lead" data-i18n="wifiLead">The browser cannot write to this lamp. A program on the computer can.</p>
+      <p data-i18n="wifiPlug">Plug the Solar Flare Alert into this computer with a USB cable that carries data.</p>
+      <p data-i18n="wifiRunning">When the light is not blinking, the Solar Flare Alert is already running and has already joined a Wi-Fi network. You can leave it as it is, or save a different network with the program below.</p>
+      <p><a class="action" href="lamp_setup.py?v=9" download="lamp_setup.py" data-i18n="download">Download the setup program</a></p>
+      <p data-i18n="wifiRun">Open Terminal. Go to the folder where this file was saved. On a Mac that is usually Downloads. The program asks for the network name and the password.</p>
+      <pre class="command" data-i18n="cmdWifi">cd ~/Downloads
+python3 lamp_setup.py wifi</pre>
+      <p class="note" data-i18n="wifiPrivate">The password is typed into that program and written to the lamp over the cable. It is not sent to a server. Leave it empty when the network has no password.</p>
+      <p data-i18n="wifiClearLead">To remove the saved Wi-Fi, run this instead. The program on the lamp stays as it is. Afterwards the light blinks until a new network is saved.</p>
+      <pre class="command" data-i18n="cmdClear">cd ~/Downloads
+python3 lamp_setup.py clear</pre>
     </main>
-    <script src="lamp.js?v=8"></script>
+    <script src="lamp.js?v=9"></script>
     <script>
       LampTools.initWifi(document);
     </script>
