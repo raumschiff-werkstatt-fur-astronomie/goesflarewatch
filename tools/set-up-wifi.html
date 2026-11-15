@@ -10,19 +10,19 @@
     <main>
       <p class="lang"><button type="button" data-lang>Deutsch</button></p>
       <h1 data-i18n="wifiTitle">Set up Wi-Fi for the Solar Flare Alert</h1>
-      <p class="lead" data-i18n="wifiLead">The browser cannot write to this lamp. A program on the computer can.</p>
+      <p class="lead" data-i18n="wifiLead">The browser cannot save a network on this lamp. Use the program below on this computer.</p>
       <p data-i18n="wifiPlug">Plug the Solar Flare Alert into this computer with a USB cable that carries data.</p>
-      <p data-i18n="wifiRunning">When the light is not blinking, the Solar Flare Alert is already running and has already joined a Wi-Fi network. You can leave it as it is, or save a different network with the program below.</p>
-      <p><a class="action" href="lamp_setup.py?v=9" download="lamp_setup.py" data-i18n="download">Download the setup program</a></p>
-      <p data-i18n="wifiRun">Open Terminal. Go to the folder where this file was saved. On a Mac that is usually Downloads. The program asks for the network name and the password.</p>
+      <p data-i18n="wifiRunning">If the light is not blinking, the Solar Flare Alert is already running and has already joined a Wi-Fi network. You can leave that network as it is, or save a different one with the program below.</p>
+      <p><a class="action" href="lamp_setup.py?v=10" download="lamp_setup.py" data-i18n="download">Download the setup program</a></p>
+      <p data-i18n="wifiRun">Open Terminal and go to the folder where you saved the file. On a Mac, that folder is usually Downloads. The program asks for the network name and the password.</p>
       <pre class="command" data-i18n="cmdWifi">cd ~/Downloads
 python3 lamp_setup.py wifi</pre>
-      <p class="note" data-i18n="wifiPrivate">The password is typed into that program and written to the lamp over the cable. It is not sent to a server. Leave it empty when the network has no password.</p>
-      <p data-i18n="wifiClearLead">To remove the saved Wi-Fi, run this instead. The program on the lamp stays as it is. Afterwards the light blinks until a new network is saved.</p>
+      <p class="note" data-i18n="wifiPrivate">You type the password into that program, and the program writes it to the lamp over the cable. The password is not sent to a server. Leave it empty if the network does not have one.</p>
+      <p data-i18n="wifiClearLead">To remove the saved Wi-Fi network, run the command below instead. The program on the lamp stays as it is. The light blinks until a new network is saved.</p>
       <pre class="command" data-i18n="cmdClear">cd ~/Downloads
 python3 lamp_setup.py clear</pre>
     </main>
-    <script src="lamp.js?v=9"></script>
+    <script src="lamp.js?v=10"></script>
     <script>
       LampTools.initWifi(document);
     </script>

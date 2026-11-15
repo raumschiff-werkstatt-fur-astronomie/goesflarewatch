@@ -11,18 +11,18 @@
       <p class="lang"><button type="button" data-lang>Deutsch</button></p>
       <h1 data-i18n="upgradeTitle">Solar Flare Alert versions</h1>
       <p class="warning" hidden></p>
-      <p class="lead" data-i18n="programLead">The browser cannot check this lamp. A program on the computer can.</p>
+      <p class="lead" data-i18n="programLead">The browser cannot check this lamp. Use the program below on this computer.</p>
       <p data-i18n="programPlug">Plug the Solar Flare Alert into this computer with a USB cable that carries data.</p>
-      <p><a class="action" href="lamp_setup.py?v=9" download="lamp_setup.py" data-i18n="download">Download the setup program</a></p>
-      <p data-i18n="programCheck">Open Terminal. Go to the folder where this file was saved. On a Mac that is usually Downloads. This reads the version. It does not change the program or the Wi-Fi.</p>
+      <p><a class="action" href="lamp_setup.py?v=10" download="lamp_setup.py" data-i18n="download">Download the setup program</a></p>
+      <p data-i18n="programCheck">Open Terminal and go to the folder where you saved the file. On a Mac, that folder is usually Downloads. The command reads the version from the lamp and reports whether the lamp is connected to Wi-Fi. It does not change the program or the saved network.</p>
       <pre class="command" data-i18n="cmdCheck">cd ~/Downloads
 python3 lamp_setup.py check</pre>
-      <p data-i18n="programInstall">To put the current version on the lamp, run this instead. The saved Wi-Fi stays as it is. The external Wi-Fi manager stays as it is.</p>
+      <p data-i18n="programInstall">To install the current version on the lamp, run the command below instead. The saved Wi-Fi network is left unchanged, and the external Wi-Fi manager is left unchanged.</p>
       <pre class="command" data-i18n="cmdInstall">cd ~/Downloads
 python3 lamp_setup.py install</pre>
       <div id="releases"></div>
     </main>
-    <script src="lamp.js?v=9"></script>
+    <script src="lamp.js?v=10"></script>
     <script>
       LampTools.initUpgrade(document);
     </script>

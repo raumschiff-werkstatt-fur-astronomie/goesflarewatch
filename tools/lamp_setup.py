@@ -28,61 +28,64 @@ TEXT = {
         "platform": "This program runs on macOS and Linux.",
         "usage": "\n".join(
             [
-                "Save lamp_setup.py, open Terminal, and go to that folder. Then run one of:",
+                "Save lamp_setup.py, open Terminal, and go to the folder where you saved it. Then run one of these commands:",
                 "",
                 "  python3 lamp_setup.py check",
                 "  python3 lamp_setup.py install",
                 "  python3 lamp_setup.py wifi",
                 "  python3 lamp_setup.py clear",
                 "",
-                "check reads the version. It does not change the program or the Wi-Fi.",
-                "install puts the current Solar Flare Alert on the lamp. The saved Wi-Fi stays.",
-                "wifi saves a network on the lamp. The password stays on this computer.",
-                "clear removes the saved Wi-Fi. The program stays as it is.",
+                "The check command reads the version from the lamp and reports whether it has joined Wi-Fi. It does not change the program or the saved network.",
+                "The install command copies the current Solar Flare Alert onto the lamp. The saved Wi-Fi network is left unchanged.",
+                "The wifi command saves a network on the lamp. The password remains on this computer.",
+                "The clear command removes the saved Wi-Fi network. The program on the lamp stays as it is.",
             ]
         ),
         "testing": "Testing the lamp. Please wait.",
-        "found": "The computer found the lamp on {port}.",
-        "noport": "The computer found no lamp. Plug it in with a USB cable that carries data, then try again.",
-        "several": "More than one lamp is plugged in. Type the number of this lamp.",
-        "repl": "The lamp did not stop for the computer. Unplug it, plug it back in, and try again.",
-        "raw": "The lamp did not open a connection the computer can use. Unplug it, plug it back in, and try again.",
+        "found": "The lamp was found at {port}.",
+        "noport": "No lamp was found. Plug the lamp into this computer with a USB cable that carries data, and then try again.",
+        "several": "More than one lamp is plugged in. Type the number of the lamp you want to use.",
+        "repl": "The lamp did not stop, so the computer could not communicate with it. Unplug the cable, plug it back in, and try again.",
+        "raw": "The lamp did not open a connection that the computer can use. Unplug the cable, plug it back in, and try again.",
         "silent": "The lamp sent nothing.",
         "exec": "The lamp did not accept the command. Unplug it, plug it back in, and try again.",
         "device": "The lamp reported an error.",
-        "size": "The transfer stopped early. The lamp still has its previous program and its previous Wi-Fi.",
+        "size": "The transfer stopped before it finished. The lamp still has its previous program and its previous Wi-Fi network.",
         "missing": "The Solar Flare Alert program could not be loaded.",
-        "busy": "The lamp is already in use. Close any program or page that is talking to it, then try again.",
-        "current": "This Solar Flare Alert is {version}, the current version.",
-        "older": "This Solar Flare Alert is {version}. {latest} is newer. Run install to put {latest} on the lamp.",
-        "unknown": "This Solar Flare Alert reports {version}. The current version is {latest}.",
-        "new": "This lamp does not have the Solar Flare Alert program yet. The current version is {latest}. Run install to put it on the lamp.",
-        "have": "This Solar Flare Alert is {version}.",
-        "catalog": "The version list could not be loaded. The number above is what the lamp reported.",
+        "busy": "The lamp is already in use. Close any program or page that is using the lamp, and then try again.",
+        "current": "This Solar Flare Alert is version {version}, which is the current version.",
+        "older": "This Solar Flare Alert is version {version}. Version {latest} is newer. Run install to copy version {latest} onto the lamp.",
+        "unknown": "This Solar Flare Alert reports version {version}. The current version is {latest}.",
+        "new": "This lamp does not have the Solar Flare Alert program yet. The current version is {latest}. Run install to copy it onto the lamp.",
+        "have": "This Solar Flare Alert is version {version}.",
+        "catalog": "The list of versions could not be loaded. The number above is the version reported by the lamp.",
         "running": "The lamp is running again. You can unplug the cable.",
+        "waiting_wifi": "Waiting to see whether the lamp joins the Wi-Fi network.",
+        "wifi_joined": "The lamp is connected to Wi-Fi. You can unplug the cable.",
+        "wifi_needed": "The lamp is not connected to Wi-Fi, so the light keeps blinking. Set up the connection by running this command:\n\n  {command}",
         "restarted": "The lamp was restarted. You can unplug the cable.",
         "copying": "Copying the Solar Flare Alert program… {done} / {total}",
-        "confirm_install": "This installs Solar Flare Alert {version}. The saved Wi-Fi stays as it is. The external Wi-Fi manager stays as it is. Continue? [y/N] ",
-        "installed": "Solar Flare Alert {version} is on the lamp. The saved Wi-Fi is unchanged.",
-        "install_unseen": "The copy finished and the lamp restarted. The computer did not see the new program announce itself.",
+        "confirm_install": "This installs Solar Flare Alert {version}. The saved Wi-Fi network is left unchanged, and the external Wi-Fi manager is left unchanged. Continue? [y/N] ",
+        "installed": "Solar Flare Alert {version} is on the lamp. The saved Wi-Fi network is unchanged.",
+        "install_unseen": "The copy finished and the lamp restarted. The computer did not see the new program start.",
         "ssid": "Network name:",
         "password": "Password:",
-        "empty_password": "Leave the password empty when the network has none.",
+        "empty_password": "Leave the password empty if the network does not have one.",
         "need_name": "Enter the network name.",
-        "long_name": "The network name has to be 32 characters or fewer.",
+        "long_name": "The network name must be 32 characters or fewer.",
         "semicolon": "The network name and the password cannot contain a semicolon.",
-        "private": "The password is written to the lamp over the cable. It is not sent to a server.",
+        "private": "The password is written to the lamp over the cable and is not sent to a server.",
         "saving": "Saving the Wi-Fi on the lamp…",
-        "connected": "The lamp has joined the Wi-Fi. You can unplug the cable. When the light stops blinking, it is connected.",
-        "rejected": "The lamp did not join that network. Check the name and the password, then try again.",
-        "wifi_unknown": "The Wi-Fi was written to the lamp, and the lamp restarted. If the light stops blinking, it is connected.",
-        "confirm_clear": "This removes the Wi-Fi saved on the lamp. The program stays as it is. Continue? [y/N] ",
-        "clearing": "Clearing the saved Wi-Fi…",
-        "cleared": "The saved Wi-Fi is gone. You can unplug the cable. The light blinks until a new network is saved.",
-        "clear_still": "The lamp still joined a Wi-Fi. Unplug it, plug it back in, and try again.",
-        "clear_unknown": "The saved network was removed and the lamp restarted. If the light is blinking, the Wi-Fi is cleared.",
-        "clear_failed": "The saved Wi-Fi is still on the lamp.",
-        "cancelled": "Nothing was changed.",
+        "connected": "The lamp has joined the Wi-Fi network. You can unplug the cable. The light stops blinking once the connection is established.",
+        "rejected": "The lamp did not join that network. Check the network name and the password, and then try again.",
+        "wifi_unknown": "The Wi-Fi settings were written to the lamp, and the lamp restarted. If the light stops blinking, the lamp is connected.",
+        "confirm_clear": "This removes the Wi-Fi network saved on the lamp. The program on the lamp stays as it is. Continue? [y/N] ",
+        "clearing": "Clearing the saved Wi-Fi network…",
+        "cleared": "The saved Wi-Fi network has been removed. You can unplug the cable. The light blinks until a new network is saved.",
+        "clear_still": "The lamp is still connected to a Wi-Fi network. Unplug the cable, plug it back in, and try again.",
+        "clear_unknown": "The saved network was removed and the lamp restarted. If the light is blinking, the Wi-Fi network has been removed.",
+        "clear_failed": "The saved Wi-Fi network is still on the lamp.",
+        "cancelled": "No changes were made.",
         "details": "Details from the lamp:",
     },
     "de": {
@@ -121,6 +124,9 @@ TEXT = {
         "have": "Dieser Sonneneruptionsalarm hat Version {version}.",
         "catalog": "Die Versionsliste konnte nicht geladen werden. Die Zahl oben ist die Meldung der Lampe.",
         "running": "Die Lampe läuft wieder. Sie können das Kabel abziehen.",
+        "waiting_wifi": "Es wird geprüft, ob die Lampe eine WLAN-Verbindung aufbaut.",
+        "wifi_joined": "Die Lampe ist mit dem WLAN verbunden. Sie können das Kabel abziehen.",
+        "wifi_needed": "Die Lampe ist nicht mit dem WLAN verbunden, deshalb blinkt das Licht. Richten Sie die Verbindung ein, indem Sie diesen Befehl ausführen:\n\n  {command}",
         "restarted": "Die Lampe wurde neu gestartet. Sie können das Kabel abziehen.",
         "copying": "Das Programm des Sonneneruptionsalarms wird kopiert … {done} / {total}",
         "confirm_install": "Damit wird Sonneneruptionsalarm {version} installiert. Das gespeicherte WLAN bleibt, wie es ist. Der externe WLAN-Manager bleibt, wie er ist. Fortfahren? [j/N] ",
@@ -605,6 +611,21 @@ def watch(lamp, decide, seconds):
     return None
 
 
+def connection_result(text):
+    if "Connected!" in text or "Connected to Wi-Fi!" in text:
+        return "connected"
+    if (
+        "Could not connect" in text
+        or "configuration portal" in text
+        or "Starting the configuration portal" in text
+        or "sign-in page" in text
+        or "Join the open" in text
+        or "Join Wi-Fi network" in text
+    ):
+        return "offline"
+    return None
+
+
 def wifi_result(text):
     if "Traceback" in text:
         return "error"
@@ -685,7 +706,8 @@ def with_lamp(lang, work):
         except Exception:
             running = False
         lamp.close()
-        print(TEXT[lang]["running"] if running else TEXT[lang]["restarted"], flush=True)
+        if not getattr(lamp, "explained", False):
+            print(TEXT[lang]["running"] if running else TEXT[lang]["restarted"], flush=True)
 
 
 def confirmed(lang, key, **values):
@@ -722,6 +744,16 @@ def report_version(lang, source):
     def work(lamp):
         has_program, version = read_state(lamp)
         describe_version(lang, has_program, version, catalog, catalog_ok)
+        if not has_program:
+            return
+        print(TEXT[lang]["waiting_wifi"], flush=True)
+        outcome = watch(lamp, connection_result, 40)
+        command = "python3 lamp_setup.py wifi" if lang == "en" else "python3 lamp_setup.py de wifi"
+        if outcome == "connected":
+            print(TEXT[lang]["wifi_joined"], flush=True)
+        else:
+            print(TEXT[lang]["wifi_needed"].format(command=command), flush=True)
+        lamp.explained = True
 
     with_lamp(lang, work)
     return 0

@@ -54,6 +54,16 @@ class LampSetupTest(unittest.TestCase):
             lamp_setup.safe_device_name("../version.py")
         self.assertEqual(lamp_setup.safe_device_name("version.py"), "version.py")
 
+    def test_a_lamp_that_has_not_joined_wifi_is_not_reported_as_connected(self):
+        self.assertEqual(lamp_setup.connection_result("Could not connect to Wi-Fi."), "offline")
+        self.assertEqual(
+            lamp_setup.connection_result("Could not connect to any WiFi network. Starting the configuration portal..."),
+            "offline",
+        )
+        self.assertEqual(lamp_setup.connection_result("\nConnected! Network information: x"), "connected")
+        self.assertIsNone(lamp_setup.connection_result("Connection failed!"))
+        self.assertIsNone(lamp_setup.connection_result("Trying to connect to: Home"))
+
     def test_the_password_record_stays_on_one_line(self):
         self.assertEqual(lamp_setup.wifi_record("Home", "secret"), "Home;secret\n")
         self.assertEqual(lamp_setup.wifi_record("Home", ""), "Home;\n")
