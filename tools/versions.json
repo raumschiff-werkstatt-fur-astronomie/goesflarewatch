@@ -2,14 +2,28 @@
   {
     "version": "2025.03",
     "date": "2025-03",
-    "latest": true,
+    "latest": false,
     "files": [
       {"name": "version.py", "file": "versions/2025.03/version.py"},
       {"name": "solar_flare_alert.py", "file": "versions/2025.03/solar_flare_alert.py"}
     ],
     "notes": {
-      "en": "The current Solar Flare Alert program. It still uses an external Wi-Fi manager for the setup page. The next version replaces that library.",
-      "de": "Das aktuelle Programm des Sonneneruptionsalarms. Es benutzt noch einen externen WLAN-Manager für die Einrichtungsseite. Die nächste Version ersetzt diese Bibliothek."
+      "en": "The Solar Flare Alert program from 2025. It still uses an external Wi-Fi manager for the setup page.",
+      "de": "Das Programm des Sonneneruptionsalarms von 2025. Es benutzt noch einen externen WLAN-Manager für die Einrichtungsseite."
+    }
+  },
+  {
+    "version": "2026.11",
+    "date": "2026-11",
+    "latest": true,
+    "files": [
+      {"name": "wifi_setup.py", "file": "versions/2026.11/wifi_setup.py"},
+      {"name": "version.py", "file": "versions/2026.11/version.py"},
+      {"name": "solar_flare_alert.py", "file": "versions/2026.11/solar_flare_alert.py"}
+    ],
+    "notes": {
+      "en": "The lamp sets up Wi-Fi from a phone. Join the network Solar Flare Alert and choose your Wi-Fi on the page. The password stays on the lamp.",
+      "de": "Die Lampe richtet das WLAN vom Telefon aus ein. Verbinden Sie sich mit dem Netzwerk Solar Flare Alert und wählen Sie Ihr WLAN auf der Seite. Das Passwort bleibt auf der Lampe."
     }
   }
 ]

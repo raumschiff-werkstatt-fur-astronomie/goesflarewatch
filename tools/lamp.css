@@ -47,6 +47,13 @@ h1 {
   margin: 0 0 0.75rem;
 }
 
+h2 {
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1.25;
+  margin: 2rem 0 0.75rem;
+}
+
 .step-count {
   font-family: "Avenir Next", "Segoe UI", sans-serif;
   font-size: 0.85rem;

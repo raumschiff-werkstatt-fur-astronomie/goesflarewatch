@@ -32,7 +32,9 @@ class PackLampSiteTest(unittest.TestCase):
             self.assertEqual(len(latest), 1)
             names = [entry["name"] for entry in latest[0]["files"]]
             self.assertIn("solar_flare_alert.py", names)
+            self.assertIn("wifi_setup.py", names)
             self.assertNotIn("wifi_manager.py", names)
+            self.assertEqual(latest[0]["version"], "2026.11")
             self.assertTrue((Path(dest) / "lamp_setup.py").is_file())
             page = (Path(dest) / "update-software.html").read_text(encoding="utf-8")
             self.assertIn("lamp_setup.py", page)

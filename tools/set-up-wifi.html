@@ -15,10 +15,15 @@
         <a href="update-software.html" data-i18n="navVersions">Versions</a>
       </nav>
       <h1 data-i18n="wifiTitle">Set up Wi-Fi for the Solar Flare Alert</h1>
-      <p class="lead" data-i18n="wifiLead">The browser cannot save a network on this lamp. Use the program below on this computer.</p>
+      <p class="lead" data-i18n="wifiLead">When the light is blinking, the lamp is not connected to the Wi-Fi. On a phone, join the Wi-Fi network named Solar Flare Alert. It has no password. It is only the lamp.</p>
+      <p data-i18n="wifiPhone">The phone should open a setup page. Choose a network and enter its password. The password stays on the lamp. A network that asks for a username while connecting cannot be used. If that is your only network, turn on the phone's personal hotspot, give it a name and a password, and choose that name on the page. The lamp then uses the phone's mobile data.</p>
+      <p data-i18n="wifiAddress">If the phone does not open the page, open the browser and go to http://192.168.4.1. After the lamp joins, it restarts. The light blinks once more, then it stays on. You can leave Solar Flare Alert and return to your own Wi-Fi.</p>
+      <p data-i18n="wifiChange">To choose a different network later, switch that network off and turn the lamp off and on. The light blinks, and Solar Flare Alert appears again.</p>
+      <p data-i18n="wifiVersion">The phone setup is part of the current software version. Put that version on the lamp from the Versions page. Until then, the lamp does not open a network named Solar Flare Alert.</p>
+      <p data-i18n="wifiRunning">If the light is not blinking, the lamp has already joined a Wi-Fi network. You can leave that network as it is.</p>
+      <h2 data-i18n="wifiComputer">With a computer, you can set up the lamp from a terminal.</h2>
       <p data-i18n="wifiPlug">Plug the Solar Flare Alert into this computer with a USB cable that carries data.</p>
-      <p data-i18n="wifiRunning">If the light is not blinking, the Solar Flare Alert is already running and has already joined a Wi-Fi network. You can leave that network as it is, or save a different one with the program below.</p>
-      <p><a class="action" href="lamp_setup.py?v=12" download="lamp_setup.py" data-i18n="download">Download the setup program</a></p>
+      <p><a class="action" href="lamp_setup.py?v=13" download="lamp_setup.py" data-i18n="download">Download the setup program</a></p>
       <p data-i18n="wifiRun">Open Terminal and go to the folder where you saved the file. On a Mac or a PC, that folder is usually Downloads. The program lists the networks the lamp can see. Choose one, and then enter the username and the password.</p>
       <pre class="command" data-i18n="cmdWifi">cd ~/Downloads
 python3 lamp_setup.py wifi</pre>
@@ -27,7 +32,7 @@ python3 lamp_setup.py wifi</pre>
       <pre class="command" data-i18n="cmdClear">cd ~/Downloads
 python3 lamp_setup.py clear</pre>
     </main>
-    <script src="lamp.js?v=12"></script>
+    <script src="lamp.js?v=13"></script>
     <script>
       LampTools.initWifi(document);
     </script>

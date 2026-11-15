@@ -96,8 +96,10 @@ class LampSetupTest(unittest.TestCase):
         catalog, files = lamp_setup.load_catalog(ROOT / "tools")
         names = [name for name, _data in files]
         self.assertIn("solar_flare_alert.py", names)
+        self.assertIn("wifi_setup.py", names)
         self.assertNotIn("wifi_manager.py", names)
-        self.assertEqual(lamp_setup._latest(catalog)["version"], "2025.03")
+        self.assertEqual(names[0], "wifi_setup.py")
+        self.assertEqual(lamp_setup._latest(catalog)["version"], "2026.11")
 
     def test_german_copy_uses_no_eszett(self):
         for text in lamp_setup.TEXT["de"].values():
