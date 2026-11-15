@@ -9,20 +9,25 @@
   <body>
     <main>
       <p class="lang"><button type="button" data-lang>Deutsch</button></p>
+      <nav class="nav">
+        <a href="index.html" data-i18n="navHome">Solar Flare Alert</a>
+        <a href="set-up-wifi.html" data-i18n="navWifi">Set up Wi-Fi</a>
+        <a href="update-software.html" data-i18n="navVersions">Versions</a>
+      </nav>
       <h1 data-i18n="upgradeTitle">Solar Flare Alert versions</h1>
       <p class="warning" hidden></p>
       <p class="lead" data-i18n="programLead">The browser cannot check this lamp. Use the program below on this computer.</p>
       <p data-i18n="programPlug">Plug the Solar Flare Alert into this computer with a USB cable that carries data.</p>
-      <p><a class="action" href="lamp_setup.py?v=11" download="lamp_setup.py" data-i18n="download">Download the setup program</a></p>
-      <p data-i18n="programCheck">Open Terminal and go to the folder where you saved the file. On a Mac, that folder is usually Downloads. The command reads the version from the lamp and reports whether the lamp is connected to Wi-Fi. It does not change the program or the saved network.</p>
+      <p><a class="action" href="lamp_setup.py?v=12" download="lamp_setup.py" data-i18n="download">Download the setup program</a></p>
+      <p data-i18n="programCheck">Open Terminal and go to the folder where you saved the file. On a Mac or a PC, that folder is usually Downloads. This check reads the version from the lamp and reports whether the lamp is connected to the Wi-Fi. It does not change the program or the Wi-Fi setup.</p>
       <pre class="command" data-i18n="cmdCheck">cd ~/Downloads
 python3 lamp_setup.py check</pre>
-      <p data-i18n="programInstall">To install the current version on the lamp, run the command below instead. The saved Wi-Fi network is left unchanged, and the external Wi-Fi manager is left unchanged.</p>
+      <p data-i18n="programInstall">To put the current software version on the lamp, run the command below. The saved Wi-Fi will not be affected.</p>
       <pre class="command" data-i18n="cmdInstall">cd ~/Downloads
 python3 lamp_setup.py install</pre>
       <div id="releases"></div>
     </main>
-    <script src="lamp.js?v=11"></script>
+    <script src="lamp.js?v=12"></script>
     <script>
       LampTools.initUpgrade(document);
     </script>
