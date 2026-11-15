@@ -7,6 +7,7 @@ reads or writes the lamp directly. The Wi-Fi password is typed here and
 written to the lamp. It is not sent to a server.
 """
 
+import ast
 import base64
 import getpass
 import glob
@@ -68,12 +69,27 @@ TEXT = {
         "confirm_install": "This installs Solar Flare Alert {version}. The saved Wi-Fi network is left unchanged, and the external Wi-Fi manager is left unchanged. Continue? [y/N] ",
         "installed": "Solar Flare Alert {version} is on the lamp. The saved Wi-Fi network is unchanged.",
         "install_unseen": "The copy finished and the lamp restarted. The computer did not see the new program start.",
+        "looking": "Looking for Wi-Fi networks. Please wait.",
+        "networks": "The lamp can see these networks. Type the number of the network it should join.",
+        "pick": "Number:",
+        "username": "Username:",
         "ssid": "Network name:",
         "password": "Password:",
+        "kind_open": "no Wi-Fi password",
+        "kind_password": "password",
+        "kind_account": "username and password; this lamp cannot join this kind of network",
+        "ask_username": "Enter the username. Leave it empty if this network does not use one.",
+        "ask_password": "Enter the password. Leave it empty if this network does not use one.",
         "empty_password": "Leave the password empty if the network does not have one.",
+        "no_networks": "The lamp did not see any Wi-Fi networks. Move it closer to the access point and try again.",
+        "bad_number": "Type the number of a network from the list.",
+        "enterprise_no": "{ssid} requires a username and a password when the lamp connects. This lamp cannot join that kind of network. Nothing was saved. Choose a network from the list that uses only a password, or a network with no Wi-Fi password.",
+        "open_account": "{ssid} does not use a Wi-Fi password. If a sign-in page asks for an account, enter the username and the password. Leave both empty if it does not ask.",
+        "open_unused": "This lamp cannot open a sign-in page, so that account was not saved. The lamp will join the Wi-Fi network.",
+        "username_ignored": "This network does not use a username. The password will be saved on the lamp.",
         "need_name": "Enter the network name.",
         "long_name": "The network name must be 32 characters or fewer.",
-        "semicolon": "The network name and the password cannot contain a semicolon.",
+        "semicolon": "The username and the password cannot contain a semicolon.",
         "private": "The password is written to the lamp over the cable and is not sent to a server.",
         "saving": "Saving the Wi-Fi on the lamp…",
         "connected": "The lamp has joined the Wi-Fi network. You can unplug the cable. The light stops blinking once the connection is established.",
@@ -132,8 +148,23 @@ TEXT = {
         "confirm_install": "Damit wird Sonneneruptionsalarm {version} installiert. Das gespeicherte WLAN bleibt, wie es ist. Der externe WLAN-Manager bleibt, wie er ist. Fortfahren? [j/N] ",
         "installed": "Sonneneruptionsalarm {version} ist auf der Lampe. Das gespeicherte WLAN ist unverändert.",
         "install_unseen": "Die Kopie ist fertig und die Lampe hat neu gestartet. Der Computer hat das neue Programm nicht erkannt.",
+        "looking": "Die WLAN-Netzwerke werden gesucht. Bitte warten.",
+        "networks": "Die Lampe sieht diese Netzwerke. Geben Sie die Nummer des Netzwerks ein, mit dem sie sich verbinden soll.",
+        "pick": "Nummer:",
+        "username": "Benutzername:",
         "ssid": "Netzwerkname:",
         "password": "Passwort:",
+        "kind_open": "kein WLAN-Passwort",
+        "kind_password": "Passwort",
+        "kind_account": "Benutzername und Passwort; die Lampe kann einem solchen Netzwerk nicht beitreten",
+        "ask_username": "Geben Sie den Benutzernamen ein. Lassen Sie ihn leer, wenn das Netzwerk keinen benutzt.",
+        "ask_password": "Geben Sie das Passwort ein. Lassen Sie es leer, wenn das Netzwerk keines hat.",
+        "no_networks": "Die Lampe hat kein WLAN-Netzwerk gesehen. Stellen Sie sie näher an den Zugangspunkt und versuchen Sie es erneut.",
+        "bad_number": "Geben Sie die Nummer eines Netzwerks aus der Liste ein.",
+        "enterprise_no": "{ssid} verlangt beim Verbinden einen Benutzernamen und ein Passwort. Dieser Art Netzwerk kann die Lampe nicht beitreten. Es wurde nichts gespeichert. Wählen Sie ein Netzwerk, das nur ein Passwort benutzt, oder eines ohne WLAN-Passwort.",
+        "open_account": "{ssid} benutzt kein WLAN-Passwort. Wenn eine Anmeldeseite nach einem Konto fragt, geben Sie den Benutzernamen und das Passwort ein. Lassen Sie beides leer, wenn sie nicht danach fragt.",
+        "open_unused": "Die Lampe kann keine Anmeldeseite öffnen, deshalb wurde dieses Konto nicht gespeichert. Die Lampe tritt dem WLAN bei.",
+        "username_ignored": "Dieses Netzwerk benutzt keinen Benutzernamen. Das Passwort wird auf der Lampe gespeichert.",
         "empty_password": "Das Passwort leer lassen, wenn das Netzwerk keines hat.",
         "need_name": "Geben Sie den Netzwerknamen ein.",
         "long_name": "Der Netzwerkname darf höchstens 32 Zeichen haben.",
@@ -265,6 +296,85 @@ def last_flag(lines, yes, no):
         elif line == no:
             last_no = index
     return last_yes > last_no
+
+
+def network_kind(auth):
+    if auth in (5, 10):
+        return "account"
+    if auth in (0, 9):
+        return "open"
+    return "password"
+
+
+def parse_scan_output(text):
+    best = {}
+    for line in parse_lines(text):
+        if not line.startswith("NET\t"):
+            continue
+        parts = line.split("\t")
+        if len(parts) != 4:
+            continue
+        try:
+            ssid = ast.literal_eval(parts[1])
+            auth = int(parts[2])
+            rssi = int(parts[3])
+        except (ValueError, SyntaxError):
+            continue
+        if not isinstance(ssid, str):
+            continue
+        ssid = ssid.strip()
+        if not ssid or ssid == "WifiManager":
+            continue
+        previous = best.get(ssid)
+        if previous is None or rssi > previous["rssi"]:
+            best[ssid] = {
+                "ssid": ssid,
+                "auth": auth,
+                "rssi": rssi,
+                "kind": network_kind(auth),
+            }
+    return sorted(best.values(), key=lambda item: item["rssi"], reverse=True)
+
+
+def scan_networks(lamp):
+    reported = lamp.exec_checked(
+        "import network\n"
+        "station = network.WLAN(network.STA_IF)\n"
+        "station.active(True)\n"
+        "rows = station.scan() or []\n"
+        "for row in rows:\n"
+        "    name = row[0].decode()\n"
+        "    print('NET\\t' + repr(name) + '\\t' + str(row[4]) + '\\t' + str(row[3]))\n",
+        timeout=20,
+    )
+    return parse_scan_output(reported)
+
+
+def choose_network(lang, networks):
+    print(TEXT[lang]["networks"])
+    labels = {
+        "open": TEXT[lang]["kind_open"],
+        "password": TEXT[lang]["kind_password"],
+        "account": TEXT[lang]["kind_account"],
+    }
+    for index, network in enumerate(networks, 1):
+        print("  %d  %s  (%s)" % (index, network["ssid"], labels[network["kind"]]))
+    for _attempt in range(2):
+        choice = input(TEXT[lang]["pick"] + " ").strip()
+        if choice.isdigit() and 1 <= int(choice) <= len(networks):
+            return networks[int(choice) - 1]
+        print(TEXT[lang]["bad_number"])
+    raise LampError("bad_number")
+
+
+def ask_account(lang):
+    print(TEXT[lang]["ask_username"])
+    username = input(TEXT[lang]["username"] + " ").strip()
+    print(TEXT[lang]["ask_password"])
+    password = getpass.getpass(TEXT[lang]["password"] + " ")
+    if any(char in username or char in password for char in (";", "\n", "\r")):
+        raise LampError("semicolon")
+    return username, password
 
 
 def wifi_record(ssid, password):
@@ -796,25 +906,51 @@ def install_program(lang, source):
 
 
 def save_network(lang):
-    print(TEXT[lang]["private"])
-    print(TEXT[lang]["empty_password"])
-    ssid = input(TEXT[lang]["ssid"] + " ").strip()
-    password = getpass.getpass(TEXT[lang]["password"] + " ")
-    record = wifi_record(ssid, password)
-
-    def work(lamp):
+    print(TEXT[lang]["looking"], flush=True)
+    port = choose_port(lang)
+    print(TEXT[lang]["found"].format(port=port), flush=True)
+    lamp = Lamp(port)
+    lamp.booted = False
+    lamp.open()
+    try:
+        lamp.prepare()
+        networks = scan_networks(lamp)
+        if not networks:
+            print(TEXT[lang]["no_networks"])
+            return 1
+        chosen = choose_network(lang, networks)
+        if chosen["kind"] == "account":
+            print(TEXT[lang]["enterprise_no"].format(ssid=chosen["ssid"]))
+            return 1
+        if chosen["kind"] == "open":
+            print(TEXT[lang]["open_account"].format(ssid=chosen["ssid"]))
+        username, password = ask_account(lang)
+        if chosen["kind"] == "open":
+            if username or password:
+                print(TEXT[lang]["open_unused"])
+            record = wifi_record(chosen["ssid"], "")
+        else:
+            if username:
+                print(TEXT[lang]["username_ignored"])
+            record = wifi_record(chosen["ssid"], password)
+        print(TEXT[lang]["private"], flush=True)
         print(TEXT[lang]["saving"], flush=True)
         save_wifi(lamp, record)
-        return watch(lamp, wifi_result, 25)
-
-    result = with_lamp(lang, work)
+        result = watch(lamp, wifi_result, 25)
+    finally:
+        try:
+            if not lamp.booted:
+                lamp.restart()
+        except Exception:
+            pass
+        lamp.close()
     if result == "connected":
         print(TEXT[lang]["connected"])
-    elif result == "rejected" or result == "error":
+        return 0
+    if result == "rejected" or result == "error":
         print(TEXT[lang]["rejected"])
         return 1
-    else:
-        print(TEXT[lang]["wifi_unknown"])
+    print(TEXT[lang]["wifi_unknown"])
     return 0
 
 

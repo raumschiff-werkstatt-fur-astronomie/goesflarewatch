@@ -64,6 +64,26 @@ class LampSetupTest(unittest.TestCase):
         self.assertIsNone(lamp_setup.connection_result("Connection failed!"))
         self.assertIsNone(lamp_setup.connection_result("Trying to connect to: Home"))
 
+    def test_the_scan_lists_each_network_once_and_names_the_kind_of_sign_in(self):
+        sample = "\n".join(
+            [
+                "NET\t'iitk'\t0\t-63",
+                "NET\t'iitk'\t0\t-58",
+                "NET\t'eduroam'\t5\t-58",
+                "NET\t'iitk-sec'\t5\t-59",
+                "NET\t''\t3\t-94",
+                "NET\t'WifiManager'\t0\t-20",
+                "NET\t'VFA_B1'\t3\t-48",
+            ]
+        )
+        networks = lamp_setup.parse_scan_output(sample)
+        self.assertEqual([item["ssid"] for item in networks], ["VFA_B1", "iitk", "eduroam", "iitk-sec"])
+        kinds = {item["ssid"]: item["kind"] for item in networks}
+        self.assertEqual(kinds["VFA_B1"], "password")
+        self.assertEqual(kinds["iitk"], "open")
+        self.assertEqual(kinds["eduroam"], "account")
+        self.assertEqual(kinds["iitk-sec"], "account")
+
     def test_the_password_record_stays_on_one_line(self):
         self.assertEqual(lamp_setup.wifi_record("Home", "secret"), "Home;secret\n")
         self.assertEqual(lamp_setup.wifi_record("Home", ""), "Home;\n")
