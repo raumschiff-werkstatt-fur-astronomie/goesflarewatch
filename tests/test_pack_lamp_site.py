@@ -39,7 +39,9 @@ class PackLampSiteTest(unittest.TestCase):
             page = (Path(dest) / "update-software.html").read_text(encoding="utf-8")
             self.assertIn("lamp_setup.py", page)
             script = (Path(dest) / "lamp.js").read_text(encoding="utf-8")
-            self.assertNotIn("navigator.serial", script)
+            self.assertIn("wifi.dat", script)
+            self.assertIn("new Uint8Array([13, 3, 3])", script)
+            self.assertIn("navigator.serial", script)
 
     def test_a_second_latest_release_is_rejected(self):
         with tempfile.TemporaryDirectory() as source, tempfile.TemporaryDirectory() as dest:

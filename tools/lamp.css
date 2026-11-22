@@ -71,8 +71,15 @@ h2 {
   margin: 0 0 1rem;
 }
 
-a {
-  color: #1c1915;
+input, button[type="submit"] {
+  font: inherit;
+  font-size: 1rem;
+}
+
+input {
+  width: 18rem;
+  max-width: 100%;
+  margin-top: 0.3rem;
 }
 
 .choices {
