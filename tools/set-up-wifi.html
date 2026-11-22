@@ -23,14 +23,7 @@
       <p data-i18n="wifiRunning">If the light is not blinking, the lamp has already joined a Wi-Fi network. You can leave that network as it is.</p>
       <h2 data-i18n="wifiComputer">With a computer, you can set up the lamp from a terminal.</h2>
       <p data-i18n="wifiPlug">Plug the Solar Flare Alert into this computer with a USB cable that carries data.</p>
-      <p data-i18n="cableLead">Firefox can write the network through the cable. Choose the lamp when Firefox asks for the port. The password stays on the lamp and is not sent to a server.</p>
-      <form data-cable>
-        <p><label><span data-i18n="cableName">Network name</span><br><input name="ssid" autocomplete="off"></label></p>
-        <p><label><span data-i18n="cablePassword">Password</span><br><input name="password" type="password" autocomplete="off"></label></p>
-        <p><button type="submit" data-i18n="cableWrite">Write the network to the lamp</button></p>
-        <p class="status" data-cable-status></p>
-      </form>
-      <p><a class="action" href="lamp_setup.py?v=14" download="lamp_setup.py" data-i18n="download">Download the setup program</a></p>
+      <p><a class="action" href="lamp_setup.py?v=13" download="lamp_setup.py" data-i18n="download">Download the setup program</a></p>
       <p data-i18n="wifiRun">Open Terminal and go to the folder where you saved the file. On a Mac or a PC, that folder is usually Downloads. The program lists the networks the lamp can see. Choose one, and then enter the username and the password.</p>
       <pre class="command" data-i18n="cmdWifi">cd ~/Downloads
 python3 lamp_setup.py wifi</pre>
@@ -39,7 +32,7 @@ python3 lamp_setup.py wifi</pre>
       <pre class="command" data-i18n="cmdClear">cd ~/Downloads
 python3 lamp_setup.py clear</pre>
     </main>
-    <script src="lamp.js?v=14"></script>
+    <script src="lamp.js?v=13"></script>
     <script>
       LampTools.initWifi(document);
     </script>
